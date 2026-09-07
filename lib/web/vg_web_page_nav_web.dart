@@ -18,3 +18,11 @@ void vgWebGoLogin({String? redirectPath}) {
     vgWebHardRedirect('/login');
   }
 }
+
+/// Blocking alert so a debug message is guaranteed to be seen (and
+/// screenshotted) before any redirect that would immediately follow it
+/// unloads the page — temporary until the web login redirect-loop bug is
+/// confirmed fixed.
+void vgWebDebugAlert(String message) {
+  web.window.alert(message);
+}

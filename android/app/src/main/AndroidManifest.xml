@@ -37,5 +37,10 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="beauty_routine_challenge" />
+        <!-- Test App ID (see android/app/src/main/res/values/admob.xml) — swap to the
+             real App ID only right before a Play Console submission. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
     </application>
 </manifest>

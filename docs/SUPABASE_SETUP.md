@@ -51,7 +51,7 @@ Profile-only personalized tips for the Guide tab (no photo).
 
 ### `polar-create-checkout` (authenticated)
 
-Creates a Polar hosted checkout session with `external_customer_id` = Supabase user UUID. Input: `{ "planId": "annual" | "pro_weekly" }`. Returns `{ "checkoutUrl" }`.
+Creates a Polar hosted checkout session via **API first** (`polar.checkouts.create`) with `customerExternalId` = Supabase user UUID. Falls back to static checkout links only if API fails and `POLAR_CHECKOUT_LINK_*` is set. Input: `{ "planId": "annual" | "pro_weekly" }`. Returns `{ "checkoutUrl" }`.
 
 ### `polar-customer-portal` (authenticated)
 
@@ -86,15 +86,16 @@ Cross-platform billing uses Polar hosted checkout — **not** Google Play Billin
 | `POLAR_ACCESS_TOKEN` | Organization access token (sandbox first, then production) |
 | `POLAR_ORGANIZATION_ID` | Organization UUID from Polar → Settings → **Unique identifier for your organization** |
 | `POLAR_ORGANIZATION_SLUG` | Org slug for `https://polar.sh/{slug}/portal` fallback (Settings → slug) |
-| `POLAR_WEBHOOK_SECRET` | From Polar webhook endpoint setup |
+| `POLAR_WEBHOOK_SECRET` | **`polar_whs_…` exactly from Polar → Webhooks → Signing secret** — do **not** add `whsec_` prefix |
 | `POLAR_PRODUCT_ID_ANNUAL` | `9e185286-cf2b-41b8-a728-e7154d144722` |
 | `POLAR_PRODUCT_ID_PRO_WEEKLY` | `8c9fddc9-1001-4143-8a27-31ce929ae5e6` |
-| `POLAR_CHECKOUT_LINK_ANNUAL` | Optional — Polar Checkout Link URL (used when set; links user via `customerExternalId`) |
-| `POLAR_CHECKOUT_LINK_PRO_WEEKLY` | Optional — same for Pro weekly plan |
+| `POLAR_CHECKOUT_LINK_ANNUAL` | Optional guest/marketing fallback — **not required** in Supabase; API checkout is preferred |
+| `POLAR_CHECKOUT_LINK_PRO_WEEKLY` | Optional guest/marketing fallback |
 | `POLAR_SUCCESS_URL` | `https://scanner.verifiedglam.com/app/face-beauty-analysis?checkout=success` (post-payment dashboard) |
+| `POLAR_CANCEL_URL` | `https://scanner.verifiedglam.com/pricing?checkout=cancelled` |
 | `POLAR_ENV` | **`production`** for live billing (defaults to sandbox if unset or any other value) |
 
-**Polar Dashboard:** Register webhook URL `https://YOUR_PROJECT.supabase.co/functions/v1/polar-webhook`. Subscribe to subscription and order events.
+**Polar Dashboard:** Register webhook URL `https://YOUR_PROJECT.supabase.co/functions/v1/polar-webhook`. Subscribe to **`subscription.active`**, `subscription.updated`, `subscription.canceled`, `subscription.revoked`, `order.created`. **`checkout.created` alone does not grant Pro.**
 
 **Database:** Run migration `009_polar_subscription.sql` (`supabase db push`).
 

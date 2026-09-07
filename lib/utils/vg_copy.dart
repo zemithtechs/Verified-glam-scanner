@@ -26,6 +26,8 @@ class VGCopy {
   static const homeSubheading = 'Pick an analysis to begin.';
   static const homeFeaturedTitle = 'Featured for you';
   static const homeAllFeaturesTitle = 'All analyses';
+  static const homeShowMore = 'Show more';
+  static const homeShowLess = 'Show less';
   static const homeSeeAll = 'See all';
   static const beginAnalysis = 'Begin analysis';
 
@@ -245,9 +247,15 @@ class VGCopy {
   static const profileViewRoutine = 'View full routine';
   static const profileQuickActions = 'Quick actions';
   static const profileActionExplore = 'Explore';
+  static const profileActionHistory = 'History';
   static const profileActionShare = 'Share app';
   static const profileActionPro = 'Go Pro';
   static const profileAccountSection = 'Account';
+  static const profileLogOut = 'Log out';
+  static const profileLogOutConfirmTitle = 'Log out?';
+  static const profileLogOutConfirmMessage = 'You can log back in anytime with the same email and password.';
+  static const profileHistoryTitle = 'Scan history';
+  static const profileHistoryEmpty = 'Your past scans will show up here once you run an analysis.';
 
   static String profileChallengeProgress(int completed, int total) =>
       'Day $completed of $total complete';
@@ -265,6 +273,9 @@ class VGCopy {
   static const profileSubscription = 'Subscription';
   static const profileSubscriptionFree = 'Free plan';
   static const profileSubscriptionPro = 'Verified Glam Pro';
+  static const profileAccountStatusFree = 'Free Member';
+  static const profileAccountStatusPro = 'Pro Member';
+  static const profileAccountStatusFreeHint = 'Tap to see pricing and go Pro';
   static const profileSubscriptionUpgradeHint =
       'Subscribe for AI credits — Yearly \$39.99/year (200 credits) or Pro \$3.99/week (30 credits weekly).';
   static const profileLegal = 'Legal';
@@ -361,7 +372,17 @@ class VGCopy {
   static const creditsRenewsOn = 'Renews';
   static String creditsPlanStatus(String status) => status.replaceAll('_', ' ');
   static const paywallPromoTitle = 'Special offer for you';
-  static const paywallPromoSubtitle = 'Yearly \$39.99/year (was \$80.99) or Pro \$3.99/week with weekly credits.';
+  static const paywallPromoSubtitle = 'Before you go — here is a flash discount just for you.';
+  static const paywallPromoFlashYearlyPrice = '\$33.00';
+  static const paywallPromoFlashYearlyPeriod = '/year';
+  // One shared code, valid on both the Annual and Pro Weekly products in
+  // Polar — a fixed dollar amount doesn't scale sensibly across a $33/year
+  // and a $3.99/week price, so this is a percentage discount instead.
+  static const paywallPromoCouponCode = 'GLOW15';
+  static const paywallPromoCouponHint = 'Use this code at checkout for an extra 15% off';
+  static const paywallPromoCodeCopied = 'Code copied — paste it at checkout';
+  static const paywallPromoChooseYearly = 'Get Yearly — \$33/year';
+  static const paywallPromoChooseWeekly = 'Get Weekly — \$3.99/week';
 
   static const paywallSubscriptionTerms =
       'Subscription Terms: Yearly plan is \$39.99 per year and renews automatically unless cancelled. Pro plan is \$3.99 per week and renews automatically unless cancelled. Credits renew each billing period.';
@@ -443,10 +464,6 @@ class VGCopy {
   static const subscriptionSuccessBenefit3 = 'Priority updates and new features';
   static const subscriptionSuccessCta = 'Start exploring';
 
-  // Ads (placeholder)
-  static const adBannerPlaceholder = 'Ad space — Pro members see none';
-  static const adInterstitialStub = 'Ad would appear here for free users';
-
   // Photo guidelines
   static const guidelinesTitle = 'Photo tips';
   static const guidelinesDosTitle = 'Do';
@@ -514,6 +531,11 @@ class VGCopy {
   // Processing
   static const processingTitle = 'Verified Glam';
   static const processingSubtitle = 'Reviewing your photo…';
+  static const rewardAdPromptTitle = 'Unlock your result';
+  static const rewardAdPromptSubtitle = 'Watch a short ad to reveal your free Face Beauty Analysis.';
+  static const rewardAdWatchButton = 'Watch ad & reveal';
+  static const rewardAdLoading = 'Loading ad…';
+  static const rewardAdNotEarned = "Watch the full ad to unlock your result — you weren't charged for this attempt.";
   static const processingDisclaimer = 'This may take a moment.';
 
   // Results common

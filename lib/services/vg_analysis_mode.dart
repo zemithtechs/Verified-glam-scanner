@@ -22,14 +22,14 @@ class VGAnalysisMode {
   static String? get blockReason {
     if (isLiveAnalysis || allowMockAnalysis) return null;
     if (!useCloud) {
-      return 'Sign in and run via Supabase to analyze your photo. '
+      return 'Sign in and run via the live server to analyze your photo. '
           'Use scripts/run-dev.ps1 with .env configured.';
     }
     if (!VGSupabaseAuthService.isSignedIn) {
       return 'Sign in to run live AI analysis on your photo.';
     }
     if (kVGUseMockAnalysis) {
-      return 'Mock analysis is disabled for normal use. Use the Supabase launch config.';
+      return 'Mock analysis is disabled for normal use. Use the Cloudflare launch config.';
     }
     return 'Live analysis is unavailable. Check your connection and try again.';
   }

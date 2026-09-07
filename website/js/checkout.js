@@ -1,13 +1,48 @@
 (function () {
   var VALID_PLANS = { annual: true, pro_weekly: true };
 
-  function getClient() {
-    var url = window.VG_SUPABASE_URL;
-    var key = window.VG_SUPABASE_ANON_KEY;
-    if (!url || !key || url.indexOf("__") >= 0 || !window.supabase) {
+  function apiUrl() {
+    var url = window.VG_API_URL;
+    if (!url || url.indexOf("__") >= 0) return null;
+    return url;
+  }
+
+  function getToken() {
+    try {
+      return localStorage.getItem("vg_auth_token");
+    } catch (_) {
       return null;
     }
-    return window.supabase.createClient(url, key);
+  }
+
+  function clearToken() {
+    try {
+      localStorage.removeItem("vg_auth_token");
+    } catch (_) {}
+  }
+
+  async function apiFetch(path, options) {
+    var base = apiUrl();
+    var token = getToken();
+    if (!base || !token) return null;
+
+    options = options || {};
+    var headers = Object.assign({}, options.headers, { Authorization: "Bearer " + token });
+    if (options.body) headers["Content-Type"] = "application/json";
+
+    var res = await fetch(base + path, {
+      method: options.method || "GET",
+      headers: headers,
+      body: options.body,
+    });
+    if (res.status === 401) {
+      clearToken();
+      return null;
+    }
+    var payload = await res.json().catch(function () {
+      return {};
+    });
+    return { ok: res.ok, status: res.status, payload: payload };
   }
 
   function planFromButton(btn) {
@@ -55,122 +90,76 @@
     window.history.replaceState({}, "", next);
   }
 
-  async function getSession(client) {
-    var sessionRes = await client.auth.getSession();
-    return sessionRes.data && sessionRes.data.session;
+  async function fetchProfile() {
+    var res = await apiFetch("/api/profiles/me");
+    if (!res || !res.ok) return null;
+    return res.payload;
   }
 
-  async function fetchProfile(client) {
-    var session = await getSession(client);
-    if (!session) return null;
-    var res = await client
-      .from("profiles")
-      .select("is_pro, credits_balance, subscription_plan")
-      .eq("id", session.user.id)
-      .maybeSingle();
-    if (res.error) return null;
-    return res.data;
-  }
-
-  async function fetchProfileIsPro(client) {
-    var profile = await fetchProfile(client);
+  async function fetchProfileIsPro() {
+    var profile = await fetchProfile();
     return profile && profile.is_pro === true;
   }
 
-  async function pollProfileIsPro(client, maxAttempts, delayMs) {
+  async function pollProfileIsPro(maxAttempts, delayMs) {
     for (var i = 0; i < maxAttempts; i++) {
-      if (await fetchProfileIsPro(client)) return true;
+      if (await fetchProfileIsPro()) return true;
       await delay(delayMs);
     }
     return false;
   }
 
   async function startCheckout(plan) {
-    var client = getClient();
-    var session = client ? await getSession(client) : null;
+    var token = getToken();
 
-    if (!session) {
+    if (!token) {
       var guestUrl = publicCheckoutUrl(plan);
       if (guestUrl) {
         window.location.href = guestUrl;
         return;
       }
-      showToast("Could not start checkout. Try again.");
+      window.location.href = "/login?redirect=" + encodeURIComponent("/pricing?plan=" + plan);
       return;
     }
 
-    var res = await fetch(window.VG_SUPABASE_URL + "/functions/v1/polar-create-checkout", {
+    var res = await apiFetch("/api/polar/checkout", {
       method: "POST",
-      headers: {
-        Authorization: "Bearer " + session.access_token,
-        apikey: window.VG_SUPABASE_ANON_KEY,
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({ planId: plan }),
     });
 
-    var payload = await res.json().catch(function () {
-      return {};
-    });
-    if (!res.ok || !payload.checkoutUrl) {
+    if (!res || !res.ok || !res.payload.checkoutUrl) {
       showToast("Could not start checkout. Try again.");
       return;
     }
 
-    window.location.href = payload.checkoutUrl;
+    window.location.href = res.payload.checkoutUrl;
   }
 
   async function openCustomerPortal() {
-    var client = getClient();
-    if (!client) {
+    if (!getToken()) {
       window.location.href = "/login?redirect=" + encodeURIComponent("/pricing");
       return;
     }
 
-    var session = await getSession(client);
-    if (!session) {
-      window.location.href = "/login?redirect=" + encodeURIComponent("/pricing");
-      return;
-    }
-
-    var res = await fetch(window.VG_SUPABASE_URL + "/functions/v1/polar-customer-portal", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + session.access_token,
-        apikey: window.VG_SUPABASE_ANON_KEY,
-        "Content-Type": "application/json",
-      },
-      body: "{}",
-    });
-
-    var payload = await res.json().catch(function () {
-      return {};
-    });
-    if (!res.ok || !payload.portalUrl) {
+    var res = await apiFetch("/api/polar/portal", { method: "POST", body: "{}" });
+    if (!res || !res.ok || !res.payload.portalUrl) {
       showToast("Could not open billing portal. Try again from your profile.");
       return;
     }
 
-    window.open(payload.portalUrl, "_blank", "noopener,noreferrer");
+    window.open(res.payload.portalUrl, "_blank", "noopener,noreferrer");
   }
 
   async function updateManageBillingUi() {
     var section = document.getElementById("vg-pricing-manage");
     if (!section) return;
 
-    var client = getClient();
-    if (!client) {
+    if (!getToken()) {
       section.hidden = true;
       return;
     }
 
-    var session = await getSession(client);
-    if (!session) {
-      section.hidden = true;
-      return;
-    }
-
-    var profile = await fetchProfile(client);
+    var profile = await fetchProfile();
     var isPro = profile && profile.is_pro === true;
     section.hidden = !isPro;
 
@@ -185,14 +174,13 @@
   }
 
   async function handleCheckoutSuccess() {
-    var client = getClient();
-    if (!client) {
+    if (!getToken()) {
       window.location.href = "/app/face-beauty-analysis?checkout=success";
       return;
     }
 
     showToast("Processing your subscription…");
-    var ready = await pollProfileIsPro(client, 15, 2000);
+    var ready = await pollProfileIsPro(15, 2000);
     stripCheckoutParam();
 
     if (ready) {
@@ -236,12 +224,7 @@
     } catch (_) {}
 
     if (resumePlan !== plan) return;
-
-    var client = getClient();
-    if (!client) return;
-
-    var session = await getSession(client);
-    if (!session) return;
+    if (!getToken()) return;
 
     try {
       sessionStorage.removeItem("vg_resume_checkout");

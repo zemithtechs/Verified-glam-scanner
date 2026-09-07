@@ -11,6 +11,7 @@ import '../utils/BMColors.dart';
 import '../utils/BMWidgets.dart';
 import '../utils/vg_auth_navigation.dart';
 import '../utils/vg_constants.dart';
+import '../utils/vg_error_utils.dart';
 import 'BMForgetPasswordScreen.dart';
 import 'BMRegisterScreen.dart';
 
@@ -46,8 +47,8 @@ class _BMLoginScreenState extends State<BMLoginScreen> {
     if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
       toast(
         VGSupabaseConfig.isConfigured
-            ? 'Could not connect to Supabase. Check your network and try again.'
-            : 'Supabase not configured. Run with scripts/run-dev.ps1 or launch config.',
+            ? 'Could not connect to the server. Check your network and try again.'
+            : 'Server not configured. Run with scripts/run-dev.ps1 or launch config.',
       );
       return;
     }
@@ -65,7 +66,7 @@ class _BMLoginScreenState extends State<BMLoginScreen> {
       finish(context);
       await vgNavigateAfterAuth(context);
     } catch (e) {
-      toast(e.toString());
+      toast(vgFriendlyAuthError(e));
     } finally {
       if (mounted) setState(() => _loading = false);
     }
@@ -83,7 +84,7 @@ class _BMLoginScreenState extends State<BMLoginScreen> {
       finish(context);
       await vgNavigateAfterAuth(context);
     } catch (e) {
-      toast(e.toString());
+      toast(vgFriendlyAuthError(e));
     } finally {
       if (mounted) setState(() => _loading = false);
     }

@@ -1,4 +1,4 @@
-# Run Verified Glam on a connected device with Supabase credentials from .env
+# Run Verified Glam on a connected device against the live Cloudflare Worker API.
 param(
   [string]$DeviceId = ""
 )
@@ -22,13 +22,11 @@ Get-Content $EnvFile | ForEach-Object {
   $vars[$key] = $val
 }
 
-foreach ($required in @("SUPABASE_URL", "SUPABASE_ANON_KEY")) {
-  if (-not $vars.ContainsKey($required) -or [string]::IsNullOrWhiteSpace($vars[$required])) {
-    Write-Error "Missing $required in .env"
-  }
-  if ($vars[$required] -match "your_") {
-    Write-Error "Replace placeholder $required in .env before running."
-  }
+if (-not $vars.ContainsKey("VG_API_URL") -or [string]::IsNullOrWhiteSpace($vars["VG_API_URL"])) {
+  Write-Error "Missing VG_API_URL in .env - set it to your Cloudflare Worker URL (e.g. https://verified-glam-api.<account>.workers.dev)."
+}
+if ($vars["VG_API_URL"] -match "your_") {
+  Write-Error "Replace placeholder VG_API_URL in .env before running."
 }
 
 $flutter = "C:\Users\zenit\flutter\bin\flutter.bat"
@@ -36,13 +34,11 @@ if (-not (Test-Path $flutter)) {
   $flutter = "flutter"
 }
 
-$supabaseUrl = $vars["SUPABASE_URL"]
-$supabaseKey = $vars["SUPABASE_ANON_KEY"]
+$apiUrl = $vars["VG_API_URL"]
 
 $flutterArgs = @(
   "run",
-  "--dart-define=SUPABASE_URL=$supabaseUrl",
-  "--dart-define=SUPABASE_ANON_KEY=$supabaseKey",
+  "--dart-define=VG_API_URL=$apiUrl",
   "--dart-define=VG_USE_SUPABASE=true",
   "--dart-define=VG_USE_MOCK_ANALYSIS=false"
 )
@@ -56,6 +52,6 @@ if ($DeviceId -ne "") {
   $flutterArgs += $DeviceId
 }
 
-Write-Host "Running with Supabase: $supabaseUrl"
+Write-Host "Running against Cloudflare Worker: $apiUrl"
 Set-Location $Root
 & $flutter @flutterArgs

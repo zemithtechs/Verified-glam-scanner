@@ -117,23 +117,57 @@ class VGLineArtPainter extends CustomPainter {
         canvas.drawCircle(Offset(cx - 6, cy - 6), 4, paint);
         canvas.drawCircle(Offset(cx + 8, cy + 8), 4, paint);
       case VGLineArtMotif.spa:
-        canvas.drawPath(Path()..moveTo(cx, cy - 20)..quadraticBezierTo(cx + 20, cy, cx, cy + 20)..quadraticBezierTo(cx - 20, cy, cx, cy - 20), paint);
-        canvas.drawLine(Offset(cx, cy - 14), Offset(cx, cy + 14), paint);
+        // Lotus: a center petal plus two symmetric side petals on a calm base line.
+        canvas.drawPath(Path()..moveTo(cx, cy + 12)..quadraticBezierTo(cx - 7, cy - 6, cx, cy - 20)..quadraticBezierTo(cx + 7, cy - 6, cx, cy + 12), paint);
+        canvas.drawPath(Path()..moveTo(cx, cy + 10)..quadraticBezierTo(cx - 20, cy - 2, cx - 22, cy - 16)..quadraticBezierTo(cx - 6, cy - 12, cx, cy + 10), paint..strokeWidth = 1.5);
+        canvas.drawPath(Path()..moveTo(cx, cy + 10)..quadraticBezierTo(cx + 20, cy - 2, cx + 22, cy - 16)..quadraticBezierTo(cx + 6, cy - 12, cx, cy + 10), paint..strokeWidth = 1.5);
+        canvas.drawArc(Rect.fromCenter(center: Offset(cx, cy + 12), width: 34, height: 10), 0.15, 2.85, false, paint..strokeWidth = 1.8);
       case VGLineArtMotif.diamond:
-        canvas.drawPath(Path()..moveTo(cx, cy - 18)..lineTo(cx + 16, cy)..lineTo(cx, cy + 18)..lineTo(cx - 16, cy)..close(), paint);
+        // Faceted gem cut: table top, girdle, and pavilion facet lines.
+        final top = Offset(cx, cy - 20);
+        final left = Offset(cx - 18, cy - 4);
+        final right = Offset(cx + 18, cy - 4);
+        final bottom = Offset(cx, cy + 20);
+        canvas.drawPath(Path()..moveTo(top.dx, top.dy)..lineTo(left.dx, left.dy)..lineTo(bottom.dx, bottom.dy)..lineTo(right.dx, right.dy)..close(), paint);
+        canvas.drawLine(left, right, paint..strokeWidth = 1.4);
+        canvas.drawLine(Offset(cx, cy - 4), bottom, paint..strokeWidth = 1.2);
+        canvas.drawLine(Offset(cx - 9, cy - 4), Offset(cx, top.dy), paint..strokeWidth = 1.0);
+        canvas.drawLine(Offset(cx + 9, cy - 4), Offset(cx, top.dy), paint..strokeWidth = 1.0);
+        _drawStar(canvas, Offset(cx + 14, cy - 20), 3.5, paint..strokeWidth = 1.4);
       case VGLineArtMotif.brush:
-        canvas.drawLine(Offset(cx - 16, cy + 16), Offset(cx + 8, cy - 8), paint..strokeWidth = 3);
-        canvas.drawOval(Rect.fromCenter(center: Offset(cx + 12, cy - 12), width: 14, height: 10), paint..strokeWidth = 1.8);
+        // Angled makeup brush: fanned bristle head, ferrule band, handle.
+        canvas.save();
+        canvas.translate(cx, cy);
+        canvas.rotate(-0.6);
+        final bristles = Path()
+          ..moveTo(-11, -20)
+          ..quadraticBezierTo(0, -30, 11, -20)
+          ..quadraticBezierTo(9, -8, 0, -4)
+          ..quadraticBezierTo(-9, -8, -11, -20)
+          ..close();
+        canvas.drawPath(bristles, paint..strokeWidth = 1.6);
+        canvas.drawLine(const Offset(-6, -4), const Offset(-6, 3), paint..strokeWidth = 3);
+        canvas.drawLine(const Offset(6, -4), const Offset(6, 3), paint..strokeWidth = 3);
+        canvas.drawLine(const Offset(-3, 3), const Offset(-1, 20), paint..strokeWidth = 2.2);
+        canvas.drawLine(const Offset(3, 3), const Offset(1, 20), paint..strokeWidth = 2.2);
+        canvas.restore();
       case VGLineArtMotif.droplet:
+        // Water drop with a glossy highlight arc.
         canvas.drawPath(Path()..moveTo(cx, cy - 18)..quadraticBezierTo(cx + 16, cy + 4, cx, cy + 18)..quadraticBezierTo(cx - 16, cy + 4, cx, cy - 18), paint);
+        canvas.drawArc(Rect.fromCenter(center: Offset(cx - 4, cy + 2), width: 10, height: 14), 3.6, 1.6, false, paint..strokeWidth = 1.3);
       case VGLineArtMotif.mirror:
-        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy), width: 28, height: 38), paint);
-        canvas.drawLine(Offset(cx, cy + 19), Offset(cx, cy + 28), paint);
-        canvas.drawLine(Offset(cx - 10, cy + 28), Offset(cx + 10, cy + 28), paint);
+        // Hand mirror: double-ring frame, neck, base, and a corner shine mark.
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy - 6), width: 30, height: 36), paint);
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy - 6), width: 24, height: 29), paint..strokeWidth = 1.1);
+        canvas.drawLine(Offset(cx, cy + 12), Offset(cx, cy + 24), paint..strokeWidth = 2.2);
+        canvas.drawLine(Offset(cx - 9, cy + 24), Offset(cx + 9, cy + 24), paint..strokeWidth = 2.2);
+        canvas.drawLine(Offset(cx - 6, cy - 16), Offset(cx - 3, cy - 11), paint..strokeWidth = 1.4);
       case VGLineArtMotif.magic:
-        canvas.drawLine(Offset(cx - 14, cy + 14), Offset(cx + 14, cy - 14), paint..strokeWidth = 2.5);
-        _drawStar(canvas, Offset(cx - 10, cy - 12), 6, paint);
-        _drawStar(canvas, Offset(cx + 12, cy + 10), 5, paint);
+        // Wand with a star tip and two accent sparkles trailing its arc.
+        canvas.drawLine(Offset(cx - 13, cy + 15), Offset(cx + 9, cy - 9), paint..strokeWidth = 2.6);
+        _drawStar(canvas, Offset(cx + 13, cy - 15), 7, paint..strokeWidth = 1.6);
+        _drawStar(canvas, Offset(cx - 15, cy - 4), 4, paint..strokeWidth = 1.3);
+        _drawStar(canvas, Offset(cx + 2, cy + 14), 3, paint..strokeWidth = 1.2);
     }
   }
 

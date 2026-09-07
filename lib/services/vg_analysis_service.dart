@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/vg_feature_model.dart';
@@ -18,7 +17,8 @@ import 'vg_connectivity_service.dart';
 import 'vg_onboarding_store.dart';
 import 'vg_credits_service.dart';
 import 'vg_session_scan_cache.dart';
-import 'supabase/vg_supabase_init.dart';
+import 'supabase/vg_api_client.dart';
+import 'supabase/vg_supabase_scan_repository.dart';
 
 class VGAnalysisService {
   VGAnalysisService._();
@@ -28,6 +28,7 @@ class VGAnalysisService {
   static Future<VGScanResult> runAnalysis({
     required VGFeatureModel feature,
     required String photoPath,
+    String? rewardToken,
   }) async {
     final blockReason = VGAnalysisMode.blockReason;
     if (blockReason != null) {
@@ -68,12 +69,8 @@ class VGAnalysisService {
         feature: feature,
         storagePath: storagePath,
         detectedFaces: detectedFaces,
+        rewardToken: rewardToken,
       );
-      try {
-        await VGSupabaseStorageService.deleteScanPhoto(storagePath);
-      } catch (e) {
-        debugPrint('VGAnalysisService: temp photo cleanup failed: $e');
-      }
     } else {
       payload = buildMockResultPayload(
         feature,
@@ -93,6 +90,15 @@ class VGAnalysisService {
       usedMockAnalysis: usedMock,
     );
     VGSessionScanCache.set(scanResult);
+
+    if (storagePath != null) {
+      try {
+        await VGSupabaseScanRepository().save(result: scanResult, storagePath: storagePath);
+      } catch (e) {
+        debugPrint('VGAnalysisService: saving scan history failed: $e');
+      }
+    }
+
     return scanResult;
   }
 
@@ -100,40 +106,22 @@ class VGAnalysisService {
     required VGFeatureModel feature,
     required String storagePath,
     List<Map<String, dynamic>>? detectedFaces,
+    String? rewardToken,
   }) async {
     final profile = await _profilePayload();
 
     try {
-      final response = await VGSupabaseInit.client.functions.invoke(
-        'analyze-scan',
-        body: {
-          'featureType': feature.featureType,
-          'storagePath': storagePath,
-          'detectedFaces': detectedFaces ?? [],
-          'profile': profile,
-        },
-      );
+      final data = await VGApiClient.post('/api/analyze', body: {
+        'featureType': feature.featureType,
+        'storagePath': storagePath,
+        'detectedFaces': detectedFaces ?? [],
+        'profile': profile,
+        if (rewardToken != null) 'rewardToken': rewardToken,
+      });
 
-      if (response.status != 200) {
-        final data = response.data;
-        if (data is Map) {
-          throw VGAnalysisFailure(
-            message: data['error']?.toString() ?? 'Analysis failed (${response.status})',
-            errorCode: data['errorCode']?.toString() ?? 'ANALYSIS_FAILED',
-            status: response.status,
-          );
-        }
-        throw VGAnalysisFailure(
-          message: 'Analysis failed (${response.status})',
-          errorCode: 'ANALYSIS_FAILED',
-          status: response.status,
-        );
-      }
-
-      final data = response.data as Map<String, dynamic>;
       await VGCreditsService.syncFromResponse(data);
       return Map<String, dynamic>.from(data['payload'] as Map);
-    } on FunctionException catch (e) {
+    } on VGApiException catch (e) {
       throw vgParseAnalysisError(e);
     }
   }

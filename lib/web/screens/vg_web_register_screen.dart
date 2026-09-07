@@ -59,8 +59,8 @@ class _VGWebRegisterScreenState extends State<VGWebRegisterScreen> {
     if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
       toast(
         VGSupabaseConfig.isConfigured
-            ? 'Could not connect to Supabase. Check your network and try again.'
-            : 'Supabase not configured.',
+            ? 'Could not connect to the server. Check your network and try again.'
+            : 'Server not configured.',
       );
       return;
     }

@@ -102,10 +102,10 @@ $passkeysSrc = Join-Path $Root "web\js\passkeys-bundle.js"
 if (Test-Path $passkeysSrc) {
   Copy-Item -Force $passkeysSrc (Join-Path $jsTo "passkeys-bundle.js")
 } else {
-  Write-Warning "Missing web/js/passkeys-bundle.js - Supabase web auth will crash on /app/*"
+  Write-Warning "Missing web/js/passkeys-bundle.js - web auth will crash on /app/*"
 }
 
-# Inject Supabase config into auth-config.js
+# Inject Worker API config into auth-config.js
 if ([string]::IsNullOrWhiteSpace($EnvFile)) {
   $EnvFile = Join-Path $Root ".env"
 }
@@ -134,20 +134,17 @@ if (Test-Path $exampleEnv) {
     }
   }
 }
-$supabaseUrl = $vars["SUPABASE_URL"]
-$supabaseKey = $vars["SUPABASE_ANON_KEY"]
+$apiUrl = $vars["VG_API_URL"]
 $googleId = $vars["GOOGLE_WEB_CLIENT_ID"]
 $polarAnnual = $vars["POLAR_CHECKOUT_LINK_ANNUAL"]
 $polarWeekly = $vars["POLAR_CHECKOUT_LINK_PRO_WEEKLY"]
-if (-not $supabaseUrl) { $supabaseUrl = $env:SUPABASE_URL }
-if (-not $supabaseKey) { $supabaseKey = $env:SUPABASE_ANON_KEY }
+if (-not $apiUrl) { $apiUrl = $env:VG_API_URL }
 if (-not $googleId) { $googleId = $env:GOOGLE_WEB_CLIENT_ID }
 
 $authConfig = Join-Path $BuildWeb "js\auth-config.js"
 if (Test-Path $authConfig) {
   $cfg = Get-Content $authConfig -Raw
-  if ($supabaseUrl) { $cfg = $cfg -replace '__SUPABASE_URL__', $supabaseUrl }
-  if ($supabaseKey) { $cfg = $cfg -replace '__SUPABASE_ANON_KEY__', $supabaseKey }
+  if ($apiUrl) { $cfg = $cfg -replace '__VG_API_URL__', $apiUrl }
   if ($googleId) { $cfg = $cfg -replace '__GOOGLE_WEB_CLIENT_ID__', $googleId }
   if ($polarAnnual) { $cfg = $cfg -replace '__POLAR_CHECKOUT_LINK_ANNUAL__', $polarAnnual }
   if ($polarWeekly) { $cfg = $cfg -replace '__POLAR_CHECKOUT_LINK_PRO_WEEKLY__', $polarWeekly }
@@ -171,27 +168,36 @@ if (Test-Path $generated) {
   }
 }
 
+$staleRedirects = Join-Path $BuildWeb "_redirects"
+if (Test-Path $staleRedirects) { Remove-Item -Force $staleRedirects }
+$staleServeJson = Join-Path $BuildWeb "serve.json"
+if (Test-Path $staleServeJson) { Remove-Item -Force $staleServeJson }
+
+$legacyStatic = Join-Path $BuildWeb "_static"
+if (Test-Path $legacyStatic) { Remove-Item $legacyStatic -Recurse -Force }
+$legacyMarketing = Join-Path $BuildWeb "marketing"
+if (Test-Path $legacyMarketing) { Remove-Item $legacyMarketing -Recurse -Force }
+
+if (Test-FlutterShellHtml $flutterShell) {
+  Copy-Item -Force $flutterShell (Join-Path $BuildWeb "404.html")
+}
+
 foreach ($seoFile in @("sitemap.xml", "robots.txt", "llms.txt", "_headers")) {
   $src = Join-Path $Root "website\$seoFile"
   if (Test-Path $src) {
     Copy-Item -Force $src (Join-Path $BuildWeb $seoFile)
   }
 }
-$staleRedirects = Join-Path $BuildWeb "_redirects"
-if (Test-Path $staleRedirects) { Remove-Item -Force $staleRedirects }
-# serve.json redirects loop with wrangler html_handling (error 100324); local dev uses local-web-server.mjs
-$staleServeJson = Join-Path $BuildWeb "serve.json"
-if (Test-Path $staleServeJson) { Remove-Item -Force $staleServeJson }
 
-# Remove legacy iframe embed
-$legacyStatic = Join-Path $BuildWeb "_static"
-if (Test-Path $legacyStatic) { Remove-Item $legacyStatic -Recurse -Force }
-$legacyMarketing = Join-Path $BuildWeb "marketing"
-if (Test-Path $legacyMarketing) { Remove-Item $legacyMarketing -Recurse -Force }
-
-# /app/* must always serve the Flutter shell, not the marketing homepage.
-if (Test-FlutterShellHtml $flutterShell) {
-  Copy-Item -Force $flutterShell (Join-Path $BuildWeb "404.html")
+$sitemapPath = Join-Path $BuildWeb "sitemap.xml"
+if (-not (Test-Path $sitemapPath)) { Write-Error "Missing build/web/sitemap.xml after sync." }
+$sitemap = Get-Content $sitemapPath -Raw
+if ($sitemap -match 'flutter_bootstrap|<html|<!DOCTYPE') {
+  Write-Error "sitemap.xml contains HTML - would break crawlers."
+}
+if ($sitemap -notmatch '<urlset') { Write-Error "sitemap.xml missing urlset element." }
+if ((Select-String -Path $sitemapPath -Pattern '<loc>').Count -lt 1) {
+  Write-Error "sitemap.xml has no URLs."
 }
 
 Write-Host "Static overlay complete."

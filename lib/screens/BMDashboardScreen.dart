@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../components/vg/vg_ad_banner.dart';
 import '../fragments/BMHomeFragment.dart';
 import '../main.dart';
 import '../utils/BMColors.dart';
@@ -94,19 +95,28 @@ class _BMDashboardScreenState extends State<BMDashboardScreen> {
     return Scaffold(
       backgroundColor: getDashboardColor(),
       body: body,
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (int index) => setState(() => selectedTab = index),
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: context.cardColor,
-        selectedItemColor: bmSpecialColor,
-        unselectedItemColor: bmPrimaryColor,
-        currentIndex: selectedTab,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: VGCopy.tabHome),
-          BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), activeIcon: Icon(Icons.explore), label: VGCopy.tabExplore),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: VGCopy.tabProfile),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          BottomNavigationBar(
+            onTap: (int index) => setState(() => selectedTab = index),
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: context.cardColor,
+            selectedItemColor: bmSpecialColor,
+            unselectedItemColor: bmPrimaryColor,
+            currentIndex: selectedTab,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: VGCopy.tabHome),
+              BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), activeIcon: Icon(Icons.explore), label: VGCopy.tabExplore),
+              BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: VGCopy.tabProfile),
+            ],
+          ).cornerRadiusWithClipRRectOnly(topLeft: 32, topRight: 32),
+          // Persistent across Home/Explore/Profile — a `const` widget here
+          // keeps the same VGBannerAdContainer State (and loaded ad) alive
+          // across tab switches instead of reloading on every rebuild.
+          SafeArea(top: false, child: const VGAdBanner()),
         ],
-      ).cornerRadiusWithClipRRectOnly(topLeft: 32, topRight: 32),
+      ),
     );
   }
 }

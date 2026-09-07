@@ -1,0 +1,30 @@
+# Verified Glam API — Cloudflare Worker (Hono + Better Auth + D1 + R2)
+# Deploys to the komolafephilip@yahoo.com account — see docs/CLOUDFLARE_MIGRATION_PLAN.md
+name = "verified-glam-api"
+main = "src/index.ts"
+compatibility_date = "2026-06-25"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+BETTER_AUTH_URL = "https://verified-glam-api.komolafephilip.workers.dev"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "verified-glam-db"
+database_id = "aaca0f9b-e21b-46ac-a35c-300e64375ecb"
+
+[[r2_buckets]]
+binding = "SCANS_BUCKET"
+bucket_name = "verified-glam-scans"
+
+[[r2_buckets]]
+binding = "ASSETS_BUCKET"
+bucket_name = "verified-glam-assets"
+
+# Cron Trigger for challenge notification dispatch (mirrors dispatch-challenge-notifications)
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Secrets (set via `wrangler secret put <NAME>`, never committed):
+#   BETTER_AUTH_SECRET, GOOGLE_CLIENT_ID, OPENAI_API_KEY,
+#   POLAR_ACCESS_TOKEN, POLAR_WEBHOOK_SECRET, FCM_SERVICE_ACCOUNT_JSON

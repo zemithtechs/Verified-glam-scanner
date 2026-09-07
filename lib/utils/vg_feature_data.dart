@@ -20,6 +20,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       description: 'Get your personalized color palette in under 60 seconds.',
       icon: Icons.palette_outlined,
       badge: 'NEW',
+      isPro: true,
       thumbnailAsset: vgFeatureThumbColorAsset,
     ),
     VGFeatureModel(
@@ -27,6 +28,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       title: 'Beauty Routine Challenge',
       description: VGCopy.featureDescGlowUpGuide,
       icon: Icons.calendar_month_outlined,
+      isPro: true,
       thumbnailAsset: vgFeatureThumbGlowUpAsset,
     ),
     VGFeatureModel(
@@ -34,6 +36,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       title: 'Beauty Tips',
       description: VGCopy.featureDescBeautyTips,
       icon: Icons.lightbulb_outline,
+      isPro: true,
       thumbnailAsset: vgFeatureThumbBeautyTipsAsset,
     ),
     VGFeatureModel(
@@ -42,6 +45,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       description: VGCopy.featureDescCelebrity,
       icon: Icons.movie_filter_outlined,
       badge: 'HOT',
+      isPro: true,
       thumbnailAsset: vgFeatureThumbCelebrityAsset,
     ),
     VGFeatureModel(
@@ -50,6 +54,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       description: VGCopy.featureDescFacialSymmetry,
       icon: Icons.compare_arrows,
       badge: 'NEW',
+      isPro: true,
       thumbnailAsset: vgFeatureThumbSymmetryAsset,
     ),
     VGFeatureModel(
@@ -58,6 +63,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       description: VGCopy.featureDescShowdown,
       icon: Icons.emoji_events_outlined,
       badge: 'HOT',
+      isPro: true,
       thumbnailAsset: vgFeatureThumbShowdownAsset,
     ),
     VGFeatureModel(
@@ -65,6 +71,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       title: 'Face Comparison',
       description: VGCopy.featureDescResemblance,
       icon: Icons.people_outline,
+      isPro: true,
       thumbnailAsset: vgFeatureThumbResemblanceAsset,
     ),
     VGFeatureModel(
@@ -72,6 +79,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       title: 'Attractiveness Test',
       description: VGCopy.featureDescAttractiveness,
       icon: Icons.speed_outlined,
+      isPro: true,
       thumbnailAsset: vgFeatureThumbAttractivenessAsset,
     ),
     VGFeatureModel(
@@ -79,6 +87,7 @@ List<VGFeatureModel> getVerifiedGlamFeatures() {
       title: 'Face Golden Ratio',
       description: VGCopy.featureDescGoldenRatio,
       icon: Icons.architecture_outlined,
+      isPro: true,
       thumbnailAsset: vgFeatureThumbGoldenRatioAsset,
     ),
   ];

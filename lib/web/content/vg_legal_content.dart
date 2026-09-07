@@ -113,7 +113,7 @@ VGLegalParagraph(
         'Device and usage data. We may collect standard app analytics such as device type, operating system version, app version, and feature usage to improve stability and performance.',
       ),
 VGLegalParagraph(
-        'Advertising and subscriptions. Free users may see ads served by Google AdMob. If you subscribe to Pro, purchase and subscription status are processed through Polar.sh (hosted checkout). Your Supabase account is linked via your user ID for cross-platform access on web and Android.',
+        'Advertising and subscriptions. Free users may see ads served by Google AdMob. If you subscribe to Pro, purchase and subscription status are processed through Polar.sh (hosted checkout). Your account is linked via your user ID for cross-platform access on web and Android.',
       ),
 VGLegalParagraph(
         'Support communications. If you email us at support@verifiedglam.com, we retain the content of your message and your email address to respond to you.',
@@ -137,11 +137,11 @@ VGLegalParagraph(
       ),
 VGLegalHeading('4. How we store and protect data'),
 VGLegalParagraph(
-        'We use Supabase for authentication, database records, and private storage of scan photos. Access to your data is protected by account authentication and row-level security policies.',
+        'We use Cloudflare (Workers, D1 database, and R2 storage) for authentication, database records, and private storage of scan photos. Access to your data is protected by account authentication and server-side access controls.',
       ),
 VGLegalHeading('5. Sharing with third parties'),
 VGLegalBulletList([
-        'Supabase — hosting, auth, database, and file storage',
+        'Cloudflare — hosting, auth, database, and file storage',
         'OpenAI — server-side image analysis for scan results',
         'Google (AdMob) — advertising on the free tier',
         'Polar.sh — subscription checkout and billing management',

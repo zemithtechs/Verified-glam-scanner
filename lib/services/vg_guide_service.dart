@@ -4,6 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../utils/vg_constants.dart';
 import '../utils/vg_copy.dart';
+import 'supabase/vg_api_client.dart';
 import 'supabase/vg_supabase_auth_service.dart';
 import 'supabase/vg_supabase_config.dart';
 import 'supabase/vg_supabase_init.dart';
@@ -77,19 +78,7 @@ class VGGuideService {
   static Future<VGGuideRecommendations> _fetchFromCloud() async {
     final profile = await _profilePayload();
 
-    final response = await VGSupabaseInit.client.functions.invoke(
-      'guide-recommendations',
-      body: {'profile': profile},
-    );
-
-    if (response.status != 200) {
-      final err = response.data is Map
-          ? (response.data as Map)['error']
-          : response.data;
-      throw Exception(err?.toString() ?? 'Guide recommendations failed (${response.status})');
-    }
-
-    final data = response.data as Map<String, dynamic>;
+    final data = await VGApiClient.post('/api/guide/recommendations', body: {'profile': profile});
     final tipsRaw = (data['tips'] as List?) ?? [];
     final tips = tipsRaw
         .whereType<Map>()

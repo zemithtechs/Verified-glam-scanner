@@ -36,13 +36,13 @@ class _VGWebForgotPasswordScreenState extends State<VGWebForgotPasswordScreen> {
     if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
       toast(
         VGSupabaseConfig.isConfigured
-            ? 'Could not connect to Supabase. Check your network and try again.'
-            : 'Supabase not configured.',
+            ? 'Could not connect to the server. Check your network and try again.'
+            : 'Server not configured.',
       );
       return;
     }
     if (!kVGUseSupabase) {
-      toast('Password reset requires Supabase configuration');
+      toast('Password reset requires server configuration');
       return;
     }
     setState(() => _loading = true);

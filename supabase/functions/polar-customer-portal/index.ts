@@ -5,7 +5,7 @@ import {
   polarAccessToken,
 } from "../_shared/polar.ts";
 
-const FUNCTION_VERSION = "2";
+const FUNCTION_VERSION = "3";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -59,8 +59,10 @@ Deno.serve(async (req) => {
       return jsonError(401, "Invalid session");
     }
 
+    // Field is externalCustomerId in @polar-sh/sdk@0.48.1 — customerExternalId
+    // (previously used here) doesn't exist on this type and was silently dropped.
     const session = await polar.customerSessions.create({
-      customerExternalId: userData.user.id,
+      externalCustomerId: userData.user.id,
     });
 
     const portalUrl = session.customerPortalUrl ?? defaultPortalUrl();

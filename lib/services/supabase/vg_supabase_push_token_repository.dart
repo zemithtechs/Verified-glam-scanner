@@ -1,6 +1,9 @@
+import 'vg_api_client.dart';
 import 'vg_supabase_auth_service.dart';
-import 'vg_supabase_init.dart';
 
+/// Kept the class name VGSupabasePushTokenRepository — see
+/// vg_supabase_config.dart for why. Ported to /api/push-tokens (see
+/// worker-api/src/routes/push-tokens.ts).
 class VGSupabasePushTokenRepository {
   Future<void> upsertToken({
     required String token,
@@ -8,22 +11,17 @@ class VGSupabasePushTokenRepository {
   }) async {
     final userId = VGSupabaseAuthService.currentUser?.id;
     if (userId == null || token.isEmpty) return;
-    await VGSupabaseInit.client.from('device_push_tokens').upsert({
-      'user_id': userId,
-      'fcm_token': token,
+    await VGApiClient.post('/api/push-tokens', body: {
+      'token': token,
       'platform': platform,
-      'is_active': true,
-      'last_seen_at': DateTime.now().toIso8601String(),
-      'updated_at': DateTime.now().toIso8601String(),
-    }, onConflict: 'fcm_token');
+    });
   }
 
   Future<void> deactivateToken(String token) async {
     final userId = VGSupabaseAuthService.currentUser?.id;
     if (userId == null || token.isEmpty) return;
-    await VGSupabaseInit.client.from('device_push_tokens').update({
-      'is_active': false,
-      'updated_at': DateTime.now().toIso8601String(),
-    }).eq('user_id', userId).eq('fcm_token', token);
+    await VGApiClient.post('/api/push-tokens/deactivate', body: {
+      'token': token,
+    });
   }
 }

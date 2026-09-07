@@ -1,33 +1,31 @@
 import '../../models/vg_scan_result.dart';
+import 'vg_api_client.dart';
 import 'vg_supabase_auth_service.dart';
-import 'vg_supabase_init.dart';
 
+/// Kept the class name VGSupabaseScanRepository — see
+/// vg_supabase_config.dart for why. Ported to /api/scans/* (see
+/// worker-api/src/routes/scans.ts).
 class VGSupabaseScanRepository {
   Future<List<VGScanResult>> loadAll() async {
     final userId = VGSupabaseAuthService.currentUser?.id;
     if (userId == null) return [];
 
-    final rows = await VGSupabaseInit.client
-        .from('scans')
-        .select()
-        .eq('user_id', userId)
-        .order('created_at', ascending: false);
-
-    return (rows as List).map((row) => _fromRow(row as Map<String, dynamic>)).toList();
+    final data = await VGApiClient.get('/api/scans');
+    final rows = (data['scans'] as List?) ?? [];
+    return rows.map((row) => _fromRow(Map<String, dynamic>.from(row as Map))).toList();
   }
 
   Future<VGScanResult?> getById(String id) async {
     final userId = VGSupabaseAuthService.currentUser?.id;
     if (userId == null) return null;
 
-    final row = await VGSupabaseInit.client
-        .from('scans')
-        .select()
-        .eq('id', id)
-        .eq('user_id', userId)
-        .maybeSingle();
-    if (row == null) return null;
-    return _fromRow(Map<String, dynamic>.from(row));
+    try {
+      final row = await VGApiClient.get('/api/scans/$id');
+      return _fromRow(row);
+    } on VGApiException catch (e) {
+      if (e.statusCode == 404) return null;
+      rethrow;
+    }
   }
 
   Future<void> save({
@@ -38,16 +36,13 @@ class VGSupabaseScanRepository {
     if (userId == null) throw StateError('Not signed in');
 
     try {
-      await VGSupabaseInit.client.from('scans').upsert({
-        'id': result.id,
-        'user_id': userId,
-        'feature_type': result.featureType,
-        'feature_title': result.featureTitle,
-        'photo_storage_path': storagePath,
-        'photo_public_url': null,
+      await VGApiClient.put('/api/scans/${result.id}', body: {
+        'featureType': result.featureType,
+        'featureTitle': result.featureTitle,
+        'storagePath': storagePath,
         'payload': result.payload,
-        'created_at': result.createdAt.toIso8601String(),
-      }, onConflict: 'id');
+        'createdAt': result.createdAt.toIso8601String(),
+      });
     } catch (e) {
       throw Exception('Could not save scan history to cloud: $e');
     }
@@ -55,9 +50,7 @@ class VGSupabaseScanRepository {
 
   VGScanResult _fromRow(Map<String, dynamic> row) {
     final rawPayload = row['payload'];
-    final payload = rawPayload is Map
-        ? Map<String, dynamic>.from(rawPayload)
-        : <String, dynamic>{};
+    final payload = rawPayload is Map ? Map<String, dynamic>.from(rawPayload) : <String, dynamic>{};
     final storagePath = row['photo_storage_path'] as String?;
 
     return VGScanResult(

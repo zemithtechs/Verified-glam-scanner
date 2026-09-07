@@ -3,6 +3,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../components/vg/subscription/vg_paywall_plans_section.dart';
 import '../../components/vg/vg_loading_overlay.dart';
+import '../../components/vg/vg_paywall_promo_sheet.dart';
 import '../../screens/BMLoginScreen.dart';
 import '../../services/supabase/vg_supabase_auth_service.dart';
 import '../../services/vg_subscription_store.dart';
@@ -63,14 +64,24 @@ class _VGPaywallScreenState extends State<VGPaywallScreen> {
     }
   }
 
-  void _dismiss() {
+  Future<void> _dismiss() async {
+    if (await VGSubscriptionStore.shouldShowPromoAfterDismiss()) {
+      if (!mounted) return;
+      await showVGPaywallPromoSheet(context);
+      if (!mounted) return;
+    }
     finish(context);
     widget.onDismiss?.call();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _dismiss();
+      },
+      child: Scaffold(
       backgroundColor: const Color(0xFF121212),
       body: SafeArea(
         child: Column(
@@ -108,6 +119,7 @@ class _VGPaywallScreenState extends State<VGPaywallScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }

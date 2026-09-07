@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette — canonical values (see docs/CLOUDFLARE_MIGRATION_PLAN.md
+     rewrite notes): burgundy-dark standardized on #520D1C (matches the
+     Flutter app's bmSpecialColorDark and website/css/styles.css; the
+     #6B2232 used in vg-saas.css was an unintentional drift). */
+  --color-burgundy: #872b3f;
+  --color-burgundy-dark: #520d1c;
+  --color-rose: #c79a9a;
+  --color-blush: #f6e3e3;
+  --color-surface: #fff7f7;
+  --color-text: #212121;
+  --color-text-muted: #5a5c5e;
+  --color-border: rgba(135, 43, 63, 0.16);
+
+  --max-content: 1200px;
+  --sidebar-width: 260px;
+}
+
+@theme inline {
+  --color-burgundy: var(--color-burgundy);
+  --color-burgundy-dark: var(--color-burgundy-dark);
+  --color-rose: var(--color-rose);
+  --color-blush: var(--color-blush);
+  --color-surface: var(--color-surface);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --font-sans: var(--font-outfit);
+}
+
+body {
+  background: var(--color-blush);
+  color: var(--color-text);
+}

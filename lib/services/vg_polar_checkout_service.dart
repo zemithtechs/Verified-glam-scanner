@@ -3,8 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/vg_constants.dart';
 import '../utils/vg_credit_constants.dart';
+import 'supabase/vg_api_client.dart';
 import 'supabase/vg_supabase_auth_service.dart';
-import 'supabase/vg_supabase_init.dart';
 import 'vg_credits_service.dart';
 import 'vg_subscription_store.dart';
 
@@ -23,21 +23,14 @@ class VGPolarCheckoutService {
   }
 
   static Future<String> createCheckoutUrl(String planId) async {
-    final response = await VGSupabaseInit.client.functions.invoke(
-      'polar-create-checkout',
-      body: {'planId': planId},
-    );
-
-    if (response.status != 200) {
-      final data = response.data;
-      final message = data is Map
-          ? data['error']?.toString() ?? 'Checkout failed (${response.status})'
-          : 'Checkout failed (${response.status})';
-      throw StateError(message);
+    Map<String, dynamic> data;
+    try {
+      data = await VGApiClient.post('/api/polar/checkout', body: {'planId': planId});
+    } on VGApiException catch (e) {
+      throw StateError(e.message);
     }
 
-    final data = response.data;
-    if (data is! Map || data['checkoutUrl'] is! String) {
+    if (data['checkoutUrl'] is! String) {
       throw StateError('Invalid checkout response');
     }
     return data['checkoutUrl'] as String;
@@ -71,20 +64,14 @@ class VGPolarCheckoutService {
   }
 
   static Future<String> createPortalUrl() async {
-    final response = await VGSupabaseInit.client.functions.invoke(
-      'polar-customer-portal',
-    );
-
-    if (response.status != 200) {
-      final data = response.data;
-      final message = data is Map
-          ? data['error']?.toString() ?? 'Portal failed (${response.status})'
-          : 'Portal failed (${response.status})';
-      throw StateError(message);
+    Map<String, dynamic> data;
+    try {
+      data = await VGApiClient.post('/api/polar/portal');
+    } on VGApiException catch (e) {
+      throw StateError(e.message);
     }
 
-    final data = response.data;
-    if (data is! Map || data['portalUrl'] is! String) {
+    if (data['portalUrl'] is! String) {
       throw StateError('Invalid portal response');
     }
     return data['portalUrl'] as String;
@@ -126,15 +113,9 @@ class VGPolarCheckoutService {
     }
 
     try {
-      final userId = VGSupabaseAuthService.currentUser!.id;
-      final row = await VGSupabaseInit.client
-          .from('profiles')
-          .select('is_pro, subscription_plan, credits_balance')
-          .eq('id', userId)
-          .maybeSingle();
-
-      final isPro = row?['is_pro'] == true;
-      final plan = row?['subscription_plan'] as String? ?? 'free';
+      final row = await VGApiClient.get('/api/profiles/me');
+      final isPro = row['is_pro'] == true;
+      final plan = row['subscription_plan'] as String? ?? 'free';
       await VGSubscriptionStore.setPro(value: isPro, planName: isPro ? plan : 'free');
       await VGCreditsService.fetchBalance();
       return isPro;

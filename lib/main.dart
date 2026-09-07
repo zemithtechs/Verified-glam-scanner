@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:verified_glam/screens/BMSplashScreen.dart';
+import 'package:verified_glam/services/ads/vg_ads_manager.dart';
 import 'package:verified_glam/services/supabase/vg_supabase_auth_service.dart';
 import 'package:verified_glam/services/supabase/vg_supabase_init.dart';
 import 'package:verified_glam/services/vg_push_service.dart';
@@ -60,6 +61,11 @@ class _VGBootAppState extends State<VGBootApp> {
           });
         } catch (e) {
           debugPrint('Firebase init skipped: $e');
+        }
+        try {
+          await VGAdsManager.instance.initialize();
+        } catch (e) {
+          debugPrint('AdMob init skipped: $e');
         }
       }
 

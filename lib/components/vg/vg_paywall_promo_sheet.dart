@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../components/vg/vg_pill_button.dart';
@@ -10,6 +11,7 @@ import '../../services/supabase/vg_supabase_auth_service.dart';
 import '../../services/vg_subscription_store.dart';
 import '../../utils/BMColors.dart';
 import '../../utils/vg_copy.dart';
+import '../../utils/vg_credit_constants.dart';
 
 Future<void> showVGPaywallPromoSheet(BuildContext context) async {
   await VGSubscriptionStore.startPromoTimer();
@@ -57,7 +59,7 @@ class _VGPaywallPromoSheetState extends State<VGPaywallPromoSheet> {
     return '00 : 00 : $m : $s';
   }
 
-  Future<void> _purchase() async {
+  Future<void> _purchase(String planName) async {
     if (!VGSupabaseAuthService.isSignedIn) {
       if (mounted) {
         finish(context);
@@ -66,7 +68,7 @@ class _VGPaywallPromoSheetState extends State<VGPaywallPromoSheet> {
       return;
     }
     try {
-      final completed = await VGSubscriptionStore.purchase(planName: 'annual');
+      final completed = await VGSubscriptionStore.purchase(planName: planName);
       await VGSubscriptionStore.markPromoShownThisSession();
       if (!mounted) return;
       finish(context);
@@ -76,6 +78,36 @@ class _VGPaywallPromoSheetState extends State<VGPaywallPromoSheet> {
     } catch (_) {
       if (mounted) toast(VGCopy.paywallCheckoutError);
     }
+  }
+
+  Future<void> _copyCode(String code) async {
+    await Clipboard.setData(ClipboardData(text: code));
+    if (mounted) toast(VGCopy.paywallPromoCodeCopied);
+  }
+
+  Widget _couponChip(String code, String hint) {
+    return InkWell(
+      onTap: () => _copyCode(code),
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.white38),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(code, style: boldTextStyle(color: Colors.white, size: 14, letterSpacing: 1)),
+            8.width,
+            const Icon(Icons.copy, color: Colors.white70, size: 14),
+            8.width,
+            Flexible(child: Text(hint, style: secondaryTextStyle(color: Colors.white70, size: 11))),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -115,13 +147,18 @@ class _VGPaywallPromoSheetState extends State<VGPaywallPromoSheet> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(color: Colors.amber.shade700, borderRadius: BorderRadius.circular(8)),
-              child: Text('${VGCopy.paywallYearlyPrice}${VGCopy.paywallYearlyPeriod} · ${VGCopy.paywallDiscountBadge}', style: boldTextStyle(color: Colors.white, size: 14)),
+              child: Text('${VGCopy.paywallPromoFlashYearlyPrice}${VGCopy.paywallPromoFlashYearlyPeriod} · ${VGCopy.paywallDiscountBadge}', style: boldTextStyle(color: Colors.white, size: 14)),
             ),
-            12.height,
+            10.height,
             Text(VGCopy.paywallExpiresIn, style: secondaryTextStyle(color: Colors.white70, size: 12)),
             Text(_format(_remaining), style: boldTextStyle(color: Colors.white, size: 18)),
+            16.height,
+            // One code works at checkout for either plan below.
+            _couponChip(VGCopy.paywallPromoCouponCode, VGCopy.paywallPromoCouponHint),
             20.height,
-            VGPillButton(label: VGCopy.paywallSubscribeNow, onTap: _purchase),
+            VGPillButton(label: VGCopy.paywallPromoChooseYearly, onTap: () => _purchase(kSubscriptionPlanAnnual)),
+            10.height,
+            VGPillButton(label: VGCopy.paywallPromoChooseWeekly, outline: true, onTap: () => _purchase(kSubscriptionPlanProWeekly)),
           ],
         ),
       ),

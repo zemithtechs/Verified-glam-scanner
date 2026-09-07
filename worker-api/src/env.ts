@@ -1,0 +1,24 @@
+export type Env = {
+  DB: D1Database;
+  SCANS_BUCKET: R2Bucket;
+  ASSETS_BUCKET: R2Bucket;
+  BETTER_AUTH_SECRET: string;
+  BETTER_AUTH_URL: string;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  OPENAI_API_KEY: string;
+  OPENAI_MODEL: string;
+  TMDB_API_KEY: string;
+  POLAR_ACCESS_TOKEN: string;
+  POLAR_WEBHOOK_SECRET: string;
+  POLAR_ENV: string;
+  POLAR_ORGANIZATION_ID: string;
+  POLAR_ORGANIZATION_SLUG: string;
+  POLAR_PRODUCT_ID_ANNUAL: string;
+  POLAR_PRODUCT_ID_PRO_WEEKLY: string;
+  POLAR_SUCCESS_URL: string;
+  POLAR_CANCEL_URL: string;
+  POLAR_CHECKOUT_LINK_ANNUAL: string;
+  POLAR_CHECKOUT_LINK_PRO_WEEKLY: string;
+  FCM_SERVICE_ACCOUNT_JSON: string;
+};

@@ -43,17 +43,16 @@ fi
 rm -rf "$BUILD/css"
 cp -R "$ROOT/website/css" "$BUILD/css"
 
-# Overlay marketing JS; keep Flutter shell scripts (passkeys-bundle.js for Supabase).
+# Overlay marketing JS; keep Flutter shell scripts (passkeys-bundle.js for the app shell's auth).
 mkdir -p "$BUILD/js"
 cp -R "$ROOT/website/js/." "$BUILD/js/"
 if [[ -f "$ROOT/web/js/passkeys-bundle.js" ]]; then
   cp -f "$ROOT/web/js/passkeys-bundle.js" "$BUILD/js/passkeys-bundle.js"
 else
-  echo "WARNING: Missing web/js/passkeys-bundle.js — /app/* will crash on Supabase init" >&2
+  echo "WARNING: Missing web/js/passkeys-bundle.js — /app/* will crash on auth init" >&2
 fi
 
-SUPABASE_URL="$(printf '%s' "${SUPABASE_URL:-}" | tr -d '\r\n\t')"
-SUPABASE_ANON_KEY="$(printf '%s' "${SUPABASE_ANON_KEY:-}" | tr -d '\r\n\t')"
+VG_API_URL="$(printf '%s' "${VG_API_URL:-}" | tr -d '\r\n\t')"
 GOOGLE_WEB_CLIENT_ID="$(printf '%s' "${GOOGLE_WEB_CLIENT_ID:-}" | tr -d '\r\n\t')"
 POLAR_CHECKOUT_LINK_ANNUAL="$(printf '%s' "${POLAR_CHECKOUT_LINK_ANNUAL:-}" | tr -d '\r\n\t')"
 POLAR_CHECKOUT_LINK_PRO_WEEKLY="$(printf '%s' "${POLAR_CHECKOUT_LINK_PRO_WEEKLY:-}" | tr -d '\r\n\t')"
@@ -66,10 +65,8 @@ if [[ -z "${POLAR_CHECKOUT_LINK_PRO_WEEKLY}" && -f "$ROOT/.env.example" ]]; then
 fi
 
 if [[ -f "$BUILD/js/auth-config.js" ]]; then
-  sed -i "s|__SUPABASE_URL__|${SUPABASE_URL}|g" "$BUILD/js/auth-config.js" 2>/dev/null || \
-    sed -i '' "s|__SUPABASE_URL__|${SUPABASE_URL}|g" "$BUILD/js/auth-config.js"
-  sed -i "s|__SUPABASE_ANON_KEY__|${SUPABASE_ANON_KEY}|g" "$BUILD/js/auth-config.js" 2>/dev/null || \
-    sed -i '' "s|__SUPABASE_ANON_KEY__|${SUPABASE_ANON_KEY}|g" "$BUILD/js/auth-config.js"
+  sed -i "s|__VG_API_URL__|${VG_API_URL}|g" "$BUILD/js/auth-config.js" 2>/dev/null || \
+    sed -i '' "s|__VG_API_URL__|${VG_API_URL}|g" "$BUILD/js/auth-config.js"
   sed -i "s|__GOOGLE_WEB_CLIENT_ID__|${GOOGLE_WEB_CLIENT_ID}|g" "$BUILD/js/auth-config.js" 2>/dev/null || \
     sed -i '' "s|__GOOGLE_WEB_CLIENT_ID__|${GOOGLE_WEB_CLIENT_ID}|g" "$BUILD/js/auth-config.js"
   if [[ -n "${POLAR_CHECKOUT_LINK_ANNUAL}" ]]; then
@@ -95,11 +92,6 @@ if [[ -d "$ROOT/website/generated" ]]; then
   done
 fi
 
-for f in sitemap.xml robots.txt llms.txt _headers; do
-  if [[ -f "$ROOT/website/$f" ]]; then
-    cp -f "$ROOT/website/$f" "$BUILD/$f"
-  fi
-done
 # _redirects and serve.json break Wrangler deploy (error 100324 with html_handling).
 rm -f "$BUILD/_redirects" "$BUILD/serve.json"
 
@@ -108,5 +100,9 @@ rm -rf "$BUILD/_static" "$BUILD/marketing"
 if [[ -f "$BUILD/_flutter/index.html" ]] && grep -q 'flutter_bootstrap.js' "$BUILD/_flutter/index.html"; then
   cp -f "$BUILD/_flutter/index.html" "$BUILD/404.html"
 fi
+
+# SEO root assets last — never overwritten by Flutter shell or marketing overlay.
+bash "$ROOT/scripts/copy-seo-root-assets.sh" "$BUILD"
+bash "$ROOT/scripts/verify-sitemap.sh" "$BUILD"
 
 echo "Static overlay complete."

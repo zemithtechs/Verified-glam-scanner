@@ -14,6 +14,18 @@
       ]
     },
     {
+      "name": "Verified Glam (Cloudflare)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": [
+        "--dart-define=VG_API_URL=https://verified-glam-api.komolafephilip.workers.dev",
+        "--dart-define=GOOGLE_WEB_CLIENT_ID=",
+        "--dart-define=VG_USE_SUPABASE=true",
+        "--dart-define=VG_USE_MOCK_ANALYSIS=false"
+      ]
+    },
+    {
       "name": "Verified Glam (local mock)",
       "request": "launch",
       "type": "dart",

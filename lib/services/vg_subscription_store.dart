@@ -84,10 +84,12 @@ class VGSubscriptionStore {
     return !(await isPro());
   }
 
+  /// True the first time a free user backs out of any paywall in this app
+  /// session — the flash-offer sheet fires once per session, not just after
+  /// onboarding's paywall.
   static Future<bool> shouldShowPromoAfterDismiss() async {
     if (await isPro()) return false;
-    if (getBoolAsync(vgSubscriptionPromoShownSessionKey, defaultValue: false)) return false;
-    return getBoolAsync(vgSubscriptionPostOnboardingPaywallShownKey, defaultValue: false);
+    return !getBoolAsync(vgSubscriptionPromoShownSessionKey, defaultValue: false);
   }
 
   static Future<void> markPromoShownThisSession() async {

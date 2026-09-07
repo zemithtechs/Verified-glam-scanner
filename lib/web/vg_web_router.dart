@@ -92,6 +92,9 @@ final GoRouter vgWebRouter = GoRouter(
         VGSupabaseConfig.isConfigured &&
         VGSupabaseInit.isReady &&
         VGSupabaseAuthService.isSignedIn;
+    debugPrint('VG router redirect: path=$path signedIn=$signedIn '
+        'useSupabase=$kVGUseSupabase configured=${VGSupabaseConfig.isConfigured} '
+        'ready=${VGSupabaseInit.isReady} authSignedIn=${VGSupabaseAuthService.isSignedIn}');
 
     if (path == '/' || path.isEmpty) {
       if (_uriHasAuthCallbackParams(uri) || signedIn) {
@@ -102,6 +105,13 @@ final GoRouter vgWebRouter = GoRouter(
     }
 
     if (!signedIn && path.startsWith('/app')) {
+      // Blocking (not just console) so this is guaranteed visible — and
+      // screenshottable — before vgWebGoLogin's navigation unloads the
+      // page. Temporary until the web login redirect-loop bug is confirmed
+      // fixed.
+      page_nav.vgWebDebugAlert('VG DEBUG: bounced from $path — signedIn=false\n'
+          'configured=${VGSupabaseConfig.isConfigured}\nready=${VGSupabaseInit.isReady}\n'
+          'apiSignedIn=${VGSupabaseAuthService.isSignedIn}');
       page_nav.vgWebGoLogin(redirectPath: path);
       return path;
     }

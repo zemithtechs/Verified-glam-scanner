@@ -33,7 +33,8 @@
       <nav class="nav" aria-label="Main">
         <a class="brand" href="/">
           <img src="/assets/logo.png" alt="" width="36" height="36">
-          <span class="brand-wordmark">Verified Glam Scanner</span>
+          <span class="brand-wordmark brand-wordmark-full">Verified Glam Scanner</span>
+          <span class="brand-wordmark brand-wordmark-short">Verified Glam</span>
         </a>
         <ul class="nav-links">
           <li class="nav-mega">
@@ -44,7 +45,7 @@
           <li><a class="vg-app-link" href="/login">Log in</a></li>
         </ul>
         <div class="nav-actions">
-          <a class="nav-auth-link nav-auth-link--mobile vg-app-link" href="/login">Log in</a>
+          <a class="nav-auth-link nav-auth-link--desktop vg-app-link" href="/login">Log in</a>
           <a class="btn btn-ghost nav-signup vg-app-link" href="/register">Sign up</a>
           <a class="btn btn-primary nav-play-cta" href="https://play.google.com/store/apps/details?id=com.verifiedglam.beauty_scanner" rel="noopener noreferrer">Get on Google Play</a>
           <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -52,7 +53,24 @@
           </button>
         </div>
       </nav>
-      <div class="mobile-nav" id="mobile-nav">
+    </div>
+    <div class="mobile-nav-backdrop" aria-hidden="true"></div>
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-top">
+        <span class="mobile-nav-title">Menu</span>
+        <button type="button" class="mobile-nav-close" aria-label="Close menu">&times;</button>
+      </div>
+      <div class="mobile-nav-auth">
+        <a class="btn btn-primary vg-app-link" href="/register">Sign up free</a>
+        <a class="btn btn-ghost vg-app-link" href="/login">Log in</a>
+      </div>
+      <div class="mobile-nav-section">
+        <p class="mobile-nav-label">Explore</p>
+        <a class="vg-tool-link" href="/pricing">Pricing</a>
+        <a class="vg-tool-link" href="/about">About</a>
+        <a class="vg-app-link" href="/app/face-beauty-analysis">Start analysis</a>
+      </div>
+      <div class="mobile-nav-section">
         <p class="mobile-nav-label">AI Tools</p>
         <a class="vg-tool-link" href="/tools">All tools</a>
         <a class="vg-tool-link" href="/face-beauty-analysis">Face Beauty Analysis</a>
@@ -65,12 +83,8 @@
         <a class="vg-tool-link" href="/face-comparison">Face Comparison</a>
         <a class="vg-tool-link" href="/attractiveness-test">Attractiveness Test</a>
         <a class="vg-tool-link" href="/face-golden-ratio">Face Golden Ratio</a>
-        <a class="vg-app-link" href="/login">Log in</a>
-        <a class="vg-app-link" href="/register">Sign up</a>
-        <a class="vg-tool-link" href="/pricing">Pricing</a>
-        <a class="vg-tool-link" href="/about">About</a>
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.verifiedglam.beauty_scanner" rel="noopener noreferrer">Get on Google Play</a>
       </div>
+      <a class="btn btn-outline mobile-nav-play" href="https://play.google.com/store/apps/details?id=com.verifiedglam.beauty_scanner" rel="noopener noreferrer">Get on Google Play</a>
     </div>
     <div class="mega-dropdown-host" id="mega-dropdown-host">
       <div class="mega-panel-bridge" aria-hidden="true"></div>

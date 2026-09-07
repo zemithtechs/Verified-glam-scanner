@@ -72,7 +72,7 @@ try {
   Write-Warning "Expected 403 invalid signature, got $($r.StatusCode)"
 } catch {
   if ($_.Exception.Response.StatusCode.value__ -eq 403) {
-    Write-Host "  [OK] polar-webhook rejects unsigned POST (sync POLAR_WEBHOOK_SECRET with Polar dashboard)"
+    Write-Host "  [OK] polar-webhook rejects unsigned POST (expected - use polar_whs_ secret for signed events)"
   } else {
     Write-Warning "POST polar-webhook: $($_.Exception.Message)"
   }

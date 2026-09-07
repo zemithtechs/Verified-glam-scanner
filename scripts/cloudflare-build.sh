@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cloudflare Pages build — installs Flutter, builds web with dart-defines.
-# Required env: SUPABASE_URL, SUPABASE_ANON_KEY
+# Required env: VG_API_URL (the Worker API — see worker-api/wrangler.toml)
 # Optional env: GOOGLE_WEB_CLIENT_ID
 
 set -euo pipefail
@@ -16,16 +16,15 @@ sanitize_env() {
   printf '%s' "${1:-}" | tr -d '\r\n\t'
 }
 
-SUPABASE_URL="$(sanitize_env "${SUPABASE_URL:-}")"
-SUPABASE_ANON_KEY="$(sanitize_env "${SUPABASE_ANON_KEY:-}")"
+VG_API_URL="$(sanitize_env "${VG_API_URL:-}")"
 GOOGLE_WEB_CLIENT_ID="$(sanitize_env "${GOOGLE_WEB_CLIENT_ID:-}")"
 
-if [[ -z "${SUPABASE_URL}" || -z "${SUPABASE_ANON_KEY}" ]]; then
-  echo "ERROR: Set SUPABASE_URL and SUPABASE_ANON_KEY in Cloudflare Pages environment variables." >&2
+if [[ -z "${VG_API_URL}" ]]; then
+  echo "ERROR: Set VG_API_URL in Cloudflare Pages environment variables (e.g. https://verified-glam-api.<account>.workers.dev)." >&2
   exit 1
 fi
 
-# Production Cloudflare builds always use live Supabase + real analysis.
+# Production Cloudflare builds always use the live Worker API + real analysis.
 VG_USE_SUPABASE="true"
 VG_USE_MOCK_ANALYSIS="false"
 
@@ -42,6 +41,9 @@ flutter precache --web
 echo "==> flutter pub get"
 flutter pub get
 
+echo "==> Seed web/ with SEO root assets (Flutter copies web/ into build/web)"
+bash "${ROOT}/scripts/copy-seo-root-assets.sh" "${ROOT}/web"
+
 echo "==> flutter build web (app shell only — main_web.dart)"
 BUILD_ARGS=(
   build web
@@ -49,8 +51,7 @@ BUILD_ARGS=(
   --no-wasm-dry-run
   --no-tree-shake-icons
   -t lib/main_web.dart
-  "--dart-define=SUPABASE_URL=${SUPABASE_URL}"
-  "--dart-define=SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}"
+  "--dart-define=VG_API_URL=${VG_API_URL}"
   "--dart-define=VG_USE_SUPABASE=${VG_USE_SUPABASE}"
   "--dart-define=VG_USE_MOCK_ANALYSIS=${VG_USE_MOCK_ANALYSIS}"
 )
@@ -129,5 +130,9 @@ if [[ "${MAIN_SIZE}" -lt 100000 ]]; then
   echo "ERROR: main.dart.js looks too small — build may have failed silently." >&2
   exit 1
 fi
+
+echo "==> Final SEO root assets + sitemap validation"
+bash "${ROOT}/scripts/copy-seo-root-assets.sh" "${ROOT}/build/web"
+bash "${ROOT}/scripts/verify-sitemap.sh" "${ROOT}/build/web"
 
 echo "==> Build complete: build/web/"

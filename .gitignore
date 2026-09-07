@@ -24,3 +24,9 @@ node_modules/
 # Android Gradle cache (never commit)
 android/.gradle/
 .gradle/
+
+# Cloudflare Worker (worker-api/) local dev state and secrets
+.wrangler/
+worker-api/.dev.vars
+worker-api/.dev.vars.*
+worker-api/.secrets/

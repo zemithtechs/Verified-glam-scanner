@@ -9,7 +9,7 @@ import {
   polarSuccessUrl,
 } from "../_shared/polar.ts";
 
-const FUNCTION_VERSION = "4";
+const FUNCTION_VERSION = "6";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -75,8 +75,41 @@ Deno.serve(async (req) => {
 
     const successUrl = polarSuccessUrl();
     const cancelUrl = polarCancelUrl();
-    const staticLink = polarCheckoutLinkForPlan(planId);
+    const productId = productIdForPlan(planId);
+    const polar = createPolarClient();
 
+    if (polar && productId) {
+      try {
+        // Field is externalCustomerId in @polar-sh/sdk@0.48.1 — customerExternalId
+        // (previously used here) doesn't exist on CheckoutCreate and was silently
+        // dropped, so checkouts weren't linking to the user's external ID at all.
+        // cancelUrl also isn't a CheckoutCreate field in this SDK version (Polar
+        // replaced it with returnUrl semantics) — dropped from the call, kept only
+        // in the response JSON below.
+        const checkout = await polar.checkouts.create({
+          products: [productId],
+          externalCustomerId: userData.user.id,
+          customerEmail: userData.user.email ?? undefined,
+          successUrl,
+        });
+
+        if (checkout.url) {
+          return new Response(
+            JSON.stringify({
+              checkoutUrl: checkout.url,
+              successUrl,
+              cancelUrl,
+              version: FUNCTION_VERSION,
+            }),
+            { headers: responseHeaders({ "Content-Type": "application/json" }) },
+          );
+        }
+      } catch (apiError) {
+        console.warn("Polar API checkout failed, trying static link fallback:", apiError);
+      }
+    }
+
+    const staticLink = polarCheckoutLinkForPlan(planId);
     if (staticLink) {
       const checkoutUrl = buildCheckoutLinkUrl(
         staticLink,
@@ -89,39 +122,13 @@ Deno.serve(async (req) => {
       );
     }
 
-    const polar = createPolarClient();
-    if (!polar) {
-      return jsonError(503, "Polar client not configured");
+    if (!polarAccessToken()) {
+      return jsonError(503, "POLAR_ACCESS_TOKEN not configured");
     }
 
-    const productId = productIdForPlan(planId);
-    if (!productId) {
-      return jsonError(
-        503,
-        "Polar checkout not configured — set POLAR_CHECKOUT_LINK_* or POLAR_PRODUCT_ID_* secrets",
-      );
-    }
-
-    const checkout = await polar.checkouts.create({
-      products: [productId],
-      customerExternalId: userData.user.id,
-      customerEmail: userData.user.email ?? undefined,
-      successUrl,
-      cancelUrl,
-    });
-
-    if (!checkout.url) {
-      return jsonError(500, "Polar did not return a checkout URL");
-    }
-
-    return new Response(
-      JSON.stringify({
-        checkoutUrl: checkout.url,
-        successUrl,
-        cancelUrl,
-        version: FUNCTION_VERSION,
-      }),
-      { headers: responseHeaders({ "Content-Type": "application/json" }) },
+    return jsonError(
+      503,
+      "Polar checkout not configured — set POLAR_PRODUCT_ID_* secrets (preferred) or POLAR_CHECKOUT_LINK_* fallback",
     );
   } catch (e) {
     console.error(e);

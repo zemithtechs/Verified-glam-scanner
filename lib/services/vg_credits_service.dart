@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 import '../utils/vg_credit_constants.dart';
+import 'supabase/vg_api_client.dart';
 import 'supabase/vg_supabase_auth_service.dart';
-import 'supabase/vg_supabase_init.dart';
 import 'vg_analysis_mode.dart';
 import 'vg_subscription_store.dart';
 
@@ -106,16 +106,8 @@ class VGCreditsService {
       return null;
     }
     try {
-      final userId = VGSupabaseAuthService.currentUser!.id;
-      final row = await VGSupabaseInit.client
-          .from('profiles')
-          .select(
-            'credits_balance, credits_allocated, subscription_plan, '
-            'subscription_status, is_pro, subscription_current_period_end',
-          )
-          .eq('id', userId)
-          .maybeSingle();
-      if (row == null) return null;
+      final row = await VGApiClient.get('/api/profiles/me');
+      if (row.isEmpty) return null;
 
       final isPro = row['is_pro'] == true;
       final plan = row['subscription_plan'] as String? ?? kSubscriptionPlanFree;
@@ -165,27 +157,17 @@ class VGCreditsService {
       return const [];
     }
     try {
-      final userId = VGSupabaseAuthService.currentUser!.id;
-      var query = VGSupabaseInit.client
-          .from('credit_transactions')
-          .select()
-          .eq('user_id', userId);
-
-      if (from != null) {
-        query = query.gte('created_at', from.toUtc().toIso8601String());
-      }
-      if (to != null) {
-        final end = DateTime(to.year, to.month, to.day, 23, 59, 59, 999);
-        query = query.lte('created_at', end.toUtc().toIso8601String());
-      }
-      if (earnedOnly) {
-        query = query.gt('amount', 0);
-      } else if (usedOnly) {
-        query = query.lt('amount', 0);
-      }
-
-      final rows = await query.order('created_at', ascending: false).limit(limit);
-      return (rows as List)
+      final query = <String, dynamic>{
+        'limit': limit,
+        if (from != null) 'from': from.toUtc().toIso8601String(),
+        if (to != null)
+          'to': DateTime(to.year, to.month, to.day, 23, 59, 59, 999).toUtc().toIso8601String(),
+        if (earnedOnly) 'earnedOnly': 'true',
+        if (usedOnly) 'usedOnly': 'true',
+      };
+      final data = await VGApiClient.get('/api/profiles/credit-transactions', query: query);
+      final rows = (data['transactions'] as List?) ?? [];
+      return rows
           .map((e) => VGCreditTransaction.fromRow(Map<String, dynamic>.from(e as Map)))
           .toList();
     } catch (e) {
@@ -199,7 +181,6 @@ class VGCreditsService {
         ? kSubscriptionPlanProWeekly
         : kSubscriptionPlanAnnual;
     final allocated = creditsAllocationForPlan(plan);
-    final periodKey = currentCreditsPeriodKey(plan);
 
     _cachedBalance = allocated;
     _cachedPlan = plan;
@@ -211,20 +192,14 @@ class VGCreditsService {
       isPro: true,
     );
 
-    if (!VGAnalysisMode.useCloud || !VGSupabaseAuthService.isSignedIn) {
-      return;
-    }
-
-    final userId = VGSupabaseAuthService.currentUser!.id;
-    await VGSupabaseInit.client.from('profiles').update({
-      'is_pro': true,
-      'subscription_plan': plan,
-      'subscription_status': 'active',
-      'credits_balance': allocated,
-      'credits_allocated': allocated,
-      'credits_period_key': periodKey,
-      'updated_at': DateTime.now().toIso8601String(),
-    }).eq('id', userId);
+    // Deliberately client-cache-only now, even when signed in: the old
+    // Supabase RLS policy ("profiles_update_own") let any authenticated
+    // user write is_pro/credits_balance directly on their own row —
+    // functional for this mock-purchase dev path, but a real self-grant
+    // hole if ever called outside a dev build. D1 has no such open write
+    // path by default (see docs/CLOUDFLARE_MIGRATION_PLAN.md), and adding
+    // one just for this dev/testing convenience isn't worth reopening it.
+    // Real subscriptions still go through the Polar webhook server-side.
   }
 
   static Future<void> syncFromResponse(dynamic data) async {

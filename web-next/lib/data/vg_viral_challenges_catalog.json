@@ -1,0 +1,241 @@
+{
+  "disclaimer": "These are natural tips shared by everyday creators. Everyone's skin is different, so results may vary. Always patch test before trying anything new. This app is not medical advice.",
+  "issueMap": {
+    "acne": ["honey_mask", "skin_cycling", "aloe_vera_repair", "no_product_reset", "clear_skin_7day"],
+    "pigmentation": ["turmeric_glow", "rice_water", "glass_skin", "k_grandma_glow", "clear_skin_7day"],
+    "texture": ["skin_cycling", "gua_sha_sculpt", "clear_skin_7day", "aloe_vera_repair", "glass_skin"],
+    "aging": ["gua_sha_sculpt", "face_yoga", "morning_shed", "skin_cycling", "glass_skin"],
+    "sensitivity": ["no_product_reset", "green_tea_ice", "aloe_vera_repair", "cucumber_refresh", "skin_flooding"],
+    "oily": ["skin_flooding", "face_icing", "no_product_reset", "clear_skin_7day", "green_tea_ice"],
+    "dryness": ["slugging", "skin_flooding", "ten_layer_hydration", "water_glow_7day", "glass_skin"],
+    "uneven_tone": ["rice_water", "turmeric_glow", "cucumber_refresh", "glass_skin", "green_tea_ice"]
+  },
+  "challenges": [
+    {
+      "id": "skin_cycling",
+      "title": "Skin Cycling Reset Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["acne", "texture", "aging"],
+      "steps": [
+        { "title": "Exfoliation Night", "mainTask": "Use a gentle oat or sugar scrub for 60 seconds and rinse.", "supportTask": "Keep cleanser and moisturizer simple tonight.", "whyLine": "Many creators say the cycle works best when exfoliation is gentle, not aggressive.", "estMinutes": 8 },
+        { "title": "Active Night", "mainTask": "Use one focused treatment step like rosehip oil or a light acne-safe spot layer.", "supportTask": "Do not stack many actives in one routine.", "whyLine": "A lot of people in the beauty community say one hero active keeps irritation lower.", "estMinutes": 8 },
+        { "title": "Recovery Night", "mainTask": "Hydrate with aloe and moisturizer only.", "supportTask": "Skip exfoliation and keep skin barrier calm.", "whyLine": "Creators share that recovery days often make the biggest difference by morning.", "estMinutes": 6 },
+        { "title": "Recovery Plus", "mainTask": "Repeat hydration-focused routine on damp skin.", "supportTask": "Drink extra water and sleep early.", "whyLine": "Some users notice smoother texture when they respect recovery nights.", "estMinutes": 6 }
+      ]
+    },
+    {
+      "id": "slugging",
+      "title": "Slugging Moisture Lock Challenge",
+      "durations": [3, 5],
+      "bestForIssues": ["dryness"],
+      "steps": [
+        { "title": "Hydration Base", "mainTask": "Apply hydrating layers on damp skin before bed.", "supportTask": "Use a small amount only to avoid heaviness.", "whyLine": "Many creators say slugging works better when hydration goes underneath first.", "estMinutes": 7 },
+        { "title": "Seal Night", "mainTask": "Apply a thin occlusive final layer to lock in moisture overnight.", "supportTask": "Use clean pillowcase tonight.", "whyLine": "People in beauty communities often share overnight plumpness from moisture sealing.", "estMinutes": 5 },
+        { "title": "Recovery Check", "mainTask": "Repeat light slugging and compare morning glow.", "supportTask": "Skip if skin feels clogged and pivot to hydration-only.", "whyLine": "Some users get best results by adjusting amount, not over-applying.", "estMinutes": 5 }
+      ]
+    },
+    {
+      "id": "skin_flooding",
+      "title": "Skin Flooding Glow Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["dryness", "oily", "sensitivity"],
+      "steps": [
+        { "title": "Damp Layering", "mainTask": "Layer rose water, aloe gel, and moisturizer while skin is still damp.", "supportTask": "Do each layer within 20 seconds.", "whyLine": "Creators say damp-skin layering may help skin hold hydration longer.", "estMinutes": 8 },
+        { "title": "Hydration Repeat", "mainTask": "Repeat morning and evening flooding routine.", "supportTask": "Avoid harsh scrubs today.", "whyLine": "A lot of users notice faster glow when they keep this routine consistent.", "estMinutes": 8 },
+        { "title": "Barrier Day", "mainTask": "Use only gentle cleanse and hydration stack.", "supportTask": "Skip new actives today.", "whyLine": "Many people share that barrier-friendly days improve comfort and texture.", "estMinutes": 6 }
+      ]
+    },
+    {
+      "id": "glass_skin",
+      "title": "Glass Skin Journey",
+      "durations": [5, 7],
+      "bestForIssues": ["pigmentation", "uneven_tone", "texture", "dryness", "aging"],
+      "steps": [
+        { "title": "Double Cleanse Lite", "mainTask": "Cleanse gently and prep skin with rice-water toner.", "supportTask": "Keep water lukewarm, not hot.", "whyLine": "Many creators say clean prep makes later layers look smoother.", "estMinutes": 8 },
+        { "title": "Hydration Stack", "mainTask": "Apply thin layers: toner, aloe, moisturizer.", "supportTask": "Wait a few seconds between each layer.", "whyLine": "Beauty creators share that multiple light layers give that glassy look.", "estMinutes": 9 },
+        { "title": "Mask Day", "mainTask": "Use honey or aloe mask for 15-20 minutes.", "supportTask": "Patch test first if trying a new mix.", "whyLine": "Some users notice instant glow boost after mask days.", "estMinutes": 20 },
+        { "title": "Tone Finish", "mainTask": "Repeat hydration stack and capture same-lighting selfie.", "supportTask": "Apply SPF in daytime.", "whyLine": "Consistency plus protection is a common tip behind glass-skin routines.", "estMinutes": 8 }
+      ]
+    },
+    {
+      "id": "face_icing",
+      "title": "Face Icing Reset",
+      "durations": [3, 5],
+      "bestForIssues": ["oily", "sensitivity", "acne", "uneven_tone"],
+      "steps": [
+        { "title": "Cooling Sweep", "mainTask": "Use wrapped ice for 2-3 minutes across T-zone and cheeks.", "supportTask": "Never hold ice on one area too long.", "whyLine": "Creators often use short cooling sweeps for puffiness and fresh glow.", "estMinutes": 5 },
+        { "title": "Green Tea Ice", "mainTask": "Use green-tea or rose-water ice cubes for a quick face massage.", "supportTask": "Follow with light moisturizer.", "whyLine": "A lot of users say this leaves skin looking calmer before makeup.", "estMinutes": 6 },
+        { "title": "Recovery Cooldown", "mainTask": "Repeat one short icing round and hydrate.", "supportTask": "Stop if skin feels over-sensitive.", "whyLine": "Many people share better results with short sessions, not long exposure.", "estMinutes": 5 }
+      ]
+    },
+    {
+      "id": "rice_water",
+      "title": "Rice Water Brightening Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["pigmentation", "uneven_tone", "dryness"],
+      "steps": [
+        { "title": "Fresh Rice Toner", "mainTask": "Use freshly prepared rice water as toner morning and evening.", "supportTask": "Store refrigerated and refresh regularly.", "whyLine": "Many creators say rice water may help skin look brighter over time.", "estMinutes": 7 },
+        { "title": "Tone Focus Day", "mainTask": "Spot-press rice water on darker areas for 3 minutes.", "supportTask": "Avoid picking marks.", "whyLine": "Some users report more even-looking tone with focused consistency.", "estMinutes": 7 },
+        { "title": "Glow Layer", "mainTask": "Use rice water then aloe for hydration.", "supportTask": "Hydrate and rest well.", "whyLine": "People in beauty communities say glow comes faster when hydration is paired with brightening.", "estMinutes": 8 }
+      ]
+    },
+    {
+      "id": "banana_mask",
+      "title": "Banana Glow Mini Challenge",
+      "durations": [3, 5],
+      "bestForIssues": ["dryness", "aging", "pigmentation"],
+      "steps": [
+        { "title": "Banana Mask Day", "mainTask": "Apply mashed banana with honey for 15 minutes then rinse.", "supportTask": "Patch test first.", "whyLine": "Creators share banana masks as a quick kitchen glow ritual.", "estMinutes": 18 },
+        { "title": "Hydrate and Seal", "mainTask": "Use aloe plus light moisturizer after cleansing.", "supportTask": "Drink extra water.", "whyLine": "Many users say hydration helps mask days feel more effective.", "estMinutes": 7 },
+        { "title": "Progress Check", "mainTask": "Repeat banana mask and capture selfie.", "supportTask": "Keep same lighting as day one.", "whyLine": "Side-by-side photos help reveal subtle changes clearly.", "estMinutes": 18 }
+      ]
+    },
+    {
+      "id": "honey_mask",
+      "title": "Honey Clarity Challenge",
+      "durations": [3, 5, 7],
+      "bestForIssues": ["acne", "texture", "dryness"],
+      "steps": [
+        { "title": "Raw Honey Spot Day", "mainTask": "Apply raw honey on breakout-prone areas for 15-20 minutes.", "supportTask": "Rinse with lukewarm water only.", "whyLine": "A lot of creators say honey routines may calm rough-looking skin.", "estMinutes": 20 },
+        { "title": "Honey + Oat Blend", "mainTask": "Mix honey with oat for a gentle mask.", "supportTask": "Do not scrub hard when removing.", "whyLine": "Many people in the beauty community use oat + honey for texture comfort.", "estMinutes": 18 },
+        { "title": "Recovery Night", "mainTask": "Hydrate with aloe and moisturizer only.", "supportTask": "Avoid touching active spots.", "whyLine": "Creators often alternate treatment and recovery to keep skin calm.", "estMinutes": 6 }
+      ]
+    },
+    {
+      "id": "turmeric_glow",
+      "title": "Turmeric Glow Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["pigmentation", "uneven_tone"],
+      "steps": [
+        { "title": "Turmeric Mask", "mainTask": "Apply turmeric + yogurt + honey mask for 10-15 minutes.", "supportTask": "Use a tiny turmeric amount to reduce staining.", "whyLine": "Many creators say turmeric routines may support brighter-looking skin.", "estMinutes": 18 },
+        { "title": "Tone Recovery", "mainTask": "Use aloe and rose water only.", "supportTask": "Avoid layering multiple strong steps.", "whyLine": "Some users find recovery days help keep glow routines comfortable.", "estMinutes": 7 },
+        { "title": "Spot Focus", "mainTask": "Use a diluted turmeric blend on darker areas briefly.", "supportTask": "Patch test and rinse fully.", "whyLine": "A lot of people share better outcomes with short, consistent use.", "estMinutes": 10 }
+      ]
+    },
+    {
+      "id": "gua_sha_sculpt",
+      "title": "Gua Sha Sculpt Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["aging", "texture"],
+      "steps": [
+        { "title": "Upward Sculpt", "mainTask": "Massage upward and outward for 5-8 minutes with oil.", "supportTask": "Keep pressure light and strokes smooth.", "whyLine": "Creators say consistent upward strokes can improve de-puffed appearance.", "estMinutes": 10 },
+        { "title": "Jawline Focus", "mainTask": "Do extra passes along jawline and cheek contours.", "supportTask": "Hydrate after massage.", "whyLine": "Many users share jawline definition wins with regular sculpting.", "estMinutes": 8 },
+        { "title": "Cooling Finish", "mainTask": "Use a cool spoon or tool to finish routine.", "supportTask": "Capture before/after angles weekly.", "whyLine": "Some people find cooling finish helps skin look fresher right away.", "estMinutes": 6 }
+      ]
+    },
+    {
+      "id": "face_yoga",
+      "title": "Face Yoga Firmness Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["aging"],
+      "steps": [
+        { "title": "Lift Set", "mainTask": "Perform cheek lift, brow raise, and jaw release holds for 5 minutes.", "supportTask": "Focus on breathing and posture.", "whyLine": "Many creators call this a mini workout for facial tone.", "estMinutes": 8 },
+        { "title": "Eye and Neck Set", "mainTask": "Do wide-eye holds and gentle neck stretches.", "supportTask": "Avoid over-tensing forehead.", "whyLine": "Some users report better firmness look when exercises stay controlled.", "estMinutes": 8 },
+        { "title": "Full Flow", "mainTask": "Repeat full face yoga circuit.", "supportTask": "Pair with hydration and sleep reset.", "whyLine": "A lot of beauty creators say consistency matters more than intensity.", "estMinutes": 10 }
+      ]
+    },
+    {
+      "id": "morning_shed",
+      "title": "Morning Shed Recovery Challenge",
+      "durations": [3, 5],
+      "bestForIssues": ["aging", "dryness"],
+      "steps": [
+        { "title": "Overnight Layer", "mainTask": "Apply overnight hydration mask plus lip mask.", "supportTask": "Keep layers lightweight and comfortable.", "whyLine": "Creators love this challenge for the dramatic morning reveal vibe.", "estMinutes": 12 },
+        { "title": "Morning Reveal", "mainTask": "Remove overnight layers and follow with gentle cleanse.", "supportTask": "Use cool water splash at finish.", "whyLine": "Many users say the morning shed ritual keeps routines fun and consistent.", "estMinutes": 8 },
+        { "title": "Repair Night", "mainTask": "Repeat a simplified overnight stack.", "supportTask": "Patch test anything new.", "whyLine": "Some people see better comfort when they keep formulas simple.", "estMinutes": 10 }
+      ]
+    },
+    {
+      "id": "green_tea_ice",
+      "title": "Green Tea Ice Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["sensitivity", "oily", "uneven_tone"],
+      "steps": [
+        { "title": "Green Tea Prep", "mainTask": "Use brewed green-tea ice cubes for a 2-3 minute face massage.", "supportTask": "Wrap cube in soft cloth.", "whyLine": "Many creators say this is a quick morning freshness ritual.", "estMinutes": 6 },
+        { "title": "Cool and Calm", "mainTask": "Repeat massage on redness-prone areas then moisturize.", "supportTask": "Keep routine gentle for the rest of the day.", "whyLine": "Some users say this helps skin look calmer before makeup.", "estMinutes": 6 },
+        { "title": "Recovery Hydration", "mainTask": "Skip ice and focus on hydration-only routine.", "supportTask": "Alternate cool days with barrier days.", "whyLine": "People often report better comfort by balancing cooling with hydration.", "estMinutes": 7 }
+      ]
+    },
+    {
+      "id": "cucumber_refresh",
+      "title": "Cucumber Refresh Challenge",
+      "durations": [3, 5],
+      "bestForIssues": ["sensitivity", "uneven_tone"],
+      "steps": [
+        { "title": "Cucumber Soothe", "mainTask": "Apply cucumber slices or blended cucumber mask for 10-15 minutes.", "supportTask": "Keep cucumber chilled for extra comfort.", "whyLine": "Creators share this as a classic calming and de-puffing ritual.", "estMinutes": 15 },
+        { "title": "Eye Focus", "mainTask": "Use cucumber on under-eyes and rinse with cool water.", "supportTask": "Follow with light moisturizer.", "whyLine": "Many users love the instant refreshed look around eyes.", "estMinutes": 10 },
+        { "title": "Tone Splash", "mainTask": "Use cucumber juice as a quick toner splash.", "supportTask": "Patch test if skin is highly reactive.", "whyLine": "Some people notice a calmer tone with repeated cucumber days.", "estMinutes": 6 }
+      ]
+    },
+    {
+      "id": "clear_skin_7day",
+      "title": "7-Day Clear Skin Challenge",
+      "durations": [7],
+      "bestForIssues": ["acne", "texture", "oily", "pigmentation"],
+      "steps": [
+        { "title": "Reset Cleanse", "mainTask": "Gentle cleanse plus hydration reset.", "supportTask": "Use clean towel and pillowcase.", "whyLine": "Creators often start challenge week with a clean baseline.", "estMinutes": 7 },
+        { "title": "Exfoliation Day", "mainTask": "Do one mild exfoliation step.", "supportTask": "No extra actives tonight.", "whyLine": "Many users say less-exfoliate-but-consistent works better.", "estMinutes": 8 },
+        { "title": "Deep Moisture Day", "mainTask": "Focus on overnight hydration or slugging style layer.", "supportTask": "Adjust amount for comfort.", "whyLine": "Hydration days are a common turning point in creator routines.", "estMinutes": 8 },
+        { "title": "Inside-Out Day", "mainTask": "Drink 2L water and avoid sugary drinks.", "supportTask": "Keep routines minimal tonight.", "whyLine": "A lot of community members pair skin routines with hydration habits.", "estMinutes": 5 },
+        { "title": "Massage Day", "mainTask": "Do 5-minute facial massage or gua sha.", "supportTask": "Use light oil to avoid friction.", "whyLine": "Creators share visible de-puffing after regular massage days.", "estMinutes": 8 },
+        { "title": "DIY Mask Day", "mainTask": "Use one DIY mask (honey, turmeric, or banana).", "supportTask": "Patch test before use.", "whyLine": "Many users say challenge routines feel more fun with one hero mask day.", "estMinutes": 20 },
+        { "title": "Barrier Repair Day", "mainTask": "Hydration-only routine and progress selfie.", "supportTask": "Compare day-1 and day-7 photos.", "whyLine": "Consistency over seven days is what most creators celebrate.", "estMinutes": 8 }
+      ]
+    },
+    {
+      "id": "ten_layer_hydration",
+      "title": "10-Layer Hydration Challenge",
+      "durations": [3, 5],
+      "bestForIssues": ["dryness"],
+      "steps": [
+        { "title": "Layer Test", "mainTask": "Apply 5-10 very thin hydrating layers.", "supportTask": "Stop early if product starts pilling.", "whyLine": "Creators use this challenge to learn which layering order works best.", "estMinutes": 12 },
+        { "title": "Absorption Day", "mainTask": "Use fewer, cleaner layers and track absorption.", "supportTask": "Wait 20 seconds between layers.", "whyLine": "Many users find less layers can still deliver a better glow.", "estMinutes": 10 },
+        { "title": "Best Stack Repeat", "mainTask": "Repeat the best performing hydration stack.", "supportTask": "Capture close-up selfie for comparison.", "whyLine": "Some people notice clear texture improvement when they simplify stack order.", "estMinutes": 10 }
+      ]
+    },
+    {
+      "id": "no_product_reset",
+      "title": "No-Product Reset Challenge",
+      "durations": [3],
+      "bestForIssues": ["acne", "sensitivity", "oily"],
+      "steps": [
+        { "title": "Water-Only Day", "mainTask": "Cleanse with water only morning and evening.", "supportTask": "No actives and no heavy layers.", "whyLine": "Many creators use this reset when skin feels overwhelmed.", "estMinutes": 4 },
+        { "title": "Minimal Reset", "mainTask": "Repeat water-only routine and observe oil balance.", "supportTask": "Do not pick skin.", "whyLine": "Some users report skin looks calmer when they stop over-managing it.", "estMinutes": 4 },
+        { "title": "Rebuild Day", "mainTask": "Reintroduce only aloe plus gentle moisturizer.", "supportTask": "Keep routine minimal after challenge.", "whyLine": "Creators often rebuild slowly to keep sensitivity down.", "estMinutes": 6 }
+      ]
+    },
+    {
+      "id": "k_grandma_glow",
+      "title": "K-Grandma Glow Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["pigmentation", "aging", "uneven_tone"],
+      "steps": [
+        { "title": "Fermented Rice Prep", "mainTask": "Use rice-water toner and gentle facial massage.", "supportTask": "Keep routine soft and steady.", "whyLine": "Creators love this challenge for old-school glow rituals.", "estMinutes": 10 },
+        { "title": "Grain Mask Day", "mainTask": "Apply rice flour + milk style mask for 15 minutes.", "supportTask": "Patch test and rinse gently.", "whyLine": "Many users say this step leaves skin looking bright and smooth.", "estMinutes": 18 },
+        { "title": "Tea Soak Day", "mainTask": "Use green-tea soak or compress for calm glow.", "supportTask": "Hydrate and sleep early.", "whyLine": "A lot of people in beauty communities combine tea calm with brightening routines.", "estMinutes": 8 }
+      ]
+    },
+    {
+      "id": "water_glow_7day",
+      "title": "Drink Water Glow Challenge",
+      "durations": [7],
+      "bestForIssues": ["dryness", "pigmentation", "aging", "acne", "oily", "sensitivity", "texture", "uneven_tone"],
+      "steps": [
+        { "title": "Hydration Target", "mainTask": "Drink at least 2 liters of water today.", "supportTask": "Track intake in small checkpoints.", "whyLine": "Creators consistently pair hydration with clearer, fresher-looking skin.", "estMinutes": 5 },
+        { "title": "No Sugary Drinks", "mainTask": "Replace sugary drinks with water or infused water.", "supportTask": "Add cucumber or lemon if needed.", "whyLine": "Many users say this challenge is easier when they make water taste better.", "estMinutes": 5 },
+        { "title": "Glow Habit Repeat", "mainTask": "Repeat hydration target and note skin feel changes.", "supportTask": "Capture daily selfie in same lighting.", "whyLine": "Some people notice glow shifts after a few consistent hydration days.", "estMinutes": 5 }
+      ]
+    },
+    {
+      "id": "aloe_vera_repair",
+      "title": "Aloe Vera Repair Challenge",
+      "durations": [5, 7],
+      "bestForIssues": ["acne", "sensitivity", "dryness", "texture"],
+      "steps": [
+        { "title": "Aloe Morning Layer", "mainTask": "Apply aloe as a lightweight morning serum.", "supportTask": "Follow with moisturizer.", "whyLine": "Many creators use aloe as a low-fuss comfort layer.", "estMinutes": 6 },
+        { "title": "Aloe Night Repair", "mainTask": "Apply aloe overnight after cleansing.", "supportTask": "Mix with one drop of oil if skin is very dry.", "whyLine": "A lot of users say overnight aloe may help skin look calmer by morning.", "estMinutes": 6 },
+        { "title": "Aloe Mask Day", "mainTask": "Use a fuller aloe mask for 15-20 minutes.", "supportTask": "Patch test if first time with fresh aloe.", "whyLine": "Creators often use mask day for a visible refresh moment.", "estMinutes": 18 }
+      ]
+    }
+  ]
+}

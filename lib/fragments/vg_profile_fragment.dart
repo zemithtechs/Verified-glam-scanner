@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/vg/challenge/vg_challenge_badge_grid.dart';
 import '../components/vg/vg_main_app_bar.dart';
@@ -9,14 +10,15 @@ import '../components/vg/vg_pill_button.dart';
 import '../main.dart';
 import '../models/vg_challenge_plan.dart';
 import '../models/vg_feature_model.dart';
+import '../screens/BMLoginScreen.dart';
 import '../screens/guide/vg_challenge_reward_screen.dart';
 import '../screens/guide/vg_routine_challenge_screen.dart';
+import '../screens/scan/vg_scan_history_screen.dart';
+import '../services/supabase/vg_supabase_auth_service.dart';
 import '../services/vg_challenge_service.dart';
 import '../services/vg_credits_service.dart';
 import '../services/vg_polar_checkout_service.dart';
-import '../services/vg_subscription_store.dart';
 import '../utils/BMColors.dart';
-import '../utils/BMConstants.dart';
 import '../utils/vg_challenge_badges.dart';
 import '../utils/vg_constants.dart';
 import '../utils/vg_copy.dart';
@@ -121,7 +123,7 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: bmPrimaryColor.withValues(alpha: 0.25)),
                     ),
-                    child: VGChallengeBadgeGrid(earnedBadges: _badges, loading: false),
+                    child: VGChallengeBadgeGrid(earnedBadges: _badges, loading: false, collapsible: true),
                   ),
                   24.height,
                   Text(VGCopy.profileQuickActions, style: boldTextStyle(color: bmSpecialColorDark, size: 18)),
@@ -296,6 +298,9 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
       childAspectRatio: 1.6,
       children: [
         _actionTile(Icons.explore_outlined, VGCopy.profileActionExplore, () => vgRequestDashboardTab(1)),
+        _actionTile(Icons.history, VGCopy.profileActionHistory, () {
+          VGScanHistoryScreen().launch(context);
+        }),
         _actionTile(Icons.share_outlined, VGCopy.profileActionShare, () {
           Share.share('${VGCopy.splashTagline} — $vgAppName');
         }),
@@ -332,33 +337,24 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
   }
 
   Widget _accountSection() {
-    return FutureBuilder<(bool isPro, int? credits)>(
-      future: _loadSubscriptionInfo(),
+    return FutureBuilder<VGCreditSnapshot?>(
+      // Fresh server fetch, not the cached local flag — a stale cache would
+      // show "Free" for a user whose subscription changed server-side
+      // (e.g. right after a webhook grant) until something else happened to
+      // refresh it.
+      future: VGCreditsService.fetchSnapshot(),
       builder: (context, snapshot) {
-        final isPro = snapshot.data?.$1 == true;
-        final credits = snapshot.data?.$2;
+        final data = snapshot.data;
+        final isPro = data?.isPro == true;
+        final statusLabel = isPro ? VGCopy.profileAccountStatusPro : VGCopy.profileAccountStatusFree;
         final subtitle = isPro
-            ? (credits != null
-                ? '${VGCopy.profileSubscriptionPro} · ${VGCopy.profileCreditsRemaining(credits)}'
-                : VGCopy.profileSubscriptionPro)
-            : VGCopy.profileSubscriptionUpgradeHint;
+            ? '${data!.planDisplayName} · ${VGCopy.profileCreditsRemaining(data.balance)}'
+            : VGCopy.profileAccountStatusFreeHint;
         return Column(
           children: [
             _accountTile(
-              Icons.brightness_6_outlined,
-              VGCopy.profileTheme,
-              trailing: Switch(
-                value: appStore.isDarkModeOn,
-                activeTrackColor: bmSpecialColor,
-                onChanged: (val) async {
-                  appStore.toggleDarkMode(value: val);
-                  await setValue(isDarkModeOnPref, val);
-                },
-              ),
-            ),
-            _accountTile(
-              Icons.workspace_premium_outlined,
-              VGCopy.profileSubscription,
+              isPro ? Icons.workspace_premium : Icons.person_outline,
+              statusLabel,
               subtitle: subtitle,
               onTap: isPro
                   ? () async {
@@ -370,19 +366,44 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
                     }
                   : () => vgShowPaywall(context, entry: VGPaywallEntry.profile),
             ),
-            _accountTile(Icons.privacy_tip_outlined, VGCopy.settingsPrivacy),
-            _accountTile(Icons.mail_outline, VGCopy.settingsSupport, subtitle: vgSupportEmail),
+            _accountTile(
+              Icons.privacy_tip_outlined,
+              VGCopy.settingsPrivacy,
+              onTap: () => launchUrl(Uri.parse('$vgMarketingSiteUrl/privacy'), mode: LaunchMode.externalApplication),
+            ),
+            _accountTile(
+              Icons.mail_outline,
+              VGCopy.settingsSupport,
+              subtitle: vgSupportEmail,
+              onTap: () => launchUrl(Uri.parse('mailto:$vgSupportEmail')),
+            ),
+            _accountTile(Icons.logout, VGCopy.profileLogOut, onTap: _confirmLogOut),
           ],
         );
       },
     );
   }
 
-  Future<(bool, int?)> _loadSubscriptionInfo() async {
-    final isPro = await VGSubscriptionStore.isPro();
-    if (!isPro) return (false, null);
-    final credits = await VGCreditsService.fetchBalance();
-    return (true, credits);
+  Future<void> _confirmLogOut() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(VGCopy.profileLogOutConfirmTitle),
+        content: Text(VGCopy.profileLogOutConfirmMessage),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: Text(VGCopy.scanErrorCancel)),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: Text(VGCopy.profileLogOut, style: const TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    await VGSupabaseAuthService.signOut();
+    if (!mounted) return;
+    BMLoginScreen().launch(context, isNewTask: true);
   }
 
   Widget _accountTile(
@@ -392,19 +413,28 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
     Widget? trailing,
     VoidCallback? onTap,
   }) {
+    // Material wraps the ListTile so its ink splash actually renders —
+    // a bare Container+ListTile (the previous shape) hides the ripple
+    // behind the Container's own background paint (Flutter framework
+    // assertion: "ListTile background color or ink splashes may be
+    // invisible").
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: bmPrimaryColor.withValues(alpha: 0.2)),
       ),
-      child: ListTile(
-        leading: Icon(icon, color: bmSpecialColor),
-        title: Text(title, style: boldTextStyle(color: appTextColorPrimary, size: 15)),
-        subtitle: subtitle != null ? Text(subtitle, style: secondaryTextStyle(size: 12)) : null,
-        trailing: trailing ?? (onTap != null ? Icon(Icons.chevron_right, color: bmPrimaryColor) : null),
-        onTap: onTap,
+      child: Material(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        child: ListTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          leading: Icon(icon, color: bmSpecialColor),
+          title: Text(title, style: boldTextStyle(color: appTextColorPrimary, size: 15)),
+          subtitle: subtitle != null ? Text(subtitle, style: secondaryTextStyle(size: 12)) : null,
+          trailing: trailing ?? (onTap != null ? Icon(Icons.chevron_right, color: bmPrimaryColor) : null),
+          onTap: onTap,
+        ),
       ),
     );
   }

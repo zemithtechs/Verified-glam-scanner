@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../main.dart';
-import '../utils/BMColors.dart';
-
+/// Only Google sign-in is wired up (see docs/CLOUDFLARE_MIGRATION_PLAN.md —
+/// email/password + native Google ID-token are the only supported methods).
+/// Facebook/Twitter/Apple icons were decorative only, with no real sign-in
+/// behind them, and were removed rather than left as dead UI.
 class BMSocialIconsLoginComponents extends StatelessWidget {
   final VoidCallback? onGoogleSignIn;
 
@@ -12,49 +12,11 @@ class BMSocialIconsLoginComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 16,
-      children: [
-        Container(
-          height: 50,
-          width: 50,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(borderRadius: radius(100), color: facebook),
-          child: SvgPicture.asset(
-            'images/ic_facebook.svg',
-            fit: BoxFit.cover,
-          ),
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(borderRadius: radius(100), color: twitter),
-          child: SvgPicture.asset(
-            'images/ic_twitter.svg',
-            fit: BoxFit.cover,
-          ),
-        ),
-        Image.asset(
-          'images/google_logo.png',
-          height: 50,
-          width: 50,
-          fit: BoxFit.cover,
-        )
-            .cornerRadiusWithClipRRect(100)
-            .onTap(onGoogleSignIn ?? () {}),
-        Container(
-          height: 50,
-          width: 50,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(borderRadius: radius(100), color: appStore.isDarkModeOn ? bmPrimaryColor : bmSpecialColorDark),
-          child: Image.asset(
-            'images/ic_apple.png',
-            color: white,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ],
-    );
+    return Image.asset(
+      'images/google_logo.png',
+      height: 50,
+      width: 50,
+      fit: BoxFit.cover,
+    ).cornerRadiusWithClipRRect(100).onTap(onGoogleSignIn ?? () {});
   }
 }

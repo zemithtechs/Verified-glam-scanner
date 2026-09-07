@@ -1,4 +1,10 @@
-import { Polar } from "npm:@polar-sh/sdk@0.32.16";
+import { Polar } from "npm:@polar-sh/sdk@0.48.1";
+import {
+  Webhook,
+  WebhookVerificationError as StandardWebhookVerificationError,
+} from "npm:standardwebhooks@1.0.0";
+
+const POLAR_SDK_VERSION = "0.48.1";
 
 export function polarServer(): "sandbox" | "production" {
   return Deno.env.get("POLAR_ENV") === "production" ? "production" : "sandbox";
@@ -55,6 +61,95 @@ export function assertEventOrganization(data: Record<string, unknown>): string |
   }
   return null;
 }
+
+/** Strip accidental whsec_ prefix; Polar secrets are polar_whs_… from the dashboard. */
+export function normalizePolarWebhookSecret(raw: string): { secret: string; strippedWhsec: boolean } {
+  let secret = raw.trim();
+  let strippedWhsec = false;
+  if (secret.startsWith("whsec_polar_whs_")) {
+    secret = secret.slice("whsec_".length);
+    strippedWhsec = true;
+  } else if (secret.startsWith("whsec_") && secret.includes("polar_whs_")) {
+    secret = secret.slice("whsec_".length);
+    strippedWhsec = true;
+  }
+  return { secret, strippedWhsec };
+}
+
+/** Returns an error message when the secret format is wrong; null when OK. */
+export function validatePolarWebhookSecretFormat(secret: string): string | null {
+  if (!secret.startsWith("polar_whs_")) {
+    return "POLAR_WEBHOOK_SECRET must start with polar_whs_ (paste exactly from Polar dashboard — do not add whsec_)";
+  }
+  if (secret.length < 20) {
+    return "POLAR_WEBHOOK_SECRET looks too short";
+  }
+  return null;
+}
+
+export function polarWebhookSecret(): string | null {
+  const raw = Deno.env.get("POLAR_WEBHOOK_SECRET")?.trim();
+  if (!raw) return null;
+  const { secret, strippedWhsec } = normalizePolarWebhookSecret(raw);
+  if (strippedWhsec) {
+    console.warn("POLAR_WEBHOOK_SECRET had accidental whsec_ prefix — using polar_whs_… value");
+  }
+  return secret;
+}
+
+export type PolarWebhookEvent = {
+  type: string;
+  data: Record<string, unknown>;
+};
+
+function webhookSecretBase64(secret: string): string {
+  const bytes = new TextEncoder().encode(secret);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+/** Lowercase header names for Standard Webhooks verification. */
+export function normalizeWebhookHeaders(headers: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [key, value] of Object.entries(headers)) {
+    out[key.toLowerCase()] = value;
+  }
+  return out;
+}
+
+/**
+ * Verify Polar webhook signature and parse JSON without strict SDK Zod schemas.
+ * Strict validateEvent() rejects newer Polar payloads (e.g. checkout.created → HTTP 400).
+ */
+export function parsePolarWebhookEvent(
+  rawBody: string,
+  headers: Record<string, string>,
+  secret: string,
+): PolarWebhookEvent {
+  const webhook = new Webhook(webhookSecretBase64(secret));
+  const verified = webhook.verify(rawBody, normalizeWebhookHeaders(headers));
+
+  if (!verified || typeof verified !== "object" || Array.isArray(verified)) {
+    throw new Error("Invalid webhook payload shape");
+  }
+
+  const payload = verified as Record<string, unknown>;
+  const type = typeof payload.type === "string" ? payload.type : "";
+  const data = payload.data && typeof payload.data === "object" && !Array.isArray(payload.data)
+    ? payload.data as Record<string, unknown>
+    : {};
+
+  if (!type) {
+    throw new Error("Missing webhook event type");
+  }
+
+  return { type, data };
+}
+
+export { POLAR_SDK_VERSION, StandardWebhookVerificationError };
 
 const DEFAULT_APP_ORIGIN = "https://scanner.verifiedglam.com";
 const DEFAULT_SUCCESS_PATH = "/app/face-beauty-analysis?checkout=success";

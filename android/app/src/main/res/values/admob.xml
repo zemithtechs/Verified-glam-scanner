@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Google's public test AdMob App ID — safe to ship in debug builds.
+         Swap for the real App ID only immediately before a Play Console
+         submission, and only on a machine where no one will tap-test live ads. -->
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+</resources>

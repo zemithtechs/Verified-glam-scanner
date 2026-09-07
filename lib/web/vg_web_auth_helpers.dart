@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../services/supabase/vg_api_client.dart';
 import '../utils/vg_constants.dart';
 
 const _emailPattern = r'^[^@\s]+@[^@\s]+\.[^@\s]+$';
@@ -12,10 +12,10 @@ bool vgIsValidAuthEmail(String email) => RegExp(_emailPattern).hasMatch(email);
 bool vgIsValidAuthPassword(String password) => password.length >= 6;
 
 String vgAuthErrorMessage(Object error) {
-  if (error is AuthException) return error.message;
+  if (error is VGApiException) return error.message;
   final text = error.toString();
   if (text.contains('FormatException') || text.contains('Unexpected character')) {
-    return 'Login failed — app cannot reach Supabase. Rebuild with .\\scripts\\build-web.ps1, then hard-refresh (Ctrl+Shift+R).';
+    return 'Login failed — app cannot reach the server. Rebuild with .\\scripts\\build-web.ps1, then hard-refresh (Ctrl+Shift+R).';
   }
   if (text.startsWith('Exception: ')) return text.substring(11);
   return text;

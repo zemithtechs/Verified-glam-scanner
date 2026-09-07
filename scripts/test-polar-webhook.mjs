@@ -21,13 +21,45 @@ if (fs.existsSync(envPath)) {
   }
 }
 
-const secret = process.env.POLAR_WEBHOOK_SECRET?.trim();
+function normalizePolarWebhookSecret(raw) {
+  let secret = raw.trim();
+  let strippedWhsec = false;
+  if (secret.startsWith("whsec_polar_whs_")) {
+    secret = secret.slice("whsec_".length);
+    strippedWhsec = true;
+  } else if (secret.startsWith("whsec_") && secret.includes("polar_whs_")) {
+    secret = secret.slice("whsec_".length);
+    strippedWhsec = true;
+  }
+  return { secret, strippedWhsec };
+}
+
+const rawSecret = process.env.POLAR_WEBHOOK_SECRET?.trim();
 const url =
   process.env.POLAR_WEBHOOK_URL?.trim() ||
   "https://qmivgvctmxvpnbouqslj.supabase.co/functions/v1/polar-webhook";
 
-if (!secret) {
+if (!rawSecret) {
   console.error("Missing POLAR_WEBHOOK_SECRET in .env or environment");
+  process.exit(1);
+}
+
+const { secret, strippedWhsec } = normalizePolarWebhookSecret(rawSecret);
+const hadWhsecPrefix = rawSecret.startsWith("whsec_");
+const formatOk = secret.startsWith("polar_whs_") && secret.length >= 20;
+
+if (hadWhsecPrefix) {
+  console.warn(
+    "WARNING: POLAR_WEBHOOK_SECRET has whsec_ prefix — paste polar_whs_… from Polar dashboard without whsec_",
+  );
+}
+if (strippedWhsec) {
+  console.warn("Using normalized secret (whsec_ stripped for this test). Update Supabase to polar_whs_… only.");
+}
+if (!formatOk) {
+  console.error(
+    "Invalid POLAR_WEBHOOK_SECRET format — must start with polar_whs_ (exact copy from Polar → Webhooks → Signing secret)",
+  );
   process.exit(1);
 }
 
@@ -78,7 +110,6 @@ const signatureOk =
     parsed &&
     typeof parsed === "object" &&
     parsed.error === "Invalid payload");
-const formatOk = secret.startsWith("whsec_") && secret.length >= 20;
 
 console.log(
   JSON.stringify(
@@ -86,6 +117,7 @@ console.log(
       ok,
       status: res.status,
       secretFormatValid: formatOk,
+      hadWhsecPrefix,
       signatureVerified: signatureOk,
       secretPrefix: secret.slice(0, 12) + "...",
       response: parsed,
@@ -94,7 +126,7 @@ console.log(
         : signatureOk
           ? "Signature OK — secret matches. Polar real events should return 202."
           : res.status === 403
-            ? "Invalid signature — sync POLAR_WEBHOOK_SECRET via set-polar-secrets.ps1"
+            ? "Invalid signature — set POLAR_WEBHOOK_SECRET to polar_whs_… from Polar dashboard (no whsec_ prefix)"
             : `Unexpected HTTP ${res.status}`,
     },
     null,

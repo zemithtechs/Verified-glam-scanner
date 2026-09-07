@@ -20,6 +20,7 @@ fi
 echo "==> Pre-deploy check"
 echo "    Git: $(git -C "${ROOT}" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 echo "    Asset files: $(find "${BUILD}" -type f | wc -l | tr -d ' ')"
+bash "${ROOT}/scripts/verify-sitemap.sh" "${BUILD}"
 if find "${BUILD}" -maxdepth 1 -name '_redirects' -o -name 'serve.json' | grep -q .; then
   echo "ERROR: redirect files found in build/web root." >&2
   exit 1

@@ -16,13 +16,18 @@
     errorEl.hidden = !msg;
   }
 
-  function getClient() {
-    var url = window.VG_SUPABASE_URL;
-    var key = window.VG_SUPABASE_ANON_KEY;
-    if (!url || !key || url.indexOf("__") >= 0) {
+  function apiUrl() {
+    var url = window.VG_API_URL;
+    if (!url || url.indexOf("__") >= 0) {
       throw new Error("Auth is not configured on this build.");
     }
-    return window.supabase.createClient(url, key);
+    return url;
+  }
+
+  function saveToken(token) {
+    try {
+      localStorage.setItem("vg_auth_token", token);
+    } catch (_) {}
   }
 
   function postAuthDestination() {
@@ -32,18 +37,46 @@
     return redirect;
   }
 
-  function goAfterAuth() {
+  function goAfterAuth(payload) {
     var dest = postAuthDestination();
     if (hasCheckoutPlan) {
       try {
         sessionStorage.setItem("vg_resume_checkout", plan);
       } catch (_) {}
     }
+
+    // This static page and the Flutter app (/app/*) are separate bundles
+    // with no shared storage — a token saved to this page's localStorage
+    // is invisible to Flutter's own session storage. Hand the session off
+    // via URL params instead; main_web.dart picks these up on boot and
+    // establishes the real Flutter-side session, then strips them from
+    // the address bar. Static destinations (e.g. /pricing) don't need
+    // this — checkout.js already reads the same localStorage this page writes.
+    if (dest.indexOf("/app/") === 0 && payload && payload.user) {
+      var sep = dest.indexOf("?") >= 0 ? "&" : "?";
+      dest +=
+        sep +
+        "vg_token=" + encodeURIComponent(payload.token) +
+        "&vg_uid=" + encodeURIComponent(payload.user.id) +
+        "&vg_email=" + encodeURIComponent(payload.user.email || "");
+    }
+
     window.location.href = dest;
   }
 
-  function oauthRedirectTo() {
-    return window.location.origin + postAuthDestination();
+  async function submitEmailAuth(path, email, password) {
+    var res = await fetch(apiUrl() + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, password: password, name: email.split("@")[0] }),
+    });
+    var payload = await res.json().catch(function () {
+      return {};
+    });
+    if (!res.ok) {
+      throw new Error(payload.message || payload.error || "Sign in failed.");
+    }
+    return payload;
   }
 
   form.addEventListener("submit", function (e) {
@@ -51,26 +84,18 @@
     showError("");
     var email = form.email.value.trim();
     var password = form.password.value;
-    var client = getClient();
     var submit = form.querySelector(".auth-submit");
     if (submit) submit.disabled = true;
 
-    var promise =
-      mode === "login"
-        ? client.auth.signInWithPassword({ email: email, password: password })
-        : client.auth.signUp({ email: email, password: password });
+    var path = mode === "login" ? "/api/auth/sign-in/email" : "/api/auth/sign-up/email";
 
-    promise
-      .then(function (res) {
-        if (res.error) throw res.error;
-        if (mode === "register" && !res.data.session) {
-          var msg = hasCheckoutPlan
-            ? "Check your email to confirm your account, then sign in to complete checkout."
-            : "Check your email to confirm your account, then sign in.";
-          showError(msg);
-          return;
+    submitEmailAuth(path, email, password)
+      .then(function (payload) {
+        if (!payload.token) {
+          throw new Error("Sign in did not return a session.");
         }
-        goAfterAuth();
+        saveToken(payload.token);
+        goAfterAuth(payload);
       })
       .catch(function (err) {
         showError(err.message || "Sign in failed.");
@@ -83,30 +108,7 @@
   if (googleBtn) {
     googleBtn.addEventListener("click", function () {
       showError("");
-      var clientId = window.VG_GOOGLE_WEB_CLIENT_ID;
-      if (!clientId || clientId.indexOf("__") >= 0) {
-        showError("Google sign-in is not configured.");
-        return;
-      }
-      if (hasCheckoutPlan) {
-        try {
-          sessionStorage.setItem("vg_resume_checkout", plan);
-        } catch (_) {}
-      }
-      var client = getClient();
-      client.auth
-        .signInWithOAuth({
-          provider: "google",
-          options: {
-            redirectTo: oauthRedirectTo(),
-          },
-        })
-        .then(function (res) {
-          if (res.error) throw res.error;
-        })
-        .catch(function (err) {
-          showError(err.message || "Google sign-in failed.");
-        });
+      showError("Google sign-in on the website isn't available yet — please use email and password.");
     });
   }
 })();

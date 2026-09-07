@@ -1,15 +1,18 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
-
 import '../../utils/vg_copy.dart';
 import '../../utils/vg_platform_file.dart';
+import 'vg_api_client.dart';
 import 'vg_supabase_auth_service.dart';
-import 'vg_supabase_init.dart';
 
+/// Kept the class name VGSupabaseStorageService — see
+/// vg_supabase_config.dart for why. Photo upload/delete moved from direct
+/// client-side Supabase Storage calls to the Worker's /api/scans/:id/photo
+/// route, which writes to R2 (see worker-api/src/routes/scans.ts — no
+/// signed URLs needed, matching docs/CLOUDFLARE_MIGRATION_PLAN.md).
 class VGSupabaseStorageService {
-  static const bucket = 'scan-photos';
   static const _maxUploadBytes = 5 * 1024 * 1024;
 
-  /// Uploads [localPath] to `{userId}/{scanId}.jpg`. Returns storage path.
+  /// Uploads [localPath] as the photo for scan [scanId]. Returns the
+  /// storage path (`{userId}/{scanId}.jpg`), same shape as before.
   static Future<String> uploadScanPhoto({
     required String localPath,
     required String scanId,
@@ -17,35 +20,32 @@ class VGSupabaseStorageService {
     final userId = VGSupabaseAuthService.currentUser?.id;
     if (userId == null) throw StateError('Not signed in');
 
-    final storagePath = '$userId/$scanId.jpg';
     final bytes = await vgReadFileBytes(localPath);
     if (bytes.length > _maxUploadBytes) {
       throw StateError(VGCopy.scanImageTooLarge);
     }
 
-    await VGSupabaseInit.client.storage.from(bucket).uploadBinary(
-          storagePath,
-          bytes,
-          fileOptions: const FileOptions(
-            contentType: 'image/jpeg',
-            upsert: true,
-          ),
-        );
-
-    return storagePath;
+    final data = await VGApiClient.postBytes('/api/scans/$scanId/photo', bytes);
+    return data['storagePath'] as String? ?? '$userId/$scanId.jpg';
   }
 
+  /// Short-lived signed URL for a private scan photo — R2 has no public
+  /// URL for SCANS_BUCKET, so the Worker issues an HMAC-signed proxy link
+  /// instead (see worker-api/src/routes/scans.ts's /photo-url endpoint).
   static Future<String?> signedUrl(String storagePath, {int expiresIn = 3600}) async {
-    final res = await VGSupabaseInit.client.storage.from(bucket).createSignedUrl(
-          storagePath,
-          expiresIn,
-        );
-    return res;
+    final scanId = storagePath.split('/').last.replaceAll('.jpg', '');
+    try {
+      final data = await VGApiClient.get('/api/scans/$scanId/photo-url');
+      return data['url'] as String?;
+    } catch (_) {
+      return null;
+    }
   }
 
-  /// Removes a temporary analysis upload after the Edge Function completes.
+  /// Removes a temporary analysis upload after the analyze call completes.
   static Future<void> deleteScanPhoto(String storagePath) async {
     if (storagePath.isEmpty) return;
-    await VGSupabaseInit.client.storage.from(bucket).remove([storagePath]);
+    final scanId = storagePath.split('/').last.replaceAll('.jpg', '');
+    await VGApiClient.delete('/api/scans/$scanId/photo');
   }
 }

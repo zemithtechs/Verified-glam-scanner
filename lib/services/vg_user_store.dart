@@ -27,6 +27,6 @@ class VGUserStore {
   }
 
   static Future<String> email() async {
-    return VGSupabaseAuthService.currentUser?.email ?? 'guest@verifiedglam.app';
+    return VGSupabaseAuthService.currentUser?.email ?? 'guest@verifiedglam.com';
   }
 }

@@ -54,10 +54,10 @@ class _VGWebLoginScreenState extends State<VGWebLoginScreen> {
     }
     if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
       final blocked = VGSupabaseConfig.url.isNotEmpty && !VGSupabaseConfig.hasValidUrl
-          ? 'Supabase URL is invalid in this build. Run .\\scripts\\build-web.ps1 and hard-refresh.'
+          ? 'Server URL is invalid in this build. Run .\\scripts\\build-web.ps1 and hard-refresh.'
           : VGSupabaseConfig.isConfigured
-              ? 'Could not connect to Supabase. Check your network and try again.'
-              : 'Supabase not configured.';
+              ? 'Could not connect to the server. Check your network and try again.'
+              : 'Server not configured.';
       toast(blocked);
       return;
     }

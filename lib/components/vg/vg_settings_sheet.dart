@@ -2,12 +2,32 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../services/vg_referral_service.dart';
 import '../../utils/BMColors.dart';
+import '../../utils/vg_constants.dart';
 import '../../utils/vg_dashboard_nav.dart';
 import '../../utils/vg_copy.dart';
 import '../../web/vg_web_breakpoints.dart';
-import '../../web/vg_web_navigation.dart';
+
+Future<void> _shareApp() async {
+  await Share.share('${VGCopy.splashTagline} — $vgAppName');
+}
+
+Future<void> _sendInvite() async {
+  final link = await VGReferralService.referralLink();
+  await Share.share('Join me on $vgAppName — try it free: $link');
+}
+
+Future<void> _emailSupport() async {
+  await launchUrl(Uri.parse('mailto:$vgSupportEmail'));
+}
+
+Future<void> _openPrivacyPolicy() async {
+  await launchUrl(Uri.parse('$vgMarketingSiteUrl/privacy'), mode: LaunchMode.externalApplication);
+}
 
 void showVGSettingsSheet(BuildContext context) {
   if (kIsWeb && VGWebBreakpoints.isDesktop(context)) {
@@ -34,10 +54,22 @@ void showVGSettingsSheet(BuildContext context) {
               finish(ctx);
               vgRequestDashboardTab(2);
             }),
-            _sheetRow(ctx, VGCopy.settingsShare, Icons.share_outlined, () => finish(ctx)),
-            _sheetRow(ctx, VGCopy.settingsInvite, Icons.card_giftcard_outlined, () => finish(ctx)),
-            _sheetRow(ctx, VGCopy.settingsSupport, Icons.mail_outline, () => finish(ctx)),
-            _sheetRow(ctx, VGCopy.settingsPrivacy, Icons.lock_outline, () => finish(ctx)),
+            _sheetRow(ctx, VGCopy.settingsShare, Icons.share_outlined, () {
+              finish(ctx);
+              _shareApp();
+            }),
+            _sheetRow(ctx, VGCopy.settingsInvite, Icons.card_giftcard_outlined, () {
+              finish(ctx);
+              _sendInvite();
+            }),
+            _sheetRow(ctx, VGCopy.settingsSupport, Icons.mail_outline, () {
+              finish(ctx);
+              _emailSupport();
+            }),
+            _sheetRow(ctx, VGCopy.settingsPrivacy, Icons.lock_outline, () {
+              finish(ctx);
+              _openPrivacyPolicy();
+            }),
           ],
         ),
       );

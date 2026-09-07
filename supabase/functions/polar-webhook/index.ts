@@ -1,8 +1,4 @@
 import {
-  validateEvent,
-  WebhookVerificationError,
-} from "npm:@polar-sh/sdk@0.32.16/webhooks";
-import {
   createAdminClient,
   extractProductId,
   grantSubscriptionCredits,
@@ -11,9 +7,18 @@ import {
   revokeSubscription,
   type SubscriptionPlan,
 } from "../_shared/credits.ts";
-import { assertEventOrganization } from "../_shared/polar.ts";
+import {
+  assertEventOrganization,
+  parsePolarWebhookEvent,
+  polarWebhookSecret,
+  StandardWebhookVerificationError,
+  validatePolarWebhookSecretFormat,
+} from "../_shared/polar.ts";
 
-const FUNCTION_VERSION = "4";
+const FUNCTION_VERSION = "6";
+
+const INVALID_SIGNATURE_HINT =
+  "POLAR_WEBHOOK_SECRET must be polar_whs_… exactly as shown in Polar dashboard — do not add whsec_";
 
 function json(status: number, body: Record<string, unknown>) {
   return new Response(JSON.stringify({ ...body, version: FUNCTION_VERSION }), {
@@ -158,10 +163,16 @@ Deno.serve(async (req) => {
     return json(405, { error: "Method not allowed" });
   }
 
-  const webhookSecret = Deno.env.get("POLAR_WEBHOOK_SECRET")?.trim();
+  const webhookSecret = polarWebhookSecret();
   if (!webhookSecret) {
     console.error("POLAR_WEBHOOK_SECRET not configured");
     return json(503, { error: "Webhook not configured" });
+  }
+
+  const formatError = validatePolarWebhookSecretFormat(webhookSecret);
+  if (formatError) {
+    console.error(formatError);
+    return json(503, { error: formatError });
   }
 
   const rawBody = await req.text();
@@ -169,16 +180,16 @@ Deno.serve(async (req) => {
   let event: { type: string; data: Record<string, unknown> };
 
   try {
-    event = validateEvent(rawBody, headerRecord, webhookSecret) as {
-      type: string;
-      data: Record<string, unknown>;
-    };
+    event = parsePolarWebhookEvent(rawBody, headerRecord, webhookSecret);
   } catch (e) {
-    if (e instanceof WebhookVerificationError) {
-      return json(403, { error: "Invalid signature" });
+    if (e instanceof StandardWebhookVerificationError) {
+      return json(403, { error: "Invalid signature", hint: INVALID_SIGNATURE_HINT });
     }
-    console.error(e);
-    return json(400, { error: "Invalid payload" });
+    console.error("Polar webhook parse error", e);
+    return json(400, {
+      error: "Invalid payload",
+      detail: e instanceof Error ? e.message : "Parse failed",
+    });
   }
 
   const eventId = req.headers.get("webhook-id") ?? crypto.randomUUID();
@@ -218,6 +229,9 @@ Deno.serve(async (req) => {
         break;
       case "subscription.revoked":
         await handleSubscriptionRevoked(admin, data, "revoked");
+        break;
+      case "subscription.past_due":
+        await handleSubscriptionRevoked(admin, data, "past_due");
         break;
       case "order.created":
         await handleOrderRenewal(admin, data);

@@ -133,31 +133,27 @@
         );
       }, isLocalHost ? 300000 : 180000);
 
-      // Stale Flutter service workers cause infinite loading on static hosts.
-      if (!isLocalHost) {
-        var swKey = 'vg-sw-cleared-v2';
-        if (!sessionStorage.getItem(swKey)) {
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (regs) {
-              regs.forEach(function (r) { r.unregister(); });
-            });
-          }
-          if (window.caches) {
-            caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
-          }
-          sessionStorage.setItem(swKey, '1');
-        }
+      function loadFlutterBootstrap() {
+        var s = document.createElement('script');
+        s.src = 'flutter_bootstrap.js';
+        s.async = true;
+        s.onerror = function () {
+          window.__vgShowBootError && window.__vgShowBootError('flutter_bootstrap.js failed to load.');
+        };
+        document.body.appendChild(s);
+      }
 
-        function checkAsset(path, help) {
-          fetch(path, { method: 'GET', cache: 'no-store' }).then(function (res) {
-            if (!res.ok && !bootFailed) {
-              showError(path + ' returned HTTP ' + res.status + '. ' + help);
-            }
-          }).catch(function () {
-            if (!bootFailed) showError('Could not reach ' + path + '. ' + help);
-          });
-        }
+      function checkAsset(path, help) {
+        fetch(path, { method: 'GET', cache: 'no-store' }).then(function (res) {
+          if (!res.ok && !bootFailed) {
+            showError(path + ' returned HTTP ' + res.status + '. ' + help);
+          }
+        }).catch(function () {
+          if (!bootFailed) showError('Could not reach ' + path + '. ' + help);
+        });
+      }
 
+      function startAssetChecks() {
         checkAsset(
           'flutter_bootstrap.js',
           'Cloudflare is probably serving the web/ source folder instead of build/web/. Set Build output directory to build/web and remove any deploy command.'
@@ -166,9 +162,53 @@
           checkAsset('main.dart.js', 'Flutter build output is missing from the deployed site.');
         }, 3000);
       }
+
+      if (isLocalHost) {
+        loadFlutterBootstrap();
+      } else {
+        // A service worker from an older deploy can keep intercepting every
+        // navigation on this origin (including deep links like /app/*?vg_token=...)
+        // and serving its own stale cached shell — no amount of redeploying
+        // fixes this until the worker controlling THIS tab is gone. Unregistering
+        // only stops it from controlling *future* navigations, so once we find
+        // one, force a single reload (guarded so it can't loop) to actually
+        // escape it before loading anything else. Bump this key whenever a
+        // real deploy regression needs everyone's stale worker force-cleared
+        // even mid-session (sessionStorage never expires the old guard on its own).
+        var swKey = 'vg-sw-cleared-v3';
+        var reloadKey = 'vg-sw-reloaded-v3';
+        var alreadyReloaded = sessionStorage.getItem(reloadKey) === '1';
+
+        var clearCaches = window.caches
+          ? caches.keys().then(function (keys) { return Promise.all(keys.map(function (k) { return caches.delete(k); })); })
+          : Promise.resolve();
+
+        var clearServiceWorkers = ('serviceWorker' in navigator)
+          ? navigator.serviceWorker.getRegistrations().then(function (regs) {
+              return Promise.all(regs.map(function (r) { return r.unregister(); })).then(function () {
+                return regs.length > 0;
+              });
+            })
+          : Promise.resolve(false);
+
+        Promise.all([clearServiceWorkers, clearCaches]).then(function (results) {
+          var hadServiceWorker = results[0];
+          sessionStorage.setItem(swKey, '1');
+          if (hadServiceWorker && !alreadyReloaded) {
+            sessionStorage.setItem(reloadKey, '1');
+            window.location.reload();
+            return;
+          }
+          startAssetChecks();
+          loadFlutterBootstrap();
+        }).catch(function () {
+          // Cleanup itself failing shouldn't block boot — proceed anyway.
+          startAssetChecks();
+          loadFlutterBootstrap();
+        });
+      }
     })();
   </script>
   <script src="js/passkeys-bundle.js"></script>
-  <script src="flutter_bootstrap.js" async onerror="window.__vgShowBootError && window.__vgShowBootError('flutter_bootstrap.js failed to load.')"></script>
 </body>
 </html>

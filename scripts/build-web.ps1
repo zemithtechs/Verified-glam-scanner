@@ -22,13 +22,11 @@ Get-Content $EnvFile | ForEach-Object {
   $vars[$key] = $val
 }
 
-foreach ($required in @("SUPABASE_URL", "SUPABASE_ANON_KEY")) {
-  if (-not $vars.ContainsKey($required) -or [string]::IsNullOrWhiteSpace($vars[$required])) {
-    Write-Error "Missing $required in .env"
-  }
-  if ($vars[$required] -match "your_") {
-    Write-Error "Replace placeholder $required in .env before building."
-  }
+if (-not $vars.ContainsKey("VG_API_URL") -or [string]::IsNullOrWhiteSpace($vars["VG_API_URL"])) {
+  Write-Error "Missing VG_API_URL in .env"
+}
+if ($vars["VG_API_URL"] -match "your_") {
+  Write-Error "Replace placeholder VG_API_URL in .env before building."
 }
 
 $flutter = "C:\Users\zenit\flutter\bin\flutter.bat"
@@ -36,8 +34,7 @@ if (-not (Test-Path $flutter)) {
   $flutter = "flutter"
 }
 
-$supabaseUrl = $vars["SUPABASE_URL"]
-$supabaseKey = $vars["SUPABASE_ANON_KEY"]
+$apiUrl = $vars["VG_API_URL"]
 
 $flutterArgs = @(
   "build",
@@ -47,8 +44,7 @@ $flutterArgs = @(
   "--no-tree-shake-icons",
   "-t",
   "lib/main_web.dart",
-  "--dart-define=SUPABASE_URL=$supabaseUrl",
-  "--dart-define=SUPABASE_ANON_KEY=$supabaseKey",
+  "--dart-define=VG_API_URL=$apiUrl",
   "--dart-define=VG_USE_SUPABASE=true",
   "--dart-define=VG_USE_MOCK_ANALYSIS=false"
 )
@@ -59,8 +55,16 @@ if ($vars.ContainsKey("GOOGLE_WEB_CLIENT_ID") -and $vars["GOOGLE_WEB_CLIENT_ID"]
 
 $flutterArgs += $ExtraArgs
 
-Write-Host "Building web app shell (main_web.dart) with Supabase: $supabaseUrl"
+Write-Host "Building web app shell (main_web.dart) with Worker API: $apiUrl"
 Set-Location $Root
+
+foreach ($seoFile in @("sitemap.xml", "robots.txt", "llms.txt", "_headers")) {
+  $src = Join-Path $Root "website\$seoFile"
+  if (Test-Path $src) {
+    Copy-Item -Force $src (Join-Path $Root "web\$seoFile")
+  }
+}
+
 & $flutter @flutterArgs
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 

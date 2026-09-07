@@ -1,0 +1,30 @@
+{
+  "name": "verified-glam-worker-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "d1:migrate:local": "wrangler d1 migrations apply verified-glam-db --local",
+    "d1:migrate:remote": "wrangler d1 migrations apply verified-glam-db --remote"
+  },
+  "dependencies": {
+    "@cf-wasm/photon": "^0.4.0",
+    "@polar-sh/sdk": "^0.48.1",
+    "bcryptjs": "^2.4.3",
+    "better-auth": "^1.2.7",
+    "hono": "^4.6.14",
+    "jose": "^5.9.6",
+    "kysely": "^0.27.5",
+    "kysely-d1": "^0.3.0",
+    "standardwebhooks": "^1.1.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260903.1",
+    "@types/bcryptjs": "^2.4.6",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.129.0"
+  }
+}

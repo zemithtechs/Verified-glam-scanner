@@ -1,7 +1,10 @@
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:verified_glam/services/supabase/vg_api_client.dart';
 import 'package:verified_glam/services/supabase/vg_supabase_init.dart';
 import 'package:verified_glam/services/vg_scan_history_store.dart';
 import 'package:verified_glam/store/AppStore.dart';
@@ -42,6 +45,7 @@ class _VGWebBootAppState extends State<VGWebBootApp> {
     try {
       await initialize(aLocaleLanguageList: languageList()).timeout(timeout);
       await VGSupabaseInit.initialize().timeout(timeout);
+      await _consumeHandoffSession();
       await setValue(vgWalkthroughCompleteKey, true);
       await VGScanHistoryStore.clearLegacyLocalHistoryOnce();
       appStore.toggleDarkMode(value: getBoolAsync(isDarkModeOnPref));
@@ -54,6 +58,43 @@ class _VGWebBootAppState extends State<VGWebBootApp> {
       if (!mounted) return;
       setState(() => _error = e.toString());
     }
+  }
+
+  /// Picks up a session minted by the static site's login/register page
+  /// (website/js/auth.js) and handed off via URL query params — that page
+  /// and this Flutter bundle are separate apps with no shared storage, so
+  /// this is how logging in there becomes a real session here. Strips the
+  /// params from the address bar afterward so the token doesn't linger
+  /// visibly or get bookmarked/shared.
+  Future<void> _consumeHandoffSession() async {
+    final uri = Uri.base;
+    final token = uri.queryParameters['vg_token'];
+    final userId = uri.queryParameters['vg_uid'];
+    debugPrint('VG handoff: uri=$uri token=${token != null} userId=$userId');
+    if (token == null || token.isEmpty || userId == null || userId.isEmpty) {
+      // On-screen (not just console) so this is visible from a phone
+      // screenshot without opening DevTools — temporary until the web
+      // login redirect-loop bug is confirmed fixed. Only fires for a
+      // /app/* entry with no handoff params, i.e. exactly the bounce case.
+      if (uri.path.startsWith('/app/')) {
+        html.window.alert('VG DEBUG: no handoff token in URL\npath=${uri.path}\nfull=$uri');
+      }
+      return;
+    }
+
+    await VGApiClient.setSession(
+      token: token,
+      userId: userId,
+      userEmail: uri.queryParameters['vg_email'],
+    );
+    debugPrint('VG handoff: session set, isSignedIn=${VGApiClient.isSignedIn}');
+
+    final cleanParams = Map<String, String>.from(uri.queryParameters)
+      ..remove('vg_token')
+      ..remove('vg_uid')
+      ..remove('vg_email');
+    final cleanUri = uri.replace(queryParameters: cleanParams.isEmpty ? null : cleanParams);
+    html.window.history.replaceState(null, '', cleanUri.toString());
   }
 
   @override

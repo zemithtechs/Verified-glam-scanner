@@ -9,6 +9,7 @@ import '../services/supabase/vg_supabase_init.dart';
 import '../utils/BMColors.dart';
 import '../utils/BMWidgets.dart';
 import '../utils/vg_constants.dart';
+import '../utils/vg_error_utils.dart';
 
 class BMForgetPasswordScreen extends StatefulWidget {
   const BMForgetPasswordScreen({Key? key}) : super(key: key);
@@ -36,8 +37,8 @@ class _BMForgetPasswordScreenState extends State<BMForgetPasswordScreen> {
     if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
       toast(
         VGSupabaseConfig.isConfigured
-            ? 'Could not connect to Supabase. Check your network and try again.'
-            : 'Supabase not configured. Run with scripts/run-dev.ps1 or launch config.',
+            ? 'Could not connect to the server. Check your network and try again.'
+            : 'Server not configured. Run with scripts/run-dev.ps1 or launch config.',
       );
       return;
     }
@@ -48,13 +49,13 @@ class _BMForgetPasswordScreenState extends State<BMForgetPasswordScreen> {
         toast('Check your email for reset instructions');
         if (mounted) finish(context);
       } catch (e) {
-        toast(e.toString());
+        toast(vgFriendlyAuthError(e));
       } finally {
         if (mounted) setState(() => _loading = false);
       }
       return;
     }
-    toast('Password reset requires Supabase configuration');
+    toast('Password reset requires server configuration');
   }
 
   @override

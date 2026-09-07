@@ -12,7 +12,8 @@ Future<bool?> showVGScanErrorDialog(
   required VGAnalysisFailure failure,
 }) {
   final needsPlans = failure.errorCode == 'INSUFFICIENT_CREDITS' ||
-      failure.errorCode == 'NOT_SUBSCRIBED';
+      failure.errorCode == 'NOT_SUBSCRIBED' ||
+      failure.errorCode == 'FREE_LIMIT_REACHED';
 
   return showDialog<bool>(
     context: context,

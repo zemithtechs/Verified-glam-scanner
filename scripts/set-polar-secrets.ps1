@@ -22,6 +22,19 @@ function Load-EnvFile($path) {
   return $vars
 }
 
+function Normalize-PolarWebhookSecret([string]$Raw) {
+  $secret = $Raw.Trim()
+  $stripped = $false
+  if ($secret.StartsWith("whsec_polar_whs_")) {
+    $secret = $secret.Substring("whsec_".Length)
+    $stripped = $true
+  } elseif ($secret.StartsWith("whsec_") -and $secret.Contains("polar_whs_")) {
+    $secret = $secret.Substring("whsec_".Length)
+    $stripped = $true
+  }
+  return @{ Secret = $secret; StrippedWhsec = $stripped }
+}
+
 if ([string]::IsNullOrWhiteSpace($EnvFile)) {
   $EnvFile = Join-Path $Root ".env"
 }
@@ -52,13 +65,28 @@ $polarKeys = @(
 $toSet = @()
 foreach ($key in $polarKeys) {
   if ($vars.ContainsKey($key) -and -not [string]::IsNullOrWhiteSpace($vars[$key])) {
-    $toSet += "$key=$($vars[$key])"
+    $val = $vars[$key]
+    if ($key -eq "POLAR_WEBHOOK_SECRET") {
+      if ($val.StartsWith("whsec_")) {
+        Write-Warning "POLAR_WEBHOOK_SECRET has whsec_ prefix - stripping whsec_ before upload (use polar_whs_ only in .env)."
+        $norm = Normalize-PolarWebhookSecret $val
+        $val = $norm.Secret
+      }
+      if (-not $val.StartsWith("polar_whs_")) {
+        Write-Error "POLAR_WEBHOOK_SECRET must start with polar_whs_ - paste exactly from Polar Dashboard Webhooks Signing secret (no whsec_ prefix)."
+      }
+      if ($val.Length -lt 20) {
+        Write-Error "POLAR_WEBHOOK_SECRET looks too short."
+      }
+      Write-Host "Webhook secret format OK (polar_whs_...)" -ForegroundColor Green
+    }
+    $toSet += "$key=$val"
   }
 }
 
 if ($toSet.Count -eq 0) {
   Write-Host "No POLAR_* values in $EnvFile"
-  Write-Host "Add POLAR_WEBHOOK_SECRET (must match Polar dashboard) and rerun."
+  Write-Host "Add POLAR_WEBHOOK_SECRET=polar_whs_... (exact copy from Polar dashboard, no whsec_ prefix) and rerun."
   exit 1
 }
 
