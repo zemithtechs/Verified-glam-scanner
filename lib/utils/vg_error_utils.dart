@@ -1,4 +1,4 @@
-import '../services/supabase/vg_api_client.dart';
+import '../services/backend/vg_api_client.dart';
 import 'vg_copy.dart';
 
 /// Typed analysis failure from edge function or client preflight.

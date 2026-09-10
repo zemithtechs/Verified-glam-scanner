@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_connection.dart';
-import '../services/supabase/vg_supabase_init.dart';
+import '../services/backend/vg_auth_service.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_connection.dart';
+import '../services/backend/vg_backend_init.dart';
 import '../utils/BMColors.dart';
 import '../utils/BMWidgets.dart';
 import '../utils/vg_constants.dart';
@@ -34,18 +34,18 @@ class _BMForgetPasswordScreenState extends State<BMForgetPasswordScreen> {
       toast('Enter your email');
       return;
     }
-    if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
+    if (kVGUseCloudBackend && vgBackendConnectionBlocked()) {
       toast(
-        VGSupabaseConfig.isConfigured
+        VGBackendConfig.isConfigured
             ? 'Could not connect to the server. Check your network and try again.'
             : 'Server not configured. Run with scripts/run-dev.ps1 or launch config.',
       );
       return;
     }
-    if (kVGUseSupabase && VGSupabaseInit.isReady) {
+    if (kVGUseCloudBackend && VGBackendInit.isReady) {
       setState(() => _loading = true);
       try {
-        await VGSupabaseAuthService.resetPassword(email);
+        await VGAuthService.resetPassword(email);
         toast('Check your email for reset instructions');
         if (mounted) finish(context);
       } catch (e) {

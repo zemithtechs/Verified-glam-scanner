@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 
 import '../utils/vg_credit_constants.dart';
-import 'supabase/vg_api_client.dart';
-import 'supabase/vg_supabase_auth_service.dart';
+import 'backend/vg_api_client.dart';
+import 'backend/vg_auth_service.dart';
 import 'vg_analysis_mode.dart';
 import 'vg_subscription_store.dart';
 
-/// Point-in-time subscription credit state from Supabase profiles.
+/// Point-in-time subscription credit state from the profiles table.
 class VGCreditSnapshot {
   final int balance;
   final int allocated;
@@ -83,7 +83,7 @@ class VGCreditTransaction {
   }
 }
 
-/// Subscription credit balance from Supabase profiles.
+/// Subscription credit balance from the profiles table.
 class VGCreditsService {
   VGCreditsService._();
 
@@ -109,7 +109,7 @@ class VGCreditsService {
   }
 
   static Future<VGCreditSnapshot?> fetchSnapshot() async {
-    if (!VGAnalysisMode.useCloud || !VGSupabaseAuthService.isSignedIn) {
+    if (!VGAnalysisMode.useCloud || !VGAuthService.isSignedIn) {
       return null;
     }
     try {
@@ -162,7 +162,7 @@ class VGCreditsService {
     bool usedOnly = false,
     int limit = 50,
   }) async {
-    if (!VGAnalysisMode.useCloud || !VGSupabaseAuthService.isSignedIn) {
+    if (!VGAnalysisMode.useCloud || !VGAuthService.isSignedIn) {
       return const [];
     }
     try {
@@ -205,14 +205,11 @@ class VGCreditsService {
       isPro: true,
     );
 
-    // Deliberately client-cache-only now, even when signed in: the old
-    // Supabase RLS policy ("profiles_update_own") let any authenticated
-    // user write is_pro/credits_balance directly on their own row —
-    // functional for this mock-purchase dev path, but a real self-grant
-    // hole if ever called outside a dev build. D1 has no such open write
-    // path by default (see docs/CLOUDFLARE_MIGRATION_PLAN.md), and adding
-    // one just for this dev/testing convenience isn't worth reopening it.
-    // Real subscriptions still go through the Polar webhook server-side.
+    // Deliberately client-cache-only, even when signed in: there is no
+    // client-writable path to set is_pro/credits_balance on D1, and adding
+    // one just for this dev/testing convenience isn't worth opening a
+    // self-grant hole. Real subscriptions still go through the Polar
+    // webhook server-side.
   }
 
   static Future<void> syncFromResponse(dynamic data) async {

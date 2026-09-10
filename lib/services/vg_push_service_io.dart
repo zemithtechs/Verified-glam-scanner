@@ -10,16 +10,16 @@ import '../models/vg_feature_model.dart';
 import '../screens/guide/vg_challenge_day_task_screen.dart';
 import '../screens/guide/vg_challenge_reward_screen.dart';
 import '../screens/guide/vg_routine_challenge_screen.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_init.dart';
-import '../services/supabase/vg_supabase_profile_repository.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_init.dart';
+import '../services/backend/vg_profile_repository.dart';
 import '../services/vg_onboarding_store.dart';
 import '../utils/vg_constants.dart';
 import '../utils/vg_feature_data.dart';
 import 'vg_analytics_service.dart';
 import 'vg_challenge_service.dart';
-import 'supabase/vg_supabase_auth_service.dart';
-import 'supabase/vg_supabase_push_token_repository.dart';
+import 'backend/vg_auth_service.dart';
+import 'backend/vg_push_token_repository.dart';
 
 @pragma('vm:entry-point')
 Future<void> vgFirebaseBackgroundHandler(RemoteMessage message) async {
@@ -31,7 +31,7 @@ Future<void> vgFirebaseBackgroundHandler(RemoteMessage message) async {
 class VGPushService {
   VGPushService._();
 
-  static final _tokens = VGSupabasePushTokenRepository();
+  static final _tokens = VGPushTokenRepository();
   static bool _initialized = false;
   static String? _pendingDeepLink;
   static String _pendingKind = '';
@@ -102,7 +102,7 @@ class VGPushService {
 
   static Future<void> _syncToken() async {
     try {
-      if (!VGSupabaseAuthService.isSignedIn) return;
+      if (!VGAuthService.isSignedIn) return;
       final token = await FirebaseMessaging.instance.getToken();
       if (token != null) {
         await _tokens.upsertToken(
@@ -131,11 +131,11 @@ class VGPushService {
   }
 
   static Future<bool> isReadyForDeepLink() async {
-    if (!VGSupabaseAuthService.isSignedIn) return false;
+    if (!VGAuthService.isSignedIn) return false;
     final localDone = await VGOnboardingStore.isComplete();
     if (!localDone) return false;
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      final remoteDone = await VGSupabaseProfileRepository.isOnboardingCompleteRemote();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      final remoteDone = await VGProfileRepository.isOnboardingCompleteRemote();
       if (!remoteDone) return false;
     }
     return true;
@@ -221,7 +221,7 @@ class VGPushService {
   }
 
   static Future<void> syncTokenIfSignedIn() async {
-    if (!VGSupabaseAuthService.isSignedIn) return;
+    if (!VGAuthService.isSignedIn) return;
     await _syncToken();
   }
 }

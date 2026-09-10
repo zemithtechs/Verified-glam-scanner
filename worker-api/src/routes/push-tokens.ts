@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import type { Env } from "../env";
 import type { SessionVars } from "../middleware/session";
 
-// Port of vg_supabase_push_token_repository.dart's two calls.
+// Port of vg_push_token_repository.dart's two calls.
 export const pushTokens = new Hono<{ Bindings: Env; Variables: SessionVars }>();
 
 pushTokens.post("/", async (c) => {

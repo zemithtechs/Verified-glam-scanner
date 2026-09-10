@@ -6,10 +6,10 @@ import 'package:nb_utils/nb_utils.dart';
 import '../screens/BMDashboardScreen.dart';
 import '../screens/BMLoginScreen.dart';
 import '../screens/onboarding/vg_onboarding_flow.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_init.dart';
-import '../services/supabase/vg_supabase_profile_repository.dart';
+import '../services/backend/vg_auth_service.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_init.dart';
+import '../services/backend/vg_profile_repository.dart';
 import '../services/vg_onboarding_store.dart';
 import '../services/vg_push_service.dart';
 import '../web/vg_web_app_prefs.dart';
@@ -26,8 +26,8 @@ Future<void> vgNavigateAfterAuth(BuildContext context, {String? redirect}) async
   }
 
   final onboardingDone = await VGOnboardingStore.isComplete();
-  if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-    final remoteDone = await VGSupabaseProfileRepository.isOnboardingCompleteRemote();
+  if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+    final remoteDone = await VGProfileRepository.isOnboardingCompleteRemote();
     if (remoteDone) {
       if (kIsWeb) {
         final target = await vgTakePostAuthRedirect();
@@ -61,12 +61,12 @@ Future<void> vgNavigateAfterAuth(BuildContext context, {String? redirect}) async
   }
 }
 
-/// Walkthrough complete → login (if Supabase) → onboarding or home.
+/// Walkthrough complete → login (if cloud backend configured) → onboarding or home.
 Future<void> vgNavigateAfterWalkthroughWithAuth(BuildContext context) async {
   if (kIsWeb) {
     await setValue(vgWalkthroughCompleteKey, true);
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      if (!VGSupabaseAuthService.isSignedIn) {
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      if (!VGAuthService.isSignedIn) {
         context.go('/login');
         return;
       }
@@ -77,8 +77,8 @@ Future<void> vgNavigateAfterWalkthroughWithAuth(BuildContext context) async {
     return;
   }
 
-  if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-    if (!VGSupabaseAuthService.isSignedIn) {
+  if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+    if (!VGAuthService.isSignedIn) {
       if (kIsWeb) {
         context.go('/login');
       } else {

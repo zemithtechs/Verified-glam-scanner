@@ -5,8 +5,8 @@ import '../models/vg_challenge_progress.dart';
 import '../models/vg_scan_result.dart';
 import '../utils/vg_challenge_push_copy.dart';
 import '../utils/vg_constants.dart';
-import 'supabase/vg_supabase_auth_service.dart';
-import 'supabase/vg_supabase_challenge_repository.dart';
+import 'backend/vg_auth_service.dart';
+import 'backend/vg_challenge_repository.dart';
 import 'vg_challenge_templates.dart';
 import 'vg_detected_issues_builder.dart';
 import 'vg_session_scan_cache.dart';
@@ -28,10 +28,10 @@ class VGChallengePreview {
 class VGChallengeService {
   VGChallengeService._();
 
-  static final VGSupabaseChallengeRepository _repo = VGSupabaseChallengeRepository();
+  static final VGChallengeRepository _repo = VGChallengeRepository();
 
   static Future<VGChallengePlan?> loadOrAssign() async {
-    final userId = VGSupabaseAuthService.currentUser?.id;
+    final userId = VGAuthService.currentUser?.id;
     if (userId == null) return null;
 
     try {
@@ -118,7 +118,7 @@ class VGChallengeService {
     VGScanResult scan, {
     String? issueCodeOverride,
   }) async {
-    final userId = VGSupabaseAuthService.currentUser?.id;
+    final userId = VGAuthService.currentUser?.id;
     if (userId == null) return null;
 
     try {

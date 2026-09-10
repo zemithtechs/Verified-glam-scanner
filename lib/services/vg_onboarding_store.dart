@@ -2,16 +2,16 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../models/vg_onboarding_profile.dart';
 import '../utils/vg_constants.dart';
-import 'supabase/vg_supabase_config.dart';
-import 'supabase/vg_supabase_init.dart';
-import 'supabase/vg_supabase_profile_repository.dart';
+import 'backend/vg_backend_config.dart';
+import 'backend/vg_backend_init.dart';
+import 'backend/vg_profile_repository.dart';
 import 'vg_analytics_service.dart';
 import 'vg_profile_cache.dart';
 
 class VGOnboardingStore {
   static Future<bool> isComplete() async {
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      final remoteDone = await VGSupabaseProfileRepository.isOnboardingCompleteRemote();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      final remoteDone = await VGProfileRepository.isOnboardingCompleteRemote();
       if (remoteDone) {
         await setComplete(true);
         return true;
@@ -25,8 +25,8 @@ class VGOnboardingStore {
   }
 
   static Future<VGOnboardingProfile> loadProfile() async {
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      final remote = await VGSupabaseProfileRepository.fetchProfile();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      final remote = await VGProfileRepository.fetchProfile();
       if (remote != null) {
         await saveProfile(remote);
         return remote;
@@ -45,8 +45,8 @@ class VGOnboardingStore {
   static Future<void> markComplete(VGOnboardingProfile profile) async {
     await saveProfile(profile);
     await setComplete(true);
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      await VGSupabaseProfileRepository.upsertFromOnboarding(profile);
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      await VGProfileRepository.upsertFromOnboarding(profile);
     }
     await VGAnalyticsService.logOnboardingCompleted();
   }

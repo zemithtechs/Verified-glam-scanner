@@ -6,8 +6,8 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:verified_glam/screens/BMSplashScreen.dart';
 import 'package:verified_glam/services/ads/vg_ads_manager.dart';
-import 'package:verified_glam/services/supabase/vg_supabase_auth_service.dart';
-import 'package:verified_glam/services/supabase/vg_supabase_init.dart';
+import 'package:verified_glam/services/backend/vg_auth_service.dart';
+import 'package:verified_glam/services/backend/vg_backend_init.dart';
 import 'package:verified_glam/services/vg_push_service.dart';
 import 'package:verified_glam/services/vg_scan_history_store.dart';
 import 'package:verified_glam/store/AppStore.dart';
@@ -51,12 +51,12 @@ class _VGBootAppState extends State<VGBootApp> {
     const timeout = Duration(seconds: 45);
     try {
       await initialize(aLocaleLanguageList: languageList()).timeout(timeout);
-      await VGSupabaseInit.initialize().timeout(timeout);
+      await VGBackendInit.initialize().timeout(timeout);
       if (!kIsWeb) {
         try {
           await Firebase.initializeApp();
           await VGPushService.initialize();
-          VGSupabaseAuthService.onAuthStateChange.listen((_) {
+          VGAuthService.onAuthStateChange.listen((_) {
             VGPushService.syncTokenIfSignedIn();
           });
         } catch (e) {

@@ -5,7 +5,7 @@ import '../../components/vg/vg_scan_photo_image.dart';
 import '../../main.dart';
 import '../../models/vg_feature_model.dart';
 import '../../models/vg_scan_result.dart';
-import '../../services/supabase/vg_supabase_scan_repository.dart';
+import '../../services/backend/vg_scan_repository.dart';
 import '../../services/vg_scan_photo_resolver.dart';
 import '../../utils/BMColors.dart';
 import '../../utils/vg_copy.dart';
@@ -22,7 +22,7 @@ class VGScanHistoryScreen extends StatefulWidget {
 }
 
 class _VGScanHistoryScreenState extends State<VGScanHistoryScreen> {
-  final _repo = VGSupabaseScanRepository();
+  final _repo = VGScanRepository();
   List<VGScanResult> _scans = const [];
   bool _loading = true;
 

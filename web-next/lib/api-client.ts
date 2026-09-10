@@ -60,7 +60,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   if (!res.ok) {
     // worker-api's own routes return {error, errorCode}; Better Auth's
     // /api/auth/* routes return {message, code} instead — handle both
-    // (mirrors lib/services/supabase/vg_api_client.dart on mobile).
+    // (mirrors lib/services/backend/vg_api_client.dart on mobile).
     const message = data?.error ?? data?.message ?? `Request failed (${res.status})`;
     const errorCode = data?.errorCode ?? data?.code;
     throw new ApiError(res.status, message, errorCode);

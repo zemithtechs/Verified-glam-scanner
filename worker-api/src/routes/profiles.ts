@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import type { Env } from "../env";
 import type { SessionVars } from "../middleware/session";
 
-// Port of vg_supabase_profile_repository.dart. Consolidated into fewer,
+// Port of vg_profile_repository.dart. Consolidated into fewer,
 // more RESTful endpoints than the original per-field Supabase queries,
 // since D1 has no auto-generated table REST layer to mirror 1:1 — this is
 // the "genuinely new work" the migration plan called out.

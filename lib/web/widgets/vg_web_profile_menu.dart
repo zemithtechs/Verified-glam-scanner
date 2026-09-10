@@ -5,7 +5,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
-import '../../services/supabase/vg_supabase_auth_service.dart';
+import '../../services/backend/vg_auth_service.dart';
 import '../../utils/BMConstants.dart';
 import '../../utils/BMColors.dart';
 import '../../utils/vg_constants.dart';
@@ -27,7 +27,7 @@ class VGWebProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final email = VGSupabaseAuthService.currentUser?.email ?? '';
+    final email = VGAuthService.currentUser?.email ?? '';
     final initial = email.isNotEmpty ? email[0].toUpperCase() : '?';
     final onProfile = section == VGWebAppSection.profile;
 

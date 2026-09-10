@@ -7,15 +7,15 @@ import '../models/vg_scan_result.dart';
 import '../utils/vg_constants.dart';
 import '../utils/vg_copy.dart';
 import '../utils/vg_payload_values.dart';
-import 'supabase/vg_supabase_config.dart';
-import 'supabase/vg_supabase_init.dart';
-import 'supabase/vg_supabase_profile_repository.dart';
+import 'backend/vg_backend_config.dart';
+import 'backend/vg_backend_init.dart';
+import 'backend/vg_profile_repository.dart';
 import 'vg_referral_bonus_store.dart';
 
 class VGReferralService {
   static Future<String> referralCode() async {
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      final remote = await VGSupabaseProfileRepository.referralCode();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      final remote = await VGProfileRepository.referralCode();
       if (remote != null && remote.isNotEmpty) return remote;
     }
 
@@ -33,15 +33,15 @@ class VGReferralService {
   }
 
   static Future<int> downloadCount() async {
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      return VGSupabaseProfileRepository.referralDownloadCount();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      return VGProfileRepository.referralDownloadCount();
     }
     return getIntAsync(vgReferralDownloadCountKey, defaultValue: 0);
   }
 
   static Future<int> incrementDownloadCount() async {
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      final count = await VGSupabaseProfileRepository.incrementReferralDownloadCount();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      final count = await VGProfileRepository.incrementReferralDownloadCount();
       await setValue(vgReferralDownloadCountKey, count);
       return count;
     }
@@ -51,8 +51,8 @@ class VGReferralService {
   }
 
   static Future<bool> isRedeemed() async {
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      final remote = await VGSupabaseProfileRepository.isReferralBonusRedeemedRemote();
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      final remote = await VGProfileRepository.isReferralBonusRedeemedRemote();
       if (remote) {
         await setValue(vgReferralBonusRedeemedKey, true);
         return true;
@@ -70,8 +70,8 @@ class VGReferralService {
   static Future<bool> redeemReward() async {
     if (!await canRedeem()) return false;
     await setValue(vgReferralBonusRedeemedKey, true);
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      await VGSupabaseProfileRepository.setReferralBonusRedeemed(
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      await VGProfileRepository.setReferralBonusRedeemed(
         bonusScans: vgReferralBonusScanAmount,
       );
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/supabase/vg_supabase_auth_service.dart';
+import '../../services/backend/vg_auth_service.dart';
 import '../../utils/BMColors.dart';
 import '../../utils/vg_constants.dart';
 import '../vg_web_breakpoints.dart';
@@ -31,13 +31,13 @@ class _VGWebAppShellState extends State<VGWebAppShell> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> _signOut(BuildContext context) async {
-    await VGSupabaseAuthService.signOut();
+    await VGAuthService.signOut();
     if (context.mounted) page_nav.vgWebGoLogin();
   }
 
   @override
   Widget build(BuildContext context) {
-    final signedIn = VGSupabaseAuthService.isSignedIn;
+    final signedIn = VGAuthService.isSignedIn;
     final drawerNav = VGWebBreakpoints.useDrawerNav(context);
     final pad = VGWebBreakpoints.contentPadding(context);
     final phone = VGWebBreakpoints.isPhone(context);

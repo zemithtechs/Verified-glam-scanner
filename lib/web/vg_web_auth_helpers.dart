@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../services/supabase/vg_api_client.dart';
+import '../services/backend/vg_api_client.dart';
 import '../utils/vg_constants.dart';
 
 const _emailPattern = r'^[^@\s]+@[^@\s]+\.[^@\s]+$';

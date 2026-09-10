@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../services/supabase/vg_supabase_auth_service.dart';
-import '../../services/supabase/vg_supabase_config.dart';
-import '../../services/supabase/vg_supabase_connection.dart';
+import '../../services/backend/vg_auth_service.dart';
+import '../../services/backend/vg_backend_config.dart';
+import '../../services/backend/vg_backend_connection.dart';
 import '../../utils/vg_auth_navigation.dart';
 import '../../utils/vg_constants.dart';
 import '../vg_web_auth_helpers.dart';
@@ -52,22 +52,22 @@ class _VGWebLoginScreenState extends State<VGWebLoginScreen> {
       toast('Password must be at least 6 characters');
       return;
     }
-    if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
-      final blocked = VGSupabaseConfig.url.isNotEmpty && !VGSupabaseConfig.hasValidUrl
+    if (kVGUseCloudBackend && vgBackendConnectionBlocked()) {
+      final blocked = VGBackendConfig.url.isNotEmpty && !VGBackendConfig.hasValidUrl
           ? 'Server URL is invalid in this build. Run .\\scripts\\build-web.ps1 and hard-refresh.'
-          : VGSupabaseConfig.isConfigured
+          : VGBackendConfig.isConfigured
               ? 'Could not connect to the server. Check your network and try again.'
               : 'Server not configured.';
       toast(blocked);
       return;
     }
-    if (!kVGUseSupabase) {
+    if (!kVGUseCloudBackend) {
       await vgNavigateAfterAuth(context, redirect: _redirect);
       return;
     }
     setState(() => _loading = true);
     try {
-      await VGSupabaseAuthService.signInWithEmail(
+      await VGAuthService.signInWithEmail(
         email: email,
         password: _passwordController.text,
       );
@@ -81,13 +81,13 @@ class _VGWebLoginScreenState extends State<VGWebLoginScreen> {
   }
 
   Future<void> _signInGoogle() async {
-    if (!VGSupabaseConfig.hasGoogleSignIn) {
+    if (!VGBackendConfig.hasGoogleSignIn) {
       toast('Google sign-in not configured (GOOGLE_WEB_CLIENT_ID)');
       return;
     }
     setState(() => _loading = true);
     try {
-      await VGSupabaseAuthService.signInWithGoogle();
+      await VGAuthService.signInWithGoogle();
       if (!mounted) return;
       await vgNavigateAfterAuth(context, redirect: _redirect);
     } catch (e) {

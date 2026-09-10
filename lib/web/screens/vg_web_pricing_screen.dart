@@ -5,7 +5,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../components/vg/subscription/vg_paywall_plans_section.dart';
 import '../../components/vg/vg_loading_overlay.dart';
 import '../../components/vg/vg_pill_button.dart';
-import '../../services/supabase/vg_supabase_auth_service.dart';
+import '../../services/backend/vg_auth_service.dart';
 import '../../services/vg_polar_checkout_service.dart';
 import '../../services/vg_subscription_store.dart';
 import '../../utils/BMColors.dart';
@@ -84,7 +84,7 @@ class _VGWebPricingScreenState extends State<VGWebPricingScreen> {
   @override
   Widget build(BuildContext context) {
     final desktop = VGWebBreakpoints.isDesktop(context);
-    final signedIn = VGSupabaseAuthService.isSignedIn;
+    final signedIn = VGAuthService.isSignedIn;
     final padding = VGWebBreakpoints.contentPadding(context);
 
     return Scaffold(

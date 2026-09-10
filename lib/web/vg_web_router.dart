@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../screens/onboarding/vg_onboarding_flow.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_init.dart';
+import '../services/backend/vg_auth_service.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_init.dart';
 import '../utils/vg_constants.dart';
 import 'screens/vg_web_app_screen.dart';
 import 'screens/vg_web_forgot_password_screen.dart';
@@ -88,13 +88,13 @@ final GoRouter vgWebRouter = GoRouter(
       return path;
     }
 
-    final signedIn = kVGUseSupabase &&
-        VGSupabaseConfig.isConfigured &&
-        VGSupabaseInit.isReady &&
-        VGSupabaseAuthService.isSignedIn;
+    final signedIn = kVGUseCloudBackend &&
+        VGBackendConfig.isConfigured &&
+        VGBackendInit.isReady &&
+        VGAuthService.isSignedIn;
     debugPrint('VG router redirect: path=$path signedIn=$signedIn '
-        'useSupabase=$kVGUseSupabase configured=${VGSupabaseConfig.isConfigured} '
-        'ready=${VGSupabaseInit.isReady} authSignedIn=${VGSupabaseAuthService.isSignedIn}');
+        'useSupabase=$kVGUseCloudBackend configured=${VGBackendConfig.isConfigured} '
+        'ready=${VGBackendInit.isReady} authSignedIn=${VGAuthService.isSignedIn}');
 
     if (path == '/' || path.isEmpty) {
       if (_uriHasAuthCallbackParams(uri) || signedIn) {
@@ -110,8 +110,8 @@ final GoRouter vgWebRouter = GoRouter(
       // page. Temporary until the web login redirect-loop bug is confirmed
       // fixed.
       page_nav.vgWebDebugAlert('VG DEBUG: bounced from $path — signedIn=false\n'
-          'configured=${VGSupabaseConfig.isConfigured}\nready=${VGSupabaseInit.isReady}\n'
-          'apiSignedIn=${VGSupabaseAuthService.isSignedIn}');
+          'configured=${VGBackendConfig.isConfigured}\nready=${VGBackendInit.isReady}\n'
+          'apiSignedIn=${VGAuthService.isSignedIn}');
       page_nav.vgWebGoLogin(redirectPath: path);
       return path;
     }

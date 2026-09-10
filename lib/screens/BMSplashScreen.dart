@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_init.dart';
-import '../services/supabase/vg_supabase_profile_repository.dart';
+import '../services/backend/vg_auth_service.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_init.dart';
+import '../services/backend/vg_profile_repository.dart';
 import '../services/vg_onboarding_store.dart';
 import '../utils/BMColors.dart';
 import '../utils/vg_auth_navigation.dart';
@@ -40,10 +40,10 @@ class _BMSplashScreenState extends State<BMSplashScreen> {
 
     final walkthroughDone = getBoolAsync(vgWalkthroughCompleteKey, defaultValue: false);
 
-    if (kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady) {
-      if (VGSupabaseAuthService.isSignedIn) {
+    if (kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady) {
+      if (VGAuthService.isSignedIn) {
         final localDone = await VGOnboardingStore.isComplete();
-        final remoteDone = localDone && await VGSupabaseProfileRepository.isOnboardingCompleteRemote();
+        final remoteDone = localDone && await VGProfileRepository.isOnboardingCompleteRemote();
         if (remoteDone || localDone) {
           BMDashboardScreen(flag: false).launch(context, isNewTask: true);
           return;

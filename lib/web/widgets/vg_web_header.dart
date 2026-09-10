@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../services/supabase/vg_supabase_auth_service.dart';
+import '../../services/backend/vg_auth_service.dart';
 import '../../utils/BMColors.dart';
 import '../../utils/vg_constants.dart';
 import '../../utils/vg_copy.dart';
@@ -45,7 +45,7 @@ class VGWebHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final signedIn = VGSupabaseAuthService.isSignedIn;
+    final signedIn = VGAuthService.isSignedIn;
     final desktop = VGWebBreakpoints.isDesktop(context);
     final phone = VGWebBreakpoints.isPhone(context);
     final padding = VGWebBreakpoints.contentPadding(context);

@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import type { Env } from "../env";
 import type { SessionVars } from "../middleware/session";
 
-// Port of vg_supabase_challenge_repository.dart. Unlike scans/profiles,
+// Port of vg_challenge_repository.dart. Unlike scans/profiles,
 // this one had real business logic living CLIENT-SIDE in Dart (badge
 // awarding, streak math, day-unlock checks), guarded only by Supabase RLS —
 // D1 has no RLS equivalent, so all of it moves server-side here, staying

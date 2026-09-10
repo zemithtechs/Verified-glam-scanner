@@ -4,7 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../../components/vg/subscription/vg_paywall_plans_section.dart';
 import '../../../components/vg/vg_loading_overlay.dart';
-import '../../../services/supabase/vg_supabase_auth_service.dart';
+import '../../../services/backend/vg_auth_service.dart';
 import '../../../services/vg_polar_checkout_service.dart';
 import '../../../services/vg_subscription_store.dart';
 import '../../../utils/BMColors.dart';
@@ -53,7 +53,7 @@ class _VGWebPaywallDialogBodyState extends State<_VGWebPaywallDialogBody> {
     Navigator.of(context).pop();
     widget.onDismiss?.call();
 
-    if (!VGSupabaseAuthService.isSignedIn) {
+    if (!VGAuthService.isSignedIn) {
       try {
         await VGPolarCheckoutService.openCheckout(planId);
       } catch (_) {

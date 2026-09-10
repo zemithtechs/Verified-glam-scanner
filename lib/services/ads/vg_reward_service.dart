@@ -1,4 +1,4 @@
-import '../supabase/vg_api_client.dart';
+import '../backend/vg_api_client.dart';
 import 'vg_ads_manager.dart';
 
 /// Bridges "watched a rewarded interstitial" (VGAdsManager) to "the server

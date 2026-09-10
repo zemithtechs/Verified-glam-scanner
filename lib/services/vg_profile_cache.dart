@@ -6,7 +6,7 @@ import '../../models/vg_onboarding_profile.dart';
 
 const _profileCacheKey = 'vg_profile_cache_json';
 
-/// Local cache for onboarding profile to reduce repeated Supabase reads.
+/// Local cache for onboarding profile to reduce repeated backend reads.
 class VGProfileCache {
   VGProfileCache._();
 

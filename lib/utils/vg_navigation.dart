@@ -11,9 +11,9 @@ import '../screens/subscription/vg_paywall_screen.dart';
 import '../screens/BMLoginScreen.dart';
 import '../services/ads/vg_ads_config.dart';
 import '../services/ads/vg_ads_manager.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_init.dart';
+import '../services/backend/vg_auth_service.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_init.dart';
 import '../services/vg_onboarding_store.dart';
 import '../services/vg_referral_bonus_store.dart';
 import '../services/vg_subscription_store.dart';
@@ -59,10 +59,10 @@ Future<void> vgStartAnalysis(BuildContext context, VGFeatureModel feature) async
   if (!context.mounted) return;
 
   if (kIsWeb && VGWebBreakpoints.isDesktop(context)) {
-    if (kVGUseSupabase &&
-        VGSupabaseConfig.isConfigured &&
-        VGSupabaseInit.isReady &&
-        !VGSupabaseAuthService.isSignedIn) {
+    if (kVGUseCloudBackend &&
+        VGBackendConfig.isConfigured &&
+        VGBackendInit.isReady &&
+        !VGAuthService.isSignedIn) {
       toast('Sign in to run analyses');
       final slug = slugForFeatureType(feature.featureType);
       page_nav.vgWebGoLogin(redirectPath: '/app/$slug');
@@ -78,10 +78,10 @@ Future<void> vgStartAnalysis(BuildContext context, VGFeatureModel feature) async
     return;
   }
 
-  if (kVGUseSupabase &&
-      VGSupabaseConfig.isConfigured &&
-      VGSupabaseInit.isReady &&
-      !VGSupabaseAuthService.isSignedIn) {
+  if (kVGUseCloudBackend &&
+      VGBackendConfig.isConfigured &&
+      VGBackendInit.isReady &&
+      !VGAuthService.isSignedIn) {
     toast('Sign in to run analyses');
     if (kIsWeb) {
       final path = GoRouterState.of(context).uri.path;

@@ -4,7 +4,7 @@ import '../../utils/BMColors.dart';
 import '../../utils/vg_local_photo_io.dart' if (dart.library.html) '../../utils/vg_local_photo_web.dart' as local;
 import '../../utils/vg_platform_file.dart';
 
-/// Displays a scan photo from a local file path or remote URL (signed Supabase URL).
+/// Displays a scan photo from a local file path or remote signed URL.
 class VGScanPhotoImage extends StatelessWidget {
   final String? photoPath;
   final BoxFit fit;

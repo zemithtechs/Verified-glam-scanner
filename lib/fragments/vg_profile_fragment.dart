@@ -14,7 +14,7 @@ import '../screens/BMLoginScreen.dart';
 import '../screens/guide/vg_challenge_reward_screen.dart';
 import '../screens/guide/vg_routine_challenge_screen.dart';
 import '../screens/scan/vg_scan_history_screen.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
+import '../services/backend/vg_auth_service.dart';
 import '../services/vg_challenge_service.dart';
 import '../services/vg_credits_service.dart';
 import '../utils/BMColors.dart';
@@ -456,7 +456,7 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
     );
     if (confirmed != true) return;
 
-    await VGSupabaseAuthService.signOut();
+    await VGAuthService.signOut();
     if (!mounted) return;
     BMLoginScreen().launch(context, isNewTask: true);
   }
@@ -471,7 +471,7 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
 
     setState(() => _deletingAccount = true);
     try {
-      await VGSupabaseAuthService.deleteAccount();
+      await VGAuthService.deleteAccount();
       VGCreditsService.clearCache();
       if (!mounted) return;
       BMLoginScreen().launch(context, isNewTask: true);

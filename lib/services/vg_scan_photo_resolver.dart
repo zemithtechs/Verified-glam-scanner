@@ -1,14 +1,14 @@
 import '../models/vg_scan_result.dart';
 import '../utils/vg_platform_file.dart';
-import 'supabase/vg_supabase_auth_service.dart';
-import 'supabase/vg_supabase_storage_service.dart';
+import 'backend/vg_auth_service.dart';
+import 'backend/vg_storage_service.dart';
 
 /// Refreshes signed URLs for cloud-stored scan photos (local paths expire / are device-only).
 class VGScanPhotoResolver {
   VGScanPhotoResolver._();
 
   static Future<VGScanResult> hydrate(VGScanResult result) async {
-    if (!VGSupabaseAuthService.isSignedIn) return result;
+    if (!VGAuthService.isSignedIn) return result;
     final storagePath = result.storagePath;
     if (storagePath == null || storagePath.isEmpty) return result;
 
@@ -17,7 +17,7 @@ class VGScanPhotoResolver {
     }
 
     try {
-      final url = await VGSupabaseStorageService.signedUrl(storagePath);
+      final url = await VGStorageService.signedUrl(storagePath);
       if (url == null || url.isEmpty) return result;
       return result.copyWith(photoPath: url);
     } catch (_) {

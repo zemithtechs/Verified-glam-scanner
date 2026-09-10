@@ -7,10 +7,6 @@ const bool kVGLocalDevMode = false;
 const bool kVGUseCloudBackend =
     bool.fromEnvironment('VG_USE_CLOUD_BACKEND', defaultValue: true);
 
-/// Legacy internal name retained while call sites are migrated. This no longer
-/// selects or configures Supabase.
-const bool kVGUseSupabase = kVGUseCloudBackend;
-
 /// When true: use local mock payloads instead of OpenAI Edge Function (offline dev).
 const bool kVGUseMockAnalysis =
     bool.fromEnvironment('VG_USE_MOCK_ANALYSIS', defaultValue: false);

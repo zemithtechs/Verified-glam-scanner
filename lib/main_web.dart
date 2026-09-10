@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:verified_glam/services/supabase/vg_api_client.dart';
-import 'package:verified_glam/services/supabase/vg_supabase_init.dart';
+import 'package:verified_glam/services/backend/vg_api_client.dart';
+import 'package:verified_glam/services/backend/vg_backend_init.dart';
 import 'package:verified_glam/services/vg_scan_history_store.dart';
 import 'package:verified_glam/store/AppStore.dart';
 import 'package:verified_glam/utils/AppTheme.dart';
@@ -44,7 +44,7 @@ class _VGWebBootAppState extends State<VGWebBootApp> {
     const timeout = Duration(seconds: 45);
     try {
       await initialize(aLocaleLanguageList: languageList()).timeout(timeout);
-      await VGSupabaseInit.initialize().timeout(timeout);
+      await VGBackendInit.initialize().timeout(timeout);
       await _consumeHandoffSession();
       await setValue(vgWalkthroughCompleteKey, true);
       await VGScanHistoryStore.clearLegacyLocalHistoryOnce();

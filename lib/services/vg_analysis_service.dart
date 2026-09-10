@@ -10,15 +10,15 @@ import '../utils/vg_copy.dart';
 import '../utils/vg_error_utils.dart';
 import '../utils/vg_mock_results.dart';
 import 'vg_profile_cache.dart';
-import 'supabase/vg_supabase_profile_repository.dart';
-import 'supabase/vg_supabase_storage_service.dart';
+import 'backend/vg_profile_repository.dart';
+import 'backend/vg_storage_service.dart';
 import 'vg_analysis_mode.dart';
 import 'vg_connectivity_service.dart';
 import 'vg_onboarding_store.dart';
 import 'vg_credits_service.dart';
 import 'vg_session_scan_cache.dart';
-import 'supabase/vg_api_client.dart';
-import 'supabase/vg_supabase_scan_repository.dart';
+import 'backend/vg_api_client.dart';
+import 'backend/vg_scan_repository.dart';
 
 class VGAnalysisService {
   VGAnalysisService._();
@@ -61,7 +61,7 @@ class VGAnalysisService {
     final usedMock = VGAnalysisMode.willUseMock;
 
     if (VGAnalysisMode.isLiveAnalysis) {
-      storagePath = await VGSupabaseStorageService.uploadScanPhoto(
+      storagePath = await VGStorageService.uploadScanPhoto(
         localPath: photoPath,
         scanId: scanId,
       );
@@ -93,7 +93,7 @@ class VGAnalysisService {
 
     if (storagePath != null) {
       try {
-        await VGSupabaseScanRepository().save(result: scanResult, storagePath: storagePath);
+        await VGScanRepository().save(result: scanResult, storagePath: storagePath);
       } catch (e) {
         debugPrint('VGAnalysisService: saving scan history failed: $e');
       }
@@ -129,7 +129,7 @@ class VGAnalysisService {
   static Future<Map<String, dynamic>> _profilePayload() async {
     VGOnboardingProfile profile = await VGProfileCache.load() ?? await VGOnboardingStore.loadProfile();
     if (VGAnalysisMode.useCloud) {
-      final remote = await VGSupabaseProfileRepository.fetchProfile();
+      final remote = await VGProfileRepository.fetchProfile();
       if (remote != null) {
         profile = remote;
         await VGProfileCache.save(remote);

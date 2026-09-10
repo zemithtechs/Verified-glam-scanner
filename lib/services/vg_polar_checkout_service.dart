@@ -3,12 +3,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/vg_constants.dart';
 import '../utils/vg_credit_constants.dart';
-import 'supabase/vg_api_client.dart';
-import 'supabase/vg_supabase_auth_service.dart';
+import 'backend/vg_api_client.dart';
+import 'backend/vg_auth_service.dart';
 import 'vg_credits_service.dart';
 import 'vg_subscription_store.dart';
 
-/// Polar.sh checkout via Supabase Edge Functions (no Polar API key in app).
+/// Polar.sh checkout via the Cloudflare Worker (no Polar API key in app).
 class VGPolarCheckoutService {
   VGPolarCheckoutService._();
 
@@ -66,7 +66,7 @@ class VGPolarCheckoutService {
   static Future<void> openCheckout(String planId) async {
     _requireWebCheckoutSurface('Polar checkout');
 
-    if (VGSupabaseAuthService.isSignedIn) {
+    if (VGAuthService.isSignedIn) {
       final url = await createCheckoutUrl(planId);
       await _launchCheckoutUrl(url);
       return;
@@ -126,7 +126,7 @@ class VGPolarCheckoutService {
 
   /// Webhook is source of truth — refresh profile credits and local Pro cache.
   static Future<bool> refreshSubscriptionFromServer() async {
-    if (!VGSupabaseAuthService.isSignedIn) {
+    if (!VGAuthService.isSignedIn) {
       await VGSubscriptionStore.setPro(value: false);
       return false;
     }

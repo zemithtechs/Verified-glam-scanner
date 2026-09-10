@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../services/supabase/vg_supabase_auth_service.dart';
-import '../../services/supabase/vg_supabase_config.dart';
-import '../../services/supabase/vg_supabase_connection.dart';
+import '../../services/backend/vg_auth_service.dart';
+import '../../services/backend/vg_backend_config.dart';
+import '../../services/backend/vg_backend_connection.dart';
 import '../../utils/vg_auth_navigation.dart';
 import '../../utils/vg_constants.dart';
 import '../../utils/vg_copy.dart';
@@ -56,21 +56,21 @@ class _VGWebRegisterScreenState extends State<VGWebRegisterScreen> {
       toast('Password must be at least 6 characters');
       return;
     }
-    if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
+    if (kVGUseCloudBackend && vgBackendConnectionBlocked()) {
       toast(
-        VGSupabaseConfig.isConfigured
+        VGBackendConfig.isConfigured
             ? 'Could not connect to the server. Check your network and try again.'
             : 'Server not configured.',
       );
       return;
     }
-    if (!kVGUseSupabase) {
+    if (!kVGUseCloudBackend) {
       context.go('/onboarding');
       return;
     }
     setState(() => _loading = true);
     try {
-      final response = await VGSupabaseAuthService.signUpWithEmail(
+      final response = await VGAuthService.signUpWithEmail(
         email: email,
         password: _passwordController.text,
       );
@@ -99,13 +99,13 @@ class _VGWebRegisterScreenState extends State<VGWebRegisterScreen> {
   }
 
   Future<void> _google() async {
-    if (!VGSupabaseConfig.hasGoogleSignIn) {
+    if (!VGBackendConfig.hasGoogleSignIn) {
       toast('Google sign-in not configured');
       return;
     }
     setState(() => _loading = true);
     try {
-      await VGSupabaseAuthService.signInWithGoogle();
+      await VGAuthService.signInWithGoogle();
       if (!mounted) return;
       await vgNavigateAfterAuth(context, redirect: _postAuthTarget ?? _redirect);
     } catch (e) {

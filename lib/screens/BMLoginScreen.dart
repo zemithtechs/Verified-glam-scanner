@@ -4,9 +4,9 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../components/BMSocialIconsLoginComponents.dart';
 import '../main.dart';
-import '../services/supabase/vg_supabase_auth_service.dart';
-import '../services/supabase/vg_supabase_config.dart';
-import '../services/supabase/vg_supabase_connection.dart';
+import '../services/backend/vg_auth_service.dart';
+import '../services/backend/vg_backend_config.dart';
+import '../services/backend/vg_backend_connection.dart';
 import '../utils/BMColors.dart';
 import '../utils/BMWidgets.dart';
 import '../utils/vg_auth_navigation.dart';
@@ -44,21 +44,21 @@ class _BMLoginScreenState extends State<BMLoginScreen> {
   }
 
   Future<void> _signInEmail() async {
-    if (kVGUseSupabase && vgSupabaseConnectionBlocked()) {
+    if (kVGUseCloudBackend && vgBackendConnectionBlocked()) {
       toast(
-        VGSupabaseConfig.isConfigured
+        VGBackendConfig.isConfigured
             ? 'Could not connect to the server. Check your network and try again.'
             : 'Server not configured. Run with scripts/run-dev.ps1 or launch config.',
       );
       return;
     }
-    if (!kVGUseSupabase) {
+    if (!kVGUseCloudBackend) {
       await vgNavigateAfterAuth(context);
       return;
     }
     setState(() => _loading = true);
     try {
-      await VGSupabaseAuthService.signInWithEmail(
+      await VGAuthService.signInWithEmail(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
@@ -73,13 +73,13 @@ class _BMLoginScreenState extends State<BMLoginScreen> {
   }
 
   Future<void> _signInGoogle() async {
-    if (!VGSupabaseConfig.hasGoogleSignIn) {
+    if (!VGBackendConfig.hasGoogleSignIn) {
       toast('Google sign-in not configured (GOOGLE_WEB_CLIENT_ID)');
       return;
     }
     setState(() => _loading = true);
     try {
-      await VGSupabaseAuthService.signInWithGoogle();
+      await VGAuthService.signInWithGoogle();
       if (!mounted) return;
       finish(context);
       await vgNavigateAfterAuth(context);

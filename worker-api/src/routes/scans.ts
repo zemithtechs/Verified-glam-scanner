@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import type { Env } from "../env";
 import type { SessionVars } from "../middleware/session";
 
-// Port of vg_supabase_scan_repository.dart + vg_supabase_storage_service.dart.
+// Port of vg_scan_repository.dart + vg_storage_service.dart.
 // Photo upload/delete move from direct client-side Supabase Storage calls
 // (RLS-scoped) to Worker-mediated R2 reads/writes, since R2 has no
 // client-facing auth layer of its own — matches the "no signed URLs

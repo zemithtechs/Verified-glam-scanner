@@ -4,11 +4,11 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../utils/vg_constants.dart';
 import '../utils/vg_copy.dart';
-import 'supabase/vg_api_client.dart';
-import 'supabase/vg_supabase_auth_service.dart';
-import 'supabase/vg_supabase_config.dart';
-import 'supabase/vg_supabase_init.dart';
-import 'supabase/vg_supabase_profile_repository.dart';
+import 'backend/vg_api_client.dart';
+import 'backend/vg_auth_service.dart';
+import 'backend/vg_backend_config.dart';
+import 'backend/vg_backend_init.dart';
+import 'backend/vg_profile_repository.dart';
 import 'vg_onboarding_store.dart';
 
 class VGGuideTip {
@@ -40,7 +40,7 @@ class VGGuideService {
   VGGuideService._();
 
   static bool get _useCloud =>
-      kVGUseSupabase && VGSupabaseConfig.isConfigured && VGSupabaseInit.isReady;
+      kVGUseCloudBackend && VGBackendConfig.isConfigured && VGBackendInit.isReady;
 
   static List<String> get staticFallbackTips => [
         VGCopy.guideTip1,
@@ -56,7 +56,7 @@ class VGGuideService {
       if (cached != null && cached.tips.isNotEmpty) return cached;
     }
 
-    if (_useCloud && VGSupabaseAuthService.isSignedIn && !kVGUseMockAnalysis) {
+    if (_useCloud && VGAuthService.isSignedIn && !kVGUseMockAnalysis) {
       try {
         final result = await _fetchFromCloud();
         await _writeCache(result);
@@ -99,7 +99,7 @@ class VGGuideService {
   static Future<Map<String, dynamic>> _profilePayload() async {
     var profile = await VGOnboardingStore.loadProfile();
     if (_useCloud) {
-      final remote = await VGSupabaseProfileRepository.fetchProfile();
+      final remote = await VGProfileRepository.fetchProfile();
       if (remote != null) profile = remote;
     }
     return profile.toJson();
