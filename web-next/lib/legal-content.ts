@@ -66,7 +66,7 @@ export const PRIVACY_CONTENT: LegalPageContent = {
   pageTitle: "Privacy Policy — Verified Glam Scanner",
   metaDescription: "Privacy Policy for Verified Glam Scanner. How we collect, use, and protect your photos and account data.",
   h1: "Privacy Policy",
-  metaLine: "Last updated: June 2, 2026",
+  metaLine: "Last updated: September 9, 2026",
   blocks: [
     p(
       'Verified Glam ("we," "us," or "our") operates the Verified Glam Scanner website and the Verified Glam mobile application for Android (package com.verifiedglam.beauty_scanner). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our app or contact us.',
@@ -111,14 +111,14 @@ export const PRIVACY_CONTENT: LegalPageContent = {
     p("We do not sell your personal information. We may disclose information if required by law or to protect our rights, users, or safety."),
     h("6. Data retention"),
     p(
-      "Scan photos and results remain associated with your account while you use the app. You can delete individual scans from your history in the app. If you delete your account or request deletion by contacting support@verifiedglam.com, we will delete or anonymize your personal data within a reasonable period.",
+      "Scan photos and results remain associated with your account while you use the app. You can delete individual scans from your history or permanently delete your account and associated personal data immediately from the app or at scanner.verifiedglam.com/delete-account.",
     ),
     h("7. Your choices and rights"),
     ul(
       "Decline optional permissions — some features may not work without them",
       "Delete scans from history in the app",
-      "Request account or data deletion by emailing support@verifiedglam.com",
-      "Manage ad personalization through your device's Google account and ad settings",
+      "Delete your account in the app under Profile → Account → Delete account, or online at scanner.verifiedglam.com/delete-account",
+      "Review available AdMob privacy choices from the app's Settings menu",
     ),
     h("8. Children's privacy"),
     p(

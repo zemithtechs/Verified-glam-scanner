@@ -51,6 +51,14 @@ export default async function ProfilePage() {
       </div>
 
       <CreditsPanel profile={profile} />
+
+      <div className="rounded-[20px] border border-red-200 bg-white p-6">
+        <h2 className="font-bold text-red-800">Account deletion</h2>
+        <p className="mt-2 text-sm text-(--color-text-muted)">Permanently remove your account, stored photos, and analysis history.</p>
+        <Link href="/delete-account" className="mt-4 inline-flex font-semibold text-red-700 hover:underline">
+          Delete account
+        </Link>
+      </div>
     </div>
   );
 }

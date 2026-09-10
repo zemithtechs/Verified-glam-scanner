@@ -12,6 +12,7 @@ import '../main.dart';
 import '../utils/BMColors.dart';
 import '../services/vg_push_service.dart';
 import '../utils/vg_copy.dart';
+import '../utils/vg_navigation.dart';
 import '../web/vg_web_app_prefs.dart';
 import '../web/vg_web_breakpoints.dart';
 
@@ -49,6 +50,7 @@ class _BMDashboardScreenState extends State<BMDashboardScreen> {
     vgDashboardTabRequest.addListener(_onTabRequest);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       VGPushService.consumePendingDeepLinkIfReady();
+      if (!kIsWeb && mounted) vgMaybeShowFreeReminder(context);
     });
   }
 

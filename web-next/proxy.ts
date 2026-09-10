@@ -41,6 +41,27 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname.startsWith("/admin")) {
+    if (!token) return redirectToLogin(request, pathname);
+
+    try {
+      await apiClient.get<{ isAdmin: boolean; email: string }>("/api/admin/me", token);
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 403) {
+        // Signed in but not on the admin allowlist — a plain 404 (not a
+        // "forbidden" page) so /admin's existence isn't revealed.
+        return new NextResponse("Not Found", { status: 404 });
+      }
+      if (err instanceof ApiError && (err.status === 401 || err.status === 404)) {
+        const response = redirectToLogin(request, pathname);
+        response.cookies.delete(SESSION_COOKIE);
+        return response;
+      }
+      throw err;
+    }
+    return NextResponse.next();
+  }
+
   const authPages = ["/login", "/register", "/forgot-password"];
   if (authPages.includes(pathname) && token) {
     return NextResponse.redirect(new URL(`/app/${DEFAULT_TOOL_SLUG}`, request.url));
@@ -56,5 +77,5 @@ function redirectToLogin(request: NextRequest, redirectPath: string) {
 }
 
 export const config = {
-  matcher: ["/app/:path*", "/login", "/register", "/forgot-password"],
+  matcher: ["/app/:path*", "/admin/:path*", "/login", "/register", "/forgot-password"],
 };

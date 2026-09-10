@@ -35,16 +35,22 @@ if (-not (Test-Path $flutter)) {
 }
 
 $apiUrl = $vars["VG_API_URL"]
+$googleWebClientId = ""
+if ($vars.ContainsKey("GOOGLE_WEB_CLIENT_ID") -and $vars["GOOGLE_WEB_CLIENT_ID"] -notmatch "your_") {
+  $googleWebClientId = $vars["GOOGLE_WEB_CLIENT_ID"]
+} elseif ($vars.ContainsKey("GOOGLE_CLIENT_ID") -and $vars["GOOGLE_CLIENT_ID"] -notmatch "your_") {
+  $googleWebClientId = $vars["GOOGLE_CLIENT_ID"]
+}
 
 $flutterArgs = @(
   "run",
   "--dart-define=VG_API_URL=$apiUrl",
-  "--dart-define=VG_USE_SUPABASE=true",
+  "--dart-define=VG_USE_CLOUD_BACKEND=true",
   "--dart-define=VG_USE_MOCK_ANALYSIS=false"
 )
 
-if ($vars.ContainsKey("GOOGLE_WEB_CLIENT_ID") -and $vars["GOOGLE_WEB_CLIENT_ID"] -notmatch "your_") {
-  $flutterArgs += "--dart-define=GOOGLE_WEB_CLIENT_ID=$($vars['GOOGLE_WEB_CLIENT_ID'])"
+if (-not [string]::IsNullOrWhiteSpace($googleWebClientId)) {
+  $flutterArgs += "--dart-define=GOOGLE_WEB_CLIENT_ID=$googleWebClientId"
 }
 
 if ($DeviceId -ne "") {

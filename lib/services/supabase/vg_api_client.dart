@@ -137,7 +137,9 @@ class VGApiClient {
     // endpoints return {message, code} instead — read both shapes so a real
     // message (e.g. "Invalid email or password") always surfaces, never a
     // bare "Request failed (401)".
-    final message = map?['error']?.toString() ?? map?['message']?.toString() ?? 'Request failed (${res.statusCode})';
+    final message = map?['error']?.toString() ??
+        map?['message']?.toString() ??
+        'Request failed (${res.statusCode})';
     final errorCode = map?['errorCode']?.toString() ?? map?['code']?.toString();
     throw VGApiException(
       statusCode: res.statusCode,
@@ -188,8 +190,15 @@ class VGApiClient {
     return decoded is Map<String, dynamic> ? decoded : <String, dynamic>{};
   }
 
-  static Future<void> delete(String path) async {
-    final res = await http.delete(_uri(path), headers: _headers());
+  static Future<void> delete(
+    String path, {
+    Map<String, dynamic>? body,
+  }) async {
+    final res = await http.delete(
+      _uri(path),
+      headers: _headers(),
+      body: body == null ? null : jsonEncode(body),
+    );
     if (res.statusCode < 200 || res.statusCode >= 300) _throwForResponse(res);
   }
 

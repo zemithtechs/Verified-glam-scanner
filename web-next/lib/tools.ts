@@ -1,9 +1,6 @@
 /**
- * Tool catalog — ported from lib/utils/vg_feature_data.dart +
- * lib/web/vg_feature_slugs.dart (Flutter app). `featureType` values match
- * worker-api's FeatureType enum (worker-api/src/lib/analyze-types.ts)
- * exactly; only FACE_BEAUTY_ANALYSIS is free (ad-gated), everything else
- * is Pro-only (credits-gated).
+ * Tool catalog ported from the Flutter app feature data.
+ * `featureType` values match worker-api/src/lib/analyze-types.ts.
  */
 export type FeatureType =
   | "FACE_BEAUTY_ANALYSIS"
@@ -23,19 +20,9 @@ export type ToolDefinition = {
   title: string;
   isPro: boolean;
   badge?: "NEW" | "HOT";
-  /** Shown in the upload guidance panel — most tools want a plain front-facing
-   * selfie, but a couple (Face Comparison) need different framing. */
   photoGuidance: string;
-  /** One-line description for the tools index grid card (ported from the
-   * static site's /tools directory page — a distinct, shorter copy than the
-   * tool landing page's own subheadline). */
   gridDescription: string;
-  /** The 3 tools called out on the tools index page and nav mega-menu. */
   featured?: boolean;
-  /** True for tools that aren't a single-shot photo analysis and need their
-   * own dedicated flow instead of the generic upload-and-analyze workspace
-   * (Beauty Routine Challenge is a multi-day tracked plan — see
-   * worker-api's /api/challenges/* routes). Built in a later phase. */
   comingSoon?: boolean;
 };
 
@@ -55,7 +42,7 @@ export const TOOLS: ToolDefinition[] = [
     title: "Seasonal Color Palette",
     isPro: true,
     badge: "NEW",
-    photoGuidance: "Natural daylight works best — avoid strong color casts from indoor lighting.",
+    photoGuidance: "Natural daylight works best. Avoid strong color casts from indoor lighting.",
     gridDescription: "Get your personalized color palette in under 60 seconds.",
     featured: true,
   },
@@ -81,7 +68,7 @@ export const TOOLS: ToolDefinition[] = [
     title: "Celebrity Look Alike",
     isPro: true,
     badge: "HOT",
-    photoGuidance: "Face the camera directly — this works best with a clear, unobstructed view of your face.",
+    photoGuidance: "Face the camera directly. This works best with a clear, unobstructed view of your face.",
     gridDescription: "Find which celebrity you resemble with AI face matching.",
   },
   {
@@ -100,7 +87,7 @@ export const TOOLS: ToolDefinition[] = [
     title: "Beauty Score Showdown",
     isPro: true,
     badge: "HOT",
-    photoGuidance: "Face the camera directly — your score joins the leaderboard once analyzed.",
+    photoGuidance: "Face the camera directly. Your score joins the leaderboard once analyzed.",
     gridDescription: "Compare beauty scores and challenge friends.",
   },
   {
@@ -108,7 +95,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: "face-comparison",
     title: "Face Comparison",
     isPro: true,
-    photoGuidance: "Upload one photo showing two clear faces side by side (e.g. you and a friend).",
+    photoGuidance: "Upload one photo showing two clear faces side by side, such as you and a friend.",
     gridDescription: "Compare two faces and see resemblance scores.",
   },
   {

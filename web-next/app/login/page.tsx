@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { AuthLayout } from "@/components/AuthLayout";
 import { LoginForm } from "./LoginForm";
 import { safeRedirectPath } from "@/lib/safe-redirect";
+
+export const metadata: Metadata = {
+  title: "Log in",
+  robots: { index: false, follow: true },
+};
 
 export default async function LoginPage({
   searchParams,

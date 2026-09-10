@@ -3,16 +3,17 @@ import { MarketingLayout } from "./MarketingLayout";
 import type { LegalPageContent } from "@/lib/legal-content";
 
 function linkifyPrivacy(text: string) {
-  const parts = text.split(/(Privacy Policy)/g);
-  return parts.map((part, i) =>
-    part === "Privacy Policy" ? (
-      <Link key={i} href="/privacy" className="text-(--color-burgundy) font-semibold">
-        Privacy Policy
+  const parts = text.split(/(Privacy Policy|scanner\.verifiedglam\.com\/delete-account)/g);
+  return parts.map((part, i) => {
+    const href = part === "Privacy Policy" ? "/privacy" : part === "scanner.verifiedglam.com/delete-account" ? "/delete-account" : null;
+    return href ? (
+      <Link key={i} href={href} className="text-(--color-burgundy) font-semibold">
+        {part}
       </Link>
     ) : (
       part
-    ),
-  );
+    );
+  });
 }
 
 export function LegalPageLayout({ content }: { content: LegalPageContent }) {

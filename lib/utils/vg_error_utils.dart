@@ -46,7 +46,7 @@ VGAnalysisFailure vgParseAnalysisError(Object error) {
   }
   if (message.contains('Pro subscription required') || message.contains('NOT_SUBSCRIBED')) {
     return const VGAnalysisFailure(
-      message: 'Pro subscription required to run AI analysis.',
+      message: "This analysis isn't included in your free plan.",
       errorCode: 'NOT_SUBSCRIBED',
       status: 403,
     );
@@ -142,9 +142,9 @@ String _defaultMessageForCode(String code) {
     case 'INSUFFICIENT_CREDITS':
       return VGCopy.creditsInsufficientMessage;
     case 'NOT_SUBSCRIBED':
-      return 'Pro subscription required to run AI analysis.';
+      return "This analysis isn't included in your free plan.";
     case 'FREE_LIMIT_REACHED':
-      return "You've used all your free scans. Subscribe to keep analyzing.";
+      return "You've used all your free scans for now.";
     case 'REWARD_REQUIRED':
       return 'Watch an ad to unlock this scan.';
     case 'NETWORK_ERROR':

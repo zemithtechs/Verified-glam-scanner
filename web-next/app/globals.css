@@ -34,3 +34,26 @@ body {
   background: var(--color-blush);
   color: var(--color-text);
 }
+
+@keyframes vg-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.vg-reveal {
+  animation: vg-pop-in 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-timeline: view();
+  animation-range: entry 8% cover 28%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vg-reveal {
+    animation: none;
+  }
+}

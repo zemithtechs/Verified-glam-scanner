@@ -8,11 +8,18 @@ import { ReviewsSection } from "@/components/marketing/ReviewsSection";
 import { FaqSection } from "@/components/marketing/FaqSection";
 import { HeroMockup } from "@/components/marketing/HeroMockup";
 import { GooglePlayBadge } from "@/components/marketing/GooglePlayBadge";
+import { SoftwareApplicationJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL } from "@/lib/site";
+
+const TITLE = "Verified Glam Scanner — AI Beauty Insights from Your Selfie";
+const DESCRIPTION =
+  "Verified Glam Scanner analyzes your selfie with AI for face beauty scores, symmetry, celebrity look-alikes, and personalized glow-up tips. Download on Google Play for Android.";
 
 export const metadata: Metadata = {
-  title: "Verified Glam Scanner — AI Beauty Insights from Your Selfie",
-  description:
-    "Verified Glam Scanner analyzes your selfie with AI for face beauty scores, symmetry, celebrity look-alikes, and personalized glow-up tips. Download on Google Play for Android.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: SITE_URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: SITE_URL },
 };
 
 const HERO_BULLETS = [
@@ -133,6 +140,8 @@ const FAQ = [
 export default function HomePage() {
   return (
     <MarketingLayout>
+      <SoftwareApplicationJsonLd />
+      <FaqJsonLd items={FAQ} />
       {/* Hero */}
       <div className="grid lg:grid-cols-2 gap-10 items-center px-4 sm:px-6 py-12 sm:py-20 max-w-(--max-content) mx-auto">
         <div>

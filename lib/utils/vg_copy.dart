@@ -13,11 +13,14 @@ class VGCopy {
 
   // Walkthrough (photos locked in BMDataGenerator)
   static const walkthrough1Title = 'Pretty Up Now';
-  static const walkthrough1Subtitle = 'See your features through a lens built for confidence, not comparison.';
+  static const walkthrough1Subtitle =
+      'See your features through a lens built for confidence, not comparison.';
   static const walkthrough2Title = 'Know Your Features';
-  static const walkthrough2Subtitle = 'Personal insights powered by thoughtful AI — made for you alone.';
+  static const walkthrough2Subtitle =
+      'Personal insights powered by thoughtful AI — made for you alone.';
   static const walkthrough3Title = 'Guidance You Can Trust';
-  static const walkthrough3Subtitle = 'Expert-informed tips that celebrate what makes you unique.';
+  static const walkthrough3Subtitle =
+      'Expert-informed tips that celebrate what makes you unique.';
   static const walkthroughGetStarted = 'Get Started';
   static const walkthroughSkip = 'SKIP';
 
@@ -38,14 +41,18 @@ class VGCopy {
 
   // Explore
   static const exploreTitle = 'Explore analyses';
-  static const exploreSubtitle = 'Ten ways to understand your features — each with clear, actionable takeaways.';
+  static const exploreSubtitle =
+      'Ten ways to understand your features — each with clear, actionable takeaways.';
 
   // Feature card descriptions (catalog)
-  static const featureDescGlowUpGuide = 'A personalized beauty challenge based on your latest scan.';
+  static const featureDescGlowUpGuide =
+      'A personalized beauty challenge based on your latest scan.';
   static const featureDescBeautyTips =
       'Portrait skin check with labeled concerns and natural, creator-style beauty ideas — not medical advice.';
-  static const featureDescCelebrity = 'Playful look-alike matches based on your features.';
-  static const featureDescFacialSymmetry = 'Balance insights with gentle framing tips.';
+  static const featureDescCelebrity =
+      'Playful look-alike matches based on your features.';
+  static const featureDescFacialSymmetry =
+      'Balance insights with gentle framing tips.';
   static const featureDescShowdown =
       'Join the community challenge — see your rank and top performers.';
   static const featureDescResemblance =
@@ -60,7 +67,8 @@ class VGCopy {
   static const guideDailyTips = 'Daily tips';
   static const guideRoutineChallenge = 'Beauty routine challenge';
   static const guideOpenRoutine = 'View full routine';
-  static const guideNoActiveChallenge = 'No active challenge yet. Start an analysis to get a personalized routine.';
+  static const guideNoActiveChallenge =
+      'No active challenge yet. Start an analysis to get a personalized routine.';
   static const guideStartChallenge = 'Start challenge';
   static const guideLockedUntil = 'Next day unlocks in';
   static const guideDoneToday = 'Completed for today. Come back tomorrow.';
@@ -69,7 +77,8 @@ class VGCopy {
   static const guideChallengeDisclaimer =
       "All tips in this challenge are inspired by natural beauty habits shared by everyday creators and users in the beauty community. Everyone's skin is different. Results may vary. Always do a patch test before trying new ingredients. This app is not a medical or dermatological service.";
   static const guideDonePanelTitle = 'Day complete!';
-  static const guideDonePanelBody = 'Great job! Your skin is already responding. Come back tomorrow for your next challenge.';
+  static const guideDonePanelBody =
+      'Great job! Your skin is already responding. Come back tomorrow for your next challenge.';
   static const guideShareProgress = 'Share My Progress';
   static const challengeBackToDashboard = 'Back to Dashboard';
   static const challengeShareCardTitle = 'Verified Glam';
@@ -77,12 +86,14 @@ class VGCopy {
   static const challengeReminderTimeLabel = 'Daily reminder time';
   static const challengeReminderTimeSaved = 'Reminder time saved';
 
-  static String guideDonePanelTitleForDay(int day) => 'Amazing! You completed Day $day 🌿';
+  static String guideDonePanelTitleForDay(int day) =>
+      'Amazing! You completed Day $day 🌿';
 
   static String guideDonePanelBodyForNextDay(int nextDay) =>
       'Come back tomorrow for Day $nextDay. Your skin is already responding.';
 
-  static String challengeUnlockCountdownLabel(int nextDay) => 'Day $nextDay unlocks in';
+  static String challengeUnlockCountdownLabel(int nextDay) =>
+      'Day $nextDay unlocks in';
 
   static String challengeShareDayLine(int completedDay, int durationDays) =>
       'Day $completedDay of $durationDays complete ✅';
@@ -97,7 +108,8 @@ class VGCopy {
       '$challengeShareTagline\n'
       '— $vgAppName';
   static const guideBackDashboard = 'Back to Dashboard';
-  static const guideRescanPrompt = 'Challenge complete! Want to see how your skin has changed? Scan your face now.';
+  static const guideRescanPrompt =
+      'Challenge complete! Want to see how your skin has changed? Scan your face now.';
   static const guideRescanCta = 'Re-scan your face';
   static const guideNextChallengeCta = 'Start next challenge';
 
@@ -108,7 +120,8 @@ class VGCopy {
   static const challengeWhatWeFound = 'What we found';
   static const challengeViewMyChallenge = 'Start My Challenge';
   static const challengeNotNow = 'Not Now';
-  static const challengePickIssueTitle = 'Which would you like to work on first?';
+  static const challengePickIssueTitle =
+      'Which would you like to work on first?';
   static const challengePickIssueBody =
       'We detected two things on your skin. Pick the focus for your personalised challenge.';
   static const challengeCtaBody =
@@ -119,7 +132,8 @@ class VGCopy {
   static const challengeDayOfLabel = 'Day';
   static const challengeProgressLabel = 'Progress';
   static const challengeStreakTitle = 'day streak';
-  static const challengeStreakSubtitle = 'Keep showing up — consistency is the glow-up.';
+  static const challengeStreakSubtitle =
+      'Keep showing up — consistency is the glow-up.';
   static String challengeBestStreakLabel(int best) => 'Best streak: $best days';
   static const challengeRewardTitle = 'You did it!';
   static const challengeRewardSubtitle =
@@ -137,55 +151,72 @@ class VGCopy {
   static const challengeNextDayUnlockHint =
       'Take this time to rest your skin. We will remind you when Day unlocks.';
 
-  static String challengeScanSummary(int issueCount) =>
-      issueCount == 1 ? '1 concern detected on your face' : '$issueCount concerns detected on your face';
+  static String challengeScanSummary(int issueCount) => issueCount == 1
+      ? '1 concern detected on your face'
+      : '$issueCount concerns detected on your face';
 
   static String challengeCtaHeadline(int days, String challengeName) =>
       'Your personalised $days-day challenge is ready!';
 
-  static String challengeDayHeroTitle(int day, int total) => 'Day $day of $total';
+  static String challengeDayHeroTitle(int day, int total) =>
+      'Day $day of $total';
 
   static String challengeEstMinutes(int minutes) => '~$minutes min';
 
-  static String challengeDayProgress(int current, int total) => 'Day $current of $total';
+  static String challengeDayProgress(int current, int total) =>
+      'Day $current of $total';
 
   // Auth & welcome
   static const welcomeTitle = 'You are ready';
-  static const welcomeSubtitle = 'Your profile is set. Head to Home and try your first analysis whenever you like.';
+  static const welcomeSubtitle =
+      'Your profile is set. Head to Home and try your first analysis whenever you like.';
   static const welcomeCta = 'Open Home';
-  static const registerTermsPrefix = 'By creating an account with Verified Glam, you agree to our';
+  static const registerTermsPrefix =
+      'By creating an account with Verified Glam, you agree to our';
   static const notificationsTitle = 'Helpful updates';
-  static const notificationsBody = 'Optional alerts for new analyses, tips, and product suggestions tuned to you.';
+  static const notificationsBody =
+      'Optional alerts for new analyses, tips, and product suggestions tuned to you.';
   static const notificationsCta = 'Turn on notifications';
   static const notificationsSkip = 'Not now';
   static const locationTitle = 'Location is optional';
-  static const locationBody = 'Verified Glam works fully without location access. You can enable it later if we add local tips.';
+  static const locationBody =
+      'Verified Glam works fully without location access. You can enable it later if we add local tips.';
 
   // Rating (onboarding)
   static const ratingTitle = 'Enjoying Verified Glam?';
-  static const ratingSubtitle = 'A quick store rating helps other people discover thoughtful beauty tools.';
+  static const ratingSubtitle =
+      'A quick store rating helps other people discover thoughtful beauty tools.';
   static const ratingCta = 'Rate on the store';
   static const ratingSkip = 'Skip for now';
 
   // Onboarding step titles
   static const onboardingAgeTitle = 'How old are you?';
-  static const onboardingAgeSubtitle = 'We use age only to tailor product and routine suggestions.';
+  static const onboardingAgeSubtitle =
+      'We use age only to tailor product and routine suggestions.';
   static const onboardingGenderTitle = 'How do you identify?';
-  static const onboardingGenderSubtitle = 'Some guidance differs by gender presentation — pick what fits you.';
+  static const onboardingGenderSubtitle =
+      'Some guidance differs by gender presentation — pick what fits you.';
   static const onboardingGoalsTitle = 'What matters most to you?';
-  static const onboardingGoalsSubtitle = 'Choose every goal that resonates. We will prioritize these in your results.';
+  static const onboardingGoalsSubtitle =
+      'Choose every goal that resonates. We will prioritize these in your results.';
   static const onboardingConcernsTitle = 'Any skin priorities?';
-  static const onboardingConcernsSubtitle = 'Select topics you want us to keep in mind.';
+  static const onboardingConcernsSubtitle =
+      'Select topics you want us to keep in mind.';
   static const onboardingProductsTitle = 'Shopping style';
-  static const onboardingProductsSubtitle = 'Tell us how you usually build your routine.';
+  static const onboardingProductsSubtitle =
+      'Tell us how you usually build your routine.';
   static const onboardingSkinTypeTitle = 'Skin type today';
-  static const onboardingSkinTypeSubtitle = 'Pick the option that best matches how your skin feels now.';
+  static const onboardingSkinTypeSubtitle =
+      'Pick the option that best matches how your skin feels now.';
   static const onboardingEthnicityTitle = 'Background';
-  static const onboardingEthnicitySubtitle = 'Helps color matching and product suggestions feel relevant.';
+  static const onboardingEthnicitySubtitle =
+      'Helps color matching and product suggestions feel relevant.';
   static const onboardingAestheticTitle = 'Style direction';
-  static const onboardingAestheticSubtitle = 'Choose a vibe for your personalized beauty plan.';
+  static const onboardingAestheticSubtitle =
+      'Choose a vibe for your personalized beauty plan.';
   static const onboardingSummaryTitle = 'Profile complete';
-  static const onboardingSummarySubtitle = 'We will use these answers across every analysis.';
+  static const onboardingSummarySubtitle =
+      'We will use these answers across every analysis.';
   static const continueLabel = 'Continue';
   static const finishLabel = 'Complete setup';
 
@@ -217,7 +248,13 @@ class VGCopy {
     'Makeup-forward',
     'Skincare-first',
   ];
-  static const skinTypes = ['Normal', 'Dry', 'Oily', 'Combination', 'Sensitive'];
+  static const skinTypes = [
+    'Normal',
+    'Dry',
+    'Oily',
+    'Combination',
+    'Sensitive'
+  ];
   static const ethnicities = [
     'East Asian',
     'South Asian',
@@ -238,10 +275,12 @@ class VGCopy {
   static const creditsMetricBalance = 'Credits balance';
   static const creditsMetricPlan = 'Plan';
   static const creditsMetricAnalysesLeft = 'Analyses left';
-  static const creditsSubscribeToReceiveCredits = 'Subscribe to receive credits';
+  static const creditsSubscribeToReceiveCredits =
+      'Subscribe to receive credits';
   static const creditsFreePlanKpiHint = 'Subscribe for AI credits';
   static const profileFeaturedAchievement = 'Latest achievement';
-  static const profileNoAchievementYet = 'Complete a challenge to earn your first badge.';
+  static const profileNoAchievementYet =
+      'Complete a challenge to earn your first badge.';
   static const profileActiveChallenge = 'Active challenge';
   static const profileContinueChallenge = 'Continue today\'s task';
   static const profileViewRoutine = 'View full routine';
@@ -249,13 +288,25 @@ class VGCopy {
   static const profileActionExplore = 'Explore';
   static const profileActionHistory = 'History';
   static const profileActionShare = 'Share app';
-  static const profileActionPro = 'Go Pro';
+  static const profileActionPro = 'Premium';
   static const profileAccountSection = 'Account';
   static const profileLogOut = 'Log out';
   static const profileLogOutConfirmTitle = 'Log out?';
-  static const profileLogOutConfirmMessage = 'You can log back in anytime with the same email and password.';
+  static const profileLogOutConfirmMessage =
+      'You can log back in anytime with the same email and password.';
+  static const profileDeleteAccount = 'Delete account';
+  static const profileDeleteAccountHint =
+      'Permanently remove your account and data';
+  static const profileDeleteConfirmTitle = 'Delete your account?';
+  static const profileDeleteConfirmMessage =
+      'This permanently deletes your profile, scan photos, analysis history, challenges, and sign-in access. '
+      'It does not cancel an active subscription, so manage that first. Type DELETE to continue.';
+  static const profileDeleteConfirmationLabel = 'Type DELETE';
+  static const profileDeleteFailed =
+      'We could not delete your account. Please try again.';
   static const profileHistoryTitle = 'Scan history';
-  static const profileHistoryEmpty = 'Your past scans will show up here once you run an analysis.';
+  static const profileHistoryEmpty =
+      'Your past scans will show up here once you run an analysis.';
 
   static String profileChallengeProgress(int completed, int total) =>
       'Day $completed of $total complete';
@@ -268,6 +319,7 @@ class VGCopy {
   static const settingsInvite = 'Send an invite';
   static const settingsSupport = 'Get support';
   static const settingsPrivacy = 'Privacy policy';
+  static const settingsAdPrivacy = 'Ad privacy choices';
   static const profileTitle = 'Profile & account';
   static const profileTheme = 'App theme';
   static const profileSubscription = 'Subscription';
@@ -275,7 +327,7 @@ class VGCopy {
   static const profileSubscriptionPro = 'Verified Glam Pro';
   static const profileAccountStatusFree = 'Free Member';
   static const profileAccountStatusPro = 'Pro Member';
-  static const profileAccountStatusFreeHint = 'Tap to see pricing and go Pro';
+  static const profileAccountStatusFreeHint = 'Tap to learn more';
   static const profileSubscriptionUpgradeHint =
       'Subscribe for AI credits — Yearly \$39.99/year (200 credits) or Pro \$3.99/week (30 credits weekly).';
   static const profileLegal = 'Legal';
@@ -283,9 +335,6 @@ class VGCopy {
   // Paywall — Yearly + Pro weekly (credit-based, no free trial)
   static const paywallTitle = 'Get Premium';
   static const paywallSubtitle = 'Unlock all features';
-  static const paywallLimitedOffer = 'Limited-time offer';
-  static const paywallDiscountBadge = 'Save 50% today';
-  static const paywallExpiresIn = 'Offer ends in';
   static const paywallYearlyColumn = 'Yearly';
   static const paywallProColumn = 'Pro Weekly';
   static const paywallBestPrice = 'Best Value';
@@ -342,10 +391,9 @@ class VGCopy {
 
   static const paywallPlanFeatures = paywallSharedFeatures;
 
-  static const paywallGetPremium = 'Get Premium';
   static const paywallSubscribeNow = 'Subscribe now';
   static const paywallCancelAnytime = 'Cancel anytime';
-  static const paywallRestore = 'Restore purchases';
+  static const paywallRestore = 'Refresh Access';
   static const paywallTermsPrefix = 'See';
   static const paywallTerms = 'Terms';
   static const paywallPrivacy = 'Privacy';
@@ -357,37 +405,46 @@ class VGCopy {
   static const checkoutSuccessToast = 'Welcome to Pro! Your credits are ready.';
   static const checkoutPendingToast =
       'Payment processing — your credits will appear shortly. Refresh if needed.';
-  static const checkoutCancelledToast = 'Checkout cancelled. Choose a plan when you are ready.';
+  static const checkoutCancelledToast =
+      'Checkout cancelled. Choose a plan when you are ready.';
   static const creditsMyCreditsTitle = 'My Credits';
   static const creditsBuyCredits = 'Buy credits';
   static const creditsUsageDetailsTitle = 'Credit usage details';
   static const creditsViewEarned = 'Earned';
   static const creditsViewUsed = 'Used';
   static const creditsProgressLabel = 'Credits';
-  static String creditsProgress(int balance, int allocated) => '$balance / $allocated Credits';
+  static String creditsProgress(int balance, int allocated) =>
+      '$balance / $allocated Credits';
   static String creditsBalanceTitle(int balance) => 'Credits: $balance';
-  static const creditsFreePlanHint = 'Free plan includes 0 credits. Subscribe to receive AI credits.';
-  static const creditsHistoryEmptyFree = 'Subscribe to receive credits and see your usage history here.';
+  static const creditsFreePlanHint =
+      'Free plan includes 0 credits. Subscribe to receive AI credits.';
+  static const creditsHistoryEmptyFree =
+      'Subscribe to receive credits and see your usage history here.';
   static const creditsHistoryEmpty = 'No credit activity in this date range.';
   static const creditsRenewsOn = 'Renews';
   static String creditsPlanStatus(String status) => status.replaceAll('_', ' ');
-  static const paywallPromoTitle = 'Special offer for you';
-  static const paywallPromoSubtitle = 'Before you go — here is a flash discount just for you.';
-  static const paywallPromoFlashYearlyPrice = '\$33.00';
-  static const paywallPromoFlashYearlyPeriod = '/year';
-  // One shared code, valid on both the Annual and Pro Weekly products in
-  // Polar — a fixed dollar amount doesn't scale sensibly across a $33/year
-  // and a $3.99/week price, so this is a percentage discount instead.
-  static const paywallPromoCouponCode = 'GLOW15';
-  static const paywallPromoCouponHint = 'Use this code at checkout for an extra 15% off';
-  static const paywallPromoCodeCopied = 'Code copied — paste it at checkout';
-  static const paywallPromoChooseYearly = 'Get Yearly — \$33/year';
-  static const paywallPromoChooseWeekly = 'Get Weekly — \$3.99/week';
 
   static const paywallSubscriptionTerms =
       'Subscription Terms: Yearly plan is \$39.99 per year and renews automatically unless cancelled. Pro plan is \$3.99 per week and renews automatically unless cancelled. Credits renew each billing period.';
   static const paywallCancellationTerms =
       'Cancellation Terms: Cancel anytime in account settings to stop future renewals. Access and remaining credits continue until the end of your current billing period.';
+
+  // Android app — consumption-only compliance: no prices, no purchase CTAs,
+  // no clickable checkout links, and no direct prompt to buy elsewhere.
+  static const paywallWebsiteNotice =
+      'Already have Verified Glam Pro? Sign in here and refresh access below.';
+  static const paywallAlreadyMemberHint =
+      'Already subscribed? Tap Refresh Access below.';
+  static const profileManageOnWebsite =
+      'Manage your subscription from where you originally subscribed.';
+
+  static const paywallOnboardingTitle = 'See what your scans could reveal';
+  static const paywallOnboardingSubtitle =
+      'Symmetry, skin quality, color matching, and more — every analysis includes a full breakdown of your results.';
+
+  static const dailyReminderTitle = "You're on the Free plan";
+  static const dailyReminderSubtitle =
+      'Upgrade for full access to every AI analysis, ad-free.';
 
   static const creditsHowTitle = 'How Credits Work';
   static const creditsHowIntro = 'Every AI analysis uses 5 credits.';
@@ -406,18 +463,21 @@ class VGCopy {
   static const creditsInsufficientMessage =
       'You need 5 credits for this analysis. Credits renew with your subscription plan.';
   static const creditsRemainingLabel = 'AI credits remaining';
-  static String profileCreditsRemaining(int balance) => '$balance $creditsRemainingLabel';
-  static const scanErrorViewPlans = 'View plans';
+  static String profileCreditsRemaining(int balance) =>
+      '$balance $creditsRemainingLabel';
+  static const scanErrorViewPlans = 'Learn more';
 
   // Pricing page (SEO)
-  static const pricingMetaTitle = 'Verified Glam Scanner Pricing — Credits & Plans';
+  static const pricingMetaTitle =
+      'Verified Glam Scanner Pricing — Credits & Plans';
   static const pricingMetaDescription =
       'Verified Glam Scanner Pro: Yearly \$39.99/year (200 AI credits) or Pro \$3.99/week (30 credits weekly). 5 credits per AI generation. Ad-free.';
   static const pricingHeroTitle = 'Choose the Right Plan';
   static const pricingHeroSubtitle =
       'Unlock all AI Beauty analyses with a flexible subscription that fits your needs. Every subscription includes full access to all AI beauty tools, ad-free results, and downloadable reports. Credits are used whenever you generate a new AI analysis.';
   static const pricingCompareTitle = 'Compare Plans';
-  static const pricingCompareSubtitle = 'Everything included with Yearly and Pro subscriptions.';
+  static const pricingCompareSubtitle =
+      'Everything included with Yearly and Pro subscriptions.';
   static const pricingFaqTitle = 'Pricing FAQ';
   static const pricingSignUpCta = 'Sign up';
   static const pricingWhatsIncluded = "What's Included";
@@ -458,10 +518,12 @@ class VGCopy {
 
   // Subscription success
   static const subscriptionSuccessTitle = 'Welcome to Pro';
-  static const subscriptionSuccessSubtitle = 'You now have full access to every analysis and an ad-free experience.';
+  static const subscriptionSuccessSubtitle =
+      'You now have full access to every analysis and an ad-free experience.';
   static const subscriptionSuccessBenefit1 = 'All eleven analyses unlocked';
   static const subscriptionSuccessBenefit2 = 'No ads between results';
-  static const subscriptionSuccessBenefit3 = 'Priority updates and new features';
+  static const subscriptionSuccessBenefit3 =
+      'Priority updates and new features';
   static const subscriptionSuccessCta = 'Start exploring';
 
   // Photo guidelines
@@ -497,18 +559,23 @@ class VGCopy {
   static const uploadSubtitle = 'Use a clear, recent photo of your face.';
   static const uploadSubtitleTwoFaces =
       'Upload one photo with exactly two people — twins or a couple in the same shot.';
-  static const uploadTwoFacesRequired = 'We need exactly two faces in this photo. Try a closer two-person selfie.';
-  static const uploadTooManyFaces = 'Too many faces detected. Use a photo with only two people.';
+  static const uploadTwoFacesRequired =
+      'We need exactly two faces in this photo. Try a closer two-person selfie.';
+  static const uploadTooManyFaces =
+      'Too many faces detected. Use a photo with only two people.';
   static const uploadNoFaceDetected =
       'We couldn\'t detect a face. Use a clear front-facing selfie looking at the camera.';
 
   static const scanErrorTryAgain = 'Try Again';
   static const scanErrorCancel = 'Cancel';
   static const scanOfflineTitle = 'No Internet Connection';
-  static const scanOfflineMessage = 'Please check your connection and try again.';
-  static const scanImageTooLarge = 'Photo is too large (max 5 MB). Choose a smaller image or retake your photo.';
+  static const scanOfflineMessage =
+      'Please check your connection and try again.';
+  static const scanImageTooLarge =
+      'Photo is too large (max 5 MB). Choose a smaller image or retake your photo.';
   static const uploadFaceCountOk = 'Two faces detected — ready to compare.';
-  static const uploadPrivacy = 'Your photo stays private and is never shared without your permission.';
+  static const uploadPrivacy =
+      'Your photo stays private and is never shared without your permission.';
   static const webFaceComparisonHint =
       'Use a photo with two clear faces in the same shot — no cropping needed on web.';
   static const uploadAction = 'Take or choose a photo';
@@ -517,7 +584,8 @@ class VGCopy {
 
   // Photo crop
   static const cropTitle = 'Crop your photo';
-  static const cropSubtitle = 'Frame your face in the portrait area, then tap Apply.';
+  static const cropSubtitle =
+      'Frame your face in the portrait area, then tap Apply.';
   static const cropApply = 'Apply';
   static const cropChooseAnother = 'Choose another photo';
 
@@ -532,10 +600,12 @@ class VGCopy {
   static const processingTitle = 'Verified Glam';
   static const processingSubtitle = 'Reviewing your photo…';
   static const rewardAdPromptTitle = 'Unlock your result';
-  static const rewardAdPromptSubtitle = 'Watch a short ad to reveal your free Face Beauty Analysis.';
+  static const rewardAdPromptSubtitle =
+      'Watch a short ad to reveal your free Face Beauty Analysis.';
   static const rewardAdWatchButton = 'Watch ad & reveal';
   static const rewardAdLoading = 'Loading ad…';
-  static const rewardAdNotEarned = "Watch the full ad to unlock your result — you weren't charged for this attempt.";
+  static const rewardAdNotEarned =
+      "Watch the full ad to unlock your result — you weren't charged for this attempt.";
   static const processingDisclaimer = 'This may take a moment.';
 
   // Results common
@@ -615,7 +685,8 @@ class VGCopy {
   static const makeupClearColor = 'Clear makeup color';
   static const makeupReset = 'Reset look';
 
-  static const proFeatureMessage = 'This analysis is part of Verified Glam Pro — coming soon.';
+  static const proFeatureMessage =
+      'This analysis is part of Verified Glam Pro — coming soon.';
 
   // Guide tips (mock)
   static const guideTip1 = 'Hydrate before makeup for smoother blending.';
@@ -742,7 +813,8 @@ class VGCopy {
   static String goldenRatioPhiExplanation(double phi) =>
       'Measures how closely your features align with the golden ratio ($phi).';
 
-  static String goldenRatioIndexLabel(int index) => 'Golden Ratio Index: $index / 100';
+  static String goldenRatioIndexLabel(int index) =>
+      'Golden Ratio Index: $index / 100';
 
   static String goldenRatioTotalScore(int index) =>
       'Total Score: $index / 100 (Weighted Average)';
@@ -842,8 +914,10 @@ class VGCopy {
   static const shareReferralRedeem = 'Redeem reward';
   static const shareReferralRedeemedSuccess =
       'Reward unlocked — extra scans added to your account.';
-  static const shareReferralAlreadyRedeemed = 'Referral reward already redeemed.';
-  static const shareReferralMockHint = 'Long-press here to simulate a referral (+1) in dev mode.';
+  static const shareReferralAlreadyRedeemed =
+      'Referral reward already redeemed.';
+  static const shareReferralMockHint =
+      'Long-press here to simulate a referral (+1) in dev mode.';
   static const shareReferralMockAdded = 'Mock referral registered (+1).';
 
   static String similarityLabel(int percent) => '$percent% Similarity';

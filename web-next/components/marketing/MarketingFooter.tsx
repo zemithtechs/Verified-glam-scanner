@@ -65,6 +65,9 @@ export function MarketingFooter() {
           <Link href="/terms" className="hover:text-white">
             Terms
           </Link>
+          <Link href="/delete-account" className="hover:text-white">
+            Delete account
+          </Link>
           <Link href="/pricing" className="hover:text-white">
             Pricing
           </Link>

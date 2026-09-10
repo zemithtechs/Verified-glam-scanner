@@ -144,7 +144,7 @@ export function MarketingHeader({ isSignedIn }: { isSignedIn: boolean }) {
         </button>
       </div>
 
-      {/* Full-width mega menu — anchored to the header itself (not the
+      {/* Full-width mega menu anchored to the header itself (not the
           small toggle button) so it's centered under the whole page,
           matching a real mega-menu instead of sitting lopsided wherever
           the button happens to be. */}
@@ -159,8 +159,8 @@ export function MarketingHeader({ isSignedIn }: { isSignedIn: boolean }) {
                 </div>
                 <p className="font-bold text-(--color-burgundy-dark)">Verified Glam Scanner</p>
                 <p className="mt-1 text-sm text-(--color-text-muted) leading-relaxed">
-                  An all-in-one AI beauty analysis platform — upload a selfie for face scores, symmetry, color
-                  palettes, tips, and fun challenges.
+                  An all-in-one AI beauty analysis platform for face scores, symmetry, color palettes, tips, and fun
+                  challenges.
                 </p>
                 <div className="mt-3 flex gap-2">
                   <Link

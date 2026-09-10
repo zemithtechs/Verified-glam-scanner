@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { createAuth } from "./auth";
 import { requireSession, type SessionVars } from "./middleware/session";
+import { requireAdmin } from "./middleware/admin";
 import { dispatchChallengeNotifications } from "./scheduled/challenge-notifications";
 import { profiles } from "./routes/profiles";
 import { scans, scanPhotoSigned } from "./routes/scans";
@@ -16,6 +17,7 @@ import { polarWebhook } from "./routes/polar/webhook";
 import { assets } from "./routes/assets";
 import { ads } from "./routes/ads";
 import { authNative } from "./routes/auth-native";
+import { admin } from "./routes/admin";
 import type { Env } from "./env";
 
 const app = new Hono<{ Bindings: Env; Variables: SessionVars }>();
@@ -77,6 +79,7 @@ app.use("/api/showdown/*", requireSession);
 app.use("/api/polar/checkout/*", requireSession);
 app.use("/api/polar/portal/*", requireSession);
 app.use("/api/ads/*", requireSession);
+app.use("/api/admin/*", requireSession, requireAdmin);
 
 app.route("/api/profiles", profiles);
 app.route("/api/scans", scans);
@@ -88,6 +91,7 @@ app.route("/api/showdown", showdown);
 app.route("/api/polar/checkout", polarCheckout);
 app.route("/api/polar/portal", polarPortal);
 app.route("/api/ads", ads);
+app.route("/api/admin", admin);
 
 export default {
   fetch: app.fetch,

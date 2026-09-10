@@ -77,7 +77,8 @@ class VGCreditTransaction {
       description: row['description']?.toString() ?? '',
       featureType: row['feature_type']?.toString(),
       balanceAfter: (row['balance_after'] as num?)?.toInt(),
-      createdAt: DateTime.tryParse(row['created_at']?.toString() ?? '') ?? DateTime.now(),
+      createdAt: DateTime.tryParse(row['created_at']?.toString() ?? '') ??
+          DateTime.now(),
     );
   }
 }
@@ -95,6 +96,12 @@ class VGCreditsService {
   static String? get cachedPlan => _cachedPlan;
 
   static VGCreditSnapshot? get cachedSnapshot => _cachedSnapshot;
+
+  static void clearCache() {
+    _cachedBalance = null;
+    _cachedPlan = null;
+    _cachedSnapshot = null;
+  }
 
   static void setCachedBalance(int? balance, {String? plan}) {
     _cachedBalance = balance;
@@ -114,7 +121,8 @@ class VGCreditsService {
       final status = row['subscription_status'] as String? ?? 'free';
       final balance = (row['credits_balance'] as num?)?.toInt() ?? 0;
       final allocated = isPro
-          ? ((row['credits_allocated'] as num?)?.toInt() ?? creditsAllocationForPlan(plan))
+          ? ((row['credits_allocated'] as num?)?.toInt() ??
+              creditsAllocationForPlan(plan))
           : 0;
       final periodEndRaw = row['subscription_current_period_end']?.toString();
       final periodEnd = periodEndRaw != null && periodEndRaw.isNotEmpty
@@ -133,7 +141,8 @@ class VGCreditsService {
       _cachedSnapshot = snapshot;
       _cachedBalance = snapshot.balance;
       _cachedPlan = snapshot.subscriptionPlan;
-      await VGSubscriptionStore.setPro(value: isPro, planName: isPro ? plan : kSubscriptionPlanFree);
+      await VGSubscriptionStore.setPro(
+          value: isPro, planName: isPro ? plan : kSubscriptionPlanFree);
       return snapshot;
     } catch (e) {
       debugPrint('VGCreditsService.fetchSnapshot: $e');
@@ -161,14 +170,18 @@ class VGCreditsService {
         'limit': limit,
         if (from != null) 'from': from.toUtc().toIso8601String(),
         if (to != null)
-          'to': DateTime(to.year, to.month, to.day, 23, 59, 59, 999).toUtc().toIso8601String(),
+          'to': DateTime(to.year, to.month, to.day, 23, 59, 59, 999)
+              .toUtc()
+              .toIso8601String(),
         if (earnedOnly) 'earnedOnly': 'true',
         if (usedOnly) 'usedOnly': 'true',
       };
-      final data = await VGApiClient.get('/api/profiles/credit-transactions', query: query);
+      final data = await VGApiClient.get('/api/profiles/credit-transactions',
+          query: query);
       final rows = (data['transactions'] as List?) ?? [];
       return rows
-          .map((e) => VGCreditTransaction.fromRow(Map<String, dynamic>.from(e as Map)))
+          .map((e) =>
+              VGCreditTransaction.fromRow(Map<String, dynamic>.from(e as Map)))
           .toList();
     } catch (e) {
       debugPrint('VGCreditsService.fetchTransactions: $e');

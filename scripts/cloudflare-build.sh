@@ -25,7 +25,7 @@ if [[ -z "${VG_API_URL}" ]]; then
 fi
 
 # Production Cloudflare builds always use the live Worker API + real analysis.
-VG_USE_SUPABASE="true"
+VG_USE_CLOUD_BACKEND="true"
 VG_USE_MOCK_ANALYSIS="false"
 
 echo "==> Install Flutter stable"
@@ -52,7 +52,7 @@ BUILD_ARGS=(
   --no-tree-shake-icons
   -t lib/main_web.dart
   "--dart-define=VG_API_URL=${VG_API_URL}"
-  "--dart-define=VG_USE_SUPABASE=${VG_USE_SUPABASE}"
+  "--dart-define=VG_USE_CLOUD_BACKEND=${VG_USE_CLOUD_BACKEND}"
   "--dart-define=VG_USE_MOCK_ANALYSIS=${VG_USE_MOCK_ANALYSIS}"
 )
 if [[ -n "${GOOGLE_WEB_CLIENT_ID}" ]]; then

@@ -14,10 +14,14 @@ class VGPolarCheckoutService {
 
   static String? publicCheckoutUrlForPlan(String planId) {
     if (planId == kSubscriptionPlanAnnual) {
-      return vgPolarCheckoutLinkAnnual.isNotEmpty ? vgPolarCheckoutLinkAnnual : null;
+      return vgPolarCheckoutLinkAnnual.isNotEmpty
+          ? vgPolarCheckoutLinkAnnual
+          : null;
     }
     if (planId == kSubscriptionPlanProWeekly) {
-      return vgPolarCheckoutLinkProWeekly.isNotEmpty ? vgPolarCheckoutLinkProWeekly : null;
+      return vgPolarCheckoutLinkProWeekly.isNotEmpty
+          ? vgPolarCheckoutLinkProWeekly
+          : null;
     }
     return null;
   }
@@ -25,7 +29,8 @@ class VGPolarCheckoutService {
   static Future<String> createCheckoutUrl(String planId) async {
     Map<String, dynamic> data;
     try {
-      data = await VGApiClient.post('/api/polar/checkout', body: {'planId': planId});
+      data = await VGApiClient.post('/api/polar/checkout',
+          body: {'planId': planId});
     } on VGApiException catch (e) {
       throw StateError(e.message);
     }
@@ -40,7 +45,8 @@ class VGPolarCheckoutService {
     final uri = Uri.parse(url);
     final launched = await launchUrl(
       uri,
-      mode: kIsWeb ? LaunchMode.platformDefault : LaunchMode.externalApplication,
+      mode:
+          kIsWeb ? LaunchMode.platformDefault : LaunchMode.externalApplication,
       webOnlyWindowName: kIsWeb ? '_self' : null,
     );
     if (!launched) {
@@ -48,8 +54,18 @@ class VGPolarCheckoutService {
     }
   }
 
-  /// Opens Polar checkout — signed-in users get account linking; guests use public checkout link.
+  static void _requireWebCheckoutSurface(String action) {
+    if (kIsWeb) return;
+    throw StateError(
+      '$action is web-only. The Android app is consumption-only for Google Play compliance.',
+    );
+  }
+
+  /// Opens Polar checkout — web only. Native Android consumes existing Pro access
+  /// via refreshSubscriptionFromServer() and must never launch external checkout.
   static Future<void> openCheckout(String planId) async {
+    _requireWebCheckoutSurface('Polar checkout');
+
     if (VGSupabaseAuthService.isSignedIn) {
       final url = await createCheckoutUrl(planId);
       await _launchCheckoutUrl(url);
@@ -78,11 +94,14 @@ class VGPolarCheckoutService {
   }
 
   static Future<void> openCustomerPortal() async {
+    _requireWebCheckoutSurface('Polar customer portal');
+
     final url = await createPortalUrl();
     final uri = Uri.parse(url);
     final launched = await launchUrl(
       uri,
-      mode: kIsWeb ? LaunchMode.platformDefault : LaunchMode.externalApplication,
+      mode:
+          kIsWeb ? LaunchMode.platformDefault : LaunchMode.externalApplication,
       webOnlyWindowName: kIsWeb ? '_blank' : null,
     );
     if (!launched) {
@@ -116,7 +135,8 @@ class VGPolarCheckoutService {
       final row = await VGApiClient.get('/api/profiles/me');
       final isPro = row['is_pro'] == true;
       final plan = row['subscription_plan'] as String? ?? 'free';
-      await VGSubscriptionStore.setPro(value: isPro, planName: isPro ? plan : 'free');
+      await VGSubscriptionStore.setPro(
+          value: isPro, planName: isPro ? plan : 'free');
       await VGCreditsService.fetchBalance();
       return isPro;
     } catch (e) {

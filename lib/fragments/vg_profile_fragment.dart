@@ -17,7 +17,6 @@ import '../screens/scan/vg_scan_history_screen.dart';
 import '../services/supabase/vg_supabase_auth_service.dart';
 import '../services/vg_challenge_service.dart';
 import '../services/vg_credits_service.dart';
-import '../services/vg_polar_checkout_service.dart';
 import '../utils/BMColors.dart';
 import '../utils/vg_challenge_badges.dart';
 import '../utils/vg_constants.dart';
@@ -41,9 +40,10 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
   Map<String, dynamic>? _reward;
   VGChallengePlan? _plan;
   bool _loading = true;
+  bool _deletingAccount = false;
 
-  VGFeatureModel get _routineFeature =>
-      getVerifiedGlamFeatures().firstWhere((f) => f.featureType == VGFeatureTypes.glowUpGuide);
+  VGFeatureModel get _routineFeature => getVerifiedGlamFeatures()
+      .firstWhere((f) => f.featureType == VGFeatureTypes.glowUpGuide);
 
   @override
   void initState() {
@@ -74,7 +74,9 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
       vgWebOpenChallenge(context);
       return;
     }
-    VGRoutineChallengeScreen(feature: _routineFeature).launch(context).then((_) => _load());
+    VGRoutineChallengeScreen(feature: _routineFeature)
+        .launch(context)
+        .then((_) => _load());
   }
 
   void _openReward() {
@@ -84,13 +86,17 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
       vgWebOpenReward(context, reward: reward, feature: _routineFeature);
       return;
     }
-    VGChallengeRewardScreen(reward: reward, feature: _routineFeature).launch(context).then((_) => _load());
+    VGChallengeRewardScreen(reward: reward, feature: _routineFeature)
+        .launch(context)
+        .then((_) => _load());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appStore.isDarkModeOn ? appStore.scaffoldBackground! : bmLightScaffoldBackgroundColor,
+      backgroundColor: appStore.isDarkModeOn
+          ? appStore.scaffoldBackground!
+          : bmLightScaffoldBackgroundColor,
       appBar: VGMainAppBar(title: VGCopy.tabProfile, showSettings: true),
       body: RefreshIndicator(
         color: bmSpecialColor,
@@ -100,20 +106,24 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   SizedBox(height: context.height() * 0.3),
-                  const Center(child: CircularProgressIndicator(color: bmSpecialColor)),
+                  const Center(
+                      child: CircularProgressIndicator(color: bmSpecialColor)),
                 ],
               )
             : ListView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
                 children: [
-                  Text(VGCopy.profileDashboardSubtitle, style: secondaryTextStyle(color: appTextColorSecondary)),
+                  Text(VGCopy.profileDashboardSubtitle,
+                      style: secondaryTextStyle(color: appTextColorSecondary)),
                   20.height,
                   _featuredCard(),
                   20.height,
                   _activeChallengeCard(),
                   24.height,
-                  Text(VGCopy.challengeBadgesTitle, style: boldTextStyle(color: bmSpecialColorDark, size: 18)),
+                  Text(VGCopy.challengeBadgesTitle,
+                      style:
+                          boldTextStyle(color: bmSpecialColorDark, size: 18)),
                   12.height,
                   Container(
                     width: double.infinity,
@@ -121,16 +131,24 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: bmPrimaryColor.withValues(alpha: 0.25)),
+                      border: Border.all(
+                          color: bmPrimaryColor.withValues(alpha: 0.25)),
                     ),
-                    child: VGChallengeBadgeGrid(earnedBadges: _badges, loading: false, collapsible: true),
+                    child: VGChallengeBadgeGrid(
+                        earnedBadges: _badges,
+                        loading: false,
+                        collapsible: true),
                   ),
                   24.height,
-                  Text(VGCopy.profileQuickActions, style: boldTextStyle(color: bmSpecialColorDark, size: 18)),
+                  Text(VGCopy.profileQuickActions,
+                      style:
+                          boldTextStyle(color: bmSpecialColorDark, size: 18)),
                   12.height,
                   _quickActionsGrid(),
                   24.height,
-                  Text(VGCopy.profileAccountSection, style: boldTextStyle(color: bmSpecialColorDark, size: 18)),
+                  Text(VGCopy.profileAccountSection,
+                      style:
+                          boldTextStyle(color: bmSpecialColorDark, size: 18)),
                   12.height,
                   _accountSection(),
                 ],
@@ -154,13 +172,15 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
                 color: bmLightScaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: Icon(Icons.emoji_events_outlined, color: bmPrimaryColor, size: 28),
+              child: Icon(Icons.emoji_events_outlined,
+                  color: bmPrimaryColor, size: 28),
             ),
             14.width,
             Expanded(
               child: Text(
                 VGCopy.profileNoAchievementYet,
-                style: primaryTextStyle(color: appTextColorSecondary, size: 13, height: 1.4),
+                style: primaryTextStyle(
+                    color: appTextColorSecondary, size: 13, height: 1.4),
               ),
             ),
           ],
@@ -169,7 +189,8 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
     }
 
     if (reward != null) {
-      final title = reward['challenge_title']?.toString() ?? VGCopy.guideRoutineChallenge;
+      final title =
+          reward['challenge_title']?.toString() ?? VGCopy.guideRoutineChallenge;
       final completedOn = reward['completed_on']?.toString() ?? '';
       return _cardShell(
         onTap: _openReward,
@@ -179,21 +200,28 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [const Color(0xFFF59E0B), bmSpecialColor]),
+                gradient: LinearGradient(
+                    colors: [const Color(0xFFF59E0B), bmSpecialColor]),
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: const Icon(Icons.emoji_events, color: Colors.white, size: 28),
+              child:
+                  const Icon(Icons.emoji_events, color: Colors.white, size: 28),
             ),
             14.width,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(VGCopy.profileFeaturedAchievement, style: boldTextStyle(color: bmSpecialColorDark, size: 12)),
+                  Text(VGCopy.profileFeaturedAchievement,
+                      style:
+                          boldTextStyle(color: bmSpecialColorDark, size: 12)),
                   4.height,
-                  Text(title, style: boldTextStyle(color: bmSpecialColorDark, size: 16)),
+                  Text(title,
+                      style:
+                          boldTextStyle(color: bmSpecialColorDark, size: 16)),
                   if (completedOn.isNotEmpty)
-                    Text(VGCopy.profileBadgeEarnedOn(completedOn), style: secondaryTextStyle(size: 11)),
+                    Text(VGCopy.profileBadgeEarnedOn(completedOn),
+                        style: secondaryTextStyle(size: 11)),
                 ],
               ),
             ),
@@ -218,18 +246,22 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
               border: Border.all(color: const Color(0xFFF59E0B), width: 2),
             ),
             alignment: Alignment.center,
-            child: Text(def?.emoji ?? '🏅', style: const TextStyle(fontSize: 24)),
+            child:
+                Text(def?.emoji ?? '🏅', style: const TextStyle(fontSize: 24)),
           ),
           14.width,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(VGCopy.profileFeaturedAchievement, style: boldTextStyle(color: bmSpecialColorDark, size: 12)),
+                Text(VGCopy.profileFeaturedAchievement,
+                    style: boldTextStyle(color: bmSpecialColorDark, size: 12)),
                 4.height,
-                Text(def?.title ?? code, style: boldTextStyle(color: bmSpecialColorDark, size: 16)),
+                Text(def?.title ?? code,
+                    style: boldTextStyle(color: bmSpecialColorDark, size: 16)),
                 if (earnedAt.isNotEmpty)
-                  Text(VGCopy.profileBadgeEarnedOn(earnedAt.split('T').first), style: secondaryTextStyle(size: 11)),
+                  Text(VGCopy.profileBadgeEarnedOn(earnedAt.split('T').first),
+                      style: secondaryTextStyle(size: 11)),
               ],
             ),
           ),
@@ -245,9 +277,11 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(VGCopy.profileActiveChallenge, style: boldTextStyle(color: bmSpecialColorDark, size: 15)),
+            Text(VGCopy.profileActiveChallenge,
+                style: boldTextStyle(color: bmSpecialColorDark, size: 15)),
             8.height,
-            Text(VGCopy.guideNoActiveChallenge, style: secondaryTextStyle(size: 13, height: 1.4)),
+            Text(VGCopy.guideNoActiveChallenge,
+                style: secondaryTextStyle(size: 13, height: 1.4)),
             14.height,
             VGPillButton(
               label: VGCopy.guideStartChallenge,
@@ -267,9 +301,11 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(VGCopy.profileActiveChallenge, style: boldTextStyle(color: bmSpecialColorDark, size: 15)),
+          Text(VGCopy.profileActiveChallenge,
+              style: boldTextStyle(color: bmSpecialColorDark, size: 15)),
           6.height,
-          Text(plan.title, style: boldTextStyle(color: bmSpecialColor, size: 17)),
+          Text(plan.title,
+              style: boldTextStyle(color: bmSpecialColor, size: 17)),
           8.height,
           Text(
             isDone
@@ -279,7 +315,9 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
           ),
           14.height,
           VGPillButton(
-            label: isDone ? VGCopy.profileViewRoutine : VGCopy.profileContinueChallenge,
+            label: isDone
+                ? VGCopy.profileViewRoutine
+                : VGCopy.profileContinueChallenge,
             width: double.infinity,
             onTap: _openRoutine,
           ),
@@ -297,14 +335,16 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
       crossAxisSpacing: 10,
       childAspectRatio: 1.6,
       children: [
-        _actionTile(Icons.explore_outlined, VGCopy.profileActionExplore, () => vgRequestDashboardTab(1)),
+        _actionTile(Icons.explore_outlined, VGCopy.profileActionExplore,
+            () => vgRequestDashboardTab(1)),
         _actionTile(Icons.history, VGCopy.profileActionHistory, () {
           VGScanHistoryScreen().launch(context);
         }),
         _actionTile(Icons.share_outlined, VGCopy.profileActionShare, () {
           Share.share('${VGCopy.splashTagline} — $vgAppName');
         }),
-        _actionTile(Icons.workspace_premium_outlined, VGCopy.profileActionPro, () {
+        _actionTile(Icons.workspace_premium_outlined, VGCopy.profileActionPro,
+            () {
           vgShowPaywall(context, entry: VGPaywallEntry.profile);
         }),
       ],
@@ -328,7 +368,8 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
             children: [
               Icon(icon, color: bmSpecialColor, size: 26),
               8.height,
-              Text(label, style: boldTextStyle(color: bmSpecialColorDark, size: 12)),
+              Text(label,
+                  style: boldTextStyle(color: bmSpecialColorDark, size: 12)),
             ],
           ),
         ),
@@ -346,7 +387,9 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
       builder: (context, snapshot) {
         final data = snapshot.data;
         final isPro = data?.isPro == true;
-        final statusLabel = isPro ? VGCopy.profileAccountStatusPro : VGCopy.profileAccountStatusFree;
+        final statusLabel = isPro
+            ? VGCopy.profileAccountStatusPro
+            : VGCopy.profileAccountStatusFree;
         final subtitle = isPro
             ? '${data!.planDisplayName} · ${VGCopy.profileCreditsRemaining(data.balance)}'
             : VGCopy.profileAccountStatusFreeHint;
@@ -356,20 +399,19 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
               isPro ? Icons.workspace_premium : Icons.person_outline,
               statusLabel,
               subtitle: subtitle,
-              onTap: isPro
-                  ? () async {
-                      try {
-                        await VGPolarCheckoutService.openCustomerPortal();
-                      } catch (_) {
-                        if (context.mounted) toast(VGCopy.paywallCheckoutError);
-                      }
-                    }
-                  : () => vgShowPaywall(context, entry: VGPaywallEntry.profile),
+              onTap: isPro ? null : () => vgShowPaywall(context, entry: VGPaywallEntry.profile),
             ),
+            if (isPro)
+              _accountTile(
+                Icons.language_outlined,
+                VGCopy.profileManageOnWebsite,
+                onTap: null,
+              ),
             _accountTile(
               Icons.privacy_tip_outlined,
               VGCopy.settingsPrivacy,
-              onTap: () => launchUrl(Uri.parse('$vgMarketingSiteUrl/privacy'), mode: LaunchMode.externalApplication),
+              onTap: () => launchUrl(Uri.parse('$vgMarketingSiteUrl/privacy'),
+                  mode: LaunchMode.externalApplication),
             ),
             _accountTile(
               Icons.mail_outline,
@@ -377,7 +419,17 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
               subtitle: vgSupportEmail,
               onTap: () => launchUrl(Uri.parse('mailto:$vgSupportEmail')),
             ),
-            _accountTile(Icons.logout, VGCopy.profileLogOut, onTap: _confirmLogOut),
+            _accountTile(Icons.logout, VGCopy.profileLogOut,
+                onTap: _confirmLogOut),
+            _accountTile(
+              Icons.delete_forever_outlined,
+              VGCopy.profileDeleteAccount,
+              subtitle: _deletingAccount
+                  ? 'Deleting…'
+                  : VGCopy.profileDeleteAccountHint,
+              color: Colors.red.shade700,
+              onTap: _deletingAccount ? null : _confirmDeleteAccount,
+            ),
           ],
         );
       },
@@ -391,10 +443,13 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
         title: Text(VGCopy.profileLogOutConfirmTitle),
         content: Text(VGCopy.profileLogOutConfirmMessage),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: Text(VGCopy.scanErrorCancel)),
+          TextButton(
+              onPressed: () => Navigator.of(ctx).pop(false),
+              child: Text(VGCopy.scanErrorCancel)),
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: Text(VGCopy.profileLogOut, style: const TextStyle(color: Colors.red)),
+            child: Text(VGCopy.profileLogOut,
+                style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -406,12 +461,35 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
     BMLoginScreen().launch(context, isNewTask: true);
   }
 
+  Future<void> _confirmDeleteAccount() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => const _DeleteAccountDialog(),
+    );
+    if (confirmed != true || !mounted) return;
+
+    setState(() => _deletingAccount = true);
+    try {
+      await VGSupabaseAuthService.deleteAccount();
+      VGCreditsService.clearCache();
+      if (!mounted) return;
+      BMLoginScreen().launch(context, isNewTask: true);
+    } catch (error) {
+      debugPrint('Account deletion failed: $error');
+      if (!mounted) return;
+      setState(() => _deletingAccount = false);
+      toast(VGCopy.profileDeleteFailed);
+    }
+  }
+
   Widget _accountTile(
     IconData icon,
     String title, {
     String? subtitle,
     Widget? trailing,
     VoidCallback? onTap,
+    Color? color,
   }) {
     // Material wraps the ListTile so its ink splash actually renders —
     // a bare Container+ListTile (the previous shape) hides the ripple
@@ -428,11 +506,19 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         child: ListTile(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          leading: Icon(icon, color: bmSpecialColor),
-          title: Text(title, style: boldTextStyle(color: appTextColorPrimary, size: 15)),
-          subtitle: subtitle != null ? Text(subtitle, style: secondaryTextStyle(size: 12)) : null,
-          trailing: trailing ?? (onTap != null ? Icon(Icons.chevron_right, color: bmPrimaryColor) : null),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          leading: Icon(icon, color: color ?? bmSpecialColor),
+          title: Text(title,
+              style:
+                  boldTextStyle(color: color ?? appTextColorPrimary, size: 15)),
+          subtitle: subtitle != null
+              ? Text(subtitle, style: secondaryTextStyle(size: 12))
+              : null,
+          trailing: trailing ??
+              (onTap != null
+                  ? Icon(Icons.chevron_right, color: color ?? bmPrimaryColor)
+                  : null),
           onTap: onTap,
         ),
       ),
@@ -456,6 +542,65 @@ class _VGProfileFragmentState extends State<VGProfileFragment> {
           child: child,
         ),
       ),
+    );
+  }
+}
+
+/// Owns its TextEditingController's lifecycle via State.dispose(), which
+/// only runs once the widget is truly gone — unlike disposing a
+/// showDialog-local controller right after the Future resolves, which races
+/// the dialog's still-animating exit transition and crashes with "used
+/// after being disposed".
+class _DeleteAccountDialog extends StatefulWidget {
+  const _DeleteAccountDialog();
+
+  @override
+  State<_DeleteAccountDialog> createState() => _DeleteAccountDialogState();
+}
+
+class _DeleteAccountDialogState extends State<_DeleteAccountDialog> {
+  final _controller = TextEditingController();
+  bool _confirmationMatches = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(VGCopy.profileDeleteConfirmTitle),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(VGCopy.profileDeleteConfirmMessage),
+          16.height,
+          TextField(
+            controller: _controller,
+            autofocus: true,
+            textCapitalization: TextCapitalization.characters,
+            decoration: InputDecoration(
+              labelText: VGCopy.profileDeleteConfirmationLabel,
+              border: const OutlineInputBorder(),
+            ),
+            onChanged: (value) {
+              setState(() => _confirmationMatches = value.trim() == 'DELETE');
+            },
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(VGCopy.scanErrorCancel)),
+        TextButton(
+          onPressed: _confirmationMatches ? () => Navigator.of(context).pop(true) : null,
+          child: Text(VGCopy.profileDeleteAccount, style: const TextStyle(color: Colors.red)),
+        ),
+      ],
     );
   }
 }

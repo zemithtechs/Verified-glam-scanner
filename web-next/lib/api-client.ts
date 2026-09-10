@@ -75,7 +75,8 @@ export const apiClient = {
     request<T>(path, { method: "POST", token, body }),
   put: <T>(path: string, body?: unknown, token?: string | null) =>
     request<T>(path, { method: "PUT", token, body }),
-  delete: <T>(path: string, token?: string | null) => request<T>(path, { method: "DELETE", token }),
+  delete: <T>(path: string, body?: unknown, token?: string | null) =>
+    request<T>(path, { method: "DELETE", token, body }),
   postBinary: <T>(
     path: string,
     bytes: ArrayBuffer | Uint8Array,

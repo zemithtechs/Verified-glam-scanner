@@ -1,5 +1,8 @@
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:nb_utils/nb_utils.dart';
 
+import '../../utils/vg_constants.dart';
+import '../vg_profile_cache.dart';
 import '../vg_push_service.dart';
 import '../vg_session_scan_cache.dart';
 import 'vg_api_client.dart';
@@ -110,19 +113,57 @@ class VGSupabaseAuthService {
     try {
       await VGPushService.deactivateCurrentToken();
     } catch (_) {}
-    VGSessionScanCache.clear();
     if (VGSupabaseConfig.hasGoogleSignIn) {
       try {
-        await GoogleSignIn(serverClientId: VGSupabaseConfig.googleWebClientId).signOut();
+        await GoogleSignIn(serverClientId: VGSupabaseConfig.googleWebClientId)
+            .signOut();
       } catch (_) {}
     }
     try {
       await VGApiClient.post('/api/auth/sign-out');
     } catch (_) {}
+    await _clearLocalAccountState();
     await VGApiClient.clearSession();
   }
 
-  static Future<VGApiAuthResponse> _handleAuthResponse(Map<String, dynamic> data) async {
+  static Future<void> deleteAccount() async {
+    await VGApiClient.delete(
+      '/api/profiles/me',
+      body: const {'confirmation': 'DELETE'},
+    );
+    VGSessionScanCache.clear();
+    if (VGSupabaseConfig.hasGoogleSignIn) {
+      try {
+        await GoogleSignIn(serverClientId: VGSupabaseConfig.googleWebClientId)
+            .disconnect();
+      } catch (_) {}
+    }
+    await _clearLocalAccountState(clearOnboarding: true);
+    await VGApiClient.clearSession();
+  }
+
+  static Future<void> _clearLocalAccountState({
+    bool clearOnboarding = false,
+  }) async {
+    VGSessionScanCache.clear();
+    await Future.wait([
+      if (clearOnboarding) removeKey(vgOnboardingCompleteKey),
+      if (clearOnboarding) removeKey(vgOnboardingProfileKey),
+      removeKey(vgGuideTipsCacheKey),
+      removeKey(vgSubscriptionIsProKey),
+      removeKey(vgSubscriptionPlanKey),
+      removeKey(vgSubscriptionFreeScanCountKey),
+      removeKey(vgSubscriptionLastDailyPromptKey),
+      removeKey(vgReferralCodeKey),
+      removeKey(vgReferralDownloadCountKey),
+      removeKey(vgReferralBonusRedeemedKey),
+      removeKey(vgReferralBonusScansKey),
+      VGProfileCache.clear(),
+    ]);
+  }
+
+  static Future<VGApiAuthResponse> _handleAuthResponse(
+      Map<String, dynamic> data) async {
     final token = data['token'] as String?;
     final userJson = data['user'] as Map<String, dynamic>?;
     if (token == null || userJson == null) {
@@ -132,7 +173,8 @@ class VGSupabaseAuthService {
     }
     final userId = userJson['id'] as String;
     final email = userJson['email'] as String?;
-    await VGApiClient.setSession(token: token, userId: userId, userEmail: email);
+    await VGApiClient.setSession(
+        token: token, userId: userId, userEmail: email);
     return VGApiAuthResponse(
       user: VGApiUser(id: userId, email: email),
       session: token,

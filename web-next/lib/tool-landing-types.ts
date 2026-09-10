@@ -6,6 +6,12 @@ export type ShowcaseItem = { title: string; description: string };
 export type HowToStep = { title: string; description: string };
 export type ReviewItem = { name: string; text: string; rating: number };
 export type FaqItem = { question: string; answer: string };
+export type GuidePoint = { title: string; description: string };
+export type GuideSection = {
+  title: string;
+  description: string;
+  points: GuidePoint[];
+};
 
 export type ToolLandingContent = {
   headline: string;
@@ -15,4 +21,5 @@ export type ToolLandingContent = {
   howTo: HowToStep[];
   reviews: ReviewItem[];
   faq: FaqItem[];
+  guide: GuideSection[];
 };

@@ -3,16 +3,19 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../components/vg/subscription/vg_paywall_plans_section.dart';
 import '../../components/vg/vg_loading_overlay.dart';
-import '../../components/vg/vg_paywall_promo_sheet.dart';
-import '../../screens/BMLoginScreen.dart';
-import '../../services/supabase/vg_supabase_auth_service.dart';
 import '../../services/vg_subscription_store.dart';
 import '../../utils/BMColors.dart';
 import '../../utils/vg_copy.dart';
-import 'vg_subscription_success_screen.dart';
 
-enum VGPaywallEntry { onboarding, feature, profile, promo }
+enum VGPaywallEntry { onboarding, feature, profile, dailyReminder }
 
+/// Informational "what's included in Premium" screen — no prices, no
+/// purchase buttons, no clickable checkout links. Google Play's
+/// consumption-only policy requires this for a Play-distributed app that
+/// can't use Play Billing; the only permitted mention of purchasing is
+/// non-linked text pointing to the website. "Refresh Access" only checks
+/// server-side entitlement (VGSubscriptionStore.restore), it never buys
+/// anything.
 class VGPaywallScreen extends StatefulWidget {
   final VGPaywallEntry entry;
   final VoidCallback? onDismiss;
@@ -24,34 +27,6 @@ class VGPaywallScreen extends StatefulWidget {
 }
 
 class _VGPaywallScreenState extends State<VGPaywallScreen> {
-  final _plansKey = GlobalKey<VGPaywallPlansSectionState>();
-
-  Future<void> _purchaseForPlan(String planId) async {
-    if (!VGSupabaseAuthService.isSignedIn) {
-      if (mounted) {
-        toast('Sign in to subscribe');
-        BMLoginScreen().launch(context);
-      }
-      return;
-    }
-
-    VGLoadingOverlay.show(context, message: VGCopy.paywallCheckoutOpening);
-    try {
-      final completed = await VGSubscriptionStore.purchase(planName: planId);
-      if (!mounted) return;
-      VGLoadingOverlay.hide(context);
-      if (completed) {
-        finish(context);
-        VGSubscriptionSuccessScreen().launch(context);
-      }
-    } catch (_) {
-      if (mounted) {
-        VGLoadingOverlay.hide(context);
-        toast(VGCopy.paywallCheckoutError);
-      }
-    }
-  }
-
   Future<void> _restore() async {
     VGLoadingOverlay.show(context);
     final restored = await VGSubscriptionStore.restore();
@@ -64,15 +39,22 @@ class _VGPaywallScreenState extends State<VGPaywallScreen> {
     }
   }
 
-  Future<void> _dismiss() async {
-    if (await VGSubscriptionStore.shouldShowPromoAfterDismiss()) {
-      if (!mounted) return;
-      await showVGPaywallPromoSheet(context);
-      if (!mounted) return;
-    }
+  void _dismiss() {
     finish(context);
     widget.onDismiss?.call();
   }
+
+  String get _title => switch (widget.entry) {
+        VGPaywallEntry.onboarding => VGCopy.paywallOnboardingTitle,
+        VGPaywallEntry.dailyReminder => VGCopy.dailyReminderTitle,
+        _ => VGCopy.paywallTitle,
+      };
+
+  String get _subtitle => switch (widget.entry) {
+        VGPaywallEntry.onboarding => VGCopy.paywallOnboardingSubtitle,
+        VGPaywallEntry.dailyReminder => VGCopy.dailyReminderSubtitle,
+        _ => VGCopy.paywallSubtitle,
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -100,17 +82,38 @@ class _VGPaywallScreenState extends State<VGPaywallScreen> {
                   children: [
                     Icon(Icons.workspace_premium, color: bmPrimaryColor, size: 56),
                     12.height,
-                    Text(VGCopy.paywallTitle, style: boldTextStyle(color: Colors.white, size: 24), textAlign: TextAlign.center),
+                    Text(
+                      _title,
+                      style: boldTextStyle(color: Colors.white, size: 24),
+                      textAlign: TextAlign.center,
+                    ),
                     8.height,
-                    Text(VGCopy.paywallSubtitle, style: primaryTextStyle(color: Colors.white70), textAlign: TextAlign.center),
+                    Text(
+                      _subtitle,
+                      style: primaryTextStyle(color: Colors.white70),
+                      textAlign: TextAlign.center,
+                    ),
                     24.height,
                     VGPaywallPlansSection(
-                      key: _plansKey,
-                      onPurchaseForPlan: _purchaseForPlan,
                       onRestore: _restore,
                       theme: VGPaywallTheme.dark,
-                      perPlanCta: true,
                       compact: true,
+                      showPlanCards: false,
+                      showCta: false,
+                      showTerms: false,
+                      showCreditPricingRows: false,
+                    ),
+                    16.height,
+                    Text(
+                      VGCopy.paywallWebsiteNotice,
+                      style: primaryTextStyle(color: Colors.white, size: 13),
+                      textAlign: TextAlign.center,
+                    ),
+                    6.height,
+                    Text(
+                      VGCopy.paywallAlreadyMemberHint,
+                      style: secondaryTextStyle(color: Colors.white54, size: 12),
+                      textAlign: TextAlign.center,
                     ),
                     24.height,
                   ],

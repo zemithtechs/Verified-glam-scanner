@@ -4,10 +4,16 @@ import { MarketingLayout } from "@/components/marketing/MarketingLayout";
 import { Section, SectionTitle } from "@/components/marketing/Section";
 import { ToolsGridSection } from "@/components/marketing/ToolsGridSection";
 import { TOOLS } from "@/lib/tools";
+import { SITE_URL } from "@/lib/site";
+
+const TITLE = "AI Beauty Tools — Verified Glam Scanner";
+const DESCRIPTION = "Browse AI beauty scan tools: face beauty analysis, symmetry, celebrity look-alike, seasonal color palette, and more.";
 
 export const metadata: Metadata = {
-  title: "AI Beauty Tools — Verified Glam Scanner",
-  description: "Browse AI beauty scan tools: face beauty analysis, symmetry, celebrity look-alike, seasonal color palette, and more.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}/tools` },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: `${SITE_URL}/tools` },
 };
 
 export default function ToolsIndexPage() {

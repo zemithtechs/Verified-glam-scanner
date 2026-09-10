@@ -1,477 +1,490 @@
 import type { ToolLandingContent } from "./tool-landing-types";
 import type { FeatureType } from "./tools";
+import { TOOL_DEEP_GUIDES } from "./tool-deep-guides";
 
-// Ported verbatim from lib/web/content/vg_tool_landing_content.dart (Flutter
-// app) — same copy as the current app/site, just presented as a React page.
-// Reviews are a single shared block reused across all 10 tools in the
-// source data (not per-tool), so they're defined once here too.
 const SHARED_REVIEWS = [
   {
     name: "Maya R.",
-    text: "Verified Glam Scanner gave me clarity I never got from a mirror selfie. The symmetry breakdown felt professional, not gimmicky.",
+    text: "Verified Glam Scanner made my results feel clear and personal. I liked seeing the notes connected to my own photo.",
     rating: 5,
   },
   {
     name: "Jordan K.",
-    text: "I uploaded one photo and had actionable tips in under a minute. The results screen actually uses my face — love that.",
+    text: "The scan was fast, the page looked premium, and the tips were easy to understand without feeling harsh.",
     rating: 5,
   },
   {
     name: "Priya S.",
-    text: "Finally an AI beauty tool that looks polished on desktop. Easy upload, clear scores, and suggestions I could use.",
+    text: "I use it before trying a new look. The score is fun, but the real value is the detailed breakdown.",
     rating: 5,
   },
 ];
 
+function withReviews(content: Omit<ToolLandingContent, "reviews" | "guide">, featureType: FeatureType): ToolLandingContent {
+  return { ...content, reviews: SHARED_REVIEWS, guide: TOOL_DEEP_GUIDES[featureType] };
+}
+
 const CONTENT: Record<FeatureType, ToolLandingContent> = {
-  FACE_BEAUTY_ANALYSIS: {
-    headline: "AI Face Beauty Analysis — Know Your Beauty Score",
+  FACE_BEAUTY_ANALYSIS: withReviews({
+    headline: "Free AI Face Beauty Analysis and Beauty Score",
     subheadline:
-      "Upload a clear portrait and get an instant breakdown of your facial features with AI-powered beauty analysis.",
+      "Upload a clear selfie and get an instant AI beauty report with facial feature scores, symmetry notes, and practical styling suggestions.",
     whyChoose: [
-      {
-        title: "Easy to use",
-        description: "Drag and drop or click to upload. Our AI analyzes your portrait in seconds — no studio setup required.",
-      },
-      {
-        title: "Feature-level detail",
-        description: "See scores and notes for eyes, lips, symmetry, and proportions — not just a single number.",
-      },
-      {
-        title: "Personalized guidance",
-        description: "Get tailored suggestions for makeup, hair framing, and photo angles based on your unique features.",
-      },
-      {
-        title: "Save time",
-        description: "Skip guesswork. One upload replaces hours of trial-and-error with structured, visual feedback.",
-      },
+      { title: "Instant beauty score", description: "Get a polished score and feature summary without booking a studio session." },
+      { title: "Feature level detail", description: "Review eyes, lips, symmetry, proportions, and facial balance in one clean report." },
+      { title: "Practical beauty guidance", description: "Turn your scan into simple ideas for makeup placement, grooming, hair framing, and better photos." },
+      { title: "Built for web and mobile", description: "Use Verified Glam Scanner from your browser, then sign in to keep your results connected." },
     ],
     showcase: [
       {
-        title: "See your feature map on your own photo",
+        title: "See your beauty score with visual context",
         description:
-          "Verified Glam Scanner overlays scored regions directly on your portrait — eyes, lips, brows, and jawline — so every number has context. No generic diagrams: your face stays the hero while landmarks and zones explain what we measured.",
+          "Verified Glam Scanner places your result next to your own photo, so the score feels understandable. The report focuses on facial balance, feature harmony, and the visible details that shape the final result.",
       },
       {
-        title: "Regional scores, not just one beauty number",
+        title: "Understand what affects your face analysis",
         description:
-          "Get breakdowns for symmetry, proportions, and individual features instead of a single vague score. Compare how eyes, nose, lips, and structure contribute to your overall result.",
+          "Instead of giving a single number and leaving you guessing, the report separates the main signals behind your score. You can review symmetry, feature balance, and photo quality before deciding what to improve.",
       },
       {
-        title: "Spot your strongest features instantly",
+        title: "Find the features that already stand out",
         description:
-          "Clear callouts highlight what already stands out and where small grooming or makeup tweaks can elevate your look.",
+          "The page highlights strengths first, then gives light guidance for areas where styling, camera angle, or grooming can make a visible difference.",
       },
       {
-        title: "Turn analysis into real styling moves",
+        title: "Use the report for everyday beauty choices",
         description:
-          "Practical tips connect scores to blush placement, brow shaping, hair framing, and camera angles — upload once and leave with a plan.",
+          "Your analysis can guide blush placement, brow shaping, hair framing, and the kind of lighting that flatters your face in photos.",
       },
     ],
     howTo: [
-      { title: "Upload a photo", description: "Use a front-facing portrait with even lighting." },
-      { title: "AI scans your face", description: "We detect landmarks and score facial features automatically." },
-      { title: "Review your results", description: "Explore overlays, scores, and personalized recommendations." },
+      { title: "Upload a clear selfie", description: "Use a front-facing photo with even lighting and minimal filters." },
+      { title: "Let AI scan your features", description: "The system reads facial landmarks, balance, and visible proportions." },
+      { title: "Review your report", description: "Get a score, visual context, and personalized beauty suggestions." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      {
-        question: "How does AI face beauty analysis work?",
-        answer: "We detect facial landmarks, measure proportions, and score key features using AI trained on portrait analysis.",
-      },
-      {
-        question: "What photo should I upload?",
-        answer: "A clear, front-facing selfie with your face centered and minimal filters works best.",
-      },
-      { question: "Is my photo stored?", answer: "Photos are processed securely for your analysis. See our privacy policy for retention details." },
-      {
-        question: "How accurate is the beauty score?",
-        answer: "Scores reflect measurable facial proportions and symmetry. They are guides for styling, not judgments.",
-      },
-      { question: "Can I use this on desktop?", answer: "Yes. Verified Glam Scanner is built for web — upload from your computer or phone browser." },
-      { question: "Do I need an account?", answer: "Sign in to save scans and sync results across devices." },
+      { question: "How does AI face beauty analysis work?", answer: "The tool detects facial landmarks and estimates visual balance, symmetry, and feature harmony from your uploaded photo." },
+      { question: "What kind of photo should I upload?", answer: "A clear front-facing selfie with your face centered, good light, and no heavy filter gives the best result." },
+      { question: "Is the beauty score a judgment?", answer: "No. The score is a cosmetic and entertainment guide. It is meant to help you understand styling opportunities, not define your worth." },
+      { question: "Can I use it on desktop?", answer: "Yes. Verified Glam Scanner works on desktop, laptop, tablet, and mobile browsers." },
+      { question: "Do I need an account?", answer: "You can start the flow quickly, but signing in lets you save scans and keep results connected." },
+      { question: "Is this medical advice?", answer: "No. It is not medical, dermatology, or professional health advice." },
     ],
-  },
-  COLOR_ANALYSIS: {
-    headline: "AI Seasonal Color Palette — Colors That Suit You",
-    subheadline: "Find your best seasonal palette in under a minute. Upload a photo for personalized color recommendations.",
+  }, "FACE_BEAUTY_ANALYSIS"),
+  COLOR_ANALYSIS: withReviews({
+    headline: "AI Seasonal Color Palette for Makeup, Hair, and Style",
+    subheadline:
+      "Upload a selfie to discover color families that suit your skin tone, contrast, hair color, and overall visual warmth.",
     whyChoose: [
-      { title: "Fast color typing", description: "AI reads undertone and contrast from your portrait to suggest a seasonal palette." },
-      { title: "Actionable swatches", description: "Get ready-to-use color families for makeup, hair, and outfits." },
-      { title: "Shop smarter", description: "Stop buying shades that wash you out — focus on colors that enhance your natural glow." },
-      { title: "Works on any device", description: "Try colors online from desktop or mobile with the same Verified Glam Scanner experience." },
+      { title: "Personal color direction", description: "Get a season style result based on visible undertone, depth, and contrast." },
+      { title: "Useful shopping guidance", description: "Shortlist makeup, hair, clothing, and accessory colors before you buy." },
+      { title: "Clear swatch categories", description: "Review flattering neutrals, accent shades, lip colors, blush tones, and wardrobe ideas." },
+      { title: "Easy to repeat", description: "Scan again after changing hair color, makeup style, or lighting to compare how your palette shifts." },
     ],
     showcase: [
       {
-        title: "Find your seasonal color family fast",
+        title: "Find your best color direction online",
         description:
-          "Upload a clear selfie and let Verified Glam Scanner read undertone, contrast, and depth from your natural coloring. In under a minute you get a seasonal palette that explains why certain hues harmonize with your skin, hair, and eyes.",
+          "Verified Glam Scanner reads your selfie for color cues and turns them into a practical seasonal palette. The goal is to help you choose shades that lift your face instead of washing it out.",
       },
       {
-        title: "Swatches you can shop with",
+        title: "Use color analysis before buying makeup",
         description:
-          "See coordinated color families for lipstick, blush, eyeshadow, and wardrobe accents — not abstract theory. Shortlist shades that flatter your undertone before you buy.",
+          "The report helps you narrow lipstick, blush, eyeshadow, and foundation direction so your next purchase feels less random.",
       },
       {
-        title: "Dress in colors that love you back",
-        description: "Learn which metals, neutrals, and statement colors lift your complexion instead of washing you out.",
+        title: "Plan hair and wardrobe colors with more confidence",
+        description:
+          "Explore warm, cool, soft, bright, light, and deep color directions before making a bold hair or clothing decision.",
       },
       {
-        title: "Compare palettes as your look evolves",
-        description: "Rescan with different makeup or hair color to see how your apparent undertone shifts before committing to a bold change.",
+        title: "Compare looks as your style changes",
+        description:
+          "Run a new scan when your hair, makeup, or lighting changes. It helps you see which colors still support your natural features.",
       },
     ],
     howTo: [
-      { title: "Upload a selfie", description: "Natural light and minimal makeup give the clearest read." },
-      { title: "Analyze undertone", description: "AI evaluates warmth, depth, and contrast in your features." },
-      { title: "Get your palette", description: "Review seasonal swatches and styling suggestions." },
+      { title: "Upload in natural light", description: "Use a clear selfie with minimal color filters and visible hair." },
+      { title: "AI reads color cues", description: "The scan estimates undertone, depth, and contrast from your image." },
+      { title: "Review your palette", description: "See practical color groups for makeup, hair, wardrobe, and accessories." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "What is a seasonal color palette?", answer: "It groups colors that harmonize with your natural coloring — skin, hair, and eyes — for flattering style choices." },
-      { question: "Do I need professional lighting?", answer: "Even indoor daylight works. Avoid heavy filters for the most accurate palette." },
-      { question: "Can this help with makeup shopping?", answer: "Yes. Use your palette to shortlist foundation, blush, and lip shades." },
-      { question: "How many seasons do you support?", answer: "We map you to classic seasonal families with modern, wearable swatch groups." },
-      { question: "Is seasonal color analysis accurate?", answer: "AI provides a strong starting point; personal preference always wins." },
-      { question: "Can I retake with different makeup?", answer: "Yes. Compare scans to see how makeup shifts your apparent undertone." },
+      { question: "What is seasonal color analysis?", answer: "It groups colors that tend to harmonize with your skin, hair, and eyes so you can make stronger style choices." },
+      { question: "Can lighting change my result?", answer: "Yes. Natural daylight and minimal filters usually produce the clearest read." },
+      { question: "Can this help with makeup shopping?", answer: "Yes. The palette can guide lipstick, blush, eyeshadow, and foundation direction." },
+      { question: "Does the tool replace a professional color consultant?", answer: "No. It gives a strong starting point, but personal taste and professional advice can still matter." },
+      { question: "Can I scan with makeup on?", answer: "You can, but a natural look often gives a more useful baseline." },
+      { question: "Can I save my palette?", answer: "Signed-in users can keep scans and return to their results." },
     ],
-  },
-  GLOW_UP_GUIDE: {
-    headline: "Beauty Routine Challenge — Your AI Glow-Up Plan",
-    subheadline: "Structured daily beauty habits based on your starting point and goals.",
+  }, "COLOR_ANALYSIS"),
+  GLOW_UP_GUIDE: withReviews({
+    headline: "AI Beauty Routine Challenge and Glow Up Plan",
+    subheadline:
+      "Start with a photo, then get a structured beauty routine challenge with daily steps, progress checkpoints, and realistic next moves.",
     whyChoose: [
-      { title: "Goal-based routines", description: "Challenges adapt to skin, aesthetic, and beauty goals you set in onboarding." },
-      { title: "Daily structure", description: "Clear steps so you know what to do each morning and evening." },
-      { title: "Progress mindset", description: "Celebrate small wins — consistency beats perfection." },
-      { title: "Integrated scans", description: "Pair your routine with periodic scans to see visible changes." },
+      { title: "Personal starting point", description: "Your baseline scan helps the routine feel connected to your face and goals." },
+      { title: "Simple daily structure", description: "Know what to focus on each day without building a routine from scratch." },
+      { title: "Progress friendly", description: "Milestone scans help you compare changes and refresh your guidance." },
+      { title: "Beauty and care together", description: "Balance skincare habits, grooming ideas, and optional glam practice in one plan." },
     ],
     showcase: [
       {
-        title: "Start your glow-up with a baseline scan",
-        description: "Your day-one portrait anchors the Beauty Routine Challenge. Capture where you are today in even light.",
+        title: "Begin your glow up with a baseline scan",
+        description:
+          "The challenge starts with a clear photo so the plan can reflect what you want to improve, maintain, or understand better.",
       },
       {
-        title: "Daily habits built for your goals",
-        description: "Get a structured checklist of morning and evening steps tailored to your onboarding preferences.",
+        title: "Follow a routine that feels manageable",
+        description:
+          "Instead of vague advice, you get a structured path with easy beauty habits, care reminders, and small steps that build momentum.",
       },
       {
-        title: "Track progress with milestone scans",
-        description: "Rescan on suggested days to compare visible changes and refresh guidance.",
+        title: "Use milestone scans to check your progress",
+        description:
+          "Repeat scans help you see how lighting, skin care, grooming, and consistency can change how your face reads in photos.",
       },
       {
-        title: "Skincare and glam in one plan",
-        description: "Balance care habits with optional makeup practice so beginners and enthusiasts both stay engaged.",
+        title: "Keep your routine realistic",
+        description:
+          "The plan is designed for real life. It supports simple products, steady habits, and beauty choices that fit your schedule.",
       },
     ],
     howTo: [
-      { title: "Upload a baseline photo", description: "Capture your starting point in even light." },
-      { title: "Set your goals", description: "Complete onboarding so routines match your preferences." },
-      { title: "Follow daily steps", description: "Check off habits and rescan on milestone days." },
+      { title: "Upload your baseline photo", description: "Start with a clear front-facing image in even lighting." },
+      { title: "Set your beauty goals", description: "Choose the areas you want to focus on during the challenge." },
+      { title: "Follow daily steps", description: "Use the plan, check off habits, and refresh your guidance with new scans." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "How long is the challenge?", answer: "Routines are structured in multi-day phases you can repeat or extend." },
-      { question: "Do I need products?", answer: "We suggest categories — use products you already trust and tolerate." },
-      { question: "Can beginners join?", answer: "Yes. Steps start simple and scale with your comfort level." },
-      { question: "Is this skincare or makeup?", answer: "Both — a balance of care habits and optional glam practice." },
-      { question: "How do milestones work?", answer: "Rescan on suggested days to refresh guidance and track change." },
-      { question: "Can I pause the challenge?", answer: "Yes. Resume anytime from your scan history and profile." },
+      { question: "How long is the routine challenge?", answer: "The plan is structured in phases so you can repeat, extend, or restart when needed." },
+      { question: "Do I need expensive products?", answer: "No. The routine can work with products you already trust and tolerate." },
+      { question: "Is this skincare advice?", answer: "It includes cosmetic care suggestions, but it is not dermatology or medical advice." },
+      { question: "Can beginners use it?", answer: "Yes. The steps are designed to be easy to follow even if you are new to beauty routines." },
+      { question: "Can I pause the challenge?", answer: "Yes. You can return when you are ready and continue from your account." },
+      { question: "Will it guarantee a glow up?", answer: "No tool can guarantee a result, but structure can help you stay consistent and make better beauty choices." },
     ],
-  },
-  BEAUTY_TIPS: {
-    headline: "AI Beauty Tips — Personalized For Your Face",
-    subheadline: "Turn one portrait into practical beauty advice you can use today.",
+  }, "GLOW_UP_GUIDE"),
+  BEAUTY_TIPS: withReviews({
+    headline: "AI Beauty Tips Personalized to Your Face",
+    subheadline:
+      "Turn one selfie into practical beauty tips for makeup, grooming, skincare focus, and styling choices that match your visible features.",
     whyChoose: [
-      { title: "Personalized", description: "Tips adapt to your face shape, features, and visible skin cues." },
-      { title: "Quick wins", description: "Short, actionable suggestions — not overwhelming beauty blogs." },
-      { title: "Visual context", description: "Your photo stays on screen so advice maps to real features." },
-      { title: "Always improving", description: "Our AI analysis pipeline updates with better beauty guidance over time." },
+      { title: "Personalized tips", description: "Suggestions are connected to your face shape, proportions, and visible cues." },
+      { title: "Easy to apply", description: "Get short guidance you can use today instead of a long generic beauty article." },
+      { title: "Helpful for daily glam", description: "Use the report for brows, lips, contour, blush, hair framing, and photo angles." },
+      { title: "Confidence focused", description: "The tone is constructive, supportive, and built around your natural features." },
     ],
     showcase: [
       {
-        title: "Beauty tips tied to your real features",
-        description: "Verified Glam Scanner reads your face shape, proportions, and visible skin cues to generate tips you can actually use.",
+        title: "Get beauty tips that match your face",
+        description:
+          "Verified Glam Scanner reads visible structure and gives suggestions that feel more personal than a generic makeup tutorial.",
       },
       {
-        title: "Makeup placement made simple",
-        description: "Learn where to place contour, blush, and highlight for your structure.",
+        title: "Improve makeup placement with simple cues",
+        description:
+          "The report can guide contour, blush, highlight, brow shape, and lip definition based on your facial balance.",
       },
       {
-        title: "Skincare focus from your selfie",
-        description: "Bare-skin photos surface hydration, SPF, and gentle-care reminders based on visible cues.",
+        title: "Use your scan for skincare focus",
+        description:
+          "A clear selfie can surface care reminders around hydration, texture, SPF, and gentle consistency. It stays cosmetic, not medical.",
       },
       {
-        title: "Quick wins you can apply today",
-        description: "Short, actionable guidance on brows, lashes, and lip line that respects your natural symmetry.",
+        title: "Build a beauty routine you can actually follow",
+        description:
+          "Save the most useful tips and repeat scans when your look, skin, hair, or goals change.",
       },
     ],
     howTo: [
-      { title: "Upload a clear selfie", description: "Minimal filter helps tips stay relevant." },
-      { title: "AI reads your features", description: "We analyze structure and visible skin characteristics." },
-      { title: "Apply your tips", description: "Save favorites and revisit after your next scan." },
+      { title: "Upload a clear selfie", description: "Use natural lighting and avoid heavy filters." },
+      { title: "AI reads your features", description: "The scan reviews visible structure, balance, and cosmetic cues." },
+      { title: "Apply your tips", description: "Use the guidance for makeup, hair, skincare focus, and photos." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "Are beauty tips medical advice?", answer: "No. Tips are cosmetic suggestions, not dermatology diagnoses." },
-      { question: "How personalized are tips?", answer: "They are generated from your scan payload and feature profile." },
-      { question: "Can I get tips without makeup on?", answer: "Yes — bare-skin selfies often produce the clearest skincare guidance." },
-      { question: "How often should I rescan?", answer: "Rescan when your look changes significantly or you want refreshed advice." },
-      { question: "Do tips replace professionals?", answer: "They complement — not replace — licensed estheticians or dermatologists." },
-      { question: "Can I save tips?", answer: "Signed-in users can save scans and revisit tip history." },
+      { question: "Are these beauty tips medical advice?", answer: "No. They are cosmetic suggestions and should not replace a dermatologist or licensed professional." },
+      { question: "Can I use a photo with makeup?", answer: "Yes. Use the look you want feedback on." },
+      { question: "How personalized are the tips?", answer: "The guidance is generated from your scan, feature profile, and visible image cues." },
+      { question: "Can I save my tips?", answer: "Signed-in users can keep scan history and return to useful recommendations." },
+      { question: "How often should I rescan?", answer: "Rescan when your hair, makeup, skin, or goals change." },
+      { question: "Will tips work for every face?", answer: "They are designed to be flexible, supportive, and based on what the photo shows." },
     ],
-  },
-  CELEBRITY_LOOKALIKE: {
-    headline: "Celebrity Look Alike — See Who You Resemble",
-    subheadline: "Fun, fast AI matching that compares your features to celebrity references.",
+  }, "BEAUTY_TIPS"),
+  CELEBRITY_LOOKALIKE: withReviews({
+    headline: "Celebrity Look Alike Finder with AI Face Matching",
+    subheadline:
+      "Upload a portrait and discover celebrity look alike matches based on facial structure, feature similarity, and visual resemblance.",
     whyChoose: [
-      { title: "Instant matches", description: "Upload once and get ranked celebrity look-alikes in seconds." },
-      { title: "Feature breakdown", description: "Understand which traits — eyes, jaw, smile — drive each match." },
-      { title: "Share-worthy results", description: "Results use your photo as the hero with clear match cards." },
-      { title: "Private & secure", description: "Your upload is used for analysis within your Verified Glam Scanner account." },
+      { title: "Fast face matching", description: "Get ranked celebrity style matches from one clear portrait." },
+      { title: "Feature explanations", description: "See which traits support the result, like eyes, smile, face shape, or jawline." },
+      { title: "Fun and shareable", description: "Use matches for entertainment, mood boards, and style inspiration." },
+      { title: "Clear disclaimer", description: "Results are similarity estimates for fun, not identity verification." },
     ],
     showcase: [
       {
-        title: "Discover who you resemble in seconds",
-        description: "Upload a portrait and Verified Glam Scanner compares your structure to a diverse celebrity reference set.",
+        title: "Find your celebrity look alike online",
+        description:
+          "Verified Glam Scanner compares your facial structure with reference patterns to suggest celebrities who share a similar visual feel.",
       },
       {
-        title: "See which traits drive each match",
-        description: "Every match card explains shared structure — eyes, jawline, nose bridge, smile — so results feel thoughtful, not random.",
+        title: "Understand why each match appears",
+        description:
+          "The report focuses on shared features, not random names. You can review which facial traits contribute to each match.",
       },
       {
-        title: "Your photo stays the hero",
-        description: "Results are designed for sharing: your portrait leads the screen with match cards alongside.",
+        title: "Turn matches into style inspiration",
+        description:
+          "Use your top matches as ideas for makeup, hair, color, photo style, and red carpet inspired looks.",
       },
       {
-        title: "Style inspiration from your twin",
-        description: "Use top matches as mood boards for hair, makeup, and red-carpet aesthetics.",
+        title: "Keep the experience fun and safe",
+        description:
+          "Celebrity look alike results are for entertainment and self discovery. They do not verify identity or imply endorsement.",
       },
     ],
     howTo: [
-      { title: "Upload your portrait", description: "Center your face with a natural expression." },
-      { title: "AI compares features", description: "We match proportions against our celebrity reference set." },
-      { title: "View your matches", description: "Explore top look-alikes and similarity details." },
+      { title: "Upload your portrait", description: "Center your face with a natural expression and good lighting." },
+      { title: "AI compares features", description: "The scan reviews face shape, feature spacing, and visual resemblance." },
+      { title: "View your matches", description: "Explore top look alike results and shared trait notes." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "How does celebrity look-alike detection work?", answer: "AI compares your facial structure to a database of celebrity reference faces." },
-      { question: "Are matches always exact?", answer: "Matches are similarity estimates for entertainment and style inspiration." },
-      { question: "Can I share my results?", answer: "Yes — results are designed with your photo and match cards for easy sharing." },
-      { question: "Which celebrities are included?", answer: "Our reference set covers a diverse range of well-known public figures." },
-      { question: "Do filters affect matches?", answer: "Heavy filters can skew results. Use a natural photo when possible." },
-      { question: "Is an account required?", answer: "Sign in to run analyses and save your match history." },
+      { question: "How does celebrity look alike matching work?", answer: "The tool compares visible facial patterns and estimates resemblance for entertainment and style inspiration." },
+      { question: "Are the matches exact?", answer: "No. Matches are similarity estimates, not identity verification." },
+      { question: "Can filters affect results?", answer: "Yes. Heavy filters can change facial cues, so a natural photo is better." },
+      { question: "Can I share my result?", answer: "Yes, but remember the feature is for fun and does not imply a real connection to any public figure." },
+      { question: "Do I need an account?", answer: "Signing in helps you save scans and view your match history." },
+      { question: "Is this face recognition?", answer: "It is a look alike and resemblance experience, not an identity verification product." },
     ],
-  },
-  FACIAL_SYMMETRY: {
-    headline: "AI Facial Symmetry — Accurate Face Balance Analysis",
-    subheadline: "See how balanced your features are with landmark-based symmetry scoring and clear visual overlays.",
+  }, "CELEBRITY_LOOKALIKE"),
+  FACIAL_SYMMETRY: withReviews({
+    headline: "AI Facial Symmetry Analyzer and Face Balance Test",
+    subheadline:
+      "Measure facial symmetry online with AI landmarks, visual overlays, and region level notes for eyes, brows, nose, jawline, and face shape.",
     whyChoose: [
-      { title: "Easy to use", description: "Upload a portrait and get symmetry metrics in seconds — no manual measuring." },
-      { title: "High-accuracy detection", description: "AI landmarks map eyes, brows, nose, and jawline for reliable balance scoring." },
-      { title: "Visual overlays", description: "See symmetry lines and regions on your own photo, not generic diagrams." },
-      { title: "Practical tips", description: "Learn how lighting, angles, and grooming can highlight your natural balance." },
+      { title: "Symmetry score", description: "Get a clear balance estimate from a front-facing photo." },
+      { title: "Region breakdown", description: "Review left and right balance across major facial areas." },
+      { title: "Visual overlays", description: "See guide lines on your own photo so the result feels easier to understand." },
+      { title: "Photo improvement tips", description: "Learn how pose, expression, hair, and lighting affect perceived symmetry." },
     ],
     showcase: [
       {
-        title: "Measure facial symmetry on your photo",
-        description: "Verified Glam Scanner maps your midline and compares left-right landmarks for a reliable symmetry score.",
+        title: "Run a facial symmetry test from your browser",
+        description:
+          "Upload a clear portrait and Verified Glam Scanner estimates how balanced key landmarks appear from left to right.",
       },
       {
-        title: "Break down balance by region",
-        description: "Explore symmetry scores for eyes, brows, nose, and lower face separately.",
+        title: "See more than one symmetry number",
+        description:
+          "The report can separate eye, brow, nose, mouth, and jawline balance so you understand the pattern behind the score.",
       },
       {
-        title: "Visual guides, not vague numbers",
-        description: "Thin burgundy guides and region highlights show exactly what the AI measured.",
+        title: "Use overlays to understand the result",
+        description:
+          "Guide lines and visual regions help explain what the AI measured on your own image.",
       },
       {
-        title: "Photo-ready tips from your scan",
-        description: "Small pose, expression, and lighting tweaks can change how symmetry appears on camera.",
+        title: "Improve photo balance with small changes",
+        description:
+          "Pose, lighting, camera height, and hair placement can change how symmetry appears. The report helps you notice those details.",
       },
     ],
     howTo: [
-      { title: "Upload a photo", description: "Face the camera directly with a neutral expression." },
-      { title: "Scan & analyze", description: "AI detects landmarks and computes symmetry across regions." },
-      { title: "Check results", description: "Review your score, overlays, and personalized notes." },
+      { title: "Upload a straight photo", description: "Face the camera directly with a relaxed expression." },
+      { title: "AI maps landmarks", description: "The scan compares paired features around the face midline." },
+      { title: "Review balance notes", description: "See your score, regions, overlays, and practical suggestions." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "How is facial symmetry measured?", answer: "We compare paired landmarks on the left and right sides of your face relative to the midline." },
-      { question: "Is perfect symmetry realistic?", answer: "Slight asymmetry is natural. The tool highlights balance patterns, not flaws." },
-      { question: "What affects my symmetry score?", answer: "Pose, expression, hair covering the face, and lighting can all influence readings." },
-      { question: "Can symmetry change over time?", answer: "Grooming, skincare, and photo angle often change how symmetry appears in images." },
-      { question: "Do I need a professional photo?", answer: "A clear selfie is enough for a useful symmetry analysis." },
-      { question: "Are results medical advice?", answer: "No. This is a cosmetic analysis tool for styling and self-discovery." },
+      { question: "How is facial symmetry measured?", answer: "The tool compares paired landmarks on both sides of the face relative to the center line." },
+      { question: "Is perfect symmetry normal?", answer: "No. Slight asymmetry is natural and common." },
+      { question: "What affects my score?", answer: "Pose, lighting, expression, hair placement, and camera angle can all affect the result." },
+      { question: "Can symmetry change over time?", answer: "Your actual features change slowly, but styling and photos can change how symmetry appears." },
+      { question: "Is this medical analysis?", answer: "No. It is cosmetic and entertainment analysis, not medical advice." },
+      { question: "Can I retake the scan?", answer: "Yes. Retaking with better lighting or a straighter photo can improve the usefulness of the result." },
     ],
-  },
-  BEAUTY_SCORE_SHOWDOWN: {
-    headline: "Beauty Score Showdown — Compare & Compete",
-    subheadline: "Friendly score comparisons with clear feature breakdowns — perfect for duos and groups.",
+  }, "FACIAL_SYMMETRY"),
+  BEAUTY_SCORE_SHOWDOWN: withReviews({
+    headline: "Beauty Score Showdown for Friendly AI Comparisons",
+    subheadline:
+      "Compare beauty scores with a fun AI showdown built for friends, creators, and group challenges with clear category notes.",
     whyChoose: [
-      { title: "Side-by-side clarity", description: "Compare scores without confusing spreadsheets or guesswork." },
-      { title: "Category winners", description: "See which features lead for each person in the showdown." },
-      { title: "Party-ready", description: "Fun for friends — built for shareable, visual results." },
-      { title: "Fair AI scoring", description: "Same analysis pipeline for every upload in the showdown." },
+      { title: "Side by side scoring", description: "Compare results in a clean format without confusing spreadsheets." },
+      { title: "Category notes", description: "See where each person stands out across visible beauty signals." },
+      { title: "Share friendly", description: "Designed for fun group moments, content ideas, and lighthearted comparison." },
+      { title: "Consistent pipeline", description: "Every participant is analyzed with the same scoring flow." },
     ],
     showcase: [
       {
-        title: "Head-to-head beauty scores, side by side",
-        description: "Upload portraits for each participant and Verified Glam Scanner scores everyone with the same AI pipeline.",
+        title: "Run a friendly beauty score challenge",
+        description:
+          "Beauty Score Showdown lets users compare AI beauty results in a structured way while keeping the tone playful and positive.",
       },
       {
-        title: "See who wins each category",
-        description: "Eyes, symmetry, proportions — category breakdowns reveal where each person leads.",
+        title: "Compare categories, not just totals",
+        description:
+          "The report can show category level strengths so the result feels more nuanced than a simple winner and loser.",
       },
       {
-        title: "Fair scoring for every upload",
-        description: "The same feature model analyzes each portrait so comparisons stay consistent.",
+        title: "Keep comparison fair",
+        description:
+          "Use similar lighting, similar pose, and clear photos so each participant has the same chance at a useful result.",
       },
       {
-        title: "Share the results with your group",
-        description: "Export-friendly layouts put each hero portrait and score on screen for social posts and group chats.",
+        title: "Create shareable beauty content",
+        description:
+          "The format works well for friends, creators, couples, siblings, and light social challenges when everyone has consented.",
       },
     ],
     howTo: [
-      { title: "Upload participant photos", description: "Follow prompts for each person in the showdown." },
-      { title: "Run AI analysis", description: "We score every portrait with the same feature model." },
-      { title: "Compare results", description: "Review winners, ties, and feature highlights." },
+      { title: "Add participant photos", description: "Use clear portraits with similar lighting where possible." },
+      { title: "Run the AI showdown", description: "The system scores each photo with the same analysis logic." },
+      { title: "Compare results", description: "Review scores, category notes, and shareable highlights." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "How many people can compete?", answer: "Follow on-screen prompts for the supported showdown format." },
-      { question: "Is this mean-spirited?", answer: "It is designed as light-hearted comparison with constructive feature notes." },
-      { question: "Are scores objective?", answer: "Scores reflect AI measurements — beauty is personal and subjective." },
-      { question: "Can we rematch?", answer: "Yes. Run new showdowns anytime with fresh photos." },
-      { question: "Do both need accounts?", answer: "One signed-in user can upload all photos for a session." },
-      { question: "What photo rules apply?", answer: "Similar lighting and pose make comparisons fairer." },
+      { question: "Is the showdown meant to be serious?", answer: "No. It is designed as a fun comparison tool with a constructive tone." },
+      { question: "Are scores objective?", answer: "Scores are AI estimates based on visual patterns. Beauty is personal and subjective." },
+      { question: "Can friends use one account?", answer: "One signed-in user can run the flow, but each person should consent to their photo being uploaded." },
+      { question: "What photos work best?", answer: "Use clear, front-facing photos with similar lighting and no heavy filters." },
+      { question: "Can we run a rematch?", answer: "Yes. You can upload new photos and compare again." },
+      { question: "Can results be shared?", answer: "Yes, but share respectfully and only with permission from the people in the photos." },
     ],
-  },
-  FACIAL_RESEMBLANCE: {
-    headline: "AI Face Comparison — How Alike Are Two Faces?",
-    subheadline: "Upload two portraits for resemblance scoring and shared-feature highlights.",
+  }, "BEAUTY_SCORE_SHOWDOWN"),
+  FACIAL_RESEMBLANCE: withReviews({
+    headline: "AI Face Comparison and Facial Resemblance Test",
+    subheadline:
+      "Upload two portraits to compare facial resemblance, shared traits, feature similarity, and visual differences in one clean report.",
     whyChoose: [
-      { title: "Two-face upload", description: "Purpose-built flow for exactly two faces in one analysis." },
-      { title: "Resemblance score", description: "Clear percentage-style similarity with trait notes." },
-      { title: "Visual pairing", description: "Both photos stay visible with matching landmark callouts." },
-      { title: "Fast results", description: "Great for family photos, friends, and creator content." },
+      { title: "Two face comparison", description: "Purpose built for comparing two visible faces in one analysis." },
+      { title: "Similarity estimate", description: "Get a clear resemblance score with supporting trait notes." },
+      { title: "Shared feature insights", description: "Compare eyes, nose, jawline, face shape, and overall visual structure." },
+      { title: "Fun for pairs", description: "Useful for friends, siblings, couples, family resemblance, and creator content." },
     ],
     showcase: [
       {
-        title: "Compare two faces in one flow",
-        description: "Purpose-built for exactly two portraits — upload both and Verified Glam Scanner aligns landmarks automatically.",
+        title: "Compare two faces online",
+        description:
+          "Verified Glam Scanner aligns visible facial features from two portraits and estimates how similar they appear.",
       },
       {
-        title: "Resemblance you can actually see",
-        description: "Dual heroes stay visible with matching callouts on eyes, jaw, and nose.",
+        title: "See shared traits and differences",
+        description:
+          "The report explains where faces look alike and where they differ, which makes the result more helpful than a simple percentage.",
       },
       {
-        title: "Understand differences too",
-        description: "Similarity is only half the story — see where faces diverge, not just overall match percentage.",
+        title: "Use it for family resemblance and fun content",
+        description:
+          "Compare parent and child photos, siblings, friends, couples, or old and new portraits for an entertaining resemblance check.",
       },
       {
-        title: "Fast results for pairs",
-        description: "No identity verification — this is similarity analysis for insight and fun.",
+        title: "Keep comparison clear and respectful",
+        description:
+          "The feature is for visual similarity, not identity confirmation. Clear photos and consent make the experience better.",
       },
     ],
     howTo: [
-      { title: "Upload two portraits", description: "One face per photo, clearly visible." },
-      { title: "AI aligns features", description: "Landmarks are matched across both images." },
-      { title: "Read resemblance", description: "Review score, shared traits, and visual callouts." },
+      { title: "Upload two portraits", description: "Use one clear face per image for the best comparison." },
+      { title: "AI aligns features", description: "The scan compares visible landmarks and facial structure." },
+      { title: "Read the resemblance report", description: "Review score, shared traits, and differences." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "Can I compare a parent and child?", answer: "Yes — family resemblance is a popular use case." },
-      { question: "Do photos need the same background?", answer: "No, but similar pose and lighting improve accuracy." },
-      { question: "What if one face is partially hidden?", answer: "Both faces should be fully visible for best results." },
-      { question: "Is this facial recognition?", answer: "It is similarity analysis for entertainment and insight, not identity verification." },
-      { question: "Can I compare old and new photos?", answer: "Yes — see how your features read across time or styles." },
-      { question: "How private is comparison?", answer: "Uploads are tied to your account and processed securely." },
+      { question: "Can I compare family members?", answer: "Yes. Family resemblance is one of the most common use cases." },
+      { question: "Do the photos need the same background?", answer: "No, but similar lighting and pose can improve the result." },
+      { question: "Is this identity verification?", answer: "No. It is a resemblance and entertainment tool, not identity verification." },
+      { question: "Can I compare old and new photos?", answer: "Yes. It can be fun to compare photos across time or different styles." },
+      { question: "What if one face is hidden?", answer: "Both faces should be clearly visible for the best result." },
+      { question: "Are uploads private?", answer: "Photos are processed for your requested scan. Review the privacy policy for retention details." },
     ],
-  },
-  FACE_READING: {
-    headline: "AI Attractiveness Test — Feature-Based Ratings",
-    subheadline: "A thoughtful attractiveness analysis focused on measurable features — not harsh judgments.",
+  }, "FACIAL_RESEMBLANCE"),
+  FACE_READING: withReviews({
+    headline: "AI Attractiveness Test with Feature Based Ratings",
+    subheadline:
+      "Take an online attractiveness test that focuses on facial balance, feature harmony, and practical style notes instead of harsh judgment.",
     whyChoose: [
-      { title: "Feature-based", description: "Ratings tie to proportions and symmetry — not a black-box number." },
-      { title: "Constructive tone", description: "Insights emphasize enhancement, not criticism." },
-      { title: "Your photo first", description: "Results hero your portrait with overlays — never icon-only placeholders." },
-      { title: "Quick turnaround", description: "Upload and get ratings in under a minute on web." },
+      { title: "Feature based rating", description: "The result connects the score to visible traits like balance, proportion, and photo quality." },
+      { title: "Constructive tone", description: "The report is designed to support confidence and style decisions." },
+      { title: "Visual result page", description: "Your own photo remains central, with score cards and notes around it." },
+      { title: "Useful next steps", description: "Get simple ideas for grooming, camera angle, hair framing, and makeup direction." },
     ],
     showcase: [
       {
-        title: "Attractiveness ratings with real context",
-        description: "Verified Glam Scanner ties ratings to measurable symmetry and proportions — not a random number from a black box.",
+        title: "Take an attractiveness test with context",
+        description:
+          "Verified Glam Scanner estimates visible beauty signals and presents them in a way that is easier to understand and less judgmental.",
       },
       {
-        title: "Regional breakdown beneath your photo",
-        description: "See which areas score highest and why landmarks drove the result.",
+        title: "Review what supports the score",
+        description:
+          "Instead of only showing a number, the report explains feature harmony, balance, and photo factors that can influence the result.",
       },
       {
-        title: "Feature highlights that build confidence",
-        description: "Callouts show strengths you might overlook in daily mirror checks.",
+        title: "Use the result for styling confidence",
+        description:
+          "The goal is to help you choose better angles, grooming choices, and beauty details that support your look.",
       },
       {
-        title: "Grooming tips that respect your look",
-        description: "Get hair framing, lighting, and grooming suggestions aligned with your natural features.",
+        title: "Keep the experience healthy",
+        description:
+          "Attractiveness is personal. The scan is a cosmetic guide for self discovery, not a final judgment of how you look.",
       },
     ],
     howTo: [
-      { title: "Upload your photo", description: "Face forward, relaxed expression." },
-      { title: "AI rates features", description: "Landmarks drive proportional and symmetry-based scores." },
-      { title: "Explore results", description: "Read ratings, overlays, and improvement ideas." },
+      { title: "Upload your photo", description: "Use a front-facing image with a relaxed expression." },
+      { title: "AI rates visible features", description: "The scan estimates balance, proportions, and feature harmony." },
+      { title: "Explore your score", description: "Review the result, strengths, and practical style suggestions." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "Is attractiveness subjective?", answer: "Yes. Our test reflects measurable features — confidence and style matter just as much." },
-      { question: "Will this hurt my self-esteem?", answer: "We focus on constructive, feature-level insights — skip if comparisons feel unhelpful." },
-      { question: "How is the score calculated?", answer: "AI combines symmetry, proportion, and feature harmony metrics." },
-      { question: "Can I retake the test?", answer: "Absolutely — different lighting and angles change results." },
-      { question: "Is this for dating apps?", answer: "It is for self-discovery and styling; use judgment on any platform." },
-      { question: "Do I need makeup on?", answer: "Either works — choose the look you want feedback on." },
+      { question: "Is attractiveness subjective?", answer: "Yes. The tool estimates visible patterns, but real attractiveness includes personality, confidence, culture, and preference." },
+      { question: "Will this hurt my confidence?", answer: "The copy and report are designed to be constructive. If scores feel unhelpful, it is best to skip this type of tool." },
+      { question: "How is the score calculated?", answer: "The score is estimated from visible signals like symmetry, proportion, facial balance, and photo quality." },
+      { question: "Can I retake the test?", answer: "Yes. Lighting, camera angle, expression, and grooming can change the result." },
+      { question: "Do I need makeup?", answer: "No. Choose the look you want feedback on." },
+      { question: "Is this professional advice?", answer: "No. It is an AI cosmetic and entertainment tool." },
     ],
-  },
-  GOLDEN_RATIO: {
-    headline: "Face Golden Ratio — Classical Proportion Analysis",
-    subheadline: "See how your facial proportions relate to golden ratio ideals — with clear visual guides.",
+  }, "FACE_READING"),
+  GOLDEN_RATIO: withReviews({
+    headline: "Face Golden Ratio Calculator and AI Phi Beauty Analysis",
+    subheadline:
+      "Upload a portrait to explore facial thirds, fifths, proportions, and golden ratio inspired harmony with clear visual guidance.",
     whyChoose: [
-      { title: "Phi-based metrics", description: "Explore classical proportion theory applied to your portrait." },
-      { title: "Educational overlays", description: "Lines and ratios on your photo — not abstract charts alone." },
-      { title: "Balanced perspective", description: "Ideal ratios are references; natural variation is normal." },
-      { title: "Great for creators", description: "Understand how angle and framing change perceived harmony." },
+      { title: "Golden ratio inspired", description: "Explore classic proportion ideas applied to your own photo." },
+      { title: "Visual proportion map", description: "See guides for facial thirds, fifths, balance, and harmony." },
+      { title: "Educational result", description: "Learn how angle, framing, and proportions affect how a face reads in photos." },
+      { title: "Balanced perspective", description: "The report treats ratios as guides, not beauty rules." },
     ],
     showcase: [
       {
-        title: "Golden ratio guides on your face",
-        description: "Verified Glam Scanner draws classical proportion guides — facial thirds, fifths, and phi relationships — directly on your portrait.",
+        title: "Explore golden ratio face analysis online",
+        description:
+          "Verified Glam Scanner places proportion guidance on your photo so classical beauty ratios feel easier to understand.",
       },
       {
-        title: "Harmony scores you can read",
-        description: "Summary metrics plus regional notes translate geometry into plain language.",
+        title: "Read facial thirds and fifths in plain language",
+        description:
+          "The report explains proportional signals without forcing you to interpret technical diagrams on your own.",
       },
       {
-        title: "Educational overlays, not abstract charts",
-        description: "Lines and ratio markers stay on your photo so the analysis feels tangible.",
+        title: "Use proportion guidance for better photos",
+        description:
+          "Camera distance, lens angle, head tilt, and hair volume can change how proportions appear. The scan helps you notice those shifts.",
       },
       {
-        title: "See how framing changes perceived balance",
-        description: "Hairstyle volume and camera distance affect how proportions read on screen.",
+        title: "Keep beauty standards in perspective",
+        description:
+          "Golden ratio analysis can be interesting, but natural variation is normal. The tool is for learning, styling, and self discovery.",
       },
     ],
     howTo: [
-      { title: "Upload a frontal portrait", description: "Keep head level and face unobstructed." },
-      { title: "Measure proportions", description: "AI calculates key distances and phi relationships." },
-      { title: "Study your map", description: "Review overlays, scores, and harmony notes." },
+      { title: "Upload a level portrait", description: "Keep your head straight and your face unobstructed." },
+      { title: "AI measures proportions", description: "The scan estimates facial thirds, fifths, and harmony signals." },
+      { title: "Review the map", description: "Study your score, visual guides, and practical photo notes." },
     ],
-    reviews: SHARED_REVIEWS,
     faq: [
-      { question: "What is the golden ratio in faces?", answer: "It describes proportional relationships often associated with classical harmony." },
-      { question: "Must I match phi exactly?", answer: "No — most faces deviate naturally; the tool shows patterns, not perfection targets." },
-      { question: "Does hairstyle affect results?", answer: "Hair covering the jaw or forehead can shift perceived proportions." },
-      { question: "Is this science or art?", answer: "It blends geometric analysis with aesthetic tradition — interpret as guidance." },
-      { question: "Can photographers use this?", answer: "Yes — great for learning flattering angles and crop ratios." },
-      { question: "How accurate is web analysis?", answer: "Clear, forward-facing photos produce the most reliable maps." },
+      { question: "What is the golden ratio in faces?", answer: "It is a classic proportion idea often used to discuss visual harmony in art, design, and faces." },
+      { question: "Do I need to match the golden ratio exactly?", answer: "No. Real faces vary naturally, and ratios are only a guide." },
+      { question: "Can hairstyle affect the result?", answer: "Yes. Hair covering the jaw, forehead, or face edges can change the visual read." },
+      { question: "Is this scientific proof of beauty?", answer: "No. It is a cosmetic analysis inspired by proportion theory and should be interpreted lightly." },
+      { question: "Can photographers use it?", answer: "Yes. It can help with angle, crop, and framing ideas." },
+      { question: "What photo works best?", answer: "A clear, forward-facing photo with even lighting and a neutral expression is best." },
     ],
-  },
+  }, "GOLDEN_RATIO"),
 };
 
 export function landingContentForFeature(featureType: FeatureType): ToolLandingContent {

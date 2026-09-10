@@ -21,6 +21,7 @@ class VGPaywallPlansSection extends StatefulWidget {
   final bool showCta;
   final bool perPlanCta;
   final bool compact;
+  final bool showCreditPricingRows;
 
   const VGPaywallPlansSection({
     super.key,
@@ -34,6 +35,7 @@ class VGPaywallPlansSection extends StatefulWidget {
     this.showCta = true,
     this.perPlanCta = false,
     this.compact = false,
+    this.showCreditPricingRows = true,
   });
 
   @override
@@ -343,8 +345,10 @@ class VGPaywallPlansSectionState extends State<VGPaywallPlansSection> {
               ...features.map(_compareRow),
               _compareTextRow('Ad-Free Experience', '✓', '✓'),
               _compareTextRow('Download Results', '✓', '✓'),
-              _compareTextRow('Credits Included', '200/year', '30/week'),
-              _compareTextRow('Cost per Generation', 'About \$0.20', 'About \$0.133'),
+              if (widget.showCreditPricingRows) ...[
+                _compareTextRow('Credits Included', '200/year', '30/week'),
+                _compareTextRow('Cost per Generation', 'About \$0.20', 'About \$0.133'),
+              ],
               _compareTextRow('Credit Renewal', 'Annual', 'Weekly'),
             ],
           ),

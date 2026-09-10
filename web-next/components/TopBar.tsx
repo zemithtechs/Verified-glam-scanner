@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Menu, X, Coins, LogOut, User } from "lucide-react";
 import { authApi } from "@/lib/client-api";
@@ -21,7 +22,7 @@ export function TopBar({ profile }: { profile: Profile }) {
 
   return (
     <>
-      <header className="h-[72px] flex items-center justify-between gap-3 px-4 sm:px-6 border-b border-(--color-border) bg-white">
+      <header className="flex h-[76px] items-center justify-between gap-3 border-b border-(--color-border) bg-white px-4 sm:px-7">
         <div className="flex items-center gap-3">
           <button
             className="lg:hidden p-2 -ml-2 text-(--color-burgundy-dark)"
@@ -30,21 +31,25 @@ export function TopBar({ profile }: { profile: Profile }) {
           >
             <Menu size={22} />
           </button>
-          <Link href="/app" className="lg:hidden font-extrabold text-(--color-burgundy-dark)">
-            Verified Glam
+          <Link href="/app" className="flex items-center gap-2 lg:hidden">
+            <Image src="/images/logo.png" alt="Verified Glam" width={30} height={30} className="rounded-lg" />
+            <span className="font-extrabold tracking-[-0.03em] text-(--color-burgundy-dark)">Verified Glam</span>
           </Link>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 rounded-full bg-(--color-surface) border border-(--color-border) px-3 py-1.5 text-sm font-semibold text-(--color-burgundy-dark)">
-            <Coins size={16} />
-            {profile.credits_balance}
+          <div className="flex items-center gap-2 rounded-[13px] border border-(--color-border) bg-(--color-surface) px-3 py-2 text-(--color-burgundy-dark)">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white text-(--color-burgundy) shadow-sm"><Coins size={15} /></span>
+            <span className="leading-none">
+              <span className="block text-[10px] font-bold uppercase tracking-[0.1em] text-(--color-text-muted)">Credits</span>
+              <span className="mt-1 block text-sm font-extrabold">{profile.credits_balance}</span>
+            </span>
           </div>
 
           <div className="relative">
             <button
               onClick={() => setMenuOpen((v) => !v)}
-              className="w-9 h-9 rounded-full bg-(--color-rose) text-white flex items-center justify-center font-semibold"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-(--color-burgundy) font-semibold text-white shadow-[0_6px_14px_rgba(82,13,28,0.18)]"
             >
               {(profile.display_name ?? profile.email)[0]?.toUpperCase()}
             </button>
@@ -79,8 +84,8 @@ export function TopBar({ profile }: { profile: Profile }) {
         <div className="fixed inset-0 z-30 lg:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setDrawerOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-72 bg-white flex flex-col">
-            <div className="h-[72px] flex items-center justify-between px-5 border-b border-(--color-border)">
-              <span className="font-extrabold text-(--color-burgundy-dark)">Verified Glam</span>
+            <div className="flex h-[76px] items-center justify-between border-b border-(--color-border) px-5">
+              <span className="font-extrabold tracking-[-0.03em] text-(--color-burgundy-dark)">Verified Glam</span>
               <button onClick={() => setDrawerOpen(false)} aria-label="Close menu">
                 <X size={20} />
               </button>

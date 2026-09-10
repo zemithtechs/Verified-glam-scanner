@@ -26,5 +26,5 @@ class VGAdsConfig {
   /// TEMPORARY test override — shows ads to Pro accounts too, so ad
   /// placement can be previewed without downgrading a real Pro account.
   /// Must be false before shipping; ad-free is a paid Pro benefit.
-  static const bool forceShowForTesting = true;
+  static const bool forceShowForTesting = false;
 }

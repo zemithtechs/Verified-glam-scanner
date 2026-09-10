@@ -45,7 +45,7 @@ $flutterArgs = @(
   "-t",
   "lib/main_web.dart",
   "--dart-define=VG_API_URL=$apiUrl",
-  "--dart-define=VG_USE_SUPABASE=true",
+  "--dart-define=VG_USE_CLOUD_BACKEND=true",
   "--dart-define=VG_USE_MOCK_ANALYSIS=false"
 )
 

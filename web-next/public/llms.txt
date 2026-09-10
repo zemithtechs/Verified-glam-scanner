@@ -1,0 +1,41 @@
+# Verified Glam Scanner
+
+> AI beauty analysis from your selfie — face beauty scoring, facial symmetry, seasonal color palette, celebrity look-alike matching, and personalized glow-up tips. Android app on Google Play; web scans at scanner.verifiedglam.com.
+
+Verified Glam Scanner is a product from Verified Glam (https://verifiedglam.com). Upload a photo for personalized AI beauty insights, generated server-side (no AI API keys ship in the app). Results are for entertainment and self-discovery — not medical, dermatological, or psychological advice.
+
+## Key facts
+
+- 10 AI scan types: Face Beauty Analysis, Seasonal Color Palette, Beauty Routine Challenge, Beauty Tips, Celebrity Look Alike, Facial Symmetry, Beauty Score Showdown, Face Comparison, Attractiveness Test, Face Golden Ratio.
+- Face Beauty Analysis is free (ad-supported). The other 9 tools require a Pro subscription.
+- Pricing: Yearly plan $39.99/year (200 AI credits) or Pro Weekly $3.99/week (30 credits/week). Each AI analysis costs 5 credits. Billed via Polar.sh.
+- Platforms: Android (Google Play, package com.verifiedglam.beauty_scanner) and web (scanner.verifiedglam.com).
+- Minimum age: 18+.
+- Support: support@verifiedglam.com
+
+## Canonical pages
+
+- https://scanner.verifiedglam.com/ — homepage
+- https://scanner.verifiedglam.com/tools — directory of all AI beauty tools
+- https://scanner.verifiedglam.com/pricing — plans, credits, and FAQ
+- https://scanner.verifiedglam.com/about — what the product is and how it works
+- https://scanner.verifiedglam.com/privacy — data collection and retention
+- https://scanner.verifiedglam.com/terms — terms of use, entertainment disclaimer
+
+## AI beauty tools
+
+- https://scanner.verifiedglam.com/face-beauty-analysis — free; overall beauty score with feature-level breakdown
+- https://scanner.verifiedglam.com/seasonal-color-palette — Pro; personalized color palette from skin/hair/eye tone
+- https://scanner.verifiedglam.com/beauty-routine-challenge — Pro; a tracked 3/5/7-day skincare plan built from a scan
+- https://scanner.verifiedglam.com/beauty-tips — Pro; personalized skincare/makeup tips
+- https://scanner.verifiedglam.com/celebrity-look-alike — Pro; ranked celebrity resemblance matches
+- https://scanner.verifiedglam.com/facial-symmetry — Pro; left/right balance scored by facial region
+- https://scanner.verifiedglam.com/beauty-score-showdown — Pro; beauty score with a community leaderboard
+- https://scanner.verifiedglam.com/face-comparison — Pro; resemblance score between two faces in one photo
+- https://scanner.verifiedglam.com/attractiveness-test — Pro; multi-trait attractiveness rating
+- https://scanner.verifiedglam.com/face-golden-ratio — Pro; facial proportions measured against the golden ratio
+
+## Contact
+
+- Support: support@verifiedglam.com
+- Google Play: https://play.google.com/store/apps/details?id=com.verifiedglam.beauty_scanner

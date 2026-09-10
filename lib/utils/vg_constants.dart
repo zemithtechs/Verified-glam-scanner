@@ -1,18 +1,25 @@
 import 'dart:ui';
 
-/// When true: bypass paywall / ads before results. Does not affect Supabase backend.
+/// When true: bypass paywall / ads before results. Does not affect the cloud backend.
 const bool kVGLocalDevMode = false;
 
-/// When true: use Supabase for auth, storage, scans, and Edge Function analysis.
-const bool kVGUseSupabase = bool.fromEnvironment('VG_USE_SUPABASE', defaultValue: true);
+/// When true: use the Cloudflare Worker for auth, storage, scans, and analysis.
+const bool kVGUseCloudBackend =
+    bool.fromEnvironment('VG_USE_CLOUD_BACKEND', defaultValue: true);
+
+/// Legacy internal name retained while call sites are migrated. This no longer
+/// selects or configures Supabase.
+const bool kVGUseSupabase = kVGUseCloudBackend;
 
 /// When true: use local mock payloads instead of OpenAI Edge Function (offline dev).
-const bool kVGUseMockAnalysis = bool.fromEnvironment('VG_USE_MOCK_ANALYSIS', defaultValue: false);
+const bool kVGUseMockAnalysis =
+    bool.fromEnvironment('VG_USE_MOCK_ANALYSIS', defaultValue: false);
 
 /// Portrait photo frames: width : height = 3 : 4 (Flutter [AspectRatio] width/height).
 const double vgPortraitAspectRatio = 3 / 4;
 
-Size vgPortraitSizeForWidth(double width) => Size(width, width / vgPortraitAspectRatio);
+Size vgPortraitSizeForWidth(double width) =>
+    Size(width, width / vgPortraitAspectRatio);
 
 const String vgAppName = 'Verified Glam';
 const String vgTagline = 'Beauty Made Perfect';
@@ -23,6 +30,7 @@ const String vgGooglePlayUrl =
 const String vgWebProductName = 'Verified Glam Scanner';
 const String vgWebAuthTagline = 'AI beauty analysis from your selfie';
 const String vgMarketingSiteUrl = 'https://scanner.verifiedglam.com';
+const String vgAccountDeletionUrl = '$vgMarketingSiteUrl/delete-account';
 const String vgParentCompanyUrl = 'https://verifiedglam.com';
 const String vgLegalSupportEmail = 'support@verifiedglam.com';
 const String vgMarketingAssetsPrefix = 'images/vg/marketing/';
@@ -48,16 +56,17 @@ const String vgGuideTipsCacheKey = 'vg_guide_tips_cache';
 const String vgSubscriptionIsProKey = 'vg_subscription_is_pro';
 const String vgSubscriptionPlanKey = 'vg_subscription_plan';
 const String vgSubscriptionFreeScanCountKey = 'vg_subscription_free_scan_count';
-const String vgSubscriptionPostOnboardingPaywallShownKey = 'vg_subscription_post_onboarding_paywall_shown';
-const String vgSubscriptionPromoExpiryKey = 'vg_subscription_promo_expiry';
-const String vgSubscriptionPromoShownSessionKey = 'vg_subscription_promo_shown_session';
-const String vgSubscriptionLastDailyPromptKey = 'vg_subscription_last_daily_prompt';
+const String vgSubscriptionPostOnboardingPaywallShownKey =
+    'vg_subscription_post_onboarding_paywall_shown';
+const String vgSubscriptionLastDailyPromptKey =
+    'vg_subscription_last_daily_prompt';
 
 const String vgReferralCodeKey = 'vg_referral_code';
 const String vgReferralDownloadCountKey = 'vg_referral_download_count';
 const String vgReferralBonusRedeemedKey = 'vg_referral_bonus_redeemed';
 const String vgReferralBonusScansKey = 'vg_referral_bonus_scans';
-const String vgUnilinkBaseUrl = 'https://YOUR-UNILINK-SUBDOMAIN.unilink.io/verifiedglam';
+const String vgUnilinkBaseUrl =
+    'https://YOUR-UNILINK-SUBDOMAIN.unilink.io/verifiedglam';
 const int vgReferralRewardThreshold = 3;
 const int vgReferralBonusScanAmount = 5;
 

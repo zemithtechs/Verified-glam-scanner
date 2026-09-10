@@ -28,6 +28,30 @@ function generateReferralCode(): string {
   return out;
 }
 
+async function deleteBucketPrefix(bucket: R2Bucket, prefix: string): Promise<void> {
+  let cursor: string | undefined;
+  do {
+    const page = await bucket.list({ prefix, cursor });
+    const keys = page.objects.map((object) => object.key);
+    if (keys.length > 0) await bucket.delete(keys);
+    cursor = page.truncated ? page.cursor : undefined;
+  } while (cursor);
+}
+
+function userAvatarKey(avatarUrl: string | null): string | null {
+  if (!avatarUrl) return null;
+  try {
+    const marker = "/api/assets/";
+    const path = new URL(avatarUrl).pathname;
+    const markerIndex = path.indexOf(marker);
+    if (markerIndex < 0) return null;
+    const key = decodeURIComponent(path.slice(markerIndex + marker.length));
+    return key.startsWith("showdown-avatars/") ? key : null;
+  } catch {
+    return null;
+  }
+}
+
 profiles.get("/me", async (c) => {
   const row = await c.env.DB.prepare("select * from profiles where id = ?").bind(c.get("userId")).first();
   if (!row) return c.json({ error: "not_found" }, 404);
@@ -40,6 +64,41 @@ profiles.get("/me", async (c) => {
     is_pro: row.is_pro === 1,
     referral_bonus_redeemed: row.referral_bonus_redeemed === 1,
   });
+});
+
+profiles.delete("/me", async (c) => {
+  const body = await c.req.json<{ confirmation?: string }>().catch(() => ({}) as { confirmation?: string });
+  if (body.confirmation !== "DELETE") {
+    return c.json({ error: "Type DELETE to confirm permanent account deletion.", errorCode: "confirmation_required" }, 400);
+  }
+
+  const userId = c.get("userId");
+  const account = await c.env.DB.prepare(
+    `select u.email, p.showdown_avatar_url
+       from "user" u
+       left join profiles p on p.id = u.id
+      where u.id = ?`,
+  )
+    .bind(userId)
+    .first<{ email: string; showdown_avatar_url: string | null }>();
+  if (!account) return c.json({ error: "not_found" }, 404);
+
+  // Delete private media first while the authenticated owner record still
+  // exists. R2 listing is paginated, so large scan histories are fully purged.
+  await deleteBucketPrefix(c.env.SCANS_BUCKET, `${userId}/`);
+  const avatarKey = userAvatarKey(account.showdown_avatar_url);
+  if (avatarKey) await c.env.ASSETS_BUCKET.delete(avatarKey);
+
+  // User-owned rows cascade from Better Auth's user table. Referral events
+  // are explicitly removed instead of leaving anonymous relationship rows;
+  // verification entries are keyed by email rather than a foreign key.
+  await c.env.DB.batch([
+    c.env.DB.prepare("delete from referral_events where referrer_id = ? or referred_user_id = ?").bind(userId, userId),
+    c.env.DB.prepare("delete from verification where lower(identifier) = lower(?)").bind(account.email),
+    c.env.DB.prepare('delete from "user" where id = ?').bind(userId),
+  ]);
+
+  return c.json({ ok: true, deleted: true });
 });
 
 profiles.put("/onboarding", async (c) => {

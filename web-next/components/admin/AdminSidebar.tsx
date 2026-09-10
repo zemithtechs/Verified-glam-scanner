@@ -1,0 +1,109 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Users,
+  CreditCard,
+  Bell,
+  Wrench,
+  GitBranch,
+  BarChart3,
+  Wallet,
+  ScrollText,
+  Settings,
+  ArrowLeft,
+} from "lucide-react";
+
+type NavItem = { label: string; href: string; icon: React.ComponentType<{ size?: number }>; comingSoon?: boolean };
+type NavGroup = { title: string; items: NavItem[] };
+
+const NAV: NavGroup[] = [
+  { title: "Dashboard", items: [{ label: "Overview", href: "/admin", icon: LayoutDashboard }] },
+  {
+    title: "User Management",
+    items: [
+      { label: "Users", href: "/admin/users", icon: Users },
+      { label: "Subscriptions", href: "/admin/subscriptions", icon: CreditCard },
+    ],
+  },
+  {
+    title: "Communication",
+    items: [{ label: "Notifications", href: "/admin/notifications", icon: Bell, comingSoon: true }],
+  },
+  {
+    title: "Tool Management",
+    items: [
+      { label: "Tools Registry", href: "/admin/tools", icon: Wrench, comingSoon: true },
+      { label: "Workflows", href: "/admin/workflows", icon: GitBranch, comingSoon: true },
+    ],
+  },
+  {
+    title: "Global Analytics",
+    items: [
+      { label: "Platform Usage", href: "/admin/usage", icon: BarChart3, comingSoon: true },
+      { label: "Revenue & Payouts", href: "/admin/revenue", icon: Wallet, comingSoon: true },
+    ],
+  },
+  {
+    title: "System Administration",
+    items: [
+      { label: "System Logs", href: "/admin/logs", icon: ScrollText, comingSoon: true },
+      { label: "Admin Settings", href: "/admin/settings", icon: Settings, comingSoon: true },
+    ],
+  },
+];
+
+export function AdminSidebar({ email }: { email: string }) {
+  const pathname = usePathname();
+
+  return (
+    <aside className="w-64 shrink-0 bg-[#171126] text-white/80 flex flex-col min-h-screen">
+      <div className="px-5 py-5 border-b border-white/10">
+        <p className="font-extrabold text-white">Verified Glam</p>
+        <p className="text-[11px] uppercase tracking-wide text-white/50">Admin</p>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-5">
+        {NAV.map((group) => (
+          <div key={group.title}>
+            <p className="px-2 mb-1.5 text-[10px] font-bold uppercase tracking-wide text-white/40">{group.title}</p>
+            <div className="space-y-0.5">
+              {group.items.map((item) => {
+                const active = pathname === item.href;
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.comingSoon ? "#" : item.href}
+                    aria-disabled={item.comingSoon}
+                    className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors ${
+                      active
+                        ? "bg-(--color-burgundy) text-white"
+                        : item.comingSoon
+                          ? "text-white/30 cursor-default"
+                          : "text-white/75 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    <Icon size={16} />
+                    <span className="flex-1">{item.label}</span>
+                    {item.comingSoon && <span className="text-[9px] uppercase tracking-wide">Soon</span>}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      <div className="px-3 py-4 border-t border-white/10 space-y-2">
+        <p className="px-2 text-xs text-white/40 truncate">{email}</p>
+        <Link href="/app/face-beauty-analysis" className="flex items-center gap-2 px-2.5 py-2 text-sm font-medium text-white/70 hover:text-white">
+          <ArrowLeft size={16} />
+          Exit to app
+        </Link>
+      </div>
+    </aside>
+  );
+}
