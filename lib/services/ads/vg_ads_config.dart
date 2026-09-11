@@ -6,7 +6,11 @@ class VGAdsConfig {
 
   /// Global kill switch — flip to false to disable all ads app-wide without
   /// touching any other code.
-  static const bool adStatus = true;
+  /// TEMPORARILY OFF for the Play Store submission/review period — AdMob
+  /// policy requires test ad units only be shown to registered test devices,
+  /// not real end users (which includes Google's own reviewers). Flip back
+  /// to true once the app is approved and the real ad unit IDs below are in.
+  static const bool adStatus = false;
 
   // Google's public test ad unit IDs (same for every developer, safe to tap
   // freely). Do NOT replace these with real IDs except immediately before a

@@ -12,7 +12,6 @@ import '../utils/BMColors.dart';
 import '../utils/vg_auth_navigation.dart';
 import '../utils/vg_constants.dart';
 import '../utils/vg_navigation.dart';
-import '../utils/vg_copy.dart';
 import 'BMDashboardScreen.dart';
 import 'BMWalkThroughScreen.dart';
 
@@ -75,9 +74,9 @@ class _BMSplashScreenState extends State<BMSplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset('images/verified_glam_logo.png', height: 200),
-          Text(vgAppName, style: boldTextStyle(size: 20, color: appStore.isDarkModeOn ? Colors.white : bmSpecialColorDark)),
+          Text('Verified Glam', style: boldTextStyle(size: 20, color: appStore.isDarkModeOn ? Colors.white : bmSpecialColorDark)),
           8.height,
-          Text(VGCopy.splashTagline, style: secondaryTextStyle(color: appStore.isDarkModeOn ? Colors.white70 : bmGreyColor)),
+          Text('Beauty Scanner', style: secondaryTextStyle(color: appStore.isDarkModeOn ? Colors.white70 : bmGreyColor)),
         ],
       ).center(),
     );
