@@ -32,7 +32,7 @@ export function ReportActions({ toolTitle, summaryLines, onRetake }: { toolTitle
   }
 
   async function handleShare() {
-    const text = [`${toolTitle} — Verified Glam Scanner`, ...summaryLines].join("\n");
+    const text = [`${toolTitle} — Verified Glam - Beauty Scanner`, ...summaryLines].join("\n");
     if (canShare) {
       try {
         await navigator.share({ title: toolTitle, text });

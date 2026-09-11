@@ -8,9 +8,9 @@ import { MarketingLayout } from "@/components/marketing/MarketingLayout";
 import { FaqJsonLd } from "@/components/seo/JsonLd";
 import { PricingView } from "./PricingView";
 
-const TITLE = "Verified Glam Scanner Pricing — Credits & Plans";
+const TITLE = "Verified Glam - Beauty Scanner Pricing — Credits & Plans";
 const DESCRIPTION =
-  "Verified Glam Scanner Pro: Yearly $39.99/year (200 AI credits) or Pro $3.99/week (30 credits weekly). 5 credits per AI generation. Ad-free.";
+  "Verified Glam - Beauty Scanner Pro: Yearly $39.99/year (200 AI credits) or Pro $3.99/week (30 credits weekly). 5 credits per AI generation. Ad-free.";
 
 export const metadata: Metadata = {
   title: TITLE,

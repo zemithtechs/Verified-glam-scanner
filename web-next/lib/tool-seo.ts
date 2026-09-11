@@ -5,7 +5,7 @@ export const TOOL_SEO: Record<FeatureType, { pageTitle: string; metaDescription:
   FACE_BEAUTY_ANALYSIS: {
     pageTitle: "AI Face Beauty Analysis | Free Online Beauty Score",
     metaDescription:
-      "Upload a photo for instant AI face beauty analysis. Get feature scores, highlights, and personalized beauty insights with Verified Glam Scanner.",
+      "Upload a photo for instant AI face beauty analysis. Get feature scores, highlights, and personalized beauty insights with Verified Glam - Beauty Scanner.",
   },
   COLOR_ANALYSIS: {
     pageTitle: "AI Seasonal Color Palette | Find Your Best Colors",
@@ -15,7 +15,7 @@ export const TOOL_SEO: Record<FeatureType, { pageTitle: string; metaDescription:
   GLOW_UP_GUIDE: {
     pageTitle: "Beauty Routine Challenge | AI Glow-Up Guide",
     metaDescription:
-      "Start a personalized beauty routine challenge with AI. Upload a photo and get a structured glow-up plan from Verified Glam Scanner.",
+      "Start a personalized beauty routine challenge with AI. Upload a photo and get a structured glow-up plan from Verified Glam - Beauty Scanner.",
   },
   BEAUTY_TIPS: {
     pageTitle: "AI Beauty Tips | Personalized Makeup & Skincare Advice",

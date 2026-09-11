@@ -5,7 +5,7 @@ import { TOOL_DEEP_GUIDES } from "./tool-deep-guides";
 const SHARED_REVIEWS = [
   {
     name: "Maya R.",
-    text: "Verified Glam Scanner made my results feel clear and personal. I liked seeing the notes connected to my own photo.",
+    text: "Verified Glam - Beauty Scanner made my results feel clear and personal. I liked seeing the notes connected to my own photo.",
     rating: 5,
   },
   {
@@ -33,13 +33,13 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       { title: "Instant beauty score", description: "Get a polished score and feature summary without booking a studio session." },
       { title: "Feature level detail", description: "Review eyes, lips, symmetry, proportions, and facial balance in one clean report." },
       { title: "Practical beauty guidance", description: "Turn your scan into simple ideas for makeup placement, grooming, hair framing, and better photos." },
-      { title: "Built for web and mobile", description: "Use Verified Glam Scanner from your browser, then sign in to keep your results connected." },
+      { title: "Built for web and mobile", description: "Use Verified Glam - Beauty Scanner from your browser, then sign in to keep your results connected." },
     ],
     showcase: [
       {
         title: "See your beauty score with visual context",
         description:
-          "Verified Glam Scanner places your result next to your own photo, so the score feels understandable. The report focuses on facial balance, feature harmony, and the visible details that shape the final result.",
+          "Verified Glam - Beauty Scanner places your result next to your own photo, so the score feels understandable. The report focuses on facial balance, feature harmony, and the visible details that shape the final result.",
       },
       {
         title: "Understand what affects your face analysis",
@@ -66,7 +66,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       { question: "How does AI face beauty analysis work?", answer: "The tool detects facial landmarks and estimates visual balance, symmetry, and feature harmony from your uploaded photo." },
       { question: "What kind of photo should I upload?", answer: "A clear front-facing selfie with your face centered, good light, and no heavy filter gives the best result." },
       { question: "Is the beauty score a judgment?", answer: "No. The score is a cosmetic and entertainment guide. It is meant to help you understand styling opportunities, not define your worth." },
-      { question: "Can I use it on desktop?", answer: "Yes. Verified Glam Scanner works on desktop, laptop, tablet, and mobile browsers." },
+      { question: "Can I use it on desktop?", answer: "Yes. Verified Glam - Beauty Scanner works on desktop, laptop, tablet, and mobile browsers." },
       { question: "Do I need an account?", answer: "You can start the flow quickly, but signing in lets you save scans and keep results connected." },
       { question: "Is this medical advice?", answer: "No. It is not medical, dermatology, or professional health advice." },
     ],
@@ -85,7 +85,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Find your best color direction online",
         description:
-          "Verified Glam Scanner reads your selfie for color cues and turns them into a practical seasonal palette. The goal is to help you choose shades that lift your face instead of washing it out.",
+          "Verified Glam - Beauty Scanner reads your selfie for color cues and turns them into a practical seasonal palette. The goal is to help you choose shades that lift your face instead of washing it out.",
       },
       {
         title: "Use color analysis before buying makeup",
@@ -177,7 +177,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Get beauty tips that match your face",
         description:
-          "Verified Glam Scanner reads visible structure and gives suggestions that feel more personal than a generic makeup tutorial.",
+          "Verified Glam - Beauty Scanner reads visible structure and gives suggestions that feel more personal than a generic makeup tutorial.",
       },
       {
         title: "Improve makeup placement with simple cues",
@@ -223,7 +223,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Find your celebrity look alike online",
         description:
-          "Verified Glam Scanner compares your facial structure with reference patterns to suggest celebrities who share a similar visual feel.",
+          "Verified Glam - Beauty Scanner compares your facial structure with reference patterns to suggest celebrities who share a similar visual feel.",
       },
       {
         title: "Understand why each match appears",
@@ -269,7 +269,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Run a facial symmetry test from your browser",
         description:
-          "Upload a clear portrait and Verified Glam Scanner estimates how balanced key landmarks appear from left to right.",
+          "Upload a clear portrait and Verified Glam - Beauty Scanner estimates how balanced key landmarks appear from left to right.",
       },
       {
         title: "See more than one symmetry number",
@@ -361,7 +361,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Compare two faces online",
         description:
-          "Verified Glam Scanner aligns visible facial features from two portraits and estimates how similar they appear.",
+          "Verified Glam - Beauty Scanner aligns visible facial features from two portraits and estimates how similar they appear.",
       },
       {
         title: "See shared traits and differences",
@@ -407,7 +407,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Take an attractiveness test with context",
         description:
-          "Verified Glam Scanner estimates visible beauty signals and presents them in a way that is easier to understand and less judgmental.",
+          "Verified Glam - Beauty Scanner estimates visible beauty signals and presents them in a way that is easier to understand and less judgmental.",
       },
       {
         title: "Review what supports the score",
@@ -453,7 +453,7 @@ const CONTENT: Record<FeatureType, ToolLandingContent> = {
       {
         title: "Explore golden ratio face analysis online",
         description:
-          "Verified Glam Scanner places proportion guidance on your photo so classical beauty ratios feel easier to understand.",
+          "Verified Glam - Beauty Scanner places proportion guidance on your photo so classical beauty ratios feel easier to understand.",
       },
       {
         title: "Read facial thirds and fifths in plain language",

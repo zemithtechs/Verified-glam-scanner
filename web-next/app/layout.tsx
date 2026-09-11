@@ -11,7 +11,7 @@ const outfit = Outfit({
 });
 
 const DESCRIPTION =
-  "Verified Glam Scanner analyzes your selfie with AI for face beauty scores, symmetry, celebrity look-alikes, and personalized glow-up tips. Free to try, Pro plans available.";
+  "Verified Glam - Beauty Scanner analyzes your selfie with AI for face beauty scores, symmetry, celebrity look-alikes, and personalized glow-up tips. Free to try, Pro plans available.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

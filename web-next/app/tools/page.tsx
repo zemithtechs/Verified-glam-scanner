@@ -6,7 +6,7 @@ import { ToolsGridSection } from "@/components/marketing/ToolsGridSection";
 import { TOOLS } from "@/lib/tools";
 import { SITE_URL } from "@/lib/site";
 
-const TITLE = "AI Beauty Tools — Verified Glam Scanner";
+const TITLE = "AI Beauty Tools — Verified Glam - Beauty Scanner";
 const DESCRIPTION = "Browse AI beauty scan tools: face beauty analysis, symmetry, celebrity look-alike, seasonal color palette, and more.";
 
 export const metadata: Metadata = {

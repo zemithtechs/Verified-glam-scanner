@@ -24,7 +24,7 @@ export function MarketingFooter() {
         <div>
           <div className="flex items-center gap-2.5">
             <Image src="/images/logo.png" alt="" width={40} height={40} className="rounded-lg" />
-            <span className="font-extrabold text-white">Verified Glam Scanner</span>
+            <span className="font-extrabold text-white">Verified Glam - Beauty Scanner</span>
           </div>
           <p className="mt-3 text-sm text-white/70 max-w-xs">
             AI beauty analysis with your photo at the center. Upload, analyze, and get personalized insights.
@@ -55,7 +55,7 @@ export function MarketingFooter() {
       </div>
       <div className="border-t border-white/15 py-5">
         <div className="max-w-(--max-content) mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/60">
-          <span>&copy; {new Date().getFullYear()} Verified Glam Scanner</span>
+          <span>&copy; {new Date().getFullYear()} Verified Glam - Beauty Scanner</span>
           <Link href="/about" className="hover:text-white">
             About
           </Link>

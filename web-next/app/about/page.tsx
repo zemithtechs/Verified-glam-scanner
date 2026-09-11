@@ -6,8 +6,8 @@ import { MarketingLayout } from "@/components/marketing/MarketingLayout";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Verified Glam Scanner",
-  description: "Learn how Verified Glam Scanner turns a selfie into optional beauty, style, and photo insights on web and Android.",
+  title: "About Verified Glam - Beauty Scanner",
+  description: "Learn how Verified Glam - Beauty Scanner turns a selfie into optional beauty, style, and photo insights on web and Android.",
   alternates: { canonical: `${SITE_URL}/about` },
 };
 
@@ -25,10 +25,10 @@ export default function AboutPage() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-(--color-surface) px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.13em] text-(--color-burgundy)"><Sparkles size={14} /> About Verified Glam</span>
             <h1 className="mt-5 text-4xl font-extrabold tracking-[-0.05em] text-(--color-burgundy-dark) sm:text-6xl">Beauty insight should feel personal, clear, and kind.</h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-(--color-text-muted)">Verified Glam Scanner is a beauty and style discovery product for people who want to explore a look with more context. A clear selfie can become a practical starting point for photo direction, makeup, colors, grooming, and fun face-based tools.</p>
+            <p className="mt-5 max-w-xl text-lg leading-8 text-(--color-text-muted)">Verified Glam - Beauty Scanner is a beauty and style discovery product for people who want to explore a look with more context. A clear selfie can become a practical starting point for photo direction, makeup, colors, grooming, and fun face-based tools.</p>
             <div className="mt-7 flex flex-wrap gap-3"><Link href="/tools" className="inline-flex items-center gap-2 rounded-[13px] bg-(--color-burgundy) px-5 py-3 font-extrabold text-white hover:bg-(--color-burgundy-dark)">Explore the tools <ArrowRight size={16} /></Link><Link href="/privacy" className="rounded-[13px] border border-(--color-border) px-5 py-3 font-extrabold text-(--color-burgundy-dark) hover:bg-(--color-surface)">Read our privacy approach</Link></div>
           </div>
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] bg-(--color-surface) shadow-[0_24px_60px_rgba(82,13,28,0.14)]"><Image src="/images/lifestyle/value-results.jpg" alt="Verified Glam Scanner beauty analysis preview" fill priority className="object-cover" sizes="(min-width: 1024px) 560px, 100vw" /><div className="absolute inset-x-5 bottom-5 rounded-[16px] bg-white/95 p-4 shadow-lg backdrop-blur"><p className="text-xs font-extrabold uppercase tracking-[0.12em] text-(--color-burgundy)">Built around your image</p><p className="mt-1 font-extrabold text-(--color-burgundy-dark)">Clear visual context, then ideas you can choose to use.</p></div></div>
+          <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] bg-(--color-surface) shadow-[0_24px_60px_rgba(82,13,28,0.14)]"><Image src="/images/lifestyle/value-results.jpg" alt="Verified Glam - Beauty Scanner beauty analysis preview" fill priority className="object-cover" sizes="(min-width: 1024px) 560px, 100vw" /><div className="absolute inset-x-5 bottom-5 rounded-[16px] bg-white/95 p-4 shadow-lg backdrop-blur"><p className="text-xs font-extrabold uppercase tracking-[0.12em] text-(--color-burgundy)">Built around your image</p><p className="mt-1 font-extrabold text-(--color-burgundy-dark)">Clear visual context, then ideas you can choose to use.</p></div></div>
         </div>
       </section>
 

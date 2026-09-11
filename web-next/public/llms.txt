@@ -1,8 +1,8 @@
-# Verified Glam Scanner
+# Verified Glam - Beauty Scanner
 
 > AI beauty analysis from your selfie — face beauty scoring, facial symmetry, seasonal color palette, celebrity look-alike matching, and personalized glow-up tips. Android app on Google Play; web scans at scanner.verifiedglam.com.
 
-Verified Glam Scanner is a product from Verified Glam (https://verifiedglam.com). Upload a photo for personalized AI beauty insights, generated server-side (no AI API keys ship in the app). Results are for entertainment and self-discovery — not medical, dermatological, or psychological advice.
+Verified Glam - Beauty Scanner is a product from Verified Glam (https://verifiedglam.com). Upload a photo for personalized AI beauty insights, generated server-side (no AI API keys ship in the app). Results are for entertainment and self-discovery — not medical, dermatological, or psychological advice.
 
 ## Key facts
 

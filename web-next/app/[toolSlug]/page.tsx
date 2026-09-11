@@ -229,7 +229,7 @@ function ExpectationsSection({ tool }: { tool: ToolDefinition }) {
           <article className="vg-reveal rounded-[18px] border border-(--color-border) bg-white p-6 shadow-[0_14px_34px_rgba(82,13,28,0.06)]">
             <h2 className="text-lg font-extrabold text-(--color-burgundy-dark)">Know when a photo tool is not the right answer</h2>
             <p className="mt-3 text-sm leading-6 text-(--color-text-muted)">
-              Verified Glam Scanner provides cosmetic, styling, and entertainment guidance. It does not diagnose skin conditions, assess health, identify people, or replace a dermatologist, stylist, or other qualified professional. If you have a medical concern or a product reaction, seek professional advice rather than relying on an image analysis result.
+              Verified Glam - Beauty Scanner provides cosmetic, styling, and entertainment guidance. It does not diagnose skin conditions, assess health, identify people, or replace a dermatologist, stylist, or other qualified professional. If you have a medical concern or a product reaction, seek professional advice rather than relying on an image analysis result.
             </p>
           </article>
         </div>

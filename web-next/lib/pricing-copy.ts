@@ -61,7 +61,7 @@ export const PRICING_COPY = {
     {
       question: "What plans do you offer?",
       answer:
-        "Verified Glam Scanner Pro is available as a Yearly plan ($39.99/year, 200 credits) or a Pro weekly plan ($3.99/week, 30 credits refreshed weekly).",
+        "Verified Glam - Beauty Scanner Pro is available as a Yearly plan ($39.99/year, 200 credits) or a Pro weekly plan ($3.99/week, 30 credits refreshed weekly).",
     },
     {
       question: "How do credits work?",

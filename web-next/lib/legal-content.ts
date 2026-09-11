@@ -19,18 +19,18 @@ const ul = (...items: string[]): LegalBlock => ({ type: "bullets", items });
 const ol = (...items: string[]): LegalBlock => ({ type: "numbered", items });
 
 export const ABOUT_CONTENT: LegalPageContent = {
-  pageTitle: "About Us — Verified Glam Scanner",
+  pageTitle: "About Us — Verified Glam - Beauty Scanner",
   metaDescription:
-    "About Verified Glam Scanner — AI beauty analysis from your selfie on Android and web. Personalized scores, symmetry insights, and glow-up tips.",
-  h1: "About Verified Glam Scanner",
+    "About Verified Glam - Beauty Scanner — AI beauty analysis from your selfie on Android and web. Personalized scores, symmetry insights, and glow-up tips.",
+  h1: "About Verified Glam - Beauty Scanner",
   metaLine: "Beauty made perfect — on Android and the web",
   blocks: [
     p(
-      "Verified Glam Scanner is the AI-powered beauty scanning product from Verified Glam. It turns a single selfie into personalized insights — overall beauty scores, facial symmetry breakdowns, color palette suggestions, celebrity look-alike matches, and practical glow-up tips. Our tagline is Pretty in Every Way: we help you understand your features with confidence, not judgment.",
+      "Verified Glam - Beauty Scanner is the AI-powered beauty scanning product from Verified Glam. It turns a single selfie into personalized insights — overall beauty scores, facial symmetry breakdowns, color palette suggestions, celebrity look-alike matches, and practical glow-up tips. Our tagline is Pretty in Every Way: we help you understand your features with confidence, not judgment.",
     ),
     h("What we offer"),
     p(
-      "Verified Glam Scanner includes 10 scan types — from core face beauty analysis to seasonal color palettes, attractiveness tests, golden-ratio guides, and fun challenges. Every result is built around your photo: scores and overlays appear directly on your selfie so you can see what the AI detected.",
+      "Verified Glam - Beauty Scanner includes 10 scan types — from core face beauty analysis to seasonal color palettes, attractiveness tests, golden-ratio guides, and fun challenges. Every result is built around your photo: scores and overlays appear directly on your selfie so you can see what the AI detected.",
     ),
     ul(
       "Free tier — explore scans with optional ads",
@@ -48,28 +48,28 @@ export const ABOUT_CONTENT: LegalPageContent = {
     ),
     h("Our approach"),
     p(
-      "Verified Glam Scanner is designed for self-discovery and entertainment. AI outputs are generated automatically and may not always be perfectly accurate. They are not medical, dermatological, or professional advice. Features like Celebrity Look-Alike are for fun — they do not verify identity.",
+      "Verified Glam - Beauty Scanner is designed for self-discovery and entertainment. AI outputs are generated automatically and may not always be perfectly accurate. They are not medical, dermatological, or professional advice. Features like Celebrity Look-Alike are for fun — they do not verify identity.",
     ),
     p(
       "We take privacy seriously. Photos are stored in secure cloud storage, processed server-side, and protected by account authentication. Read our Privacy Policy for full details on data collection, retention, and your choices.",
     ),
     h("Who we serve"),
     p(
-      "Verified Glam Scanner is built for beauty-conscious users who want actionable, confidence-oriented feedback — whether you are exploring symmetry, finding your seasonal colors, or following a glow-up routine challenge. We serve users on Android today and on the web for the same core scan experience.",
+      "Verified Glam - Beauty Scanner is built for beauty-conscious users who want actionable, confidence-oriented feedback — whether you are exploring symmetry, finding your seasonal colors, or following a glow-up routine challenge. We serve users on Android today and on the web for the same core scan experience.",
     ),
     h("Contact us"),
-    p("Questions, feedback, or partnership inquiries?", "Email: support@verifiedglam.com", "Get Verified Glam Scanner on Google Play"),
+    p("Questions, feedback, or partnership inquiries?", "Email: support@verifiedglam.com", "Get Verified Glam - Beauty Scanner on Google Play"),
   ],
 };
 
 export const PRIVACY_CONTENT: LegalPageContent = {
-  pageTitle: "Privacy Policy — Verified Glam Scanner",
-  metaDescription: "Privacy Policy for Verified Glam Scanner. How we collect, use, and protect your photos and account data.",
+  pageTitle: "Privacy Policy — Verified Glam - Beauty Scanner",
+  metaDescription: "Privacy Policy for Verified Glam - Beauty Scanner. How we collect, use, and protect your photos and account data.",
   h1: "Privacy Policy",
   metaLine: "Last updated: September 9, 2026",
   blocks: [
     p(
-      'Verified Glam ("we," "us," or "our") operates the Verified Glam Scanner website and the Verified Glam mobile application for Android (package com.verifiedglam.beauty_scanner). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our app or contact us.',
+      'Verified Glam ("we," "us," or "our") operates the Verified Glam - Beauty Scanner website and the Verified Glam mobile application for Android (package com.verifiedglam.beauty_scanner). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our app or contact us.',
     ),
     h("1. Information we collect"),
     p(
@@ -122,7 +122,7 @@ export const PRIVACY_CONTENT: LegalPageContent = {
     ),
     h("8. Children's privacy"),
     p(
-      "Verified Glam Scanner is not directed at children or teens. We do not knowingly collect personal information from anyone under 18. If you believe a minor has provided us information, contact support@verifiedglam.com and we will delete it.",
+      "Verified Glam - Beauty Scanner is not directed at children or teens. We do not knowingly collect personal information from anyone under 18. If you believe a minor has provided us information, contact support@verifiedglam.com and we will delete it.",
     ),
     h("9. International users"),
     p("Your information may be processed in countries where our service providers operate. By using the app, you consent to such transfers subject to applicable safeguards."),
@@ -134,21 +134,21 @@ export const PRIVACY_CONTENT: LegalPageContent = {
 };
 
 export const TERMS_CONTENT: LegalPageContent = {
-  pageTitle: "Terms of Use — Verified Glam Scanner",
-  metaDescription: "Terms of Use for Verified Glam Scanner. Entertainment disclaimer, subscriptions, and acceptable use.",
+  pageTitle: "Terms of Use — Verified Glam - Beauty Scanner",
+  metaDescription: "Terms of Use for Verified Glam - Beauty Scanner. Entertainment disclaimer, subscriptions, and acceptable use.",
   h1: "Terms of Use",
   metaLine: "Last updated: June 2, 2026",
   blocks: [
     p(
-      'These Terms of Use ("Terms") govern your access to and use of the Verified Glam Scanner website, the Verified Glam mobile application for Android (package com.verifiedglam.beauty_scanner), and related services (collectively, the "Service") operated by Verified Glam ("we," "us," or "our"). By downloading, installing, or using the Service, you agree to these Terms.',
+      'These Terms of Use ("Terms") govern your access to and use of the Verified Glam - Beauty Scanner website, the Verified Glam mobile application for Android (package com.verifiedglam.beauty_scanner), and related services (collectively, the "Service") operated by Verified Glam ("we," "us," or "our"). By downloading, installing, or using the Service, you agree to these Terms.',
     ),
     h("1. Eligibility"),
     p(
-      "You must be at least 18 years old to use Verified Glam Scanner, create an account, or purchase a Pro subscription. By using the Service, you represent that you meet this age requirement. The Service is not intended for minors.",
+      "You must be at least 18 years old to use Verified Glam - Beauty Scanner, create an account, or purchase a Pro subscription. By using the Service, you represent that you meet this age requirement. The Service is not intended for minors.",
     ),
     h("2. Entertainment and disclaimer — not medical advice"),
     p(
-      "Verified Glam Scanner provides AI-generated beauty analysis, scores, symmetry readings, celebrity look-alike matches, face reading, attractiveness tests, and similar features for entertainment and self-discovery only.",
+      "Verified Glam - Beauty Scanner provides AI-generated beauty analysis, scores, symmetry readings, celebrity look-alike matches, face reading, attractiveness tests, and similar features for entertainment and self-discovery only.",
     ),
     ul(
       "Results are not medical, dermatological, psychological, or professional advice",
