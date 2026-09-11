@@ -21,14 +21,17 @@ class HomeFragmentHeadComponent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(vgAppName, style: boldTextStyle(color: Colors.white, size: 22)),
-                  4.height,
-                  Text(VGCopy.homeGreeting, style: primaryTextStyle(color: Colors.white70, size: 14)),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(vgAppName, style: boldTextStyle(color: Colors.white, size: 18), maxLines: 1, overflow: TextOverflow.ellipsis),
+                    4.height,
+                    Text(VGCopy.homeGreeting, style: primaryTextStyle(color: Colors.white70, size: 14)),
+                  ],
+                ),
               ),
+              8.width,
               Container(
                 decoration: BoxDecoration(color: Colors.white, borderRadius: radius(100)),
                 padding: const EdgeInsets.all(8),

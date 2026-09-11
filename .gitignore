@@ -12,6 +12,9 @@
 build/
 node_modules/
 
+# Machine-local Flutter/Android SDK paths — never portable across machines
+**/android/local.properties
+
 # IDE
 .idea/
 *.iml

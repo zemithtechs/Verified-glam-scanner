@@ -17,13 +17,13 @@ const double vgPortraitAspectRatio = 3 / 4;
 Size vgPortraitSizeForWidth(double width) =>
     Size(width, width / vgPortraitAspectRatio);
 
-const String vgAppName = 'Verified Glam';
+const String vgAppName = 'Verified Glam - Beauty Scanner';
 const String vgTagline = 'Beauty Made Perfect';
 const String vgTaglineAlt = 'Pretty in Every Way';
 const String vgSupportEmail = 'support@verifiedglam.com';
 const String vgGooglePlayUrl =
     'https://play.google.com/store/apps/details?id=com.verifiedglam.beauty_scanner';
-const String vgWebProductName = 'Verified Glam Scanner';
+const String vgWebProductName = 'Verified Glam - Beauty Scanner';
 const String vgWebAuthTagline = 'AI beauty analysis from your selfie';
 const String vgMarketingSiteUrl = 'https://scanner.verifiedglam.com';
 const String vgAccountDeletionUrl = '$vgMarketingSiteUrl/delete-account';
