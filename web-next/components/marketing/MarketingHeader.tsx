@@ -88,7 +88,7 @@ export function MarketingHeader({ isSignedIn }: { isSignedIn: boolean }) {
       <div className="max-w-(--max-content) mx-auto flex items-center gap-4 px-4 sm:px-6 h-[72px]">
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <Image src="/images/logo.png" alt="" width={36} height={36} className="rounded-lg" />
-          <span className="hidden sm:inline text-lg font-extrabold text-(--color-burgundy-dark)">Verified Glam - Beauty Scanner</span>
+          <span className="hidden sm:inline text-lg font-extrabold text-(--color-burgundy-dark)">Verified Glam Scanner</span>
           <span className="sm:hidden text-lg font-extrabold text-(--color-burgundy-dark)">Verified Glam</span>
         </Link>
 
