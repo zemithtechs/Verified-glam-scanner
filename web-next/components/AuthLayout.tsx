@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function AuthLayout({
   title,
@@ -17,8 +18,9 @@ export function AuthLayout({
         className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 text-white"
         style={{ background: "linear-gradient(135deg, #872B3F 0%, #C79A9A 100%)" }}
       >
-        <Link href="/" className="text-2xl font-bold">
-          Verified Glam
+        <Link href="/" className="flex items-center gap-3 text-2xl font-bold">
+          <Image src="/images/logo.png" alt="Verified Glam" width={42} height={42} className="size-[42px] object-contain" />
+          <span>Verified Glam</span>
         </Link>
         <div>
           <h1 className="text-4xl font-extrabold leading-tight mb-4">
@@ -35,8 +37,9 @@ export function AuthLayout({
       <div className="flex-1 flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-md">
           <div className="lg:hidden mb-8">
-            <Link href="/" className="text-2xl font-bold text-(--color-burgundy-dark)">
-              Verified Glam
+            <Link href="/" className="flex items-center gap-2.5 text-2xl font-bold text-(--color-burgundy-dark)">
+              <Image src="/images/logo.png" alt="Verified Glam" width={38} height={38} className="size-[38px] object-contain" />
+              <span>Verified Glam</span>
             </Link>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-(--color-burgundy-dark)">{title}</h2>

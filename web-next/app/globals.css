@@ -57,3 +57,61 @@ body {
     animation: none;
   }
 }
+
+/* Live-scan loading effect (see ScanningOverlay.tsx). */
+@keyframes vg-scan-sweep {
+  0% {
+    top: -18%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.vg-scan-sweep {
+  animation: vg-scan-sweep 2.4s ease-in-out infinite;
+}
+
+@keyframes vg-scan-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    r: 1.1;
+  }
+  50% {
+    opacity: 1;
+    r: 1.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vg-scan-sweep {
+    animation: none;
+  }
+}
+
+/* Scoped "print just this element" mode, toggled via JS immediately before
+   window.print() (see ReportActions.tsx) so it never affects printing on
+   pages that don't opt in. */
+@media print {
+  body.vg-printing * {
+    visibility: hidden !important;
+  }
+  body.vg-printing .vg-print-area,
+  body.vg-printing .vg-print-area * {
+    visibility: visible !important;
+  }
+  body.vg-printing .vg-print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+  }
+}

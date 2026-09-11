@@ -6,268 +6,46 @@ import { MarketingLayout } from "@/components/marketing/MarketingLayout";
 import { Section, SectionTitle } from "@/components/marketing/Section";
 import { ReviewsSection } from "@/components/marketing/ReviewsSection";
 import { FaqSection } from "@/components/marketing/FaqSection";
-import { HeroMockup } from "@/components/marketing/HeroMockup";
+import { HomeHeroVisuals } from "@/components/marketing/HomeHeroVisuals";
+import { HomeToolUpload } from "@/components/marketing/HomeToolUpload";
 import { GooglePlayBadge } from "@/components/marketing/GooglePlayBadge";
 import { SoftwareApplicationJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+import { isSignedIn } from "@/lib/is-signed-in";
+import { toolForSlug } from "@/lib/tools";
 import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Verified Glam Scanner — AI Beauty Insights from Your Selfie";
-const DESCRIPTION =
-  "Verified Glam Scanner analyzes your selfie with AI for face beauty scores, symmetry, celebrity look-alikes, and personalized glow-up tips. Download on Google Play for Android.";
+const TITLE = "Verified Glam Scanner | AI Beauty Insights from Your Selfie";
+const DESCRIPTION = "Verified Glam Scanner analyzes your selfie for face beauty scores, symmetry, celebrity look-alikes, and personalized glow-up tips.";
+export const metadata: Metadata = { title: TITLE, description: DESCRIPTION, alternates: { canonical: SITE_URL }, openGraph: { title: TITLE, description: DESCRIPTION, url: SITE_URL } };
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: SITE_URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: SITE_URL },
-};
-
-const HERO_BULLETS = [
-  "11 scan types — from face beauty to color analysis",
-  "Results on your photo with face overlays and clear scores",
-  "Free tier with optional Pro for full features and no ads",
-  "Your photos are processed securely on our servers — never on-device API keys",
-];
-
-const PRESS_LOGOS = [
-  { name: "Allure", file: "allure.svg" },
-  { name: "Vogue", file: "vogue.svg" },
-  { name: "Byrdie", file: "byrdie.svg" },
-  { name: "Cosmopolitan", file: "cosmopolitan.svg" },
-  { name: "Harper's Bazaar", file: "harpers-bazaar.svg" },
-];
-
-const VALUE_CARDS = [
-  { title: "Scan in seconds", description: "Upload a selfie and get results in moments, not minutes.", image: "value-scan.jpg" },
-  { title: "See results on your photo", description: "Overlays and scores appear directly on your own portrait.", image: "value-results.jpg" },
-  { title: "Build your glow-up routine", description: "Turn one scan into a daily plan that keeps you consistent.", image: "value-glowup.jpg" },
-];
-
-const STATS = [
-  { value: "11+", label: "Beauty scan types" },
-  { value: "AI", label: "Personalized results" },
-  { value: "7", label: "Day glow-up plans" },
-];
-
+const HERO_BULLETS = ["10 scan types, from face beauty to color analysis", "Results on your photo with face overlays and clear scores", "Free tier with optional Pro for full features and no ads", "Your photos are processed securely on our servers, never with on-device API keys"];
+const PRESS_LOGOS = [{ name: "Allure", file: "allure.svg" }, { name: "Vogue", file: "vogue.svg" }, { name: "Byrdie", file: "byrdie.svg" }, { name: "Cosmopolitan", file: "cosmopolitan.svg" }, { name: "Harper's Bazaar", file: "harpers-bazaar.svg" }];
+const VALUE_CARDS = [{ title: "Scan in seconds", description: "Upload a selfie and get a clear camera-style scan in moments.", image: "value-scan-v2.png" }, { title: "See results on your photo", description: "See score details and landmarks presented on your own portrait.", image: "value-results-v2.png" }, { title: "Build your glow-up routine", description: "Turn one result into a simple beauty routine you can keep.", image: "value-glowup-v2.png" }];
+const STATS = [{ value: "10", label: "Beauty scan types" }, { value: "AI", label: "Personalized results" }, { value: "7", label: "Day glow-up plans" }];
 const FEATURE_ROWS = [
-  {
-    title: "Face Beauty Analysis",
-    description:
-      "Get an overall beauty score with detailed breakdowns across facial features. Your uploaded photo stays front and center with overlays that highlight what the AI detected.",
-    cta: "Try it now",
-    href: "/face-beauty-analysis",
-    image: "face-beauty.jpg",
-  },
-  {
-    title: "Facial Symmetry",
-    description:
-      "Understand balance and proportion with a dedicated symmetry scan. Pro users unlock the full symmetry report with visual guides on their selfie.",
-    cta: "Check your symmetry",
-    href: "/facial-symmetry",
-    image: "facial-symmetry.jpg",
-  },
-  {
-    title: "Celebrity Look-Alike",
-    description:
-      "See which celebrities share your facial traits — a fun, shareable result powered by AI face analysis. Entertainment only, not identity verification.",
-    cta: "Find your match",
-    href: "/celebrity-look-alike",
-    image: "celebrity-match.jpg",
-  },
-  {
-    title: "Attractiveness Test",
-    description:
-      "Explore attractiveness scoring with trait breakdowns and personality-style signals. Results include clear disclaimers — for fun and self-discovery, not medical judgment.",
-    cta: "Take the test",
-    href: "/attractiveness-test",
-    image: "attractiveness.jpg",
-  },
+  { tool: toolForSlug("face-beauty-analysis")!, eyebrow: "Your complete score", title: "See the details behind your beauty score", description: "Start with a single clear selfie and receive an easy-to-read overview of facial balance, feature harmony, and the areas the scan recognized. Your result is presented on your own photo, so it is simple to understand and save.", image: "face-beauty-v2.png", dimensions: ["Beauty", "Symmetry", "Eyes", "Lips"] },
+  { tool: toolForSlug("facial-symmetry")!, eyebrow: "Balance and proportion", title: "Understand your facial symmetry at a glance", description: "A symmetry scan maps the balance of key facial areas and turns it into a clear visual report. Use it as a thoughtful beauty reference when you are exploring makeup, hair, angles, or simply learning more about your features.", cta: "Upload your image", image: "facial-symmetry-v2.png", dimensions: ["Symmetry", "Eyes", "Brows", "Jawline"] },
+  { tool: toolForSlug("celebrity-look-alike")!, eyebrow: "A fun comparison", title: "Find the celebrity traits you share", description: "Discover playful look-alike matches based on broad facial traits, then explore the facial details that shaped the result. It is a shareable entertainment feature for curiosity and conversation, never identity verification.", cta: "Upload your image", image: "celebrity-match-v2.png", dimensions: ["Matches", "Eyes", "Jawline", "Smile"] },
+  { tool: toolForSlug("attractiveness-test")!, eyebrow: "Style-focused insight", title: "Explore the features that shape your look", description: "Get a light, self-discovery-focused view of photo balance, facial harmony, and style signals. The result helps you explore how different elements come together in a photo, with no medical or professional claims.", cta: "Upload your image", image: "attractiveness-v2.png", dimensions: ["Rating", "Harmony", "Style", "Photo score"] },
 ];
+const REVIEWS = [{ name: "Amara K.", text: "I love seeing my scores right on my own photo. It feels personal, not generic.", rating: 5, avatar: "avatar-1.jpg" }, { name: "Priya S.", text: "The symmetry scan helped me understand my features in a kind, visual way. I use it before makeup routines.", rating: 5, avatar: "avatar-2.jpg" }, { name: "Elena M.", text: "Celebrity look-alike is fun to share with friends. Glow Up Guide keeps me consistent every week.", rating: 5, avatar: "avatar-3.jpg" }];
+const FAQ = [{ question: "How does Verified Glam Scanner use my photos?", answer: "You upload a selfie for the scan you choose. Your photo is sent securely to our servers for AI analysis and is connected to your account. See our Privacy Policy for details." }, { question: "Is this medical or professional advice?", answer: "No. Verified Glam Scanner is for entertainment and beauty self-discovery. It is not medical, dermatological, or psychological advice." }, { question: "What is free vs Pro?", answer: "Free users get basic scans with ads and limited history. Pro unlocks all scan types, removes ads, and includes credits for AI generations." }, { question: "Is Verified Glam Scanner available on iPhone?", answer: "Verified Glam Scanner is currently available for Android on Google Play and on the web." }, { question: "How long is my data kept?", answer: "Scan photos and results are tied to your account while you use the service. You can delete your account from the app or through the account deletion page." }, { question: "Who can use the app?", answer: "Verified Glam Scanner is for adults aged 18 and older." }];
 
-const REVIEWS = [
-  {
-    name: "Amara K.",
-    text: "I love seeing my scores right on my own photo — it feels personal, not generic.",
-    rating: 5,
-    avatar: "avatar-1.jpg",
-  },
-  {
-    name: "Priya S.",
-    text: "The symmetry scan helped me understand my features in a kind, visual way. I use it before makeup routines.",
-    rating: 5,
-    avatar: "avatar-2.jpg",
-  },
-  {
-    name: "Elena M.",
-    text: "Celebrity look-alike is so fun to share with friends. Glow Up Guide keeps me consistent every week.",
-    rating: 5,
-    avatar: "avatar-3.jpg",
-  },
-];
+export default async function HomePage() {
+  const signedIn = await isSignedIn();
+  const challenge = toolForSlug("beauty-routine-challenge")!;
+  return <MarketingLayout><SoftwareApplicationJsonLd /><FaqJsonLd items={FAQ} />
+    <section className="px-4 py-12 sm:px-6 sm:py-20"><div className="mx-auto grid max-w-(--max-content) items-center gap-10 lg:grid-cols-2"><div><h1 className="text-4xl font-extrabold leading-tight tracking-[-0.04em] text-(--color-burgundy-dark) sm:text-5xl">AI beauty insights from your selfie</h1><p className="mt-4 max-w-lg text-lg leading-relaxed text-(--color-text-muted)">Pretty in every way. Upload a photo, get personalized scores, symmetry breakdowns, and glow-up tips powered by AI.</p><ul className="mt-6 space-y-2.5">{HERO_BULLETS.map((bullet) => <li key={bullet} className="flex items-start gap-2.5 text-(--color-text)"><Check size={18} className="mt-0.5 shrink-0 text-(--color-burgundy)" />{bullet}</li>)}</ul><div className="mt-7 flex flex-wrap items-center gap-3"><GooglePlayBadge /><Link href="/login" className="rounded-lg bg-(--color-burgundy) px-7 py-3.5 font-semibold text-white shadow-[0_8px_18px_rgba(82,13,28,0.16)] transition-colors hover:bg-(--color-burgundy-dark)">Log in on web</Link></div></div><HomeHeroVisuals /></div></section>
 
-const FAQ = [
-  {
-    question: "How does Verified Glam Scanner use my photos?",
-    answer:
-      "You upload a selfie for the scan you choose. Your photo is stored securely and sent to our servers for AI analysis. We do not embed OpenAI or other AI API keys in the app — processing happens server-side only. See our Privacy Policy for details.",
-  },
-  {
-    question: "Is this medical or professional advice?",
-    answer:
-      "No. Verified Glam Scanner is for entertainment and beauty self-discovery. Face reading, attractiveness scores, and celebrity matches are not medical, dermatological, or psychological assessments. Always consult qualified professionals for health or skin concerns.",
-  },
-  {
-    question: "What is free vs Pro?",
-    answer:
-      "Free users get basic scans with ads and limited history. Pro subscribers unlock all scan types, remove ads, and receive AI credits (Yearly $39.99/year with 200 credits, or Pro $3.99/week with 30 credits weekly). Subscriptions are billed securely through Polar.sh and sync to your account on web and Android.",
-  },
-  {
-    question: "Is Verified Glam Scanner available on iPhone?",
-    answer: "Verified Glam Scanner is currently available for Android on Google Play only. There is no App Store version at this time.",
-  },
-  {
-    question: "How long is my data kept?",
-    answer:
-      "Scan photos and results are tied to your account while you use the app. You can delete scans from history in the app. Account deletion requests can be sent to support@verifiedglam.com. See our Privacy Policy for retention details.",
-  },
-  {
-    question: "Who can use the app?",
-    answer:
-      "Verified Glam Scanner is for adults aged 18 and older. You must be at least 18 to create an account or purchase a Pro subscription. The service is not directed at minors.",
-  },
-];
+    <Section tint><p className="mb-6 text-center text-sm font-semibold uppercase tracking-wide text-(--color-text-muted)">Featured on</p><div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">{PRESS_LOGOS.map((press) => <Image key={press.name} src={`/images/press/${press.file}`} alt={press.name} width={120} height={24} className="h-6 w-auto grayscale opacity-60" />)}</div><p className="mt-4 text-center text-xs text-(--color-text-muted)">Illustrative placement. Not affiliated endorsements.</p></Section>
 
-export default function HomePage() {
-  return (
-    <MarketingLayout>
-      <SoftwareApplicationJsonLd />
-      <FaqJsonLd items={FAQ} />
-      {/* Hero */}
-      <div className="grid lg:grid-cols-2 gap-10 items-center px-4 sm:px-6 py-12 sm:py-20 max-w-(--max-content) mx-auto">
-        <div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-(--color-burgundy-dark) leading-tight">
-            AI beauty insights from your selfie
-          </h1>
-          <p className="mt-4 text-lg text-(--color-text-muted) leading-relaxed max-w-lg">
-            Pretty in every way. Upload a photo, get personalized scores, symmetry breakdowns, and glow-up tips powered
-            by AI.
-          </p>
-          <ul className="mt-6 space-y-2.5">
-            {HERO_BULLETS.map((b) => (
-              <li key={b} className="flex items-start gap-2.5 text-(--color-text)">
-                <Check size={18} className="text-(--color-burgundy) shrink-0 mt-0.5" />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-7">
-            <GooglePlayBadge />
-          </div>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href="/login"
-              className="rounded-full bg-(--color-burgundy) text-white font-semibold px-7 py-3.5 hover:opacity-90"
-            >
-              Log in on web
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-full border border-(--color-border) text-(--color-text) font-semibold px-7 py-3.5 hover:bg-(--color-surface)"
-            >
-              Create free account
-            </Link>
-          </div>
-        </div>
-        <HeroMockup />
-      </div>
+    <Section><SectionTitle title="Ready to discover your glow?" subtitle="Verified Glam Scanner turns a quick selfie into actionable beauty insights, scores you can understand, tips you can use, and results you can save." /><div className="grid gap-5 sm:grid-cols-3">{VALUE_CARDS.map((card) => <div key={card.title} className="overflow-hidden rounded-2xl border border-(--color-border) bg-white text-center shadow-[0_12px_30px_rgba(82,13,28,0.05)]"><div className="relative aspect-[3/2]"><Image src={`/images/lifestyle/${card.image}`} alt={card.title} fill className="object-cover" sizes="(min-width: 640px) 33vw, 100vw" /></div><div className="p-6"><p className="font-bold text-(--color-text)">{card.title}</p><p className="mt-2 text-sm text-(--color-text-muted)">{card.description}</p></div></div>)}</div><div className="mt-10 grid grid-cols-3 gap-4 text-center">{STATS.map((stat) => <div key={stat.label}><p className="text-3xl font-extrabold text-(--color-burgundy) sm:text-4xl">{stat.value}</p><p className="mt-1 text-sm text-(--color-text-muted)">{stat.label}</p></div>)}</div></Section>
 
-      {/* Featured on */}
-      <Section tint>
-        <p className="text-center text-sm font-semibold text-(--color-text-muted) uppercase tracking-wide mb-6">Featured on</p>
-        <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-6">
-          {PRESS_LOGOS.map((press) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={press.name}
-              src={`/images/press/${press.file}`}
-              alt={press.name}
-              className="opacity-60 grayscale h-6 w-auto"
-            />
-          ))}
-        </div>
-        <p className="text-center text-xs text-(--color-text-muted) mt-4">Illustrative placement — not affiliated endorsements.</p>
-      </Section>
+    <Section tint className="py-16 sm:py-20"><SectionTitle title="Everything you need to shine" subtitle="Choose the beauty insight you are curious about, upload one clear selfie, and continue to your secure dashboard for the full result." /><div className="space-y-16 sm:space-y-20">{FEATURE_ROWS.map((row, index) => <article key={row.title} className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-14 ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}><div className="overflow-hidden rounded-[26px] border border-white/90 bg-white p-2 shadow-[0_20px_44px_rgba(82,13,28,0.12)] sm:p-3"><div className="relative aspect-[4/3] overflow-hidden rounded-[19px]"><Image src={`/images/features/${row.image}`} alt={`${row.title} result example`} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" /></div></div><div><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-(--color-burgundy)">{row.eyebrow}</p><h3 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.04em] text-(--color-burgundy-dark) sm:text-[36px]">{row.title}</h3><p className="mt-4 max-w-xl leading-7 text-(--color-text-muted)">{row.description}</p>{index === 0 ? <HomeToolUpload tool={row.tool} isSignedIn={signedIn} dimensions={row.dimensions} /> : <Link href={`/${row.tool.slug}`} className="mt-6 inline-flex items-center gap-2 rounded-lg bg-(--color-burgundy) px-5 py-3 text-sm font-extrabold text-white shadow-[0_8px_18px_rgba(82,13,28,0.18)] transition-colors hover:bg-(--color-burgundy-dark)">Upload your image<span aria-hidden="true">→</span></Link>}</div></article>)}</div></Section>
 
-      {/* Value cards */}
-      <Section>
-        <SectionTitle
-          title="Ready to discover your glow?"
-          subtitle="Verified Glam Scanner turns a quick selfie into actionable beauty insights — scores you can understand, tips you can use, and results you can save."
-        />
-        <div className="grid sm:grid-cols-3 gap-5">
-          {VALUE_CARDS.map((card) => (
-            <div key={card.title} className="rounded-2xl bg-white border border-(--color-border) overflow-hidden text-center">
-              <div className="relative aspect-[3/2]">
-                <Image src={`/images/lifestyle/${card.image}`} alt={card.title} fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <p className="font-bold text-(--color-text)">{card.title}</p>
-                <p className="mt-2 text-sm text-(--color-text-muted)">{card.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 grid grid-cols-3 gap-4 text-center">
-          {STATS.map((stat) => (
-            <div key={stat.label}>
-              <p className="text-3xl sm:text-4xl font-extrabold text-(--color-burgundy)">{stat.value}</p>
-              <p className="text-sm text-(--color-text-muted) mt-1">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
+    <Section><div className="grid items-center gap-8 rounded-[28px] border border-(--color-border) bg-white p-3 shadow-[0_16px_36px_rgba(82,13,28,0.06)] md:grid-cols-2 sm:p-4"><div className="relative aspect-[4/3] overflow-hidden rounded-[20px]"><Image src="/images/features/glow-up-challenge-v2.png" alt="Verified Glam seven-day glow-up challenge" fill className="object-cover" sizes="(min-width: 768px) 50vw, 100vw" /></div><div className="p-3 sm:p-5"><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-(--color-burgundy)">A routine you can keep</p><h2 className="mt-3 text-3xl font-extrabold tracking-[-0.04em] text-(--color-burgundy-dark)">Seven-Day Glow-Up Challenge</h2><p className="mt-4 leading-7 text-(--color-text-muted)">Start with a baseline photo, choose a focus, and follow a simple daily plan that helps you stay consistent without overcomplicating your routine.</p><Link href={`/${challenge.slug}`} className="mt-6 inline-flex items-center gap-2 rounded-lg bg-(--color-burgundy) px-5 py-3 text-sm font-extrabold text-white shadow-[0_8px_18px_rgba(82,13,28,0.18)] transition-colors hover:bg-(--color-burgundy-dark)">Start your glow-up challenge<span aria-hidden="true">→</span></Link></div></div></Section>
 
-      {/* Feature rows */}
-      <Section tint>
-        <SectionTitle
-          title="Everything you need to shine"
-          subtitle="From core beauty scores to fun celebrity matches — explore what Verified Glam Scanner can do with one selfie."
-        />
-        <div className="space-y-10">
-          {FEATURE_ROWS.map((row, i) => (
-            <div key={row.title} className={`grid md:grid-cols-2 gap-6 items-center ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
-              <div className="relative rounded-2xl aspect-[3/2] overflow-hidden shadow-[0_16px_32px_rgba(135,43,63,0.1)]">
-                <Image src={`/images/features/${row.image}`} alt={row.title} fill className="object-cover" />
-              </div>
-              <div>
-                <p className="text-xl font-bold text-(--color-burgundy-dark)">{row.title}</p>
-                <p className="mt-2 text-(--color-text-muted) leading-relaxed">{row.description}</p>
-                <Link href={row.href} className="mt-4 inline-block rounded-full bg-(--color-burgundy) text-white font-semibold px-6 py-2.5 hover:opacity-90">
-                  {row.cta}
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <ReviewsSection items={REVIEWS} />
-      <FaqSection items={FAQ} />
-
-      {/* Final CTA */}
-      <div className="py-16 px-4 sm:px-6 text-center text-white" style={{ background: "#520D1C" }}>
-        <h2 className="text-2xl sm:text-3xl font-extrabold">Download Verified Glam Scanner</h2>
-        <p className="mt-3 text-white/80 max-w-xl mx-auto">
-          Get AI beauty insights on Android — or log in on the web to upload a photo and sync your scan history.
-        </p>
-        <div className="mt-7 flex flex-wrap justify-center items-center gap-4">
-          <GooglePlayBadge />
-          <Link href="/register" className="rounded-full border border-white/50 font-semibold px-7 py-3.5">
-            Create free account
-          </Link>
-        </div>
-        <p className="mt-6 text-xs text-white/60">Package: com.verifiedglam.beauty_scanner &middot; Questions? support@verifiedglam.com</p>
-      </div>
-    </MarketingLayout>
-  );
+    <ReviewsSection items={REVIEWS} /><FaqSection items={FAQ} />
+    <section className="bg-(--color-burgundy-dark) px-4 py-16 text-center text-white sm:px-6"><h2 className="text-2xl font-extrabold sm:text-3xl">Download Verified Glam Scanner</h2><p className="mx-auto mt-3 max-w-xl text-white/80">Get AI beauty insights on Android, or log in on the web to upload a photo and sync your scan history.</p><div className="mt-7 flex flex-wrap items-center justify-center gap-4"><GooglePlayBadge /><Link href="/login" className="rounded-lg border border-white/50 px-7 py-3.5 font-semibold">Log in on web</Link></div><p className="mt-6 text-xs text-white/60">Package: com.verifiedglam.beauty_scanner · Questions? support@verifiedglam.com</p></section>
+  </MarketingLayout>;
 }

@@ -66,6 +66,44 @@ profiles.get("/me", async (c) => {
   });
 });
 
+const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
+
+profiles.put("/me", async (c) => {
+  const userId = c.get("userId");
+  const body = await c.req.json<{ displayName?: string }>().catch(() => ({}) as { displayName?: string });
+  const displayName = sanitize(body.displayName, 40);
+  if (!displayName) return c.json({ error: "Nickname is required.", errorCode: "invalid_nickname" }, 400);
+
+  await c.env.DB.prepare("update profiles set display_name = ?, updated_at = ? where id = ?")
+    .bind(displayName, new Date().toISOString(), userId)
+    .run();
+  return c.json({ ok: true, displayName });
+});
+
+profiles.post("/me/avatar", async (c) => {
+  const userId = c.get("userId");
+  const bytes = new Uint8Array(await c.req.arrayBuffer());
+  if (bytes.byteLength === 0) return c.json({ error: "No image data received." }, 400);
+  if (bytes.byteLength > MAX_AVATAR_BYTES) {
+    return c.json({ error: "Image too large — please choose a photo under 5MB." }, 413);
+  }
+
+  const contentType = c.req.header("content-type") || "image/jpeg";
+  const ext = contentType.includes("png") ? "png" : "jpg";
+  const key = `avatars/${userId}.${ext}`;
+  await c.env.ASSETS_BUCKET.put(key, bytes, { httpMetadata: { contentType } });
+
+  // The key is stable per user (so a re-upload overwrites, not accumulates),
+  // but /api/assets serves it with a one-year immutable cache header — a
+  // versioned query string forces browsers/CDN to treat each upload as a
+  // distinct URL instead of serving the old cached image after a change.
+  const avatarUrl = `${c.env.BETTER_AUTH_URL}/api/assets/${key}?v=${Date.now()}`;
+  await c.env.DB.prepare("update profiles set avatar_url = ?, updated_at = ? where id = ?")
+    .bind(avatarUrl, new Date().toISOString(), userId)
+    .run();
+  return c.json({ ok: true, avatarUrl });
+});
+
 profiles.delete("/me", async (c) => {
   const body = await c.req.json<{ confirmation?: string }>().catch(() => ({}) as { confirmation?: string });
   if (body.confirmation !== "DELETE") {
@@ -88,6 +126,9 @@ profiles.delete("/me", async (c) => {
   await deleteBucketPrefix(c.env.SCANS_BUCKET, `${userId}/`);
   const avatarKey = userAvatarKey(account.showdown_avatar_url);
   if (avatarKey) await c.env.ASSETS_BUCKET.delete(avatarKey);
+  // Uploaded profile pictures (POST /me/avatar) — extension is unknown here,
+  // so both are attempted; R2 deletes are no-ops for keys that don't exist.
+  await c.env.ASSETS_BUCKET.delete([`avatars/${userId}.jpg`, `avatars/${userId}.png`]);
 
   // User-owned rows cascade from Better Auth's user table. Referral events
   // are explicitly removed instead of leaving anonymous relationship rows;

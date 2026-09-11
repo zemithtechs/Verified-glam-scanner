@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { toolForSlug } from "@/lib/tools";
 import { apiClient } from "@/lib/api-client";
 import { getSessionToken } from "@/lib/session";
+import { getCurrentProfile } from "@/lib/get-current-profile";
 import type { ChallengePlan } from "@/lib/challenge-api";
 import { ToolWorkspace } from "./ToolWorkspace";
 import { ChallengeStart } from "./ChallengeStart";
@@ -20,5 +21,6 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
     return <ChallengeStart tool={tool} />;
   }
 
-  return <ToolWorkspace tool={tool} />;
+  const profile = await getCurrentProfile();
+  return <ToolWorkspace tool={tool} profile={profile} />;
 }

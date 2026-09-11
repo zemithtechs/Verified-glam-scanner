@@ -30,3 +30,10 @@ android/.gradle/
 worker-api/.dev.vars
 worker-api/.dev.vars.*
 worker-api/.secrets/
+
+# Claude Code local project state (settings/lock files, not app code)
+.claude/
+
+# JVM crash logs from Android build tooling
+android/hs_err_pid*.log
+android/replay_pid*.log

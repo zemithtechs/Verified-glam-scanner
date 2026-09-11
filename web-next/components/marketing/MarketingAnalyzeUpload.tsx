@@ -27,6 +27,7 @@ export function MarketingAnalyzeUpload({
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [selectedDimension, setSelectedDimension] = useState(dimensions[0]);
 
   function acceptFile(selected: File | undefined) {
     if (!selected) return;
@@ -109,17 +110,20 @@ export function MarketingAnalyzeUpload({
       <div className="mt-5">
         <p className="text-sm font-extrabold text-(--color-burgundy-dark)">Select an analysis dimension</p>
         <div className="mt-3 grid grid-cols-2 gap-2">
-          {dimensions.map((dimension, index) => (
-            <span
+          {dimensions.map((dimension) => (
+            <button
               key={dimension}
-              className={`rounded-[10px] border px-3 py-2 text-center text-xs font-bold ${
-                index === 0
+              type="button"
+              aria-pressed={selectedDimension === dimension}
+              onClick={() => setSelectedDimension(dimension)}
+              className={`rounded-[10px] border px-3 py-2 text-center text-xs font-bold transition-colors ${
+                selectedDimension === dimension
                   ? "border-(--color-burgundy) bg-(--color-burgundy) text-white"
-                  : "border-(--color-border) bg-white text-(--color-burgundy-dark)"
+                  : "border-(--color-border) bg-white text-(--color-burgundy-dark) hover:bg-(--color-blush)"
               }`}
             >
               {dimension}
-            </span>
+            </button>
           ))}
         </div>
       </div>

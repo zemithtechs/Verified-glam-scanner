@@ -22,7 +22,7 @@ export function PricingView({ isSignedIn, isPro }: { isSignedIn: boolean; isPro:
     setError(null);
     try {
       const { checkoutUrl } = await proxyApi.post<{ checkoutUrl: string }>("/polar/checkout", { planId });
-      window.location.href = checkoutUrl;
+      window.location.assign(checkoutUrl);
     } catch (err) {
       setError(err instanceof ClientApiError ? err.message : "Could not start checkout. Please try again.");
       setLoadingPlan(null);
@@ -79,17 +79,18 @@ export function PricingView({ isSignedIn, isPro }: { isSignedIn: boolean; isPro:
   const plans = Object.values(PRICING_COPY.plans);
 
   return (
-    <div className="bg-(--color-blush)">
-      <section className="text-center py-14 px-4 sm:px-6">
+    <div className="bg-[#fbf7f7]">
+      <section className="bg-white px-4 py-16 text-center sm:px-6 sm:py-20">
         <div className="max-w-(--max-content) mx-auto">
-          <h1 className="text-[30px] sm:text-[40px] font-extrabold text-(--color-burgundy-dark) tracking-tight">
+          <span className="inline-flex rounded-full bg-(--color-surface) px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.13em] text-(--color-burgundy)">Plans and credits</span>
+          <h1 className="mt-4 text-[34px] sm:text-[48px] font-extrabold text-(--color-burgundy-dark) tracking-[-0.045em]">
             {PRICING_COPY.heroTitle}
           </h1>
-          <p className="mt-3 text-(--color-text-muted) max-w-2xl mx-auto leading-relaxed">{PRICING_COPY.heroSubtitle}</p>
+          <p className="mt-4 text-(--color-text-muted) max-w-2xl mx-auto leading-relaxed">{PRICING_COPY.heroSubtitle}</p>
         </div>
       </section>
 
-      <div className="max-w-[960px] mx-auto px-4 sm:px-6 pb-12">
+      <div className="max-w-[1040px] mx-auto px-4 sm:px-6 py-12">
         {cancelled && (
           <div className="mb-6 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-3 text-center">
             Checkout was cancelled — no charge was made.
@@ -99,7 +100,7 @@ export function PricingView({ isSignedIn, isPro }: { isSignedIn: boolean; isPro:
           <div className="mb-6 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 text-center">{error}</div>
         )}
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-5">
           {plans.map((plan) => {
             const isSelected = selected === plan.planId;
             return (
@@ -110,19 +111,17 @@ export function PricingView({ isSignedIn, isPro }: { isSignedIn: boolean; isPro:
                 tabIndex={0}
                 onClick={() => setSelected(plan.planId)}
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelected(plan.planId)}
-                className={`rounded-2xl p-5 bg-white border cursor-pointer transition-colors ${
-                  isSelected ? "border-2 border-(--color-burgundy) bg-(--color-blush)" : "border-(--color-border) hover:border-(--color-burgundy)/45"
+                className={`relative rounded-[22px] p-6 bg-white border cursor-pointer transition-all ${
+                  isSelected ? "border-2 border-(--color-burgundy) shadow-[0_18px_42px_rgba(82,13,28,0.12)]" : "border-(--color-border) hover:border-(--color-burgundy)/45 hover:shadow-[0_12px_30px_rgba(82,13,28,0.07)]"
                 }`}
               >
+                {plan.badge && <span className="absolute -top-3 left-6 rounded-full bg-(--color-burgundy) px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white shadow-sm">Recommended</span>}
                 <div className="flex items-center gap-2 mb-3">
                   <span
                     className={`w-5 h-5 rounded-full border-2 shrink-0 ${
                       isSelected ? "border-(--color-burgundy) bg-(--color-burgundy)" : "border-gray-400"
                     }`}
                   />
-                  {plan.badge && (
-                    <span className="rounded-md bg-(--color-burgundy) text-white text-[10px] font-bold px-2 py-0.5">{plan.badge}</span>
-                  )}
                 </div>
                 <h3 className="text-base font-bold text-(--color-burgundy-dark)">{plan.name}</h3>
                 <div className="mt-1">
@@ -142,7 +141,7 @@ export function PricingView({ isSignedIn, isPro }: { isSignedIn: boolean; isPro:
                   ))}
                 </ul>
 
-                <p className="text-sm font-bold text-(--color-burgundy-dark) mt-4 mb-2">Credit Breakdown</p>
+                <p className="text-sm font-bold text-(--color-burgundy-dark) mt-5 mb-2">Credit Breakdown</p>
                 <ul className="space-y-1.5">
                   {plan.creditBreakdown.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-[13px] text-(--color-text-muted)">
@@ -159,12 +158,12 @@ export function PricingView({ isSignedIn, isPro }: { isSignedIn: boolean; isPro:
                       handleSubscribe(plan.planId);
                     }}
                     disabled={loadingPlan !== null || isPro}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-(--color-burgundy) text-white font-semibold py-3 hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-[13px] bg-(--color-burgundy) text-white font-extrabold py-3.5 hover:bg-(--color-burgundy-dark) transition-colors disabled:opacity-50"
                   >
                     {loadingPlan === plan.planId && <Loader2 className="animate-spin" size={16} />}
                     {isPro ? "Current plan" : loadingPlan === plan.planId ? "Redirecting…" : "Subscribe now"}
                   </button>
-                  <p className="text-[11px] text-(--color-text-muted) mt-1.5">Cancel anytime</p>
+                  <p className="text-[11px] text-(--color-text-muted) mt-2">Secure checkout. Cancel before your next renewal.</p>
                 </div>
               </div>
             );

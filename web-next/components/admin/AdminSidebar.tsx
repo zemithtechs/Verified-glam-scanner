@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -61,8 +62,10 @@ export function AdminSidebar({ email }: { email: string }) {
   return (
     <aside className="w-64 shrink-0 bg-[#171126] text-white/80 flex flex-col min-h-screen">
       <div className="px-5 py-5 border-b border-white/10">
-        <p className="font-extrabold text-white">Verified Glam</p>
-        <p className="text-[11px] uppercase tracking-wide text-white/50">Admin</p>
+        <Link href="/admin" className="flex items-center gap-3">
+          <span className="grid size-10 place-items-center overflow-hidden rounded-xl bg-white shadow-sm"><Image src="/images/logo.png" alt="Verified Glam" width={40} height={40} className="size-10 object-contain" /></span>
+          <span><span className="block font-extrabold text-white">Verified Glam</span><span className="block text-[11px] uppercase tracking-wide text-white/50">Admin</span></span>
+        </Link>
       </div>
 
       <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-5">

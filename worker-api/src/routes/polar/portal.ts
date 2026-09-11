@@ -44,6 +44,12 @@ polarPortal.post("/", async (c) => {
     // Polar validation error as a 500.
     const message = e instanceof Error ? e.message : "Portal session failed";
     if (message.includes("Customer does not exist")) {
+      // No personalized session could be created for this account, but an
+      // org-wide portal URL (POLAR_ORGANIZATION_SLUG) still gets them
+      // somewhere useful — e.g. their checkout succeeded but the webhook
+      // that links polar_customer_id hasn't landed yet.
+      const fallbackUrl = defaultPortalUrl(env);
+      if (fallbackUrl) return c.json({ portalUrl: fallbackUrl, version: FUNCTION_VERSION });
       return c.json(
         {
           error: "No Polar customer found for this account. Complete checkout first.",

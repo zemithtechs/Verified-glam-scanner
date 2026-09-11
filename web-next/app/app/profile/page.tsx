@@ -7,6 +7,7 @@ import type { Badge } from "@/lib/challenge-api";
 import type { ChallengePlan } from "@/lib/challenge-api";
 import { BadgeGrid } from "@/components/BadgeGrid";
 import { CreditsPanel } from "@/components/CreditsPanel";
+import { ProfileHeaderCard } from "@/components/ProfileHeaderCard";
 
 export default async function ProfilePage() {
   const profile = await getCurrentProfile();
@@ -19,10 +20,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="max-w-(--max-content) mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-(--color-burgundy-dark)">Profile</h1>
-        <p className="mt-1 text-(--color-text-muted)">{profile.email}</p>
-      </div>
+      <ProfileHeaderCard profile={profile} />
 
       {plan && !plan.progress.isCompleted && (
         <Link

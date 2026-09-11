@@ -4,6 +4,7 @@ import { Kysely } from "kysely";
 import { D1Dialect } from "kysely-d1";
 import bcrypt from "bcryptjs";
 import type { Env } from "./env";
+import { gravatarUrlFor } from "./lib/gravatar";
 
 /**
  * Migrated Supabase users keep their original bcrypt hash (see
@@ -71,6 +72,17 @@ export function createAuth(env: Env) {
             )
               .bind(user.id, user.email)
               .run();
+
+            // Give every new account a profile picture up front: reuse an
+            // OAuth provider's photo (e.g. Google) if Better Auth already
+            // captured one, otherwise check whether Gravatar has one for
+            // this email. If neither exists, leave it unset — the frontend
+            // renders a colored-initials avatar rather than a generic stock
+            // photo, so there's no bad case for avatar_url staying null.
+            const avatarUrl = user.image ?? (await gravatarUrlFor(user.email));
+            if (avatarUrl) {
+              await env.DB.prepare("update profiles set avatar_url = ? where id = ?").bind(avatarUrl, user.id).run();
+            }
           },
         },
       },

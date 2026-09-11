@@ -3,6 +3,7 @@ import { getCurrentProfile } from "@/lib/get-current-profile";
 import { Sidebar } from "@/components/Sidebar";
 import { TopBar } from "@/components/TopBar";
 import { CheckoutReturnBanner } from "@/components/CheckoutReturnBanner";
+import { DashboardOfferBar } from "@/components/DashboardOfferBar";
 
 /**
  * The authoritative auth check. proxy.ts already blocks requests with no
@@ -20,8 +21,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex min-h-screen bg-[#fbf7f7]">
-      <Sidebar />
+      <Sidebar profile={profile} />
       <div className="flex-1 flex flex-col min-w-0">
+        <DashboardOfferBar profile={profile} />
         <TopBar profile={profile} />
         <Suspense fallback={null}>
           <CheckoutReturnBanner />
