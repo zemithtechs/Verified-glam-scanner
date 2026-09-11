@@ -86,6 +86,11 @@ class VGColorAnalysisResult extends StatelessWidget {
             ).launch(context),
           ),
         ],
+        12.height,
+        Text(
+          'This color palette is an AI styling suggestion for entertainment and self-expression — not a professional color-analysis consultation.',
+          style: secondaryTextStyle(size: 11, height: 1.35),
+        ),
       ],
     );
   }

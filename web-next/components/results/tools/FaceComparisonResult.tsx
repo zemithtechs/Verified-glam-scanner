@@ -56,6 +56,8 @@ export function FaceComparisonResult({ payload, photoUrl }: { payload: FacialRes
             ))}
           </div>
         )}
+
+        <p className="mt-6 text-xs leading-relaxed text-(--color-text-muted)">This comparison is a playful, AI-estimated similarity reading — not a biometric, forensic, or scientific identity match.</p>
       </div>
     </div>
   );

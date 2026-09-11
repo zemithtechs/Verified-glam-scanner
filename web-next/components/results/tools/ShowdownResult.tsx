@@ -14,6 +14,7 @@ function PodiumSlot({ entry, photoUrl }: { entry: BeautyScoreShowdownPayload["po
       <span className="text-lg" style={{ color: CROWN_COLOR[entry.rank] ?? "#fff" }}>♛</span>
       <AvatarImage src={entry.isCurrentUser ? photoUrl : entry.avatarUrl} name={entry.displayName || entry.name} size={entry.rank === 1 ? 56 : 44} />
       <p className="max-w-[80px] truncate text-xs font-bold text-white">{entry.displayName || entry.name}</p>
+      {entry.isSimulated && <span className="rounded-full bg-white/20 px-1.5 py-0.5 text-[8px] font-extrabold uppercase tracking-wide text-white/80">Simulated</span>}
       <p className="text-xs font-extrabold text-white/90">{entry.score.toFixed(1)}</p>
       <div className={`flex w-full items-end justify-center rounded-t-lg bg-white/15 ${height}`}>
         <span className="mb-1 text-sm font-extrabold text-white">#{entry.rank}</span>
@@ -62,6 +63,8 @@ export function ShowdownResult({ payload, photoUrl }: { payload: BeautyScoreShow
         <p>{payload.engagementNote}</p>
         <p className="mt-2 font-bold text-(--color-burgundy-dark)">Your score: {payload.yourScore.toFixed(1)}/10 vs community average {payload.averageScore.toFixed(1)}/10</p>
       </div>
+
+      <p className="text-[11px] leading-relaxed text-(--color-text-muted)">This is an entertainment ranking, not a scientific or medical assessment. Entries marked &quot;Simulated&quot; are computer-generated placeholders shown while the community leaderboard is still filling in — they are not real people.</p>
     </div>
   );
 }

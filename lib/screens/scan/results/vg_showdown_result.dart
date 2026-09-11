@@ -61,6 +61,11 @@ class VGShowdownResult extends StatelessWidget {
           averageScore: averageScore,
           engagementNote: engagementNote,
         ),
+        12.height,
+        Text(
+          'This is an entertainment ranking, not a scientific or medical assessment. Entries marked "Simulated" are computer-generated placeholders shown while the community leaderboard is still filling in — they are not real people.',
+          style: secondaryTextStyle(size: 11, height: 1.35),
+        ),
       ],
     );
   }

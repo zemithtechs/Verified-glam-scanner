@@ -23,13 +23,23 @@ export function CelebrityResult({ payload, photoUrl }: { payload: CelebrityLooka
           <div className="mt-4 space-y-3">
             {matches.map((m, i) => (
               <div key={`${m.name}-${i}`} className="flex items-center gap-4 rounded-[16px] border border-(--color-border) bg-white p-4">
-                <AvatarImage src={m.imageUrl} name={m.name} size={64} />
+                <div className="relative shrink-0">
+                  <AvatarImage src={m.imageUrl} name={m.name} size={64} />
+                  {m.imageSource === "generated" && (
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-(--color-burgundy-dark) px-1.5 py-0.5 text-[8px] font-extrabold uppercase tracking-wide text-white">
+                      AI impression
+                    </span>
+                  )}
+                </div>
                 <div className="flex-1">
                   <p className="font-extrabold text-(--color-burgundy-dark)">{m.name}</p>
                   <p className="text-sm font-bold text-(--color-burgundy)">{Math.round(m.percent)}% similar</p>
                   <p className="mt-1 text-xs leading-relaxed text-(--color-text-muted)">
                     Matching features: {m.why || m.traits?.join(", ") || "similar facial proportions"}
                   </p>
+                  {m.imageSource === "generated" && (
+                    <p className="mt-1 text-[11px] italic text-(--color-text-muted)">Photo is an AI-generated impression, not an actual picture of {m.name}.</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -37,6 +47,7 @@ export function CelebrityResult({ payload, photoUrl }: { payload: CelebrityLooka
         )}
 
         {payload.disclaimer && <p className="mt-4 text-xs leading-relaxed text-(--color-text-muted)">{payload.disclaimer}</p>}
+        <p className="mt-2 text-[11px] leading-relaxed text-(--color-text-muted)">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
       </div>
     </div>
   );

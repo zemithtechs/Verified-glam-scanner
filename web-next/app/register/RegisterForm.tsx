@@ -12,6 +12,7 @@ export function RegisterForm({ redirectPath }: { redirectPath: string }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,9 +61,23 @@ export function RegisterForm({ redirectPath }: { redirectPath: string }) {
           className={inputClass}
         />
       </div>
+      <label className="flex items-start gap-2.5 text-sm text-(--color-text-muted)">
+        <input
+          type="checkbox"
+          required
+          checked={ageConfirmed}
+          onChange={(e) => setAgeConfirmed(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-(--color-burgundy)"
+        />
+        <span>
+          I confirm I am at least 18 years old and agree to the{" "}
+          <Link href="/terms" className="font-semibold text-(--color-burgundy)">Terms of Use</Link> and{" "}
+          <Link href="/privacy" className="font-semibold text-(--color-burgundy)">Privacy Policy</Link>.
+        </span>
+      </label>
       <button
         type="submit"
-        disabled={loading}
+        disabled={loading || !ageConfirmed}
         className="w-full rounded-full bg-(--color-burgundy) text-white font-semibold py-3.5 hover:opacity-90 transition-opacity disabled:opacity-60"
       >
         {loading ? "Creating account…" : "Join now"}

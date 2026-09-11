@@ -96,6 +96,9 @@ export const PRIVACY_CONTENT: LegalPageContent = {
       "Facial analysis is performed on our servers using third-party AI services (including OpenAI). Your photos are sent to these services only for the purpose of generating your requested scan results. API keys and AI credentials are kept on the server — they are never embedded in the mobile app.",
     ),
     p("AI outputs are generated automatically and may not always be accurate. They are intended for entertainment and self-discovery, not medical or professional advice."),
+    p(
+      "Celebrity Look-Alike uses TMDB to find a real published photo of your matched celebrity when one is available. When it isn't, we generate a synthetic, AI-created image intended to resemble that celebrity for entertainment purposes only — this is clearly labeled as an AI impression in the app and is never presented as an actual photo of that person. This product uses the TMDB API but is not endorsed or certified by TMDB.",
+    ),
     h("4. How we store and protect data"),
     p(
       "We use Cloudflare (Workers, D1 database, and R2 storage) for authentication, database records, and private storage of scan photos. Access to your data is protected by account authentication and server-side access controls.",

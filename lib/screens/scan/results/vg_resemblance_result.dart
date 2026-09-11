@@ -84,6 +84,11 @@ class VGResemblanceResult extends StatelessWidget {
             ),
           ),
         ],
+        12.height,
+        Text(
+          'This comparison is a playful, AI-estimated similarity reading — not a biometric, forensic, or scientific identity match.',
+          style: secondaryTextStyle(size: 11, height: 1.35),
+        ),
       ],
     );
   }

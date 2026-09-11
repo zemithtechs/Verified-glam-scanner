@@ -109,6 +109,7 @@ export function FacialSymmetryResult({ payload, photoUrl }: { payload: FacialSym
           title="Region breakdown"
           items={regions.map((r) => `${r.label}: ${Math.round(r.percent)}% — ${regionTier(r.percent)}.`)}
         />
+        <p className="mt-6 text-xs leading-relaxed text-(--color-text-muted)">This symmetry reading is an AI estimation from a single photo, for entertainment and self-reflection — not a medical or scientific assessment.</p>
       </div>
     </div>
   );

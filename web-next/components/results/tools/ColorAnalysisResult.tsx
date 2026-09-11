@@ -79,6 +79,7 @@ export function ColorAnalysisResult({ payload, photoUrl }: { payload: ColorAnaly
       )}
 
       <InsightsList items={annotations.map((a) => a.text)} />
+      <p className="text-xs leading-relaxed text-(--color-text-muted)">This color palette is an AI styling suggestion for entertainment and self-expression — not a professional color-analysis consultation.</p>
     </div>
   );
 }

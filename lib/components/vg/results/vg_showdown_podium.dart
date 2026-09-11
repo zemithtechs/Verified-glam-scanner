@@ -71,6 +71,7 @@ class _PodiumSlot extends StatelessWidget {
     final rank = (entry!['rank'] as num?)?.round() ?? 0;
     final asset = entry!['avatarAsset'] as String?;
     final avatarUrl = entry!['avatarUrl'] as String?;
+    final isSimulated = entry!['isSimulated'] == true;
 
     return Column(
       children: [
@@ -99,6 +100,10 @@ class _PodiumSlot extends StatelessWidget {
           score.toStringAsFixed(2),
           style: secondaryTextStyle(color: Colors.white70, size: 11),
         ),
+        if (isSimulated) ...[
+          2.height,
+          Text('SIMULATED', style: boldTextStyle(color: Colors.white54, size: 7)),
+        ],
       ],
     );
   }

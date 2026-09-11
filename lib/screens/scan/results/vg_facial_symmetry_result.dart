@@ -62,6 +62,11 @@ class VGFacialSymmetryResult extends StatelessWidget {
           subscores: subscores,
           photoPath: result.photoPath,
         ),
+        12.height,
+        Text(
+          'This symmetry reading is an AI estimation from a single photo, for entertainment and self-reflection — not a medical or scientific assessment.',
+          style: secondaryTextStyle(size: 11, height: 1.35),
+        ),
       ],
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/BMSocialIconsLoginComponents.dart';
 import '../main.dart';
@@ -11,7 +13,6 @@ import '../utils/BMColors.dart';
 import '../utils/BMWidgets.dart';
 import '../utils/vg_auth_navigation.dart';
 import '../utils/vg_constants.dart';
-import '../utils/vg_copy.dart';
 import '../utils/vg_error_utils.dart';
 import 'BMLoginScreen.dart';
 import 'onboarding/vg_onboarding_flow.dart';
@@ -28,6 +29,7 @@ class _BMRegisterScreenState extends State<BMRegisterScreen> {
   final _passwordController = TextEditingController();
   final _passwordFocus = FocusNode();
   bool _loading = false;
+  bool _ageConfirmed = false;
 
   @override
   void initState() {
@@ -74,6 +76,10 @@ class _BMRegisterScreenState extends State<BMRegisterScreen> {
   }
 
   Future<void> _google() async {
+    if (!_ageConfirmed) {
+      toast('Please confirm you are 18+ and agree to the Terms and Privacy Policy first.');
+      return;
+    }
     if (!VGBackendConfig.hasGoogleSignIn) {
       toast('Google sign-in not configured');
       return;
@@ -148,7 +154,45 @@ class _BMRegisterScreenState extends State<BMRegisterScreen> {
                       enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: appStore.isDarkModeOn ? bmTextColorDarkMode : bmPrimaryColor)),
                     ),
                   ),
-                  30.height,
+                  20.height,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        value: _ageConfirmed,
+                        activeColor: bmPrimaryColor,
+                        onChanged: (v) => setState(() => _ageConfirmed = v ?? false),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: RichText(
+                            text: TextSpan(
+                              style: secondaryTextStyle(color: appStore.isDarkModeOn ? Colors.white : bmSpecialColorDark, size: 12),
+                              children: [
+                                const TextSpan(text: 'I confirm I am at least 18 years old and agree to the '),
+                                TextSpan(
+                                  text: 'Terms of Use',
+                                  style: boldTextStyle(color: bmPrimaryColor, size: 12),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => launchUrl(Uri.parse('$vgMarketingSiteUrl/terms'), mode: LaunchMode.externalApplication),
+                                ),
+                                const TextSpan(text: ' and '),
+                                TextSpan(
+                                  text: 'Privacy Policy',
+                                  style: boldTextStyle(color: bmPrimaryColor, size: 12),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => launchUrl(Uri.parse('$vgMarketingSiteUrl/privacy'), mode: LaunchMode.externalApplication),
+                                ),
+                                const TextSpan(text: '.'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  10.height,
                   AppButton(
                     width: context.width() - 32,
                     shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
@@ -156,8 +200,8 @@ class _BMRegisterScreenState extends State<BMRegisterScreen> {
                         ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
                         : Text('Join Now', style: boldTextStyle(color: Colors.white)),
                     padding: const EdgeInsets.all(16),
-                    color: bmPrimaryColor,
-                    onTap: _loading ? null : _register,
+                    color: _ageConfirmed ? bmPrimaryColor : bmPrimaryColor.withValues(alpha: 0.4),
+                    onTap: (_loading || !_ageConfirmed) ? null : _register,
                   ),
                   30.height,
                   Text(
@@ -166,11 +210,6 @@ class _BMRegisterScreenState extends State<BMRegisterScreen> {
                   ).center(),
                   30.height,
                   BMSocialIconsLoginComponents(onGoogleSignIn: _google).center(),
-                  30.height,
-                  Text(
-                    '${VGCopy.registerTermsPrefix} ',
-                    style: secondaryTextStyle(color: appStore.isDarkModeOn ? Colors.white : bmSpecialColorDark, size: 12),
-                  ).center(),
                 ],
               ).paddingSymmetric(horizontal: 16),
             ),

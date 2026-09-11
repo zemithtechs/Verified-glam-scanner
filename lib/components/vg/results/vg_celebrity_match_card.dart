@@ -11,6 +11,7 @@ class VGCelebrityMatchCard extends StatelessWidget {
   final String? why;
   final String? imageAsset;
   final String? imageUrl;
+  final bool isGenerated;
 
   const VGCelebrityMatchCard({
     super.key,
@@ -20,6 +21,7 @@ class VGCelebrityMatchCard extends StatelessWidget {
     this.why,
     this.imageAsset,
     this.imageUrl,
+    this.isGenerated = false,
   });
 
   @override
@@ -47,7 +49,19 @@ class VGCelebrityMatchCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _Thumbnail(name: name, imageAsset: imageAsset, imageUrl: imageUrl),
+          Column(
+            children: [
+              _Thumbnail(name: name, imageAsset: imageAsset, imageUrl: imageUrl),
+              if (isGenerated) ...[
+                4.height,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(color: bmSpecialColorDark, borderRadius: BorderRadius.circular(6)),
+                  child: Text('AI IMPRESSION', style: boldTextStyle(color: Colors.white, size: 7)),
+                ),
+              ],
+            ],
+          ),
           14.width,
           Expanded(
             child: Column(
@@ -74,6 +88,13 @@ class VGCelebrityMatchCard extends StatelessWidget {
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
+                if (isGenerated) ...[
+                  6.height,
+                  Text(
+                    'Photo is an AI-generated impression, not an actual picture of $name.',
+                    style: secondaryTextStyle(size: 10, height: 1.3),
+                  ),
+                ],
               ],
             ),
           ),

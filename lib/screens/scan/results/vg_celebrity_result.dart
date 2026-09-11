@@ -100,12 +100,18 @@ class VGCelebrityResult extends StatelessWidget {
               why: m['why']?.toString(),
               imageAsset: m['imageAsset']?.toString(),
               imageUrl: m['imageUrl']?.toString(),
+              isGenerated: m['imageSource']?.toString() == 'generated',
             );
           }),
         if (disclaimer != null && disclaimer.isNotEmpty) ...[
           12.height,
           Text(disclaimer, style: secondaryTextStyle(size: 11, height: 1.35)),
         ],
+        6.height,
+        Text(
+          'This product uses the TMDB API but is not endorsed or certified by TMDB.',
+          style: secondaryTextStyle(size: 10, height: 1.3),
+        ),
       ],
     );
   }
