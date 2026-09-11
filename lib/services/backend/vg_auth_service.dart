@@ -2,6 +2,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../utils/vg_constants.dart';
+import '../vg_credits_service.dart';
 import '../vg_profile_cache.dart';
 import '../vg_push_service.dart';
 import '../vg_session_scan_cache.dart';
@@ -97,6 +98,13 @@ class VGAuthService {
       userId: userId,
       userEmail: account.email,
     );
+    // Sync the local isPro cache with the server immediately — several
+    // gates (paywall, feature locks) read the cached flag rather than
+    // fetching fresh, and it defaults to false until something syncs it.
+    // Without this, a real Pro account looks/behaves like Free right after
+    // signing in on a fresh install, until something else happens to call
+    // fetchSnapshot() first.
+    await VGCreditsService.fetchSnapshot();
   }
 
   static Future<void> resetPassword(String email) {
@@ -172,6 +180,9 @@ class VGAuthService {
     final email = userJson['email'] as String?;
     await VGApiClient.setSession(
         token: token, userId: userId, userEmail: email);
+    // Sync the local isPro cache with the server immediately — see the
+    // matching comment in signInWithGoogle for why this can't wait.
+    await VGCreditsService.fetchSnapshot();
     return VGApiAuthResponse(
       user: VGApiUser(id: userId, email: email),
       session: token,
