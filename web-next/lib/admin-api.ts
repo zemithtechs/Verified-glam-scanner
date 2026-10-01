@@ -15,7 +15,21 @@ export type AdminUser = {
   subscription_status: string | null;
   credits_balance: number;
   credits_allocated: number;
+  credits_used: number;
   created_at: string;
+};
+
+export type AdminTool = { featureType: string; name: string; enabled: boolean };
+export type AdminWorkflow = { id: string; name: string; source: string; destination: string; enabled: boolean };
+export type AdminUsage = {
+  totalLogs: number;
+  creditsConsumed: number;
+  uniqueTools: number;
+  breakdown: { feature_type: string; uses: number; credits: number }[];
+};
+export type AdminLog = {
+  id: string; created_at: string; tool: string; feature_type: string | null; kind: string;
+  amount: number; credits: number; balance_after: number | null; user_id: string; email: string | null;
 };
 
 export type AdminSubscriptionsSummary = {

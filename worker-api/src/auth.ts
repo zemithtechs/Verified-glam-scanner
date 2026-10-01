@@ -68,7 +68,8 @@ export function createAuth(env: Env) {
           // 1:1 like the original `references auth.users(id)` did.
           after: async (user) => {
             await env.DB.prepare(
-              "insert into profiles (id, email) values (?, ?) on conflict (id) do nothing",
+              `insert into profiles (id, email, credits_balance, credits_allocated, credits_period_key)
+               values (?, ?, 10, 10, 'free-lifetime') on conflict (id) do nothing`,
             )
               .bind(user.id, user.email)
               .run();

@@ -70,7 +70,7 @@ export function UsersTable({
             <tr className="text-left text-xs font-bold uppercase tracking-wide text-(--color-text-muted) border-b border-(--color-border)">
               <th className="px-4 py-2.5">Email</th>
               <th className="px-4 py-2.5">Plan</th>
-              <th className="px-4 py-2.5">Credits</th>
+              <th className="px-4 py-2.5">Credits used</th>
               <th className="px-4 py-2.5">Status</th>
               <th className="px-4 py-2.5">Joined</th>
             </tr>
@@ -89,7 +89,8 @@ export function UsersTable({
                   )}
                 </td>
                 <td className="px-4 py-2.5 text-(--color-text-muted)">
-                  {user.credits_balance} / {user.credits_allocated}
+                  <span className="font-semibold text-(--color-text)">{user.credits_used}</span> / {user.credits_allocated}
+                  <span className="block text-xs">{user.credits_balance} remaining</span>
                 </td>
                 <td className="px-4 py-2.5 text-(--color-text-muted)">{user.subscription_status ?? "—"}</td>
                 <td className="px-4 py-2.5 text-(--color-text-muted)">{new Date(user.created_at).toLocaleDateString()}</td>

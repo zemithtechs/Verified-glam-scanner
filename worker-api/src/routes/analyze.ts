@@ -108,7 +108,7 @@ analyze.post("/", async (c) => {
   }
 
   try {
-    const access = await checkAnalysisAccess(env.DB, userId, featureType, rewardToken);
+    await checkAnalysisAccess(env.DB, userId, featureType, rewardToken);
 
     const photoObj = await env.SCANS_BUCKET.get(storagePath);
     if (!photoObj) {
@@ -142,7 +142,7 @@ analyze.post("/", async (c) => {
       payload = await enrichShowdown(payload, env, userId);
     }
 
-    const creditsRemaining = access.usedRewardToken ? undefined : await deductCredits(env.DB, userId, featureType);
+    const creditsRemaining = await deductCredits(env.DB, userId, featureType);
 
     return c.json({ payload, version: FUNCTION_VERSION, creditsRemaining });
   } catch (e) {

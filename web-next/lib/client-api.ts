@@ -16,7 +16,14 @@ export class ClientApiError extends Error {
 async function handle<T>(res: Response): Promise<T> {
   const text = await res.text();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const data: any = text ? JSON.parse(text) : null;
+  let data: any = null;
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { error: res.ok ? "The server returned an invalid response." : `Request failed (${res.status}).` };
+    }
+  }
   if (!res.ok) {
     throw new ClientApiError(res.status, data?.error ?? `Request failed (${res.status})`, data?.errorCode);
   }
@@ -35,6 +42,8 @@ export function friendlyAuthError(err: unknown): string {
         return "An account with this email already exists.";
       case 429:
         return "Too many attempts. Please wait a moment and try again.";
+      case 503:
+        return "The sign-in service is unavailable right now. Please check your connection and try again.";
       default:
         return "Something went wrong. Please check your connection and try again.";
     }

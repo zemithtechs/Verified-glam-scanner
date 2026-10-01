@@ -14,13 +14,16 @@ export function LoginForm({ redirectPath }: { redirectPath: string }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    setSuccess(null);
     setLoading(true);
     try {
       await authApi.signIn(email.trim(), password);
+      setSuccess("Login successful. Redirecting to your dashboard…");
       router.push(redirectPath);
       router.refresh();
     } catch (err) {
@@ -33,8 +36,13 @@ export function LoginForm({ redirectPath }: { redirectPath: string }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3">
+        <div role="alert" aria-live="assertive" className="rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3">
           {error}
+        </div>
+      )}
+      {success && (
+        <div role="status" aria-live="polite" className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+          {success}
         </div>
       )}
       <div>

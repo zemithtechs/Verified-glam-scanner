@@ -199,7 +199,7 @@ class _VGWebCreditsPanelState extends State<VGWebCreditsPanel> {
           children: [
             Text(VGCopy.creditsMyCreditsTitle, style: boldTextStyle(color: bmSpecialColorDark, size: 16)),
             const SizedBox(height: 16),
-            if (snapshot.isPro && snapshot.allocated > 0) ...[
+            if (snapshot.allocated > 0) ...[
               ClipRRect(
                 borderRadius: BorderRadius.circular(999),
                 child: LinearProgressIndicator(

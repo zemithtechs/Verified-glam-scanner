@@ -1,0 +1,8 @@
+import { getSessionToken } from "@/lib/session";
+import { apiClient } from "@/lib/api-client";
+import type { AdminLog } from "@/lib/admin-api";
+export const dynamic = "force-dynamic";
+export default async function LogsPage() {
+  const data = await apiClient.get<{ logs: AdminLog[] }>("/api/admin/logs?limit=200", await getSessionToken());
+  return <div><h1 className="text-2xl font-extrabold text-(--color-burgundy-dark)">System Logs</h1><p className="mb-6 mt-1 text-sm text-(--color-text-muted)">Credit grants, deductions, renewals, and revocations.</p><div className="overflow-x-auto rounded-2xl border border-(--color-border) bg-white"><table className="w-full text-sm"><thead><tr className="border-b border-(--color-border) text-left text-xs uppercase text-(--color-text-muted)"><th className="p-3">Time</th><th className="p-3">Action</th><th className="p-3">Credits</th><th className="p-3">Balance</th><th className="p-3">User</th></tr></thead><tbody>{data.logs.map((log) => <tr key={log.id} className="border-b border-(--color-border) last:border-0"><td className="whitespace-nowrap p-3 text-(--color-text-muted)">{new Date(log.created_at).toLocaleString()}</td><td className="p-3"><b>{log.tool}</b><span className="block text-xs text-(--color-text-muted)">{log.kind}</span></td><td className={`p-3 font-bold ${log.amount < 0 ? "text-red-600" : "text-green-700"}`}>{log.amount > 0 ? "+" : ""}{log.amount}</td><td className="p-3">{log.balance_after ?? "—"}</td><td className="p-3"><span>{log.email ?? "Unknown"}</span><span className="block max-w-40 truncate text-xs text-(--color-text-muted)">{log.user_id}</span></td></tr>)}</tbody></table>{!data.logs.length && <p className="p-6 text-sm text-(--color-text-muted)">No credit events yet.</p>}</div></div>;
+}

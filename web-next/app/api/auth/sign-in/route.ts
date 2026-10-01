@@ -21,6 +21,10 @@ export async function POST(request: Request) {
     if (err instanceof ApiError) {
       return NextResponse.json({ error: err.message, errorCode: err.errorCode }, { status: err.status });
     }
-    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+    console.error("Sign-in service unavailable:", err);
+    return NextResponse.json(
+      { error: "Unable to reach the sign-in service. Check your connection and try again.", errorCode: "AUTH_SERVICE_UNAVAILABLE" },
+      { status: 503 },
+    );
   }
 }

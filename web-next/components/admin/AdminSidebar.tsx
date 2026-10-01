@@ -17,7 +17,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
-type NavItem = { label: string; href: string; icon: React.ComponentType<{ size?: number }>; comingSoon?: boolean };
+type NavItem = { label: string; href: string; icon: React.ComponentType<{ size?: number }> };
 type NavGroup = { title: string; items: NavItem[] };
 
 const NAV: NavGroup[] = [
@@ -31,27 +31,27 @@ const NAV: NavGroup[] = [
   },
   {
     title: "Communication",
-    items: [{ label: "Notifications", href: "/admin/notifications", icon: Bell, comingSoon: true }],
+    items: [{ label: "Notifications", href: "/admin/notifications", icon: Bell }],
   },
   {
     title: "Tool Management",
     items: [
-      { label: "Tools Registry", href: "/admin/tools", icon: Wrench, comingSoon: true },
-      { label: "Workflows", href: "/admin/workflows", icon: GitBranch, comingSoon: true },
+      { label: "Tools Registry", href: "/admin/tools", icon: Wrench },
+      { label: "Workflows", href: "/admin/workflows", icon: GitBranch },
     ],
   },
   {
     title: "Global Analytics",
     items: [
-      { label: "Platform Usage", href: "/admin/usage", icon: BarChart3, comingSoon: true },
-      { label: "Revenue & Payouts", href: "/admin/revenue", icon: Wallet, comingSoon: true },
+      { label: "Platform Usage", href: "/admin/usage", icon: BarChart3 },
+      { label: "Revenue & Payouts", href: "/admin/revenue", icon: Wallet },
     ],
   },
   {
     title: "System Administration",
     items: [
-      { label: "System Logs", href: "/admin/logs", icon: ScrollText, comingSoon: true },
-      { label: "Admin Settings", href: "/admin/settings", icon: Settings, comingSoon: true },
+      { label: "System Logs", href: "/admin/logs", icon: ScrollText },
+      { label: "Admin Settings", href: "/admin/settings", icon: Settings },
     ],
   },
 ];
@@ -79,19 +79,15 @@ export function AdminSidebar({ email }: { email: string }) {
                 return (
                   <Link
                     key={item.href}
-                    href={item.comingSoon ? "#" : item.href}
-                    aria-disabled={item.comingSoon}
+                    href={item.href}
                     className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors ${
                       active
                         ? "bg-(--color-burgundy) text-white"
-                        : item.comingSoon
-                          ? "text-white/30 cursor-default"
-                          : "text-white/75 hover:bg-white/10 hover:text-white"
+                        : "text-white/75 hover:bg-white/10 hover:text-white"
                     }`}
                   >
                     <Icon size={16} />
                     <span className="flex-1">{item.label}</span>
-                    {item.comingSoon && <span className="text-[9px] uppercase tracking-wide">Soon</span>}
                   </Link>
                 );
               })}

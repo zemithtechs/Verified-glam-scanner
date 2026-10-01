@@ -120,17 +120,15 @@ class VGCreditsService {
       final plan = row['subscription_plan'] as String? ?? kSubscriptionPlanFree;
       final status = row['subscription_status'] as String? ?? 'free';
       final balance = (row['credits_balance'] as num?)?.toInt() ?? 0;
-      final allocated = isPro
-          ? ((row['credits_allocated'] as num?)?.toInt() ??
-              creditsAllocationForPlan(plan))
-          : 0;
+      final allocated = (row['credits_allocated'] as num?)?.toInt() ??
+          creditsAllocationForPlan(plan);
       final periodEndRaw = row['subscription_current_period_end']?.toString();
       final periodEnd = periodEndRaw != null && periodEndRaw.isNotEmpty
           ? DateTime.tryParse(periodEndRaw)
           : null;
 
       final snapshot = VGCreditSnapshot(
-        balance: isPro ? balance : 0,
+        balance: balance,
         allocated: allocated,
         subscriptionPlan: isPro ? plan : kSubscriptionPlanFree,
         subscriptionStatus: status,
@@ -238,7 +236,6 @@ class VGCreditsService {
 
   static Future<bool> hasEnoughForGeneration() async {
     final snapshot = await fetchSnapshot();
-    if (snapshot == null || !snapshot.isPro) return false;
-    return snapshot.balance >= kCreditsPerGeneration;
+    return snapshot != null && snapshot.balance >= kCreditsPerGeneration;
   }
 }

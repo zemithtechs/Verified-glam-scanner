@@ -16,12 +16,13 @@ export function HomeToolUpload({ tool, isSignedIn, dimensions }: { tool: ToolDef
     else if (next) setError("Choose a JPG, PNG, or WebP image.");
   }
   async function continueToWorkspace() {
-    if (!file) { setError("Choose a clear photo first."); return; }
     setLoading(true);
+    const destination = `/app/${tool.slug}`;
     try {
-      const dataUrl = await readFile(file);
-      window.sessionStorage.setItem(`vg_pending_upload_${tool.slug}`, JSON.stringify({ name: file.name, type: file.type || "image/jpeg", dataUrl, savedAt: Date.now(), selectedDimension: selected }));
-      const destination = `/app/${tool.slug}`;
+      if (file) {
+        const dataUrl = await readFile(file);
+        window.sessionStorage.setItem(`vg_pending_upload_${tool.slug}`, JSON.stringify({ name: file.name, type: file.type || "image/jpeg", dataUrl, savedAt: Date.now(), selectedDimension: selected }));
+      }
       window.location.href = isSignedIn ? destination : `/register?redirect=${encodeURIComponent(destination)}`;
     } catch { setError("We could not prepare that image. Please try another photo."); setLoading(false); }
   }

@@ -5,6 +5,7 @@ import type { Env } from "../env";
 // prepared statements (see docs/CLOUDFLARE_MIGRATION_PLAN.md — credits.ts row).
 
 export const CREDITS_PER_GENERATION = 5;
+export const FREE_CREDITS_ALLOCATION = 10;
 export const YEARLY_CREDITS_ALLOCATION = 200;
 export const PRO_WEEKLY_CREDITS_ALLOCATION = 30;
 
@@ -40,13 +41,20 @@ export function currentPeriodKey(plan: SubscriptionPlan): string {
   if (plan === "annual") {
     return String(now.getUTCFullYear());
   }
-  return "";
+  return "free-lifetime";
 }
 
 export function allocationForPlan(plan: SubscriptionPlan): number {
   if (plan === "pro_weekly") return PRO_WEEKLY_CREDITS_ALLOCATION;
   if (plan === "annual") return YEARLY_CREDITS_ALLOCATION;
-  return 0;
+  return FREE_CREDITS_ALLOCATION;
+}
+
+async function configuredAllocation(db: D1Database, plan: SubscriptionPlan): Promise<number> {
+  const key = plan === "annual" ? "admin.annual_credits" : plan === "pro_weekly" ? "admin.weekly_credits" : "admin.free_credits";
+  const row = await db.prepare("select value from app_content where key = ?").bind(key).first<{ value: string }>();
+  const value = Number(row?.value);
+  return Number.isInteger(value) && value >= 0 ? value : allocationForPlan(plan);
 }
 
 export type CreditTransactionKind =
@@ -111,7 +119,7 @@ export async function grantSubscriptionCredits(
     forceRefresh?: boolean;
   } = {},
 ): Promise<void> {
-  const allocated = allocationForPlan(plan);
+  const allocated = await configuredAllocation(db, plan);
   const periodKey = currentPeriodKey(plan);
   const now = new Date().toISOString();
 
@@ -293,12 +301,23 @@ async function loadProfileCredits(db: D1Database, userId: string): Promise<Profi
 
 async function refreshCreditsIfNeeded(db: D1Database, userId: string, profile: ProfileCredits): Promise<ProfileCredits> {
   const plan = (profile.subscription_plan ?? "free") as SubscriptionPlan;
-  if (!profile.is_pro || plan === "free") return profile;
-
   const periodKey = currentPeriodKey(plan);
-  const allocated = allocationForPlan(plan);
+  const allocated = await configuredAllocation(db, plan);
   if (profile.credits_period_key === periodKey && (profile.credits_allocated ?? 0) === allocated) {
     return profile;
+  }
+
+  // Free credits are lifetime credits. If the configured allowance changes,
+  // preserve credits already used instead of refilling the account.
+  if (!profile.is_pro || plan === "free") {
+    const previousAllocated = profile.credits_allocated ?? 0;
+    const previousBalance = profile.credits_balance ?? 0;
+    const used = Math.max(0, previousAllocated - previousBalance);
+    const balance = Math.max(0, allocated - used);
+    await db.prepare(
+      "update profiles set credits_balance = ?, credits_allocated = ?, credits_period_key = ?, updated_at = ? where id = ?",
+    ).bind(balance, allocated, periodKey, new Date().toISOString(), userId).run();
+    return { ...profile, credits_balance: balance, credits_allocated: allocated, credits_period_key: periodKey };
   }
 
   const now = new Date().toISOString();
@@ -315,10 +334,6 @@ async function refreshCreditsIfNeeded(db: D1Database, userId: string, profile: P
 
 export async function checkCredits(db: D1Database, userId: string): Promise<void> {
   let profile = await loadProfileCredits(db, userId);
-  if (!profile.is_pro) {
-    throw new AnalysisError(403, "NOT_SUBSCRIBED", "Pro subscription required to run AI analysis.");
-  }
-
   profile = await refreshCreditsIfNeeded(db, userId, profile);
   const balance = profile.credits_balance ?? 0;
   if (balance < CREDITS_PER_GENERATION) {
@@ -327,14 +342,17 @@ export async function checkCredits(db: D1Database, userId: string): Promise<void
 }
 
 export async function deductCredits(db: D1Database, userId: string, featureType: string): Promise<number> {
-  const profile = await db.prepare("select credits_balance from profiles where id = ?").bind(userId).first<{ credits_balance: number | null }>();
-
-  const balance = profile?.credits_balance ?? 0;
-  const remaining = Math.max(0, balance - CREDITS_PER_GENERATION);
-  await db
-    .prepare("update profiles set credits_balance = ?, updated_at = ? where id = ?")
-    .bind(remaining, new Date().toISOString(), userId)
-    .run();
+  const updated = await db
+    .prepare(
+      `update profiles set credits_balance = credits_balance - ?, updated_at = ?
+       where id = ? and credits_balance >= ? returning credits_balance`,
+    )
+    .bind(CREDITS_PER_GENERATION, new Date().toISOString(), userId, CREDITS_PER_GENERATION)
+    .first<{ credits_balance: number }>();
+  if (!updated) {
+    throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this analysis.");
+  }
+  const remaining = updated.credits_balance;
 
   await logCreditTransaction(db, userId, {
     amount: -CREDITS_PER_GENERATION,
@@ -354,26 +372,39 @@ export async function deductCredits(db: D1Database, userId: string, featureType:
 
 const FREE_FEATURE_TYPE = "FACE_BEAUTY_ANALYSIS";
 
-export type AnalysisAccess = { usedRewardToken: boolean };
-
 /** Replaces a bare checkCredits() call at the top of the analyze route. */
 export async function checkAnalysisAccess(
   db: D1Database,
   userId: string,
   featureType: string,
   rewardToken: string | undefined,
-): Promise<AnalysisAccess> {
+): Promise<void> {
   const profile = await loadProfileCredits(db, userId);
+
+  const toolSetting = await db.prepare("select value from app_content where key = ?")
+    .bind(`admin.tool.${featureType}`)
+    .first<{ value: string }>();
+  if (toolSetting?.value === "false") {
+    throw new AnalysisError(503, "TOOL_DISABLED", "This analysis is temporarily unavailable.");
+  }
+
+  const maintenance = await db.prepare("select value from app_content where key = 'admin.maintenance_enabled'")
+    .first<{ value: string }>();
+  if (maintenance?.value === "true") {
+    const message = await db.prepare("select value from app_content where key = 'admin.maintenance_message'")
+      .first<{ value: string }>();
+    throw new AnalysisError(503, "MAINTENANCE", message?.value || "The analysis service is temporarily under maintenance.");
+  }
 
   if (profile.is_pro) {
     await checkCredits(db, userId);
-    return { usedRewardToken: false };
+    return;
   }
 
   if (featureType !== FREE_FEATURE_TYPE) {
     throw new AnalysisError(403, "NOT_SUBSCRIBED", "Pro subscription required to run AI analysis.");
   }
 
+  await checkCredits(db, userId);
   await consumeRewardToken(db, userId, featureType, rewardToken);
-  return { usedRewardToken: true };
 }

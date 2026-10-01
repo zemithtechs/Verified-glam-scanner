@@ -71,7 +71,10 @@ authNative.post("/google", async (c) => {
         .run();
       // Mirrors auth.ts's databaseHooks.user.create.after — that hook only
       // fires for Better Auth's own signup flow, not this direct DB insert.
-      await db.prepare("insert into profiles (id, email) values (?, ?) on conflict (id) do nothing").bind(userId, claims.email).run();
+      await db.prepare(
+        `insert into profiles (id, email, credits_balance, credits_allocated, credits_period_key)
+         values (?, ?, 10, 10, 'free-lifetime') on conflict (id) do nothing`,
+      ).bind(userId, claims.email).run();
     }
 
     await db

@@ -1,5 +1,6 @@
 /// AI credit costs and subscription allocations (mirrored in analyze-scan Edge Function).
 const int kCreditsPerGeneration = 5;
+const int kFreeCreditsAllocation = 10;
 const int kYearlyCreditsAllocation = 200;
 const int kProWeeklyCreditsAllocation = 30;
 
@@ -14,7 +15,7 @@ int creditsAllocationForPlan(String plan) {
     case kSubscriptionPlanAnnual:
       return kYearlyCreditsAllocation;
     default:
-      return 0;
+      return kFreeCreditsAllocation;
   }
 }
 

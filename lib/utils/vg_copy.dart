@@ -276,8 +276,8 @@ class VGCopy {
   static const creditsMetricPlan = 'Plan';
   static const creditsMetricAnalysesLeft = 'Analyses left';
   static const creditsSubscribeToReceiveCredits =
-      'Subscribe to receive credits';
-  static const creditsFreePlanKpiHint = 'Subscribe for AI credits';
+      'Upgrade for more credits';
+  static const creditsFreePlanKpiHint = 'Lifetime starter credits included';
   static const profileFeaturedAchievement = 'Latest achievement';
   static const profileNoAchievementYet =
       'Complete a challenge to earn your first badge.';
@@ -417,9 +417,9 @@ class VGCopy {
       '$balance / $allocated Credits';
   static String creditsBalanceTitle(int balance) => 'Credits: $balance';
   static const creditsFreePlanHint =
-      'Free plan includes 0 credits. Subscribe to receive AI credits.';
+      'Your free plan includes lifetime starter credits. Each AI analysis uses 5 credits.';
   static const creditsHistoryEmptyFree =
-      'Subscribe to receive credits and see your usage history here.';
+      'No free credit activity yet.';
   static const creditsHistoryEmpty = 'No credit activity in this date range.';
   static const creditsRenewsOn = 'Renews';
   static String creditsPlanStatus(String status) => status.replaceAll('_', ' ');

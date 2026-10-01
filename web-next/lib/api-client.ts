@@ -55,15 +55,30 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 
   const text = await res.text();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const data: any = text ? JSON.parse(text) : null;
+  let data: any = null;
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      // Cloudflare/other upstreams can return plain text or HTML for a 404,
+      // outage, or routing error. Never let that become a JSON.parse crash
+      // that replaces the application's own error handling with a dev overlay.
+      data = null;
+    }
+  }
 
   if (!res.ok) {
     // worker-api's own routes return {error, errorCode}; Better Auth's
     // /api/auth/* routes return {message, code} instead — handle both
     // (mirrors lib/services/backend/vg_api_client.dart on mobile).
-    const message = data?.error ?? data?.message ?? `Request failed (${res.status})`;
+    const plainTextMessage = text && !text.trimStart().startsWith("<") ? text.trim().slice(0, 240) : null;
+    const message = data?.error ?? data?.message ?? plainTextMessage ?? `Request failed (${res.status})`;
     const errorCode = data?.errorCode ?? data?.code;
     throw new ApiError(res.status, message, errorCode);
+  }
+
+  if (text && data == null) {
+    throw new ApiError(502, "The server returned an invalid response.", "INVALID_UPSTREAM_RESPONSE");
   }
 
   return data as T;

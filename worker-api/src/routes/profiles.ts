@@ -8,6 +8,23 @@ import type { SessionVars } from "../middleware/session";
 // the "genuinely new work" the migration plan called out.
 export const profiles = new Hono<{ Bindings: Env; Variables: SessionVars }>();
 
+profiles.get("/platform-config", async (c) => {
+  const rows = await c.env.DB.prepare(
+    `select key, value from app_content
+     where key in ('admin.announcement_enabled', 'admin.announcement_text', 'admin.announcement_type', 'admin.platform_name', 'admin.support_email')`,
+  ).all<{ key: string; value: string }>();
+  const values = new Map((rows.results ?? []).map((row) => [row.key, row.value]));
+  return c.json({
+    announcement: {
+      enabled: values.get("admin.announcement_enabled") === "true",
+      text: values.get("admin.announcement_text") ?? "",
+      type: values.get("admin.announcement_type") ?? "info",
+    },
+    platformName: values.get("admin.platform_name") ?? "Verified Glam",
+    supportEmail: values.get("admin.support_email") ?? "",
+  });
+});
+
 function sanitize(value: unknown, maxLen = 120): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
@@ -148,8 +165,8 @@ profiles.put("/onboarding", async (c) => {
   const body = await c.req.json<Record<string, unknown>>().catch(() => ({}) as Record<string, unknown>);
 
   await c.env.DB.prepare(
-    `insert into profiles (id, email, age, gender, beauty_goals, skin_concerns, product_preferences, skin_type, ethnicity, aesthetic, onboarding_complete, updated_at)
-     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+    `insert into profiles (id, email, age, gender, beauty_goals, skin_concerns, product_preferences, skin_type, ethnicity, aesthetic, onboarding_complete, credits_balance, credits_allocated, credits_period_key, updated_at)
+     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 10, 10, 'free-lifetime', ?)
      on conflict (id) do update set
        email = excluded.email, age = excluded.age, gender = excluded.gender,
        beauty_goals = excluded.beauty_goals, skin_concerns = excluded.skin_concerns,
