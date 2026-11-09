@@ -128,6 +128,9 @@ export async function generateLive(request: Request) {
       signal: AbortSignal.any([request.signal, AbortSignal.timeout(240_000)]),
     });
     if (!response.ok) {
+      // Private log only (Worker logs): status and error code, never the body, and never shown to visitors.
+      const info = await response.clone().json().catch(() => null) as { error?: { code?: unknown; type?: unknown } } | null;
+      console.error("openai image edit failed", response.status, String(info?.error?.code ?? ""), String(info?.error?.type ?? ""), "model", model);
       // Never pass the provider's error text to visitors: it can contain prompts or account details.
       throw new LiveError(response.status === 429 || response.status === 401 || response.status === 403
         ? "The image service is busy right now. Please try again in a little while."
