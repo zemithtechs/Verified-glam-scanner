@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormMessage, inputClass, primaryBtn } from "@/components/AuthCard";
+import { GooglePlaceholder } from "@/components/GooglePlaceholder";
 import { authApi, friendlyAuthError } from "@/lib/client-api";
 
 export function LoginForm({ next }: { next: string }) {
@@ -23,6 +24,8 @@ export function LoginForm({ next }: { next: string }) {
   }
 
   return (
+    <div>
+    <GooglePlaceholder />
     <form onSubmit={submit} className="space-y-4">
       {error && <FormMessage kind="error">{error}</FormMessage>}
       <label className="block"><span className="mb-1.5 block text-sm font-medium">Email</span>
@@ -32,5 +35,6 @@ export function LoginForm({ next }: { next: string }) {
         <input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} /></label>
       <button type="submit" disabled={loading} className={primaryBtn}>{loading ? "Logging in…" : "Log in"}</button>
     </form>
+    </div>
   );
 }

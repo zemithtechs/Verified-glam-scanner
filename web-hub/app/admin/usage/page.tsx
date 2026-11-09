@@ -1,0 +1,10 @@
+import { BarChart3, Coins, Wrench } from "lucide-react";
+import { getSessionToken } from "@/lib/session";
+import { apiClient } from "@/lib/api-client";
+import type { AdminUsage } from "@/lib/admin-api";
+export const dynamic = "force-dynamic";
+function Metric({ label, value, icon: Icon }: { label: string; value: number; icon: React.ComponentType<{ size?: number; className?: string }> }) { return <div className="rounded-2xl border border-(--color-border) bg-white p-5"><Icon size={18} className="mb-3 text-(--color-burgundy)"/><p className="text-xs font-bold uppercase tracking-wide text-(--color-text-muted)">{label}</p><p className="mt-1 text-3xl font-extrabold text-(--color-burgundy-dark)">{value.toLocaleString()}</p></div>; }
+export default async function UsagePage() {
+  const data = await apiClient.get<AdminUsage>("/api/admin/usage", await getSessionToken());
+  return <div><h1 className="text-2xl font-extrabold text-(--color-burgundy-dark)">Platform Usage</h1><p className="mb-6 mt-1 text-sm text-(--color-text-muted)">Successful AI activity recorded by the credit ledger.</p><div className="mb-6 grid gap-4 sm:grid-cols-3"><Metric label="Analysis logs" value={data.totalLogs} icon={BarChart3}/><Metric label="Credits consumed" value={data.creditsConsumed} icon={Coins}/><Metric label="Unique tools used" value={data.uniqueTools} icon={Wrench}/></div><div className="overflow-hidden rounded-2xl border border-(--color-border) bg-white"><div className="border-b border-(--color-border) px-5 py-4 font-bold">Tool breakdown</div>{data.breakdown.length ? data.breakdown.map((row) => <div key={row.feature_type} className="flex items-center justify-between border-b border-(--color-border) px-5 py-3 last:border-0"><span className="font-medium">{row.feature_type.replaceAll("_", " ")}</span><span className="text-sm text-(--color-text-muted)"><b className="text-(--color-text)">{row.uses}</b> uses · {row.credits} credits</span></div>) : <p className="p-6 text-sm text-(--color-text-muted)">No usage has been recorded yet.</p>}</div></div>;
+}

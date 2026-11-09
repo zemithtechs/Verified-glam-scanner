@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormMessage, inputClass, primaryBtn } from "@/components/AuthCard";
+import { GooglePlaceholder } from "@/components/GooglePlaceholder";
 import { authApi, friendlyAuthError } from "@/lib/client-api";
 
 export function RegisterForm({ next }: { next: string }) {
@@ -27,6 +28,8 @@ export function RegisterForm({ next }: { next: string }) {
   }
 
   return (
+    <div>
+    <GooglePlaceholder />
     <form onSubmit={submit} className="space-y-4">
       {error && <FormMessage kind="error">{error}</FormMessage>}
       <label className="block"><span className="mb-1.5 block text-sm font-medium">Email</span>
@@ -39,5 +42,6 @@ export function RegisterForm({ next }: { next: string }) {
       </label>
       <button type="submit" disabled={loading} className={primaryBtn}>{loading ? "Creating your account…" : "Create free account"}</button>
     </form>
+    </div>
   );
 }

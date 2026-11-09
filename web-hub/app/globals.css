@@ -104,3 +104,15 @@ body {
 .price-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 3px solid var(--color-plum); box-shadow: 0 2px 8px rgba(31, 18, 32, 0.25); }
 .price-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--color-plum); box-shadow: 0 2px 8px rgba(31, 18, 32, 0.25); }
 .price-slider:focus-visible { outline: 3px solid var(--color-plum); outline-offset: 6px; }
+
+/* The admin screens were built with the previous site's colour names; define them here so they look exactly as before. */
+.legacy-admin {
+  --color-burgundy: #872b3f;
+  --color-burgundy-dark: #520d1c;
+  --color-rose: #c79a9a;
+  --color-blush: #f6e3e3;
+  --color-surface: #fff7f7;
+  --color-text: #212121;
+  --color-text-muted: #5a5c5e;
+  --color-border: rgba(135, 43, 63, 0.16);
+}

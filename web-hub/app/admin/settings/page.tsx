@@ -1,0 +1,3 @@
+import { getSessionToken } from "@/lib/session"; import { apiClient } from "@/lib/api-client"; import { SettingsForm } from "./SettingsForm";
+export const dynamic = "force-dynamic";
+export default async function SettingsPage() { const data = await apiClient.get<{ settings: Record<string,string> }>("/api/admin/settings", await getSessionToken()); return <div><h1 className="text-2xl font-extrabold text-(--color-burgundy-dark)">Admin Settings</h1><p className="mb-6 mt-1 text-sm text-(--color-text-muted)">Live operational controls and plan allowances.</p><SettingsForm initial={data.settings}/></div>; }

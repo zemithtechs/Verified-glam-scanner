@@ -15,7 +15,7 @@ const WORKER_API_URL =
   process.env.WORKER_API_URL ?? "https://verified-glam-api.komolafephilip.workers.dev";
 
 // Only the backend areas this site actually uses are reachable through the proxy.
-const ALLOWED = ["profiles", "creations", "generation/balance", "polar/checkout", "polar/portal"];
+const ALLOWED = ["profiles", "creations", "generation/balance", "polar/checkout", "polar/portal", "admin"];
 
 async function forward(request: NextRequest, path: string[]) {
   const joined = path.join("/");

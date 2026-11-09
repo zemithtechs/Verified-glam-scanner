@@ -27,6 +27,23 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname.startsWith("/admin")) {
+    if (!token) return redirectToLogin(request, pathname);
+    try {
+      await apiClient.get("/api/admin/me", token);
+    } catch (err) {
+      // Signed in but not on the admin list: a plain 404, so the admin area's existence is not revealed.
+      if (err instanceof ApiError && err.status === 403) return new NextResponse("Not Found", { status: 404 });
+      if (err instanceof ApiError && (err.status === 401 || err.status === 404)) {
+        const response = redirectToLogin(request, pathname);
+        response.cookies.delete(SESSION_COOKIE);
+        return response;
+      }
+      throw err;
+    }
+    return NextResponse.next();
+  }
+
   if (["/login", "/register", "/forgot-password"].includes(pathname) && token) {
     return NextResponse.redirect(new URL("/app", request.url));
   }
@@ -39,4 +56,4 @@ function redirectToLogin(request: NextRequest, redirectPath: string) {
   return NextResponse.redirect(url);
 }
 
-export const config = { matcher: ["/app/:path*", "/login", "/register", "/forgot-password"] };
+export const config = { matcher: ["/app/:path*", "/admin/:path*", "/login", "/register", "/forgot-password"] };

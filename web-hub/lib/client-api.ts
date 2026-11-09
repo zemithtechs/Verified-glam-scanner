@@ -54,3 +54,19 @@ export const creationsApi = {
 export const accountApi = {
   remove: (confirmation: string) => call("/api/account/delete", { method: "DELETE", body: JSON.stringify({ confirmation }) }),
 };
+
+/** Calls the backend through this site's own /api/proxy (the login token is added on the server). */
+async function viaProxy<T>(path: string, init: RequestInit = {}): Promise<T> {
+  const response = await fetch(`/api/proxy${path}`, { cache: "no-store", ...init });
+  const data = await response.json().catch(() => null);
+  if (!response.ok) throw new ClientApiError(response.status, (data && (data.error || data.message)) || `Request failed (${response.status})`);
+  return data as T;
+}
+const json = (body?: unknown): RequestInit => (body !== undefined ? { headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
+
+export const proxyApi = {
+  get: <T>(path: string) => viaProxy<T>(path),
+  post: <T>(path: string, body?: unknown) => viaProxy<T>(path, { method: "POST", ...json(body) }),
+  put: <T>(path: string, body?: unknown) => viaProxy<T>(path, { method: "PUT", ...json(body) }),
+  postBinary: <T>(path: string, bytes: Blob | ArrayBuffer, contentType: string) => viaProxy<T>(path, { method: "POST", headers: { "Content-Type": contentType }, body: bytes }),
+};
