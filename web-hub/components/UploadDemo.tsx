@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Download, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck, Wand2, X } from "lucide-react";
 import { TOOLS } from "@/lib/catalog";
+import { HANDOFF } from "@/lib/live-mode";
 import { GENERATION_SPECS, samplePathsFor } from "@/lib/generation-specs";
 type Selection = { file: File; url: string; sample?: string };
 type Service = { available: boolean; token?: string; message: string };
@@ -70,7 +71,7 @@ export function UploadDemo({ toolName, toolSlug, exampleSrc, onWorkspaceChange }
       if (!response.ok) { const data = await response.json(); throw new Error(data.error || "Generation failed. Please try again."); }
       const blob = await response.blob(); if (!blob.type.startsWith("image/")) throw new Error("The service did not return an image.");
       const url = URL.createObjectURL(blob); urls.current.add(url); setResult(url);
-    } catch (error) { setError(error instanceof Error && error.name === "AbortError" ? "Stopped waiting. A request already started with OpenAI may still finish and incur a charge." : error instanceof Error ? error.message : "Generation failed. Please try again."); }
+    } catch (error) { setError(error instanceof Error && error.name === "AbortError" ? (HANDOFF ? "Stopped waiting. Your result may still finish in the background." : "Stopped waiting. A request already started with OpenAI may still finish and incur a charge.") : error instanceof Error ? error.message : "Generation failed. Please try again."); }
     finally { setBusy(false); controller.current = null; }
   }
   if (!spec || spec.unavailable) return <div className="rounded-lg border border-line bg-cream p-4 text-sm leading-6 text-muted">{spec?.unavailable || "This tool is not available for generation."}</div>;
@@ -86,9 +87,9 @@ export function UploadDemo({ toolName, toolSlug, exampleSrc, onWorkspaceChange }
     {busy && <div role="status" className="rounded-md bg-blush p-3 text-xs leading-5 text-muted">This can take a few minutes. Keep this page open.<button type="button" onClick={() => controller.current?.abort()} className="mt-2 flex min-h-9 items-center gap-1 font-semibold text-plum"><X size={14} />Stop waiting</button></div>}
     {error && !attempted && <p role="alert" className="rounded-md border border-red-200 bg-red-50 p-3 text-xs leading-5 text-red-800">{error}</p>}
     {service && !service.available && <p role="status" className="rounded-md border border-line bg-cream p-3 text-xs leading-5 text-muted">{service.message}</p>}
-    {!service && <p role="status" className="text-xs text-muted">Checking local generation service…</p>}
+    {!service && <p role="status" className="text-xs text-muted">{HANDOFF ? "Getting ready…" : "Checking local generation service…"}</p>}
     {photos.some(Boolean) && <button type="button" disabled={busy} onClick={reset} className="tool-text-link mx-auto flex min-h-10 items-center gap-2 text-xs font-medium text-muted"><RotateCcw size={14} />Clear and start again</button>}
     {exampleSrc && <a href={exampleSrc} download className="tool-text-link flex min-h-10 items-center justify-center gap-2 text-xs font-medium text-plum"><Download size={14} />Download a result example</a>}
-    <p className="flex items-start gap-2 text-[11px] leading-5 text-muted"><ShieldCheck size={14} className="mt-0.5 shrink-0" /><span>Local preview · Uses the configured OpenAI account and may incur API charges. This app does not save your uploads or results to disk. Download before leaving.</span></p>
+    <p className="flex items-start gap-2 text-[11px] leading-5 text-muted"><ShieldCheck size={14} className="mt-0.5 shrink-0" /><span>{HANDOFF ? "Your photo is sent securely to our AI provider to create your result. We do not save your uploads or results, so download your result before leaving. A limited number of free results is available each day." : "Local preview · Uses the configured OpenAI account and may incur API charges. This app does not save your uploads or results to disk. Download before leaving."}</span></p>
   </div>;
 }

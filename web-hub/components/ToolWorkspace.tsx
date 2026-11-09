@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Download, LoaderCircle, WandSparkles } from "lucide-react";
 import { UploadDemo, type WorkspaceState } from "./UploadDemo";
 import { ResultGallery } from "./ResultGallery";
-import { HandoffPanel } from "./HandoffPanel";
-import { HANDOFF } from "@/lib/live-mode";
 import type { Tool } from "@/lib/catalog";
 
 export function ToolWorkspace({ tool, title, lead, images }: { tool: Tool; title: string; lead: string; images: string[] }) {
@@ -20,7 +18,7 @@ export function ToolWorkspace({ tool, title, lead, images }: { tool: Tool; title
   return <section id="tool-workspace" aria-label={`${tool.name} workspace`} className="grid scroll-mt-20 gap-3 lg:grid-cols-[290px_minmax(0,1fr)] xl:grid-cols-[320px_minmax(0,1fr)]">
     <div className="rounded-lg border border-line bg-white p-5 sm:p-6 lg:p-5">
       <div className="mb-5 flex items-center gap-2.5 border-b border-line pb-4 text-sm font-semibold text-ink"><WandSparkles size={18} className="shrink-0 text-plum" aria-hidden="true" />{tool.name}</div>
-      {HANDOFF ? <HandoffPanel tool={tool} /> : <UploadDemo toolSlug={tool.slug} toolName={tool.name} credits={tool.credits} exampleSrc={images[0]} onWorkspaceChange={setState} />}
+      <UploadDemo toolSlug={tool.slug} toolName={tool.name} credits={tool.credits} exampleSrc={images[0]} onWorkspaceChange={setState} />
     </div>
     <div ref={preview} className="min-w-0 scroll-mt-20 rounded-lg border border-line bg-white px-4 py-7 sm:px-6 sm:py-8">
       <h1 className="mx-auto max-w-3xl text-center text-[32px] font-extrabold leading-[1.1] tracking-[-0.055em] text-ink sm:text-[44px]">{title}</h1>

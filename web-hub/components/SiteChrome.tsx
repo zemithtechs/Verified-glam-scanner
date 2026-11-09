@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CATEGORIES, SITE, TOOLS, isBrowsableTool } from "@/lib/catalog";
 import { Logo } from "./Logo";
+import { appHref } from "@/lib/live-mode";
 import { MegaHeader } from "./MegaHeader";
 
 export { Logo } from "./Logo";
@@ -28,8 +29,8 @@ export function SiteFooter({ className = "mt-24" }: { className?: string }) {
         <div>
           <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Your workspace</h2>
           <ul className="space-y-2.5">
-            <li><Link href="/app" className={footerLink}>Dashboard</Link></li>
-            <li><Link href="/app/creations" className={footerLink}>My creations</Link></li>
+            <li><Link href={appHref("/app")} className={footerLink}>Dashboard</Link></li>
+            <li><Link href={appHref("/app/creations")} className={footerLink}>My creations</Link></li>
             <li><Link href="/pricing" className={footerLink}>Plans & credits</Link></li>
           </ul>
         </div>

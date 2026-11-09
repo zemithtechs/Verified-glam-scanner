@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Lock } from "lucide-react";
 import { TOOLS, categoryById, isBrowsableTool, toolBySlug, type CategoryId, type Tool } from "@/lib/catalog";
 import { NAV_GROUPS } from "@/lib/nav";
+import { appHref } from "@/lib/live-mode";
 import { CategoryGlyph, Glyph, IconTile, ToolGlyph } from "./icons";
 import type { Category } from "@/lib/catalog";
 
@@ -74,7 +75,7 @@ export function SideNav({ variant, mode = "flyout", headerH = 64, onNavigate }: 
             const active = path === item.href;
             return (
               <li key={item.href}>
-                <Link href={item.href} onClick={done} aria-current={active ? "page" : undefined} className={`flex items-center gap-2.5 rounded-lg px-2.5 py-[7px] text-[13.5px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum ${active ? "bg-blush font-semibold text-plum" : "font-medium text-ink hover:bg-blush/60"}`}>
+                <Link href={appHref(item.href)} onClick={done} aria-current={active ? "page" : undefined} className={`flex items-center gap-2.5 rounded-lg px-2.5 py-[7px] text-[13.5px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum ${active ? "bg-blush font-semibold text-plum" : "font-medium text-ink hover:bg-blush/60"}`}>
                   <span className="text-plum"><Glyph name={item.glyph} size={18} /></span>{item.label}
                 </Link>
               </li>

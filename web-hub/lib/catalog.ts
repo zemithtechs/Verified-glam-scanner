@@ -127,7 +127,7 @@ export const TOOLS: Tool[] = [
   { slug: "beauty-score-showdown", name: "Beauty Score Showdown", category: "face-analysis", status: "live", credits: 1, badge: "HOT", summary: "Put two portraits side by side with subjective photo-harmony notes." },
   { slug: "face-shape-analyzer", name: "Face Shape Analyzer", category: "face-analysis", status: "launch", credits: 0, badge: "NEW", popular: true, summary: "Find out if your face is oval, round, square, heart or diamond — then get matching hair and glasses ideas.", merges: ["Face Analyzer", "Face Analyzer Advanced"] },
   { slug: "skin-analysis", name: "AI Skin Analysis", category: "face-analysis", status: "launch", credits: 1, badge: "NEW", popular: true, summary: "Explore visible texture, fine lines, pores and tone variation in a photo-based report.", merges: ["Skin Analyze", "Skin Analyze Advanced", "Skin Analyze Pro"] },
-  { slug: "facial-landmarks", name: "Facial Landmarks Map", category: "face-analysis", status: "later", credits: 0, summary: "Explore an illustrative guide to visible facial features." },
+  { slug: "facial-landmarks", name: "Facial Landmarks Map", category: "face-analysis", status: "launch", credits: 0, summary: "Explore an illustrative guide to visible facial features." },
 
   /* ───────── Glow-Up & Color ───────── */
   { slug: "seasonal-color-palette", name: "Seasonal Color Palette", category: "glow-up", status: "live", credits: 1, badge: "NEW", popular: true, summary: "Discover the colors that suit your skin tone, hair and eyes." },
@@ -139,47 +139,47 @@ export const TOOLS: Tool[] = [
   { slug: "smart-beauty", name: "Smart Beauty Retouch", category: "skin-retouch", status: "launch", credits: 1, summary: "One-tap portrait retouch with adjustable strength." },
   { slug: "face-beauty-retouch", name: "Face Beauty Editor", category: "skin-retouch", status: "launch", credits: 2, pro: true, summary: "Fine-tune smoothing, shine and polish with three natural finish levels.", merges: ["Face Beauty", "Face Beauty Advanced", "Face Beauty Pro"] },
   { slug: "ai-face-enhancer", name: "AI Face Enhancer", category: "skin-retouch", status: "launch", credits: 1, popular: true, summary: "Sharpen blurry or low-resolution portraits into crisp, clear photos." },
-  { slug: "ai-face-slimming", name: "AI Face Slimming", category: "skin-retouch", status: "later", credits: 1, summary: "Subtly refine face contour in portraits." },
+  { slug: "ai-face-slimming", name: "AI Face Slimming", category: "skin-retouch", status: "launch", credits: 1, summary: "Subtly refine face contour in portraits." },
 
   /* ───────── Hair & Beard ───────── */
   { slug: "hairstyle-changer", name: "Hairstyle Changer", category: "hair-beard", status: "launch", credits: 2, pro: true, badge: "HOT", popular: true, summary: "Try four distinct cuts and styles on your own photo.", merges: ["Hairstyle Changer Pro", "Hairstyle Changer Premium"] },
   { slug: "ai-hair-color", name: "AI Hair Color Changer", category: "hair-beard", status: "launch", credits: 1, popular: true, summary: "Preview five shades, from natural browns to a bold pastel." },
-  { slug: "beard-styling", name: "AI Beard Styling", category: "hair-beard", status: "later", credits: 1, summary: "Preview beard shapes and lengths." },
-  { slug: "beard-remover", name: "AI Beard Removal", category: "hair-beard", status: "later", credits: 1, summary: "See a clean-shaven look before you shave." },
-  { slug: "hair-loss-simulation", name: "Hair Loss Simulation", category: "hair-beard", status: "later", credits: 1, summary: "Entertainment preview of a receding hairline. Not medical advice." },
-  { slug: "bald-filter", name: "AI Bald Filter", category: "hair-beard", status: "later", credits: 1, summary: "Picture yourself with a shaved head." },
+  { slug: "beard-styling", name: "AI Beard Styling", category: "hair-beard", status: "launch", credits: 1, summary: "Preview beard shapes and lengths." },
+  { slug: "beard-remover", name: "AI Beard Removal", category: "hair-beard", status: "launch", credits: 1, summary: "See a clean-shaven look before you shave." },
+  { slug: "hair-loss-simulation", name: "Hair Loss Simulation", category: "hair-beard", status: "launch", credits: 1, summary: "Entertainment preview of a receding hairline. Not medical advice." },
+  { slug: "bald-filter", name: "AI Bald Filter", category: "hair-beard", status: "launch", credits: 1, summary: "Picture yourself with a shaved head." },
 
   /* ───────── Makeup Try-On ───────── */
   { slug: "lip-color-changer", name: "Lip Color Changer", category: "makeup-tryon", status: "launch", credits: 1, popular: true, summary: "Try lipstick shades from nude to bold red, matte or glossy.", merges: ["Lips Color Changer", "AI Red Lip Gloss"] },
   { slug: "eyeshadow-try-on", name: "Eyeshadow Try-On", category: "makeup-tryon", status: "launch", credits: 1, summary: "Test eyeshadow palettes on your eyes." },
   { slug: "colored-contacts", name: "Colored Contacts Try-On", category: "makeup-tryon", status: "launch", credits: 1, popular: true, summary: "See your eyes in blue, green, hazel, gray and more." },
-  { slug: "ai-eyelashes", name: "AI Eyelashes", category: "makeup-tryon", status: "later", credits: 1, summary: "Preview natural to dramatic lash styles." },
-  { slug: "ai-eyebrows", name: "AI Eyebrows", category: "makeup-tryon", status: "later", credits: 1, summary: "Try brow shapes and thickness." },
-  { slug: "ai-lip-enhancement", name: "AI Lip Enhancement", category: "makeup-tryon", status: "later", credits: 1, summary: "Preview fuller-looking lips for makeup planning." },
+  { slug: "ai-eyelashes", name: "AI Eyelashes", category: "makeup-tryon", status: "launch", credits: 1, summary: "Preview natural to dramatic lash styles." },
+  { slug: "ai-eyebrows", name: "AI Eyebrows", category: "makeup-tryon", status: "launch", credits: 1, summary: "Try brow shapes and thickness." },
+  { slug: "ai-lip-enhancement", name: "AI Lip Enhancement", category: "makeup-tryon", status: "launch", credits: 1, summary: "Preview fuller-looking lips for makeup planning." },
 
   /* ───────── Fashion & Style ───────── */
   { slug: "virtual-try-on-clothes", name: "Virtual Try-On: Clothes", category: "fashion-style", status: "launch", credits: 3, pro: true, badge: "HOT", popular: true, summary: "Upload a photo and a garment, see how it looks on you.", merges: ["Try on Clothes", "Try on Clothes Pro"] },
-  { slug: "ai-tattoo-generator", name: "AI Tattoo Generator", category: "fashion-style", status: "later", credits: 2, summary: "Preview one of three original tattoo motifs on your skin." },
-  { slug: "ai-waist-slimming", name: "Silhouette Preview", category: "fashion-style", status: "later", credits: 1, summary: "Preview how a garment's fit shapes your silhouette." },
+  { slug: "ai-tattoo-generator", name: "AI Tattoo Generator", category: "fashion-style", status: "launch", credits: 2, summary: "Preview one of three original tattoo motifs on your skin." },
+  { slug: "ai-waist-slimming", name: "Silhouette Preview", category: "fashion-style", status: "launch", credits: 1, summary: "Preview how a garment's fit shapes your silhouette." },
 
   /* ───────── Fun Face Effects ───────── */
   { slug: "cartoon-yourself", name: "Cartoon Yourself", category: "fun-effects", status: "launch", credits: 1, badge: "HOT", popular: true, summary: "Turn your selfie into anime, 3D or comic art." },
-  { slug: "face-filters", name: "AI Face Filters", category: "fun-effects", status: "later", credits: 1, summary: "Trending face filters in one tap." },
-  { slug: "facial-expression-changer", name: "Facial Expression Changer", category: "fun-effects", status: "later", credits: 2, summary: "Add a smile, surprise or wink to a photo." },
-  { slug: "age-gender-swap", name: "Age & Gender Swap", category: "fun-effects", status: "later", credits: 2, summary: "See a younger, older or alternate-gender version of yourself." },
-  { slug: "ai-face-swap", name: "AI Face Swap", category: "fun-effects", status: "later", credits: 2, summary: "Swap faces between two photos (consent-gated)." },
-  { slug: "square-face-filter", name: "Square Face Filter", category: "fun-effects", status: "later", credits: 1, summary: "The viral square-face trend, one tap." },
-  { slug: "big-head-effect", name: "Big Head Effect", category: "fun-effects", status: "later", credits: 1, summary: "Comic big-head caricature of any portrait." },
-  { slug: "halloween-mask", name: "AI Halloween Mask", category: "fun-effects", status: "later", credits: 1, summary: "Spooky masks and makeup for October." },
-  { slug: "pregnant-filter", name: "Pregnancy Joke Filter", category: "fun-effects", status: "later", credits: 1, summary: "A playful prank filter for friends." },
-  { slug: "birthday-image-generator", name: "Birthday Image Generator", category: "fun-effects", status: "later", credits: 1, summary: "Personalised birthday cards from a photo." },
-  { slug: "ai-fortune-teller", name: "AI Fortune Teller", category: "fun-effects", status: "later", credits: 0, summary: "Playful face-reading fortune for entertainment." },
-  { slug: "elf-name-generator", name: "Elf Name Generator", category: "fun-effects", status: "later", credits: 0, summary: "Get your fantasy elf name and portrait." },
+  { slug: "face-filters", name: "AI Face Filters", category: "fun-effects", status: "launch", credits: 1, summary: "Trending face filters in one tap." },
+  { slug: "facial-expression-changer", name: "Facial Expression Changer", category: "fun-effects", status: "launch", credits: 2, summary: "Add a smile, surprise or wink to a photo." },
+  { slug: "age-gender-swap", name: "Age & Gender Swap", category: "fun-effects", status: "launch", credits: 2, summary: "See a younger, older or alternate-gender version of yourself." },
+  { slug: "ai-face-swap", name: "AI Face Swap", category: "fun-effects", status: "launch", credits: 2, summary: "Swap faces between two photos (consent-gated)." },
+  { slug: "square-face-filter", name: "Square Face Filter", category: "fun-effects", status: "launch", credits: 1, summary: "The viral square-face trend, one tap." },
+  { slug: "big-head-effect", name: "Big Head Effect", category: "fun-effects", status: "launch", credits: 1, summary: "Comic big-head caricature of any portrait." },
+  { slug: "halloween-mask", name: "AI Halloween Mask", category: "fun-effects", status: "launch", credits: 1, summary: "Spooky masks and makeup for October." },
+  { slug: "pregnant-filter", name: "Pregnancy Joke Filter", category: "fun-effects", status: "launch", credits: 1, summary: "A playful prank filter for friends." },
+  { slug: "birthday-image-generator", name: "Birthday Image Generator", category: "fun-effects", status: "launch", credits: 1, summary: "Personalised birthday cards from a photo." },
+  { slug: "ai-fortune-teller", name: "AI Fortune Teller", category: "fun-effects", status: "launch", credits: 0, summary: "Playful face-reading fortune for entertainment." },
+  { slug: "elf-name-generator", name: "Elf Name Generator", category: "fun-effects", status: "launch", credits: 0, summary: "Get your fantasy elf name and portrait." },
 
   /* ───────── Photo Tools ───────── */
   { slug: "old-photo-restoration", name: "Old Photo Restoration", category: "photo-tools", status: "launch", credits: 1, popular: true, summary: "Repair scratches, fade and blur in old family photos." },
-  { slug: "face-blur", name: "Face Blur", category: "photo-tools", status: "later", credits: 0, summary: "Automatically blur faces for privacy." },
-  { slug: "merge-portraits", name: "Merge Portraits", category: "photo-tools", status: "later", credits: 2, summary: "Blend two portraits into one image." },
+  { slug: "face-blur", name: "Face Blur", category: "photo-tools", status: "launch", credits: 0, summary: "Automatically blur faces for privacy." },
+  { slug: "merge-portraits", name: "Merge Portraits", category: "photo-tools", status: "launch", credits: 2, summary: "Blend two portraits into one image." },
 ];
 
 /* ───────── helpers ───────── */

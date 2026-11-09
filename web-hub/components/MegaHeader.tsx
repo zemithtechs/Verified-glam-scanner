@@ -10,6 +10,7 @@ import { MEGA_ORDER } from "@/lib/nav";
 import { CategoryGlyph, Glyph, IconTile, ToolGlyph } from "./icons";
 import { Logo } from "./Logo";
 import { SideNav } from "./SideNav";
+import { appHref } from "@/lib/live-mode";
 
 type Menu = "tools" | "popular" | "features" | null;
 
@@ -115,7 +116,7 @@ function FeaturesPanel({ close }: { close: () => void }) {
         </section>
         <section aria-label="Your workspace">
           <h3 className={colTitle}>Your workspace</h3>
-          <ul>{WORKSPACE.map((w) => <li key={w.href}><Link href={w.href} onClick={close} className={itemClass}><span className="text-plum"><Glyph name={w.glyph} size={18} /></span>{w.label}</Link></li>)}</ul>
+          <ul>{WORKSPACE.map((w) => <li key={w.href}><Link href={appHref(w.href)} onClick={close} className={itemClass}><span className="text-plum"><Glyph name={w.glyph} size={18} /></span>{w.label}</Link></li>)}</ul>
         </section>
       </div>
     </div>
@@ -160,7 +161,7 @@ export function MegaHeader({ onOpenSidebar, maxWidth = "max-w-[1320px]" }: { onO
           <Link href="/pricing" aria-current={path === "/pricing" ? "page" : undefined} className={plain} onMouseEnter={() => setMenu(null)}>Pricing</Link>
         </nav>
         <div className="flex items-center gap-1.5">
-          <Link href="/app" className="hidden h-9 items-center rounded-lg px-3.5 text-[14.5px] font-semibold text-ink hover:bg-blush/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum sm:flex">Log in</Link>
+          <Link href={appHref("/app")} className="hidden h-9 items-center rounded-lg px-3.5 text-[14.5px] font-semibold text-ink hover:bg-blush/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum sm:flex">Log in</Link>
           <Link href="/tools" className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg bg-plum px-4 text-[14.5px] font-semibold text-white transition-colors hover:bg-berry focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum"><span className="sm:hidden">Start</span><span className="hidden sm:inline">Start for free</span><ArrowRight size={15} aria-hidden="true" /></Link>
         </div>
       </div>
@@ -174,7 +175,7 @@ export function MegaHeader({ onOpenSidebar, maxWidth = "max-w-[1320px]" }: { onO
       {mobile && !onOpenSidebar && (
         <div id="mobile-site-menu" className="max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-line bg-white lg:hidden">
           <div className="flex flex-col"><SideNav variant="tool" mode="accordion" onNavigate={() => setMobile(false)} /></div>
-          <div className="grid gap-1 border-t border-line p-3 text-[15px] font-semibold"><Link href="/blog" className="rounded-lg px-3 py-3 hover:bg-blush">Blog</Link><Link href="/pricing" className="rounded-lg px-3 py-3 hover:bg-blush">Pricing</Link><Link href="/app" className="rounded-lg px-3 py-3 hover:bg-blush">Log in</Link></div>
+          <div className="grid gap-1 border-t border-line p-3 text-[15px] font-semibold"><Link href="/blog" className="rounded-lg px-3 py-3 hover:bg-blush">Blog</Link><Link href="/pricing" className="rounded-lg px-3 py-3 hover:bg-blush">Pricing</Link><Link href={appHref("/app")} className="rounded-lg px-3 py-3 hover:bg-blush">Log in</Link></div>
         </div>
       )}
     </header>

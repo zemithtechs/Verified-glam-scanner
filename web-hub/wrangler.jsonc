@@ -9,5 +9,17 @@
 		{ "pattern": "aibeautystyling.com", "custom_domain": true },
 		{ "pattern": "www.aibeautystyling.com", "custom_domain": true }
 	],
+	// Used only to re-encode uploaded photos (removes metadata) for the image tools.
+	"images": { "binding": "IMAGES" },
+	// Shared database with the main app: holds the free-result counters (tables from migration 0009).
+	"d1_databases": [
+		{ "binding": "DB", "database_name": "verified-glam-db", "database_id": "aaca0f9b-e21b-46ac-a35c-300e64375ecb" }
+	],
+	"vars": {
+		"OPENAI_IMAGE_MODEL": "gpt-image-2.5-sunburst",
+		// Free results per visitor per day, and the most free results the whole site will give per day.
+		"FREE_RESULTS_PER_DAY": "2",
+		"GLOBAL_RESULTS_PER_DAY": "100"
+	},
 	"observability": { "enabled": true }
 }
