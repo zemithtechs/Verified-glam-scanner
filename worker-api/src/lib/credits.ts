@@ -6,18 +6,33 @@ import type { Env } from "../env";
 
 export const CREDITS_PER_GENERATION = 5;
 export const FREE_CREDITS_ALLOCATION = 10;
-export const YEARLY_CREDITS_ALLOCATION = 200;
-export const PRO_WEEKLY_CREDITS_ALLOCATION = 30;
+export const YEARLY_CREDITS_ALLOCATION = 2400;
+export const PRO_MONTHLY_CREDITS_ALLOCATION = 200;
+export const PRO_WEEKLY_CREDITS_ALLOCATION = 30; // legacy plan, kept for existing subscribers
+/** Credits granted while a yearly free trial is running (the full allocation arrives when the trial converts). */
+export const TRIAL_CREDITS_ALLOCATION = 20;
+/** Pay-as-you-go: $0.075 per credit, i.e. 7.5 cents. Keep in sync with web-hub/lib/pricing.ts. */
+export const CREDIT_PACK_CENTS_PER_CREDIT = 7.5;
+export const CREDIT_PACK_MIN_USD = 5;
+export const CREDIT_PACK_MAX_USD = 100;
+
+export function creditsForPackCents(cents: number): number {
+  return Math.max(0, Math.round(cents / CREDIT_PACK_CENTS_PER_CREDIT));
+}
 
 export const POLAR_PRODUCT_ID_ANNUAL_DEFAULT = "9e185286-cf2b-41b8-a728-e7154d144722";
 export const POLAR_PRODUCT_ID_PRO_WEEKLY_DEFAULT = "8c9fddc9-1001-4143-8a27-31ce929ae5e6";
+export const POLAR_PRODUCT_ID_PRO_MONTHLY_DEFAULT = "281995f8-254d-4157-8222-5c363e4b6e29";
+export const POLAR_PRODUCT_ID_PAYG_DEFAULT = "932f751f-b2d9-40b0-9c9c-7bc401bf5aae";
 
-export type SubscriptionPlan = "free" | "annual" | "pro_weekly";
+export type SubscriptionPlan = "free" | "annual" | "pro_weekly" | "pro_monthly";
 
-export function polarProductIds(env: Env): { annual: string; proWeekly: string } {
+export function polarProductIds(env: Env): { annual: string; proWeekly: string; proMonthly: string; payg: string } {
   return {
     annual: env.POLAR_PRODUCT_ID_ANNUAL || POLAR_PRODUCT_ID_ANNUAL_DEFAULT,
     proWeekly: env.POLAR_PRODUCT_ID_PRO_WEEKLY || POLAR_PRODUCT_ID_PRO_WEEKLY_DEFAULT,
+    proMonthly: env.POLAR_PRODUCT_ID_PRO_MONTHLY || POLAR_PRODUCT_ID_PRO_MONTHLY_DEFAULT,
+    payg: env.POLAR_PRODUCT_ID_PAYG || POLAR_PRODUCT_ID_PAYG_DEFAULT,
   };
 }
 
@@ -25,6 +40,7 @@ export function planForPolarProductId(env: Env, productId: string): Subscription
   const ids = polarProductIds(env);
   if (productId === ids.annual) return "annual";
   if (productId === ids.proWeekly) return "pro_weekly";
+  if (productId === ids.proMonthly) return "pro_monthly";
   return null;
 }
 
@@ -38,23 +54,37 @@ export function currentPeriodKey(plan: SubscriptionPlan): string {
     const weekNo = Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
     return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
   }
+  if (plan === "pro_monthly") {
+    return `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
+  }
   if (plan === "annual") {
     return String(now.getUTCFullYear());
   }
   return "free-lifetime";
 }
 
+/** A running free trial uses its own period key, so converting to a paid period triggers the full grant. */
+export function periodKeyFor(plan: SubscriptionPlan, status: string | null | undefined): string {
+  return status === "trialing" ? `${currentPeriodKey(plan)}-trial` : currentPeriodKey(plan);
+}
+
 export function allocationForPlan(plan: SubscriptionPlan): number {
   if (plan === "pro_weekly") return PRO_WEEKLY_CREDITS_ALLOCATION;
+  if (plan === "pro_monthly") return PRO_MONTHLY_CREDITS_ALLOCATION;
   if (plan === "annual") return YEARLY_CREDITS_ALLOCATION;
   return FREE_CREDITS_ALLOCATION;
 }
 
-async function configuredAllocation(db: D1Database, plan: SubscriptionPlan): Promise<number> {
-  const key = plan === "annual" ? "admin.annual_credits" : plan === "pro_weekly" ? "admin.weekly_credits" : "admin.free_credits";
+async function configuredAllocation(db: D1Database, plan: SubscriptionPlan, trialing = false): Promise<number> {
+  const key = trialing
+    ? "admin.trial_credits"
+    : plan === "annual" ? "admin.annual_credits"
+    : plan === "pro_weekly" ? "admin.weekly_credits"
+    : plan === "pro_monthly" ? "admin.monthly_credits"
+    : "admin.free_credits";
   const row = await db.prepare("select value from app_content where key = ?").bind(key).first<{ value: string }>();
   const value = Number(row?.value);
-  return Number.isInteger(value) && value >= 0 ? value : allocationForPlan(plan);
+  return Number.isInteger(value) && value >= 0 ? value : trialing ? TRIAL_CREDITS_ALLOCATION : allocationForPlan(plan);
 }
 
 export type CreditTransactionKind =
@@ -98,6 +128,7 @@ export async function logCreditTransaction(
 function planCreditLabel(plan: SubscriptionPlan): string {
   if (plan === "annual") return "Yearly subscription";
   if (plan === "pro_weekly") return "Pro weekly subscription";
+  if (plan === "pro_monthly") return "Pro monthly subscription";
   return "Subscription";
 }
 
@@ -117,10 +148,12 @@ export async function grantSubscriptionCredits(
     subscriptionStatus?: string;
     periodEnd?: string | null;
     forceRefresh?: boolean;
+    trialing?: boolean;
   } = {},
 ): Promise<void> {
-  const allocated = await configuredAllocation(db, plan);
-  const periodKey = currentPeriodKey(plan);
+  const trialing = Boolean(opts.trialing);
+  const allocated = await configuredAllocation(db, plan, trialing);
+  const periodKey = periodKeyFor(plan, trialing ? "trialing" : "active");
   const now = new Date().toISOString();
 
   const existing = await db
@@ -152,7 +185,7 @@ export async function grantSubscriptionCredits(
     )
     .bind(
       plan,
-      opts.subscriptionStatus ?? "active",
+      trialing ? "trialing" : opts.subscriptionStatus ?? "active",
       balance,
       allocated,
       periodKey,
@@ -175,7 +208,7 @@ export async function grantSubscriptionCredits(
         description:
           kind === "period_refresh"
             ? `${planCreditLabel(plan)} credits renewed`
-            : `${planCreditLabel(plan)} credits granted`,
+            : `${planCreditLabel(plan)} credits granted${trialing ? " (free trial)" : ""}`,
         balanceAfter: balance,
       });
     }
@@ -238,6 +271,48 @@ export async function revokeSubscription(
   }
 }
 
+/**
+ * Pay-as-you-go credit pack. Idempotent per Polar order: the order id is the primary key of
+ * credit_purchases and the insert and balance update run in one batch, so a redelivered webhook
+ * is detected and credits nothing the second time.
+ */
+export async function grantPurchasedCredits(
+  db: D1Database,
+  userId: string,
+  opts: { orderId: string; amountCents: number },
+): Promise<{ credits: number; duplicate: boolean }> {
+  const credits = creditsForPackCents(opts.amountCents);
+  if (credits <= 0) return { credits: 0, duplicate: false };
+
+  try {
+    await db.batch([
+      db
+        .prepare("insert into credit_purchases (polar_order_id, user_id, amount_cents, credits) values (?, ?, ?, ?)")
+        .bind(opts.orderId, userId, opts.amountCents, credits),
+      db
+        .prepare("update profiles set purchased_credits = purchased_credits + ?, updated_at = ? where id = ?")
+        .bind(credits, new Date().toISOString(), userId),
+    ]);
+  } catch (e) {
+    if (/unique|constraint|primary key/i.test(e instanceof Error ? e.message : String(e))) {
+      return { credits: 0, duplicate: true };
+    }
+    throw e;
+  }
+
+  const row = await db
+    .prepare("select credits_balance, purchased_credits from profiles where id = ?")
+    .bind(userId)
+    .first<{ credits_balance: number | null; purchased_credits: number | null }>();
+  await logCreditTransaction(db, userId, {
+    amount: credits,
+    kind: "subscription_grant",
+    description: `Credit pack purchased (+${credits} credits)`,
+    balanceAfter: (row?.credits_balance ?? 0) + (row?.purchased_credits ?? 0),
+  });
+  return { credits, duplicate: false };
+}
+
 export function extractUserIdFromCustomer(customer: Record<string, unknown> | null | undefined): string | null {
   if (!customer) return null;
   const externalId =
@@ -283,14 +358,16 @@ import { consumeRewardToken } from "./reward-tokens";
 type ProfileCredits = {
   is_pro: number | null;
   subscription_plan: string | null;
+  subscription_status: string | null;
   credits_balance: number | null;
+  purchased_credits: number | null;
   credits_period_key: string | null;
   credits_allocated: number | null;
 };
 
 async function loadProfileCredits(db: D1Database, userId: string): Promise<ProfileCredits> {
   const row = await db
-    .prepare("select is_pro, subscription_plan, credits_balance, credits_period_key, credits_allocated from profiles where id = ?")
+    .prepare("select is_pro, subscription_plan, subscription_status, credits_balance, purchased_credits, credits_period_key, credits_allocated from profiles where id = ?")
     .bind(userId)
     .first<ProfileCredits>();
   if (!row) {
@@ -301,8 +378,9 @@ async function loadProfileCredits(db: D1Database, userId: string): Promise<Profi
 
 async function refreshCreditsIfNeeded(db: D1Database, userId: string, profile: ProfileCredits): Promise<ProfileCredits> {
   const plan = (profile.subscription_plan ?? "free") as SubscriptionPlan;
-  const periodKey = currentPeriodKey(plan);
-  const allocated = await configuredAllocation(db, plan);
+  const trialing = Boolean(profile.is_pro) && profile.subscription_status === "trialing";
+  const periodKey = periodKeyFor(plan, trialing ? "trialing" : "active");
+  const allocated = await configuredAllocation(db, plan, trialing);
   if (profile.credits_period_key === periodKey && (profile.credits_allocated ?? 0) === allocated) {
     return profile;
   }
@@ -332,37 +410,55 @@ async function refreshCreditsIfNeeded(db: D1Database, userId: string, profile: P
   return { ...profile, credits_balance: allocated, credits_allocated: allocated, credits_period_key: periodKey, subscription_plan: plan, is_pro: 1 };
 }
 
-export async function checkCredits(db: D1Database, userId: string): Promise<void> {
+export async function checkCredits(db: D1Database, userId: string, featureType?: string): Promise<void> {
   let profile = await loadProfileCredits(db, userId);
   profile = await refreshCreditsIfNeeded(db, userId, profile);
-  const balance = profile.credits_balance ?? 0;
+  // Subscription/free credits only count where that plan allows the tool; bought credits work for every tool.
+  const planCreditsUsable = Boolean(profile.is_pro) || featureType === undefined || featureType === FREE_FEATURE_TYPE;
+  const balance = (planCreditsUsable ? profile.credits_balance ?? 0 : 0) + (profile.purchased_credits ?? 0);
   if (balance < CREDITS_PER_GENERATION) {
     throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this analysis. Credits renew with your subscription plan.");
   }
 }
 
 export async function deductCredits(db: D1Database, userId: string, featureType: string): Promise<number> {
-  const updated = await db
-    .prepare(
-      `update profiles set credits_balance = credits_balance - ?, updated_at = ?
-       where id = ? and credits_balance >= ? returning credits_balance`,
-    )
-    .bind(CREDITS_PER_GENERATION, new Date().toISOString(), userId, CREDITS_PER_GENERATION)
-    .first<{ credits_balance: number }>();
-  if (!updated) {
-    throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this analysis.");
+  // Spend subscription/free credits first (they renew or expire), then bought credits (they never expire).
+  // The update is guarded by the balances we read, so two analyses running at once cannot overspend; one retry on a race.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const row = await db
+      .prepare("select is_pro, credits_balance, purchased_credits from profiles where id = ?")
+      .bind(userId)
+      .first<{ is_pro: number | null; credits_balance: number | null; purchased_credits: number | null }>();
+    const balance = row?.credits_balance ?? 0;
+    const purchased = row?.purchased_credits ?? 0;
+    const planCreditsUsable = Boolean(row?.is_pro) || featureType === FREE_FEATURE_TYPE;
+    const fromBalance = planCreditsUsable ? Math.min(balance, CREDITS_PER_GENERATION) : 0;
+    const fromPurchased = CREDITS_PER_GENERATION - fromBalance;
+    if (fromPurchased > purchased) {
+      throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this analysis.");
+    }
+
+    const updated = await db
+      .prepare(
+        `update profiles set credits_balance = credits_balance - ?, purchased_credits = purchased_credits - ?, updated_at = ?
+         where id = ? and credits_balance >= ? and purchased_credits >= ?
+         returning credits_balance, purchased_credits`,
+      )
+      .bind(fromBalance, fromPurchased, new Date().toISOString(), userId, fromBalance, fromPurchased)
+      .first<{ credits_balance: number; purchased_credits: number }>();
+    if (!updated) continue;
+
+    const remaining = updated.credits_balance + updated.purchased_credits;
+    await logCreditTransaction(db, userId, {
+      amount: -CREDITS_PER_GENERATION,
+      kind: "analysis",
+      description: featureLabelForCredits(featureType),
+      featureType,
+      balanceAfter: remaining,
+    });
+    return remaining;
   }
-  const remaining = updated.credits_balance;
-
-  await logCreditTransaction(db, userId, {
-    amount: -CREDITS_PER_GENERATION,
-    kind: "analysis",
-    description: featureLabelForCredits(featureType),
-    featureType,
-    balanceAfter: remaining,
-  });
-
-  return remaining;
+  throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this analysis.");
 }
 
 // --- Free tier: FACE_BEAUTY_ANALYSIS only, gated per-scan by a watched
@@ -397,14 +493,19 @@ export async function checkAnalysisAccess(
   }
 
   if (profile.is_pro) {
-    await checkCredits(db, userId);
+    await checkCredits(db, userId, featureType);
+    return;
+  }
+
+  // Bought credits unlock every tool (no ad gate), like a subscription would.
+  if ((profile.purchased_credits ?? 0) >= CREDITS_PER_GENERATION) {
     return;
   }
 
   if (featureType !== FREE_FEATURE_TYPE) {
-    throw new AnalysisError(403, "NOT_SUBSCRIBED", "Pro subscription required to run AI analysis.");
+    throw new AnalysisError(403, "NOT_SUBSCRIBED", "Pro subscription or a credit pack is required to run AI analysis.");
   }
 
-  await checkCredits(db, userId);
+  await checkCredits(db, userId, featureType);
   await consumeRewardToken(db, userId, featureType, rewardToken);
 }

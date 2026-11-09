@@ -15,7 +15,7 @@ const GROUPS: Group[] = [
     rows: [
       { label: "Price", cells: ["Free", `${money(P.monthly.price)} / month`, `${money(P.yearly.price)} / year`, `${money(P.payg.min)} to ${money(P.payg.max)}, one time`] },
       { label: "Effective monthly cost", cells: ["$0", money(P.monthly.price), `${money(yearlyPerMonth)} (save ${yearlySavingsPercent}%)`, "Pay only when you need credits"] },
-      { label: "Free trial", cells: [false, false, `${P.yearly.trialDays} days, $0 today`, false] },
+      { label: "Free trial", cells: [false, false, `${P.yearly.trialDays} days, $0 today (${P.yearly.trialCredits} credits)`, false] },
       { label: "Billing", cells: ["None", "Monthly, cancel anytime", "Yearly, cancel anytime", "One-time payment"] },
     ],
   },

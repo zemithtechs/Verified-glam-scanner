@@ -2,8 +2,10 @@ import { Hono } from "hono";
 import type { Env } from "../../env";
 import {
   extractProductId,
+  grantPurchasedCredits,
   grantSubscriptionCredits,
   planForPolarProductId,
+  polarProductIds,
   resolveUserIdFromPolarCustomer,
   revokeSubscription,
 } from "../../lib/credits";
@@ -93,6 +95,8 @@ async function handleSubscriptionActive(
     subscriptionStatus: typeof data.status === "string" ? data.status : "active",
     periodEnd: periodEndIso(data),
     forceRefresh,
+    // A running free trial gets a small starter allowance; the full plan allowance arrives when it converts.
+    trialing: data.status === "trialing",
   });
 }
 
@@ -110,6 +114,55 @@ async function handleSubscriptionRevoked(
     periodEnd: periodEndIso(data),
     retainAccessUntilPeriodEnd: retain,
   });
+}
+
+function orderAmountCents(data: Record<string, unknown>): number {
+  for (const key of ["net_amount", "subtotal_amount", "amount", "total_amount"]) {
+    const value = data[key];
+    if (typeof value === "number" && Number.isFinite(value) && value > 0) return Math.round(value);
+  }
+  return 0;
+}
+
+/** One-time pay-as-you-go purchase: credits the buyer once per order, only after payment. */
+async function handleCreditPackOrder(env: Env, data: Record<string, unknown>, fromPaidEvent: boolean): Promise<void> {
+  const paid = fromPaidEvent || data.paid === true || data.status === "paid";
+  if (!paid) return;
+
+  const productId = extractProductId(data);
+  if (!productId || productId !== polarProductIds(env).payg) return;
+
+  const orderId = typeof data.id === "string" ? data.id : null;
+  if (!orderId) {
+    console.warn("Polar webhook: credit pack order without an id");
+    return;
+  }
+
+  const userId = await resolveUserIdFromPolarCustomer(env.DB, customerFromPayload(data));
+  if (!userId) {
+    console.warn("Polar webhook: credit pack order has no matching user", orderId);
+    return;
+  }
+
+  const amountCents = orderAmountCents(data);
+  if (amountCents <= 0) {
+    console.warn("Polar webhook: credit pack order has no amount", orderId);
+    return;
+  }
+
+  const result = await grantPurchasedCredits(env.DB, userId, { orderId, amountCents });
+  console.log("Polar webhook: credit pack", orderId, result.duplicate ? "already credited" : `credited ${result.credits}`);
+}
+
+async function handleOrder(env: Env, data: Record<string, unknown>, fromPaidEvent: boolean): Promise<void> {
+  const billingReason = data.billing_reason ?? data.billingReason;
+  if (billingReason === "purchase") {
+    await handleCreditPackOrder(env, data, fromPaidEvent);
+    return;
+  }
+  // order.paid for subscription orders is already covered by order.created and the subscription.* events.
+  if (fromPaidEvent) return;
+  await handleOrderRenewal(env, data);
 }
 
 async function handleOrderRenewal(env: Env, data: Record<string, unknown>): Promise<void> {
@@ -192,9 +245,14 @@ polarWebhook.post("/", async (c) => {
       case "subscription.active":
         await handleSubscriptionActive(env, data);
         break;
+      case "subscription.created": {
+        const status = typeof data.status === "string" ? data.status : "";
+        if (status === "active" || status === "trialing") await handleSubscriptionActive(env, data);
+        break;
+      }
       case "subscription.updated": {
         const status = typeof data.status === "string" ? data.status : "";
-        if (status === "active") {
+        if (status === "active" || status === "trialing") {
           await handleSubscriptionActive(env, data);
         } else if (status === "past_due") {
           await handleSubscriptionRevoked(env, data, "past_due");
@@ -213,7 +271,10 @@ polarWebhook.post("/", async (c) => {
         await handleSubscriptionRevoked(env, data, "past_due");
         break;
       case "order.created":
-        await handleOrderRenewal(env, data);
+        await handleOrder(env, data, false);
+        break;
+      case "order.paid":
+        await handleOrder(env, data, true);
         break;
       default:
         break;

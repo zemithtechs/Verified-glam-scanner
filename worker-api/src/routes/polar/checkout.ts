@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import type { Env } from "../../env";
 import type { SessionVars } from "../../middleware/session";
-import { polarProductIds } from "../../lib/credits";
+import { CREDIT_PACK_MAX_USD, CREDIT_PACK_MIN_USD, polarProductIds } from "../../lib/credits";
 import {
   buildCheckoutLinkUrl,
   createPolarClient,
@@ -17,7 +17,7 @@ import {
 // userClient.auth.getUser() call.
 
 const FUNCTION_VERSION = "d1-1";
-const VALID_PLANS = new Set(["annual", "pro_weekly"]);
+const VALID_PLANS = new Set(["annual", "pro_weekly", "pro_monthly", "payg"]);
 
 export const polarCheckout = new Hono<{ Bindings: Env; Variables: SessionVars }>();
 
@@ -25,6 +25,8 @@ function productIdForPlan(env: Env, planId: string): string | null {
   const ids = polarProductIds(env);
   if (planId === "annual") return ids.annual;
   if (planId === "pro_weekly") return ids.proWeekly;
+  if (planId === "pro_monthly") return ids.proMonthly;
+  if (planId === "payg") return ids.payg;
   return null;
 }
 
@@ -37,10 +39,20 @@ polarCheckout.post("/", async (c) => {
     return c.json({ error: "POLAR_ACCESS_TOKEN not configured", version: FUNCTION_VERSION }, 503);
   }
 
-  const body = await c.req.json<{ planId?: string }>().catch(() => ({}) as { planId?: string });
+  const body = await c.req.json<{ planId?: string; amount?: number }>().catch(() => ({}) as { planId?: string; amount?: number });
   const planId = typeof body.planId === "string" ? body.planId.trim() : "";
   if (!VALID_PLANS.has(planId)) {
     return c.json({ error: "Invalid planId", version: FUNCTION_VERSION }, 400);
+  }
+
+  // Pay as you go: the buyer picks a whole-dollar amount; Polar charges exactly that and the webhook converts it to credits.
+  let packAmountCents: number | null = null;
+  if (planId === "payg") {
+    const dollars = Number(body.amount);
+    if (!Number.isInteger(dollars) || dollars < CREDIT_PACK_MIN_USD || dollars > CREDIT_PACK_MAX_USD) {
+      return c.json({ error: `Amount must be a whole number of dollars from ${CREDIT_PACK_MIN_USD} to ${CREDIT_PACK_MAX_USD}.`, version: FUNCTION_VERSION }, 400);
+    }
+    packAmountCents = dollars * 100;
   }
 
   const successUrl = polarSuccessUrl(env);
@@ -58,6 +70,7 @@ polarCheckout.post("/", async (c) => {
         externalCustomerId: userId,
         customerEmail: userEmail ?? undefined,
         successUrl,
+        ...(packAmountCents ? { amount: packAmountCents } : {}),
       });
 
       if (checkout.url) {

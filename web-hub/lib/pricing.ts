@@ -12,7 +12,7 @@ export const PRICING = {
   creditsPerGeneration: 5,
   starter: { credits: 10 },
   monthly: { price: 10, credits: 200 },
-  yearly: { price: 60, credits: 2400, trialDays: 3 },
+  yearly: { price: 60, credits: 2400, trialDays: 3, trialCredits: 20 },
   payg: { min: 5, max: 100, step: 5, defaultAmount: 15, pricePerCredit: 0.075, quick: [15, 25, 50, 100] },
 } as const;
 

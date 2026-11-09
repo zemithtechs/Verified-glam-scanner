@@ -61,7 +61,7 @@ function ProCard() {
       {yearly && (
         <div className="mt-4 rounded-xl border border-berry/25 bg-blush/60 px-4 py-3 text-[14px] leading-5 text-ink">
           <p className="font-semibold text-plum">Start with a {PRICING.yearly.trialDays}-day free trial</p>
-          <p className="mt-0.5 text-muted">$0 due today. After {PRICING.yearly.trialDays} days you are charged {money(PRICING.yearly.price)} for the year. Cancel before then and you pay nothing.</p>
+          <p className="mt-0.5 text-muted">$0 due today, and {PRICING.yearly.trialCredits} credits to try it. After {PRICING.yearly.trialDays} days you are charged {money(PRICING.yearly.price)} for the year and your {num(PRICING.yearly.credits)} credits arrive. Cancel before then and you pay nothing.</p>
         </div>
       )}
 

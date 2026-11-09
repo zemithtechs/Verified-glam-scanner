@@ -80,6 +80,10 @@ profiles.get("/me", async (c) => {
     onboarding_complete: row.onboarding_complete === 1,
     is_pro: row.is_pro === 1,
     referral_bonus_redeemed: row.referral_bonus_redeemed === 1,
+    // Clients show one balance: plan credits plus any bought credits.
+    subscription_credits: Number(row.credits_balance ?? 0),
+    purchased_credits: Number(row.purchased_credits ?? 0),
+    credits_balance: Number(row.credits_balance ?? 0) + Number(row.purchased_credits ?? 0),
   });
 });
 
