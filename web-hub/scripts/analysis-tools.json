@@ -1,0 +1,140 @@
+[
+  {
+    "slug": "face-shape-analyzer",
+    "category": "face-analysis",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-2.png"
+    ],
+    "expected": [
+      "one large recognizable original headshot",
+      "one tentative outline label with a contour on the actual visible face edge",
+      "two photo-based contour observations and two hair or eyewear ideas"
+    ],
+    "blockers": [
+      "Image editing cannot guarantee correct face-shape classification or geometrically precise contour placement; this requires visual review for each live output."
+    ]
+  },
+  {
+    "slug": "skin-analysis",
+    "category": "face-analysis",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "same untouched complexion and identifying marks in a large portrait",
+      "source-photo circular crops connected to the depicted cheek, nose or under-eye region",
+      "only visibly supported texture, pore, fine-line or tone labels"
+    ],
+    "blockers": [
+      "The image edit has no deterministic crop or diagnosis stage. Live output needs close review for invented skin details or mismatched crop callouts."
+    ]
+  },
+  {
+    "slug": "facial-landmarks",
+    "category": "face-analysis",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-2.png"
+    ],
+    "expected": [
+      "unchanged front-facing portrait",
+      "sparse points on visible eyes, brows, nose, lips and jaw",
+      "no points on hair or background and no dense mesh"
+    ],
+    "blockers": [
+      "There is no landmark detector or coordinate output; the result is only an illustrative visual guide.",
+      "Point alignment must be checked visually on real generated output."
+    ]
+  },
+  {
+    "slug": "ai-skin-enhancement",
+    "category": "skin-retouch",
+    "inputs": 1,
+    "option": "Subtle",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "two equally framed Before and Subtle panels in one downloadable image",
+      "temporary blemishes or uneven photo tone softened only in the result",
+      "same face, complexion, hair, clothes and background"
+    ],
+    "blockers": [
+      "Sample 1 has only mild visible blemishes, so reviewers should also use a permitted photo with clearly visible temporary marks before claiming the effect works consistently."
+    ]
+  },
+  {
+    "slug": "smart-beauty",
+    "category": "skin-retouch",
+    "inputs": 1,
+    "option": "Subtle",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "two equally framed Before and Subtle panels in one downloadable image",
+      "reduced distracting shine and balanced exposure only in the result",
+      "natural highlights and skin texture retained"
+    ],
+    "blockers": [
+      "Sample 1 has limited harsh shine or exposure problems; a matching permitted stress photo is needed to evaluate the claimed correction."
+    ]
+  },
+  {
+    "slug": "face-beauty-retouch",
+    "category": "skin-retouch",
+    "inputs": 1,
+    "option": "Polished",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "one downloadable Before/Polished comparison with same crop and identity",
+      "more finished exposure and shine treatment than Subtle while pores and marks survive",
+      "original complexion and face shape preserved"
+    ],
+    "blockers": [
+      "Subtle, Balanced and Polished strength must each be generated and compared to verify a meaningful, ordered control; one option cannot prove the three-level promise."
+    ]
+  },
+  {
+    "slug": "ai-face-enhancer",
+    "category": "skin-retouch",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "Before panel retains actual blur or noise of a supplied test photo",
+      "After panel has less mild blur or noise and clearer edges",
+      "same identity, age, expression and natural skin detail"
+    ],
+    "blockers": [
+      "The existing sample is sharp and cannot establish the sharpening promise. A consented mildly blurry or noisy fixture is required for a meaningful live test.",
+      "No model can verify recovery of exact unseen details from a severely degraded input; page promises should avoid that implication."
+    ]
+  },
+  {
+    "slug": "ai-face-slimming",
+    "category": "skin-retouch",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-2.png"
+    ],
+    "expected": [
+      "same crop, camera angle and person in Before and After panels",
+      "a restrained fictional cheek or jaw contour change in After",
+      "unchanged complexion, hair, clothes, background and expression"
+    ],
+    "blockers": [
+      "Appearance edits may change identity or overstate the effect; a generated result requires explicit human visual review before this tool is marked working."
+    ]
+  }
+]

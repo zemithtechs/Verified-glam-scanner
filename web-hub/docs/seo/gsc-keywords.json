@@ -1,0 +1,3637 @@
+{
+ "note": "Queries from Search Console (scanner.verifiedglam.com, last 16 months, 617 queries, 13,041 impressions, 77 clicks). Mapped to tools by keyword rules; the export has no per-page query data. Average position is mostly 40-90, so these are demand signals, not current rankings.",
+ "byTool": {
+  "attractiveness-test": [
+   {
+    "query": "attractiveness test",
+    "clicks": 8,
+    "impressions": 313,
+    "position": 75.7
+   },
+   {
+    "query": "attractive test",
+    "clicks": 0,
+    "impressions": 191,
+    "position": 81.0
+   },
+   {
+    "query": "beauty test",
+    "clicks": 0,
+    "impressions": 190,
+    "position": 77.6
+   },
+   {
+    "query": "face rating",
+    "clicks": 2,
+    "impressions": 149,
+    "position": 83.0
+   },
+   {
+    "query": "how attractive am i",
+    "clicks": 2,
+    "impressions": 113,
+    "position": 95.4
+   },
+   {
+    "query": "rate my face",
+    "clicks": 0,
+    "impressions": 110,
+    "position": 89.6
+   },
+   {
+    "query": "attractiveness test face",
+    "clicks": 0,
+    "impressions": 91,
+    "position": 79.2
+   },
+   {
+    "query": "appearance test",
+    "clicks": 0,
+    "impressions": 88,
+    "position": 85.5
+   },
+   {
+    "query": "attractiveness ai",
+    "clicks": 0,
+    "impressions": 80,
+    "position": 81.7
+   },
+   {
+    "query": "ai attractiveness test",
+    "clicks": 1,
+    "impressions": 72,
+    "position": 79.9
+   },
+   {
+    "query": "face attractiveness analyzer",
+    "clicks": 0,
+    "impressions": 72,
+    "position": 82.7
+   },
+   {
+    "query": "attractiveness rating",
+    "clicks": 0,
+    "impressions": 68,
+    "position": 77.1
+   },
+   {
+    "query": "face attractiveness test",
+    "clicks": 1,
+    "impressions": 64,
+    "position": 80.2
+   },
+   {
+    "query": "attractive face test",
+    "clicks": 0,
+    "impressions": 60,
+    "position": 83.6
+   },
+   {
+    "query": "face rating ai",
+    "clicks": 0,
+    "impressions": 60,
+    "position": 84.5
+   },
+   {
+    "query": "face beauty test",
+    "clicks": 0,
+    "impressions": 55,
+    "position": 76.2
+   },
+   {
+    "query": "ai face rating",
+    "clicks": 1,
+    "impressions": 54,
+    "position": 85.8
+   },
+   {
+    "query": "ai beauty rating",
+    "clicks": 5,
+    "impressions": 48,
+    "position": 83.0
+   },
+   {
+    "query": "am i beautiful photo test",
+    "clicks": 0,
+    "impressions": 47,
+    "position": 89.6
+   },
+   {
+    "query": "how attractive am i picture test",
+    "clicks": 4,
+    "impressions": 43,
+    "position": 85.4
+   },
+   {
+    "query": "rate my looks",
+    "clicks": 0,
+    "impressions": 42,
+    "position": 86.2
+   },
+   {
+    "query": "attractiveness test ai",
+    "clicks": 1,
+    "impressions": 41,
+    "position": 84.1
+   },
+   {
+    "query": "looks scanner",
+    "clicks": 0,
+    "impressions": 41,
+    "position": 63.4
+   },
+   {
+    "query": "test attractiveness",
+    "clicks": 0,
+    "impressions": 39,
+    "position": 76.7
+   },
+   {
+    "query": "beauty rater",
+    "clicks": 0,
+    "impressions": 39,
+    "position": 81.2
+   },
+   {
+    "query": "attractiveness calculator",
+    "clicks": 0,
+    "impressions": 37,
+    "position": 72.6
+   },
+   {
+    "query": "facial rating",
+    "clicks": 0,
+    "impressions": 36,
+    "position": 84.0
+   },
+   {
+    "query": "attractiveness rater",
+    "clicks": 0,
+    "impressions": 35,
+    "position": 74.3
+   },
+   {
+    "query": "facial attractiveness test",
+    "clicks": 1,
+    "impressions": 33,
+    "position": 83.4
+   },
+   {
+    "query": "attractiveness scale",
+    "clicks": 0,
+    "impressions": 32,
+    "position": 87.5
+   },
+   {
+    "query": "pretty scan",
+    "clicks": 0,
+    "impressions": 31,
+    "position": 73.2
+   },
+   {
+    "query": "ai attractive test",
+    "clicks": 0,
+    "impressions": 31,
+    "position": 81.7
+   },
+   {
+    "query": "am i pretty photo test",
+    "clicks": 0,
+    "impressions": 30,
+    "position": 90.3
+   },
+   {
+    "query": "face scan rating",
+    "clicks": 1,
+    "impressions": 29,
+    "position": 76.1
+   },
+   {
+    "query": "attractive test face",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 83.4
+   },
+   {
+    "query": "rate my attractiveness",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 87.5
+   },
+   {
+    "query": "rate my face ai",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 92.4
+   },
+   {
+    "query": "attractive scale",
+    "clicks": 0,
+    "impressions": 28,
+    "position": 92.9
+   },
+   {
+    "query": "attractive test ai",
+    "clicks": 0,
+    "impressions": 27,
+    "position": 82.9
+   },
+   {
+    "query": "attractiveness score",
+    "clicks": 0,
+    "impressions": 26,
+    "position": 76.5
+   },
+   {
+    "query": "ai beauty test",
+    "clicks": 0,
+    "impressions": 25,
+    "position": 84.8
+   },
+   {
+    "query": "beauty score test",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 69.5
+   },
+   {
+    "query": "looks rating",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 73.6
+   },
+   {
+    "query": "how attractive am i ai",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 93.3
+   },
+   {
+    "query": "looks rating website",
+    "clicks": 0,
+    "impressions": 23,
+    "position": 71.2
+   },
+   {
+    "query": "look rating",
+    "clicks": 0,
+    "impressions": 23,
+    "position": 77.5
+   },
+   {
+    "query": "free face rating",
+    "clicks": 0,
+    "impressions": 23,
+    "position": 81.6
+   },
+   {
+    "query": "face rater",
+    "clicks": 0,
+    "impressions": 23,
+    "position": 92.7
+   },
+   {
+    "query": "attractive rating",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 75.3
+   },
+   {
+    "query": "ai face rater",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 94.7
+   },
+   {
+    "query": "am i attractive picture test",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 83.7
+   },
+   {
+    "query": "rating sites for looks",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 84.6
+   },
+   {
+    "query": "ai looks rater",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 91.9
+   },
+   {
+    "query": "attractiveness analysis",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 80.0
+   },
+   {
+    "query": "test of attractiveness",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 83.1
+   },
+   {
+    "query": "am i attractive photo test",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 89.8
+   },
+   {
+    "query": "attractivenesstest",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 70.4
+   },
+   {
+    "query": "looks rating site",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 78.5
+   },
+   {
+    "query": "rate my looks websites",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 86.7
+   },
+   {
+    "query": "how attractive is my face",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 89.4
+   },
+   {
+    "query": "am i attractive",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 92.6
+   },
+   {
+    "query": "ai rating attractiveness",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 76.1
+   },
+   {
+    "query": "face scanner rating",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 79.8
+   },
+   {
+    "query": "face score",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 82.4
+   },
+   {
+    "query": "am i attractive ai",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 92.5
+   },
+   {
+    "query": "ai attractiveness",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 76.5
+   },
+   {
+    "query": "pretty test online",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 77.7
+   },
+   {
+    "query": "face attractiveness",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 80.2
+   },
+   {
+    "query": "rating face",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 82.2
+   },
+   {
+    "query": "how beautiful am i picture test",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 83.0
+   },
+   {
+    "query": "rate my looks website",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 84.1
+   },
+   {
+    "query": "facial rating ai",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 85.5
+   },
+   {
+    "query": "am i pretty test",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 91.9
+   },
+   {
+    "query": "attractiveness rate",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 79.3
+   },
+   {
+    "query": "ami attractive",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 67.3
+   },
+   {
+    "query": "rate attractiveness",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 76.2
+   },
+   {
+    "query": "ai attractiveness rating",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 79.1
+   },
+   {
+    "query": "face rating website",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 80.3
+   },
+   {
+    "query": "am i beautiful picture test",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 91.6
+   },
+   {
+    "query": "how hot am i picture test",
+    "clicks": 1,
+    "impressions": 14,
+    "position": 98.8
+   },
+   {
+    "query": "beauty rating",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 77.6
+   },
+   {
+    "query": "attraction rating",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 78.9
+   },
+   {
+    "query": "face ratings",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 81.9
+   },
+   {
+    "query": "ai facial rating",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 86.0
+   },
+   {
+    "query": "how attractive am i face analyzer",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 90.4
+   },
+   {
+    "query": "ai rate attractiveness",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 78.8
+   },
+   {
+    "query": "face beauty score",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 80.5
+   },
+   {
+    "query": "looks rater",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 85.5
+   },
+   {
+    "query": "face rater ai",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 95.7
+   },
+   {
+    "query": "is my face attractive",
+    "clicks": 4,
+    "impressions": 12,
+    "position": 83.2
+   },
+   {
+    "query": "rating looks",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 81.3
+   },
+   {
+    "query": "rating my looks",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 81.8
+   },
+   {
+    "query": "handsome test",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 90.5
+   },
+   {
+    "query": "how attractive am i picture test online free",
+    "clicks": 1,
+    "impressions": 11,
+    "position": 76.3
+   },
+   {
+    "query": "attractiveness face test",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 79.2
+   },
+   {
+    "query": "hotness rating",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 81.3
+   },
+   {
+    "query": "am i attractive test",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 84.4
+   },
+   {
+    "query": "attractiveness test photo",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 86.4
+   },
+   {
+    "query": "attractive ai test",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 86.7
+   },
+   {
+    "query": "am i pretty face analysis",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 90.5
+   },
+   {
+    "query": "genuin attractiveness ai calculator",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 76.4
+   },
+   {
+    "query": "face analysis attractiveness",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 78.0
+   },
+   {
+    "query": "face rating free",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 78.4
+   },
+   {
+    "query": "face rating online",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 79.5
+   },
+   {
+    "query": "faces attractive test",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 81.9
+   },
+   {
+    "query": "ai beauty score",
+    "clicks": 2,
+    "impressions": 9,
+    "position": 87.7
+   },
+   {
+    "query": "artificial intelligence beauty test",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 55.0
+   },
+   {
+    "query": "attractiveness meter",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 74.7
+   },
+   {
+    "query": "looks rating ai",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 78.9
+   },
+   {
+    "query": "face rating ai free",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 82.3
+   },
+   {
+    "query": "rate attractiveness ai",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 82.3
+   },
+   {
+    "query": "attractiveness test free",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 82.8
+   },
+   {
+    "query": "free attractiveness test",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 83.0
+   },
+   {
+    "query": "facial attractiveness calculator",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 86.1
+   },
+   {
+    "query": "am i pretty picture test",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 89.3
+   },
+   {
+    "query": "face rating service",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 90.1
+   },
+   {
+    "query": "am i pretty ai",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 93.7
+   },
+   {
+    "query": "how attractive am i picture",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 95.9
+   },
+   {
+    "query": "ai looks rating",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 71.9
+   },
+   {
+    "query": "attractiveness checker",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 80.2
+   },
+   {
+    "query": "ai attractiveness rater",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 84.9
+   },
+   {
+    "query": "beauty test score",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 85.0
+   },
+   {
+    "query": "how attractive am i face analysis",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 86.5
+   },
+   {
+    "query": "am i pretty test photo",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 88.8
+   },
+   {
+    "query": "how pretty am i picture test",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 88.8
+   },
+   {
+    "query": "free psl rater",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 89.2
+   },
+   {
+    "query": "ai rate my face",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 93.0
+   },
+   {
+    "query": "rate my appearance",
+    "clicks": 1,
+    "impressions": 7,
+    "position": 91.7
+   },
+   {
+    "query": "attractivness test",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 66.3
+   },
+   {
+    "query": "beauty score",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 69.9
+   },
+   {
+    "query": "free rating",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 71.1
+   },
+   {
+    "query": "beauty score ai",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 77.3
+   },
+   {
+    "query": "face attractiveness calculator",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 82.9
+   },
+   {
+    "query": "attractiveness ai test",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 84.4
+   },
+   {
+    "query": "beauty test ai",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 87.1
+   },
+   {
+    "query": "rate my face free",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 93.3
+   },
+   {
+    "query": "how attractive am i photo",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 104.9
+   },
+   {
+    "query": "attractive scanner",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 66.3
+   },
+   {
+    "query": "test attractive",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 72.2
+   },
+   {
+    "query": "beauty score test online",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 75.3
+   },
+   {
+    "query": "face attractiveness rating",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 78.7
+   },
+   {
+    "query": "how pretty am i photo test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 81.3
+   },
+   {
+    "query": "attractive scale test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 82.0
+   },
+   {
+    "query": "test your attractiveness",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 82.5
+   },
+   {
+    "query": "attractiveness rating ai",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 82.8
+   },
+   {
+    "query": "attractiveness test online",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 82.8
+   },
+   {
+    "query": "attractiveness scale test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 84.3
+   },
+   {
+    "query": "face attractiveness analysis",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 84.7
+   },
+   {
+    "query": "pretty test ai",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 84.8
+   },
+   {
+    "query": "pretty scanner",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 85.0
+   },
+   {
+    "query": "rate my looks ai",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 85.5
+   },
+   {
+    "query": "attractive photo test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 86.0
+   },
+   {
+    "query": "face attractiveness rater",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 86.5
+   },
+   {
+    "query": "attractiveness rater ai",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 87.7
+   },
+   {
+    "query": "rate my face out of 10",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 88.5
+   },
+   {
+    "query": "am i handsome picture test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 89.3
+   },
+   {
+    "query": "rate my attractiveness ai",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 89.3
+   },
+   {
+    "query": "face rater free",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 94.7
+   },
+   {
+    "query": "face attractiveness test ai",
+    "clicks": 1,
+    "impressions": 5,
+    "position": 76.8
+   },
+   {
+    "query": "attractiveness detector",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 58.8
+   },
+   {
+    "query": "rate attractiveness test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 66.4
+   },
+   {
+    "query": "handsomeness test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 69.2
+   },
+   {
+    "query": "beauty test online",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 72.8
+   },
+   {
+    "query": "facial rating free",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 74.0
+   },
+   {
+    "query": "attractiveness analyzer",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 74.6
+   },
+   {
+    "query": "attractive rater",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 76.8
+   },
+   {
+    "query": "facial attractiveness rating",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 78.8
+   },
+   {
+    "query": "facial analysis attractiveness",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 79.6
+   },
+   {
+    "query": "face scan attractiveness",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 80.2
+   },
+   {
+    "query": "how hot am i photo test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 81.4
+   },
+   {
+    "query": "facial attractiveness analyzer",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 82.2
+   },
+   {
+    "query": "attractiveness face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.4
+   },
+   {
+    "query": "handsome calculator",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.6
+   },
+   {
+    "query": "face ai rating",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.8
+   },
+   {
+    "query": "face card rating",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.8
+   },
+   {
+    "query": "pretty face scanner",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.8
+   },
+   {
+    "query": "attractivity test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 84.0
+   },
+   {
+    "query": "rating attractiveness",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 84.0
+   },
+   {
+    "query": "face attractiveness analyzer ai",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 84.4
+   },
+   {
+    "query": "am i beautiful face analysis",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 86.6
+   },
+   {
+    "query": "ai rating looks",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 87.0
+   },
+   {
+    "query": "attractive picture test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 87.0
+   },
+   {
+    "query": "attractiveness photo",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 87.4
+   },
+   {
+    "query": "attractive face calculator",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 87.6
+   },
+   {
+    "query": "how hot are you picture test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 87.6
+   },
+   {
+    "query": "rate how attractive i am",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 88.4
+   },
+   {
+    "query": "look rater",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 89.0
+   },
+   {
+    "query": "rate my face attractiveness",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 91.6
+   },
+   {
+    "query": "how attractive are you ai",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 93.0
+   },
+   {
+    "query": "how attractive i am",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 95.0
+   },
+   {
+    "query": "how beautiful is my face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 98.4
+   },
+   {
+    "query": "rate my beauty",
+    "clicks": 1,
+    "impressions": 4,
+    "position": 104.2
+   },
+   {
+    "query": "beauty rater ai",
+    "clicks": 1,
+    "impressions": 4,
+    "position": 113.5
+   },
+   {
+    "query": "hotness rating ai",
+    "clicks": 1,
+    "impressions": 1,
+    "position": 50.0
+   },
+   {
+    "query": "honest ai attractiveness test",
+    "clicks": 1,
+    "impressions": 1,
+    "position": 134.0
+   }
+  ],
+  "face-golden-ratio": [
+   {
+    "query": "golden ratio face",
+    "clicks": 7,
+    "impressions": 396,
+    "position": 65.0
+   },
+   {
+    "query": "golden ratio upload photo",
+    "clicks": 0,
+    "impressions": 216,
+    "position": 29.4
+   },
+   {
+    "query": "golden ratio checker",
+    "clicks": 0,
+    "impressions": 212,
+    "position": 40.3
+   },
+   {
+    "query": "golden ratio face calculator",
+    "clicks": 6,
+    "impressions": 191,
+    "position": 45.1
+   },
+   {
+    "query": "golden ratio face test",
+    "clicks": 1,
+    "impressions": 130,
+    "position": 47.8
+   },
+   {
+    "query": "golden face ratio",
+    "clicks": 0,
+    "impressions": 101,
+    "position": 63.5
+   },
+   {
+    "query": "golden ratio calculator face",
+    "clicks": 5,
+    "impressions": 99,
+    "position": 42.8
+   },
+   {
+    "query": "face golden ratio",
+    "clicks": 1,
+    "impressions": 86,
+    "position": 61.9
+   },
+   {
+    "query": "golden ratio tester",
+    "clicks": 0,
+    "impressions": 79,
+    "position": 40.1
+   },
+   {
+    "query": "face golden ratio calculator",
+    "clicks": 0,
+    "impressions": 71,
+    "position": 39.9
+   },
+   {
+    "query": "face ratio calculator",
+    "clicks": 0,
+    "impressions": 68,
+    "position": 42.6
+   },
+   {
+    "query": "golden ratio face calculator upload photo",
+    "clicks": 0,
+    "impressions": 62,
+    "position": 40.8
+   },
+   {
+    "query": "face beauty ratio",
+    "clicks": 0,
+    "impressions": 60,
+    "position": 56.0
+   },
+   {
+    "query": "beauty ratio calculator",
+    "clicks": 0,
+    "impressions": 56,
+    "position": 36.6
+   },
+   {
+    "query": "perfect face ratio editor",
+    "clicks": 0,
+    "impressions": 52,
+    "position": 55.6
+   },
+   {
+    "query": "golden ratio ai",
+    "clicks": 2,
+    "impressions": 49,
+    "position": 46.7
+   },
+   {
+    "query": "golden ratio test",
+    "clicks": 0,
+    "impressions": 49,
+    "position": 45.6
+   },
+   {
+    "query": "perfect face ratio",
+    "clicks": 0,
+    "impressions": 48,
+    "position": 61.7
+   },
+   {
+    "query": "facial harmony calculator",
+    "clicks": 1,
+    "impressions": 46,
+    "position": 30.9
+   },
+   {
+    "query": "golden face ratio calculator",
+    "clicks": 0,
+    "impressions": 46,
+    "position": 48.8
+   },
+   {
+    "query": "perfect ratio face",
+    "clicks": 0,
+    "impressions": 46,
+    "position": 60.0
+   },
+   {
+    "query": "the golden ratio face test",
+    "clicks": 0,
+    "impressions": 40,
+    "position": 61.8
+   },
+   {
+    "query": "phi ratio face",
+    "clicks": 0,
+    "impressions": 37,
+    "position": 54.2
+   },
+   {
+    "query": "face ratio",
+    "clicks": 0,
+    "impressions": 37,
+    "position": 58.6
+   },
+   {
+    "query": "the golden ratio face",
+    "clicks": 0,
+    "impressions": 37,
+    "position": 63.5
+   },
+   {
+    "query": "facial golden ratio calculator",
+    "clicks": 0,
+    "impressions": 36,
+    "position": 42.9
+   },
+   {
+    "query": "golden ratio face ai",
+    "clicks": 1,
+    "impressions": 33,
+    "position": 50.6
+   },
+   {
+    "query": "golden face ratio test",
+    "clicks": 0,
+    "impressions": 33,
+    "position": 54.5
+   },
+   {
+    "query": "golden ratio face analyzer",
+    "clicks": 0,
+    "impressions": 32,
+    "position": 56.5
+   },
+   {
+    "query": "face proportions calculator",
+    "clicks": 0,
+    "impressions": 31,
+    "position": 43.6
+   },
+   {
+    "query": "facial ratio calculator",
+    "clicks": 0,
+    "impressions": 30,
+    "position": 43.0
+   },
+   {
+    "query": "midface ratio calculator",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 52.3
+   },
+   {
+    "query": "golden ratio of face",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 62.8
+   },
+   {
+    "query": "golden ratio for face",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 64.1
+   },
+   {
+    "query": "golden ratio analysis",
+    "clicks": 0,
+    "impressions": 27,
+    "position": 46.8
+   },
+   {
+    "query": "golden ratio calculator for face",
+    "clicks": 0,
+    "impressions": 27,
+    "position": 51.6
+   },
+   {
+    "query": "golden ratio analyzer",
+    "clicks": 1,
+    "impressions": 26,
+    "position": 50.8
+   },
+   {
+    "query": "face phi ratio",
+    "clicks": 0,
+    "impressions": 25,
+    "position": 54.0
+   },
+   {
+    "query": "golden ratio of beauty phi",
+    "clicks": 0,
+    "impressions": 25,
+    "position": 61.2
+   },
+   {
+    "query": "facial ratio analysis",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 50.2
+   },
+   {
+    "query": "face ratio analysis",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 52.0
+   },
+   {
+    "query": "golden ratio side profile",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 54.8
+   },
+   {
+    "query": "beauty ratio",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 61.9
+   },
+   {
+    "query": "golden ratio face calculator ai",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 45.6
+   },
+   {
+    "query": "golden ratio face app",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 44.6
+   },
+   {
+    "query": "golden ratio score",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 48.7
+   },
+   {
+    "query": "facial golden ratio",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 61.5
+   },
+   {
+    "query": "golden ratio face analysis",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 58.6
+   },
+   {
+    "query": "golden ratio of beauty",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 67.0
+   },
+   {
+    "query": "golden ratio beauty",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 69.5
+   },
+   {
+    "query": "golden ratio of beauty phi calculator",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 34.8
+   },
+   {
+    "query": "golden facial ratio",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 61.0
+   },
+   {
+    "query": "phi calculator for face",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 33.3
+   },
+   {
+    "query": "face harmony calculator",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 42.9
+   },
+   {
+    "query": "golden ratio face free",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 52.3
+   },
+   {
+    "query": "golden number face",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 54.4
+   },
+   {
+    "query": "face ratios calculator",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 42.1
+   },
+   {
+    "query": "face golden ratio test",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 47.9
+   },
+   {
+    "query": "free golden ratio face calculator",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 49.2
+   },
+   {
+    "query": "facial harmony test",
+    "clicks": 1,
+    "impressions": 16,
+    "position": 66.9
+   },
+   {
+    "query": "perfect golden ratio face",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 63.1
+   },
+   {
+    "query": "golden ratio filter",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 66.4
+   },
+   {
+    "query": "golden ratio face filter",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 68.3
+   },
+   {
+    "query": "harmony score calculator",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 38.9
+   },
+   {
+    "query": "facial ratios calculator",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 44.0
+   },
+   {
+    "query": "how to find golden ratio of face",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 54.1
+   },
+   {
+    "query": "face ratio filter",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 57.9
+   },
+   {
+    "query": "face measurements golden ratio",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 58.2
+   },
+   {
+    "query": "golden ratio scanner",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 40.0
+   },
+   {
+    "query": "phi ratio calculator",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 46.4
+   },
+   {
+    "query": "face ratio test",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 48.2
+   },
+   {
+    "query": "golden proportion face test",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 49.2
+   },
+   {
+    "query": "golden ratio of face calculator",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 50.9
+   },
+   {
+    "query": "golden ratio face measurements",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 59.8
+   },
+   {
+    "query": "facial harmony score calculator",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 35.8
+   },
+   {
+    "query": "face proportion analysis",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 46.8
+   },
+   {
+    "query": "calculate golden ratio face",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 49.0
+   },
+   {
+    "query": "facial golden ratio analysis",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 50.6
+   },
+   {
+    "query": "golden rule face calculator",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 52.3
+   },
+   {
+    "query": "beauty ratio face",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 53.9
+   },
+   {
+    "query": "facial ratio",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 57.4
+   },
+   {
+    "query": "golden ratio face proportions",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 60.7
+   },
+   {
+    "query": "golden ratio face checker",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 64.2
+   },
+   {
+    "query": "golden ratio face score",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 65.4
+   },
+   {
+    "query": "perfect face scanner",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 70.5
+   },
+   {
+    "query": "media io golden ratio face calculator",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 53.1
+   },
+   {
+    "query": "face proportions test",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 55.1
+   },
+   {
+    "query": "golden ratio test face",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 55.8
+   },
+   {
+    "query": "perfect face golden ratio",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 66.7
+   },
+   {
+    "query": "golden ratio app",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 34.9
+   },
+   {
+    "query": "golden ratio measurements face",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 54.8
+   },
+   {
+    "query": "face ratio analyzer",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 42.6
+   },
+   {
+    "query": "facial proportions test",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 56.6
+   },
+   {
+    "query": "calculate face golden ratio",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 63.0
+   },
+   {
+    "query": "face ratios",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 64.3
+   },
+   {
+    "query": "golden ratio on face",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 72.4
+   },
+   {
+    "query": "golden ratio in face",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 78.3
+   },
+   {
+    "query": "face ratio ai",
+    "clicks": 1,
+    "impressions": 6,
+    "position": 62.2
+   },
+   {
+    "query": "golden ratio face range",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 53.2
+   },
+   {
+    "query": "facial harmony analysis",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 64.3
+   },
+   {
+    "query": "beauty golden ratio",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 72.2
+   },
+   {
+    "query": "golden ratio beauty calculator",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 44.2
+   },
+   {
+    "query": "golden ratio visage",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 44.8
+   },
+   {
+    "query": "how to check golden ratio of face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 51.6
+   },
+   {
+    "query": "face proportion test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 53.8
+   },
+   {
+    "query": "how to calculate golden ratio of face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 59.4
+   },
+   {
+    "query": "perfect side profile ratio",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 65.0
+   },
+   {
+    "query": "face symmetry golden ratio",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 67.0
+   },
+   {
+    "query": "female golden face ratio",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 67.6
+   },
+   {
+    "query": "facial ratios",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 74.0
+   },
+   {
+    "query": "golden beauty ratio",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 76.2
+   },
+   {
+    "query": "female golden ratio face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 77.8
+   },
+   {
+    "query": "golden ratio of beauty calculator",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 45.0
+   },
+   {
+    "query": "ratio face calculator",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 46.0
+   },
+   {
+    "query": "golden ratio face calculator app",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 46.5
+   },
+   {
+    "query": "what is my golden ratio",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 48.0
+   },
+   {
+    "query": "ai golden ratio face",
+    "clicks": 1,
+    "impressions": 3,
+    "position": 80.0
+   }
+  ],
+  "face-beauty-analysis": [
+   {
+    "query": "facial analysis",
+    "clicks": 0,
+    "impressions": 156,
+    "position": 82.4
+   },
+   {
+    "query": "beauty scanner",
+    "clicks": 0,
+    "impressions": 92,
+    "position": 41.6
+   },
+   {
+    "query": "beauty analyzer",
+    "clicks": 0,
+    "impressions": 74,
+    "position": 71.3
+   },
+   {
+    "query": "beauty analysis",
+    "clicks": 1,
+    "impressions": 73,
+    "position": 59.7
+   },
+   {
+    "query": "face analysis",
+    "clicks": 0,
+    "impressions": 73,
+    "position": 80.3
+   },
+   {
+    "query": "face analyzer",
+    "clicks": 0,
+    "impressions": 67,
+    "position": 83.2
+   },
+   {
+    "query": "ai face analyzer",
+    "clicks": 0,
+    "impressions": 65,
+    "position": 86.7
+   },
+   {
+    "query": "ai face analysis",
+    "clicks": 0,
+    "impressions": 52,
+    "position": 86.7
+   },
+   {
+    "query": "face analysis ai",
+    "clicks": 0,
+    "impressions": 50,
+    "position": 87.0
+   },
+   {
+    "query": "face beauty analysis",
+    "clicks": 0,
+    "impressions": 42,
+    "position": 65.1
+   },
+   {
+    "query": "ai beauty scanner",
+    "clicks": 0,
+    "impressions": 41,
+    "position": 62.4
+   },
+   {
+    "query": "ai facial analysis",
+    "clicks": 0,
+    "impressions": 40,
+    "position": 85.8
+   },
+   {
+    "query": "facial thirds calculator",
+    "clicks": 0,
+    "impressions": 36,
+    "position": 35.2
+   },
+   {
+    "query": "ai beauty analyzer",
+    "clicks": 0,
+    "impressions": 36,
+    "position": 82.0
+   },
+   {
+    "query": "beauty analysis ai",
+    "clicks": 0,
+    "impressions": 35,
+    "position": 83.0
+   },
+   {
+    "query": "ai makeup analysis",
+    "clicks": 0,
+    "impressions": 34,
+    "position": 74.8
+   },
+   {
+    "query": "face analysis free",
+    "clicks": 0,
+    "impressions": 33,
+    "position": 66.4
+   },
+   {
+    "query": "facial analysis ai",
+    "clicks": 0,
+    "impressions": 33,
+    "position": 88.0
+   },
+   {
+    "query": "beauty analyzer ai",
+    "clicks": 0,
+    "impressions": 32,
+    "position": 85.4
+   },
+   {
+    "query": "ai beauty analysis",
+    "clicks": 0,
+    "impressions": 31,
+    "position": 85.9
+   },
+   {
+    "query": "facial analysis online free",
+    "clicks": 0,
+    "impressions": 26,
+    "position": 77.0
+   },
+   {
+    "query": "beauty scale test",
+    "clicks": 0,
+    "impressions": 26,
+    "position": 83.7
+   },
+   {
+    "query": "face ai analysis",
+    "clicks": 0,
+    "impressions": 26,
+    "position": 84.0
+   },
+   {
+    "query": "beauty scanner - face analyzer",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 55.7
+   },
+   {
+    "query": "free facial analysis",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 72.4
+   },
+   {
+    "query": "face analysis test",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 82.6
+   },
+   {
+    "query": "face scanner beauty",
+    "clicks": 0,
+    "impressions": 23,
+    "position": 56.4
+   },
+   {
+    "query": "facial analysis free",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 71.7
+   },
+   {
+    "query": "free face analysis",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 80.6
+   },
+   {
+    "query": "beauty face scanner",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 60.9
+   },
+   {
+    "query": "ai face rate",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 85.5
+   },
+   {
+    "query": "facial analysis online",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 77.8
+   },
+   {
+    "query": "face analyzer free",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 81.3
+   },
+   {
+    "query": "face beauty scanner",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 61.7
+   },
+   {
+    "query": "makeup analysis free",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 69.5
+   },
+   {
+    "query": "face analyser",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 79.2
+   },
+   {
+    "query": "face analysis report",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 81.5
+   },
+   {
+    "query": "ai makeup scanner",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 57.2
+   },
+   {
+    "query": "facial thirds test",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 62.5
+   },
+   {
+    "query": "face analyzer ai",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 87.6
+   },
+   {
+    "query": "beauty checker",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 61.9
+   },
+   {
+    "query": "facial beauty analysis",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 66.2
+   },
+   {
+    "query": "free face analyzer",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 67.5
+   },
+   {
+    "query": "analyze face",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 81.4
+   },
+   {
+    "query": "face analysis tool",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 81.9
+   },
+   {
+    "query": "ai face scanner for makeup",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 65.6
+   },
+   {
+    "query": "face analysis online",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 68.0
+   },
+   {
+    "query": "free ai face analyzer",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 80.0
+   },
+   {
+    "query": "ai face analyzer free",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 83.3
+   },
+   {
+    "query": "beauty face analysis",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 67.5
+   },
+   {
+    "query": "face potential scanner",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 77.0
+   },
+   {
+    "query": "analyze my face",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 87.1
+   },
+   {
+    "query": "facial third calculator",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 38.5
+   },
+   {
+    "query": "face beauty report",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 72.8
+   },
+   {
+    "query": "facial features scanner",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 74.8
+   },
+   {
+    "query": "face beauty detector",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 79.0
+   },
+   {
+    "query": "facial feature analyzer",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 82.2
+   },
+   {
+    "query": "ai beauty report",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 86.2
+   },
+   {
+    "query": "comprehensive face analysis",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 87.2
+   },
+   {
+    "query": "facial analyzer",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 87.3
+   },
+   {
+    "query": "facial assessment tool",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 78.0
+   },
+   {
+    "query": "ai face analysis free",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 78.5
+   },
+   {
+    "query": "face analysis test online free",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 79.2
+   },
+   {
+    "query": "beauty scanner online",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 32.3
+   },
+   {
+    "query": "online face analysis",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 66.8
+   },
+   {
+    "query": "facial features analysis",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 75.8
+   },
+   {
+    "query": "facial analysis report",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 83.9
+   },
+   {
+    "query": "face scan beauty",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 47.2
+   },
+   {
+    "query": "makeup analysis",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 76.6
+   },
+   {
+    "query": "what makeup suits my face scanner",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 78.0
+   },
+   {
+    "query": "beauty check",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 79.8
+   },
+   {
+    "query": "facial analysis tool",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 81.0
+   },
+   {
+    "query": "ai facial analysis free",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 81.1
+   },
+   {
+    "query": "face scanner",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 65.5
+   },
+   {
+    "query": "facial features analyzer",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 78.2
+   },
+   {
+    "query": "free ai face analysis",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 78.8
+   },
+   {
+    "query": "face features analysis",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 83.2
+   },
+   {
+    "query": "full facial analysis",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 86.6
+   },
+   {
+    "query": "beauty scan",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 52.6
+   },
+   {
+    "query": "facial ai analysis",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 72.6
+   },
+   {
+    "query": "facial beauty report",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 80.1
+   },
+   {
+    "query": "ai face analyser",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 82.4
+   },
+   {
+    "query": "facial beauty report ai",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 82.6
+   },
+   {
+    "query": "analyse my face",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 84.6
+   },
+   {
+    "query": "face analyze",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 85.1
+   },
+   {
+    "query": "ai facial beauty report",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 85.6
+   },
+   {
+    "query": "facial feature analysis",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 65.5
+   },
+   {
+    "query": "ai makeup analysis free",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 76.3
+   },
+   {
+    "query": "beauty detector",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 79.3
+   },
+   {
+    "query": "beauty face analyzer",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 81.7
+   },
+   {
+    "query": "equal facial thirds test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 81.8
+   },
+   {
+    "query": "free face analysis ai",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 70.2
+   },
+   {
+    "query": "facial test beauty",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 77.6
+   },
+   {
+    "query": "beauty calculator ai",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 80.2
+   },
+   {
+    "query": "check beauty",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 82.6
+   },
+   {
+    "query": "full face analysis",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.2
+   },
+   {
+    "query": "facial beauty analysis test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 85.2
+   },
+   {
+    "query": "face beauty analysis test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 96.6
+   },
+   {
+    "query": "model face test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 101.4
+   },
+   {
+    "query": "scan beauty",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 42.2
+   },
+   {
+    "query": "facial attraction test",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 55.2
+   }
+  ],
+  "celebrity-look-alike": [
+   {
+    "query": "what celebrity do i look like",
+    "clicks": 0,
+    "impressions": 217,
+    "position": 89.1
+   },
+   {
+    "query": "which celebrity do i look like",
+    "clicks": 0,
+    "impressions": 101,
+    "position": 85.5
+   },
+   {
+    "query": "celebrity look alike finder",
+    "clicks": 0,
+    "impressions": 74,
+    "position": 74.2
+   },
+   {
+    "query": "look alike finder",
+    "clicks": 0,
+    "impressions": 37,
+    "position": 59.7
+   },
+   {
+    "query": "celebrity look alike generator",
+    "clicks": 0,
+    "impressions": 36,
+    "position": 76.1
+   },
+   {
+    "query": "which actress do i look like",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 84.8
+   },
+   {
+    "query": "who is my celebrity look alike",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 77.1
+   },
+   {
+    "query": "celebrity face finder",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 116.6
+   },
+   {
+    "query": "find my celebrity look alike",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 73.4
+   },
+   {
+    "query": "face scan look alike",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 62.8
+   },
+   {
+    "query": "find my look alike celebrity",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 81.3
+   },
+   {
+    "query": "what celebrity do i look like upload photo",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 90.6
+   },
+   {
+    "query": "celebrity face match",
+    "clicks": 1,
+    "impressions": 17,
+    "position": 58.0
+   },
+   {
+    "query": "which celebrity do i look like face recognition",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 70.1
+   },
+   {
+    "query": "which actor do i look like",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 86.8
+   },
+   {
+    "query": "celebrity look alike test",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 61.4
+   },
+   {
+    "query": "celebrity look alike ai",
+    "clicks": 0,
+    "impressions": 14,
+    "position": 71.9
+   },
+   {
+    "query": "find your celebrity look alike",
+    "clicks": 1,
+    "impressions": 13,
+    "position": 79.9
+   },
+   {
+    "query": "look alike generator",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 67.7
+   },
+   {
+    "query": "what celeb do i look like",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 87.4
+   },
+   {
+    "query": "face match celebrity",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 53.0
+   },
+   {
+    "query": "lookalike finder",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 54.4
+   },
+   {
+    "query": "pornstar look alike finder",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 64.3
+   },
+   {
+    "query": "celebrity finder",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 69.8
+   },
+   {
+    "query": "who's my look alike celebrity",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 81.8
+   },
+   {
+    "query": "which celebrity looks like me",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 82.0
+   },
+   {
+    "query": "celebrity look alike scanner",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 46.0
+   },
+   {
+    "query": "celebrity lookalike finder",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 70.2
+   },
+   {
+    "query": "find celebrity look alike",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 77.9
+   },
+   {
+    "query": "best celebrity look alike finder",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 83.4
+   },
+   {
+    "query": "celebrity face scan",
+    "clicks": 1,
+    "impressions": 9,
+    "position": 48.6
+   },
+   {
+    "query": "celebrity doppelganger finder",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 70.0
+   },
+   {
+    "query": "ai celebrity look alike",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 72.3
+   },
+   {
+    "query": "which celebrity you look like",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 78.3
+   },
+   {
+    "query": "which celebrity i look like",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 79.6
+   },
+   {
+    "query": "like which celebrity do i look like",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 80.2
+   },
+   {
+    "query": "what actor do i look like",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 88.8
+   },
+   {
+    "query": "celeb look alike finder",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 63.9
+   },
+   {
+    "query": "celebrity look alike search",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 64.4
+   },
+   {
+    "query": "look alike search",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 66.9
+   },
+   {
+    "query": "find look alike",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 69.5
+   },
+   {
+    "query": "what actress do i look like",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 83.1
+   },
+   {
+    "query": "which famous person do i look like",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 91.5
+   },
+   {
+    "query": "celebrity look alikes test",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 59.4
+   },
+   {
+    "query": "like what celebrity do i look like",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 68.9
+   },
+   {
+    "query": "celebrity look alike filter",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 76.9
+   },
+   {
+    "query": "celebrity i look like",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 79.7
+   },
+   {
+    "query": "find famous look alike",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 80.6
+   },
+   {
+    "query": "match celebrity face",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 53.0
+   },
+   {
+    "query": "lookalikes finder",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 54.8
+   },
+   {
+    "query": "celebrity match",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 62.0
+   },
+   {
+    "query": "face matcher with celebrities",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 66.2
+   },
+   {
+    "query": "look alike test",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 69.2
+   },
+   {
+    "query": "find my look alike",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 82.0
+   },
+   {
+    "query": "which celeb do i look like",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 86.0
+   },
+   {
+    "query": "celebrity look alike analyzer",
+    "clicks": 1,
+    "impressions": 5,
+    "position": 93.0
+   },
+   {
+    "query": "celebrity scan",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 19.6
+   },
+   {
+    "query": "face match with celebrity",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 47.4
+   },
+   {
+    "query": "celebrity face matching",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 57.0
+   },
+   {
+    "query": "pornstar lookalike finder",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 58.4
+   },
+   {
+    "query": "face to celebrity",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 64.0
+   },
+   {
+    "query": "find your look alike celebrity",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 67.6
+   },
+   {
+    "query": "find my celebrity lookalike",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 72.6
+   },
+   {
+    "query": "celebrity lookalike generator",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 74.2
+   },
+   {
+    "query": "celeb lookalike website",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 74.8
+   },
+   {
+    "query": "you look like which celebrity",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 76.2
+   },
+   {
+    "query": "celebrity look alike face recognition",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 78.4
+   },
+   {
+    "query": "celebrity look alike test photo",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 78.4
+   },
+   {
+    "query": "which star do i look like",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 79.2
+   },
+   {
+    "query": "whos my celebrity look alike",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 82.2
+   },
+   {
+    "query": "facial recognition celebrity look alike",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 83.6
+   },
+   {
+    "query": "what famous actress do i look like",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 85.6
+   },
+   {
+    "query": "lookalike website",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 87.8
+   },
+   {
+    "query": "what celeb i look like",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 90.0
+   },
+   {
+    "query": "what celebrities do i look like",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 90.6
+   },
+   {
+    "query": "ai celebrity lookalike",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 98.0
+   },
+   {
+    "query": "face match with celebrities",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 51.8
+   },
+   {
+    "query": "celebrity detector",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 55.0
+   },
+   {
+    "query": "match face with celebrity",
+    "clicks": 0,
+    "impressions": 4,
+    "position": 55.2
+   },
+   {
+    "query": "find my celebrity look alike ai",
+    "clicks": 1,
+    "impressions": 3,
+    "position": 85.0
+   }
+  ],
+  "facial-symmetry": [
+   {
+    "query": "face symmetry test",
+    "clicks": 0,
+    "impressions": 191,
+    "position": 65.6
+   },
+   {
+    "query": "facial symmetry test",
+    "clicks": 0,
+    "impressions": 92,
+    "position": 62.7
+   },
+   {
+    "query": "symmetrical face test",
+    "clicks": 0,
+    "impressions": 80,
+    "position": 69.7
+   },
+   {
+    "query": "check face symmetry",
+    "clicks": 0,
+    "impressions": 73,
+    "position": 78.1
+   },
+   {
+    "query": "beauty symmetry test",
+    "clicks": 0,
+    "impressions": 61,
+    "position": 66.4
+   },
+   {
+    "query": "facial symmetry score",
+    "clicks": 0,
+    "impressions": 38,
+    "position": 60.9
+   },
+   {
+    "query": "symmetry face maker",
+    "clicks": 0,
+    "impressions": 35,
+    "position": 77.3
+   },
+   {
+    "query": "face symmetry test online",
+    "clicks": 0,
+    "impressions": 33,
+    "position": 65.3
+   },
+   {
+    "query": "face symmetry calculator",
+    "clicks": 0,
+    "impressions": 31,
+    "position": 73.0
+   },
+   {
+    "query": "face symmetry checker",
+    "clicks": 0,
+    "impressions": 30,
+    "position": 75.5
+   },
+   {
+    "query": "face symmetry check",
+    "clicks": 0,
+    "impressions": 29,
+    "position": 72.3
+   },
+   {
+    "query": "symmetrical face test online",
+    "clicks": 0,
+    "impressions": 28,
+    "position": 65.2
+   },
+   {
+    "query": "how symmetrical is my face",
+    "clicks": 0,
+    "impressions": 25,
+    "position": 80.6
+   },
+   {
+    "query": "symmetry checker",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 69.8
+   },
+   {
+    "query": "is my face symmetrical",
+    "clicks": 0,
+    "impressions": 24,
+    "position": 79.5
+   },
+   {
+    "query": "symmetrical face calculator",
+    "clicks": 0,
+    "impressions": 23,
+    "position": 66.6
+   },
+   {
+    "query": "symmetry face test",
+    "clicks": 0,
+    "impressions": 22,
+    "position": 68.5
+   },
+   {
+    "query": "symmetry test",
+    "clicks": 0,
+    "impressions": 21,
+    "position": 60.3
+   },
+   {
+    "query": "facial symmetry calculator",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 70.6
+   },
+   {
+    "query": "facial symmetry analysis",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 68.3
+   },
+   {
+    "query": "face symmetry ai",
+    "clicks": 0,
+    "impressions": 19,
+    "position": 72.0
+   },
+   {
+    "query": "facial symmetry analyzer",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 61.2
+   },
+   {
+    "query": "face symmetry analyzer",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 64.1
+   },
+   {
+    "query": "face symmetry test ai",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 69.1
+   },
+   {
+    "query": "face symmetry",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 82.2
+   },
+   {
+    "query": "check symmetry of face",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 72.3
+   },
+   {
+    "query": "face asymmetry test",
+    "clicks": 0,
+    "impressions": 17,
+    "position": 77.8
+   },
+   {
+    "query": "check facial symmetry",
+    "clicks": 0,
+    "impressions": 16,
+    "position": 77.2
+   },
+   {
+    "query": "facial symmetry ai",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 68.5
+   },
+   {
+    "query": "symmetry check",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 68.7
+   },
+   {
+    "query": "facial symmetry check",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 72.3
+   },
+   {
+    "query": "symmetry face",
+    "clicks": 0,
+    "impressions": 15,
+    "position": 78.5
+   },
+   {
+    "query": "face symmetry tester",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 59.1
+   },
+   {
+    "query": "online face symmetry test",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 62.8
+   },
+   {
+    "query": "facial symmetry test online",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 64.0
+   },
+   {
+    "query": "test symmetry of face",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 65.8
+   },
+   {
+    "query": "test symmetry",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 68.0
+   },
+   {
+    "query": "symmetry face calculator",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 70.2
+   },
+   {
+    "query": "symmetry of face test",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 70.8
+   },
+   {
+    "query": "symmetry calculator face",
+    "clicks": 0,
+    "impressions": 13,
+    "position": 73.2
+   },
+   {
+    "query": "symmetrical test",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 68.5
+   },
+   {
+    "query": "facial asymmetry test",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 68.7
+   },
+   {
+    "query": "face symmetry analysis",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 71.6
+   },
+   {
+    "query": "symmetrical face test filter",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 87.0
+   },
+   {
+    "query": "facial symmetry scanner",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 58.8
+   },
+   {
+    "query": "face symmetry score",
+    "clicks": 0,
+    "impressions": 11,
+    "position": 64.4
+   },
+   {
+    "query": "checking face symmetry",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 65.8
+   },
+   {
+    "query": "asymmetry test",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 73.7
+   },
+   {
+    "query": "face symmetry scanner",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 59.2
+   },
+   {
+    "query": "symmetrical face checker",
+    "clicks": 0,
+    "impressions": 9,
+    "position": 77.6
+   },
+   {
+    "query": "test face symmetry",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 64.1
+   },
+   {
+    "query": "face symmetrical test",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 67.0
+   },
+   {
+    "query": "facial symmetry checker",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 69.5
+   },
+   {
+    "query": "measure face symmetry",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 70.1
+   },
+   {
+    "query": "asymmetrical face test",
+    "clicks": 0,
+    "impressions": 8,
+    "position": 76.5
+   },
+   {
+    "query": "facial symmetry tester",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 62.1
+   },
+   {
+    "query": "do i have a symmetrical face",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 86.1
+   },
+   {
+    "query": "symmetrical face generator",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 90.6
+   },
+   {
+    "query": "facial symmetry generator",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 71.5
+   },
+   {
+    "query": "symmetry filter online",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 74.0
+   },
+   {
+    "query": "symmetry ai",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 77.0
+   },
+   {
+    "query": "how to check facial symmetry",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 80.3
+   },
+   {
+    "query": "face is symmetrical",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 85.8
+   },
+   {
+    "query": "face symmetry test online free",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 58.0
+   },
+   {
+    "query": "face symmetry online",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 64.2
+   },
+   {
+    "query": "test facial symmetry",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 65.2
+   },
+   {
+    "query": "test symmetrical face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 65.2
+   },
+   {
+    "query": "ai face symmetry test",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 68.8
+   },
+   {
+    "query": "face symmetry detector",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 74.6
+   },
+   {
+    "query": "symmetrical face ai",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 76.8
+   },
+   {
+    "query": "how to tell if your face is symmetrical",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 86.4
+   },
+   {
+    "query": "how do you know if you have a symmetrical face",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 88.0
+   },
+   {
+    "query": "is your face symmetrical",
+    "clicks": 0,
+    "impressions": 5,
+    "position": 93.8
+   }
+  ],
+  "face-comparison": [
+   {
+    "query": "who do i look like",
+    "clicks": 0,
+    "impressions": 20,
+    "position": 80.6
+   },
+   {
+    "query": "facial comparison",
+    "clicks": 0,
+    "impressions": 12,
+    "position": 73.1
+   },
+   {
+    "query": "celebrity face comparison",
+    "clicks": 0,
+    "impressions": 10,
+    "position": 54.5
+   },
+   {
+    "query": "who do i look like photo",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 88.0
+   },
+   {
+    "query": "who do i look like celebrity",
+    "clicks": 0,
+    "impressions": 7,
+    "position": 89.4
+   },
+   {
+    "query": "which celebrity do i resemble",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 77.8
+   },
+   {
+    "query": "comparaison faciale",
+    "clicks": 0,
+    "impressions": 6,
+    "position": 78.0
+   }
+  ],
+  "seasonal-color-palette": [
+   {
+    "query": "ai colour season finder",
+    "clicks": 0,
+    "impressions": 18,
+    "position": 72.9
+   }
+  ]
+ },
+ "unmapped": [
+  {
+   "query": "face rate ai",
+   "impressions": 27
+  },
+  {
+   "query": "face rate",
+   "impressions": 25
+  },
+  {
+   "query": "ai makeup recommendations",
+   "impressions": 17
+  },
+  {
+   "query": "prettiness test",
+   "impressions": 16
+  },
+  {
+   "query": "face ranking",
+   "impressions": 16
+  },
+  {
+   "query": "gesichter vergleichen",
+   "impressions": 15
+  },
+  {
+   "query": "look test",
+   "impressions": 14
+  },
+  {
+   "query": "rate looks",
+   "impressions": 13
+  },
+  {
+   "query": "face rated",
+   "impressions": 13
+  },
+  {
+   "query": "look-alike finder",
+   "impressions": 12
+  },
+  {
+   "query": "face matching online",
+   "impressions": 11
+  },
+  {
+   "query": "face calculator",
+   "impressions": 11
+  },
+  {
+   "query": "lookrank",
+   "impressions": 10
+  },
+  {
+   "query": "atracvtieness test",
+   "impressions": 10
+  },
+  {
+   "query": "face potential test",
+   "impressions": 10
+  },
+  {
+   "query": "am i good looking",
+   "impressions": 10
+  },
+  {
+   "query": "face matching online free",
+   "impressions": 9
+  },
+  {
+   "query": "look a like generator",
+   "impressions": 8
+  },
+  {
+   "query": "looks calculator",
+   "impressions": 7
+  },
+  {
+   "query": "looks test",
+   "impressions": 7
+  },
+  {
+   "query": "ai rate me",
+   "impressions": 7
+  },
+  {
+   "query": "face rate test",
+   "impressions": 6
+  },
+  {
+   "query": "midface calculator",
+   "impressions": 6
+  },
+  {
+   "query": "ai makeup help",
+   "impressions": 6
+  },
+  {
+   "query": "rate your looks",
+   "impressions": 6
+  },
+  {
+   "query": "looks rate",
+   "impressions": 6
+  },
+  {
+   "query": "rate face",
+   "impressions": 6
+  },
+  {
+   "query": "what percent good looking am i",
+   "impressions": 6
+  },
+  {
+   "query": "rate the face",
+   "impressions": 6
+  },
+  {
+   "query": "face report ai",
+   "impressions": 6
+  },
+  {
+   "query": "how good looking am i",
+   "impressions": 6
+  },
+  {
+   "query": "selfie?",
+   "impressions": 5
+  },
+  {
+   "query": "look-alike testing",
+   "impressions": 5
+  },
+  {
+   "query": "face result",
+   "impressions": 5
+  },
+  {
+   "query": "hotness test",
+   "impressions": 5
+  },
+  {
+   "query": "hotness calculator",
+   "impressions": 5
+  },
+  {
+   "query": "free face rate",
+   "impressions": 5
+  },
+  {
+   "query": "striking face filter test online free",
+   "impressions": 5
+  },
+  {
+   "query": "face rate free",
+   "impressions": 5
+  },
+  {
+   "query": "ai rate your face",
+   "impressions": 5
+  },
+  {
+   "query": "rate me ai",
+   "impressions": 5
+  },
+  {
+   "query": "attraction scale",
+   "impressions": 5
+  },
+  {
+   "query": "glam test",
+   "impressions": 4
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+/* A small progressive enhancement. Content remains visible in browsers without
+   scroll-timeline support and for visitors who prefer reduced motion. */
+@keyframes enter {
+  from { opacity: .82; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 22%;
+    }
+  }
+}

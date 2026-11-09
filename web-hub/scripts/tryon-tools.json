@@ -1,0 +1,230 @@
+[
+  {
+    "slug": "hairstyle-changer",
+    "category": "hair-beard",
+    "inputs": 1,
+    "option": "Curly bob",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "Before shows original hair and face",
+      "After has a distinct curly bob on the same face",
+      "Face, expression, clothes, and background remain recognizable"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "ai-hair-color",
+    "category": "hair-beard",
+    "inputs": 1,
+    "option": "Copper",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After hair is copper with realistic strand variation",
+      "Cut, hairline, skin, and brows match Before"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "beard-styling",
+    "category": "hair-beard",
+    "inputs": 1,
+    "option": "Light stubble",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After shows visible light stubble on chin and upper lip",
+      "Jaw, lips, and facial identity match Before"
+    ],
+    "blockers": [
+      "Portrait sample may have a subject for whom stubble preview is less representative; reviewer should also use a consenting adult bearded or clean-shaven test photo."
+    ]
+  },
+  {
+    "slug": "beard-remover",
+    "category": "hair-beard",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After has no visible beard or moustache where Before had facial hair",
+      "Jaw shape, lips, age, and natural skin remain plausible"
+    ],
+    "blockers": [
+      "Bundled portrait sample does not demonstrate beard removal; reviewer needs a consenting adult photo with visible facial hair."
+    ]
+  },
+  {
+    "slug": "hair-loss-simulation",
+    "category": "hair-beard",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After shows only a mild fictional receding hairline",
+      "Remaining hair and face remain recognizable",
+      "No diagnosis or future prediction appears in output"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "bald-filter",
+    "category": "hair-beard",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After shows a naturally shaved scalp with coherent head shape and lighting",
+      "Brows, face, ears, and clothing match Before"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "lip-color-changer",
+    "category": "makeup-tryon",
+    "inputs": 1,
+    "option": "Peach gloss",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After lips visibly carry peach gloss within the lip boundary",
+      "Lip shape, teeth, skin, and other makeup match Before"
+    ],
+    "blockers": [
+      "Catalog says matte or glossy; UI exposes four named colors and only one explicitly glossy option."
+    ]
+  },
+  {
+    "slug": "eyeshadow-try-on",
+    "category": "makeup-tryon",
+    "inputs": 1,
+    "option": "Soft bronze",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After shows soft bronze confined to visible eyelids",
+      "Eye shape, iris color, brows, and rest of face match Before"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "colored-contacts",
+    "category": "makeup-tryon",
+    "inputs": 1,
+    "option": "Green",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After has consistent green irises in visible eyes",
+      "Pupils, light reflections, eye shape, and surrounding face remain natural"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "ai-eyelashes",
+    "category": "makeup-tryon",
+    "inputs": 1,
+    "option": "Wispy",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After has wispy lashes rooted along natural lash lines",
+      "Iris color, eye shape, brows, and face match Before"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "ai-eyebrows",
+    "category": "makeup-tryon",
+    "inputs": 1,
+    "option": "Soft arch",
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After brow shape reads as a soft arch with individual hairs",
+      "Eyes, brow bone, skin texture, and expression match Before"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "ai-lip-enhancement",
+    "category": "makeup-tryon",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-1.png"
+    ],
+    "expected": [
+      "After shows subtle fuller-looking liner and gloss",
+      "Mouth anatomy, expression, and skin texture match Before",
+      "No surgical or injected appearance"
+    ],
+    "blockers": []
+  },
+  {
+    "slug": "virtual-try-on-clothes",
+    "category": "fashion-style",
+    "inputs": 2,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-body-1.png",
+      "/img/samples/sample-garment.png"
+    ],
+    "expected": [
+      "Before shows the input person in original outfit",
+      "After shows that person wearing the garment from input 2 with recognizable color, print, and neckline",
+      "Face, pose, and body proportions remain recognizable"
+    ],
+    "blockers": [
+      "Generated drape is a visual approximation, not sizing or physical fit validation."
+    ]
+  },
+  {
+    "slug": "ai-tattoo-generator",
+    "category": "fashion-style",
+    "inputs": 1,
+    "option": "Fine-line botanical",
+    "fixtures": [
+      "/img/samples/sample-body-1.png"
+    ],
+    "expected": [
+      "After has an original fine-line botanical motif on a visible forearm",
+      "Design follows arm perspective; body and clothes match Before"
+    ],
+    "blockers": [
+      "Body sample needs a clearly exposed forearm. If covered, reviewer must use a consenting adult forearm photo."
+    ]
+  },
+  {
+    "slug": "ai-waist-slimming",
+    "category": "fashion-style",
+    "inputs": 1,
+    "option": null,
+    "fixtures": [
+      "/img/samples/sample-body-1.png"
+    ],
+    "expected": [
+      "After shows slightly neater drape and seams in existing garment",
+      "Body width, waist, hips, posture, and face match Before",
+      "No weight-loss or anatomical change implied"
+    ],
+    "blockers": [
+      "Slug is legacy wording; user-facing name is Silhouette Preview."
+    ]
+  }
+]

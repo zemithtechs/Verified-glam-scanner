@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1f1220;
+  --color-plum: #6d1a46;
+  --color-berry: #b8325f;
+  --color-rose: #f06b8f;
+  --color-blush: #fdeef2;
+  --color-cream: #fffaf9;
+  --color-gold: #c8a15a;
+  --color-line: rgba(109, 26, 70, 0.13);
+  --color-muted: #6b5b66;
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --container-page: 1200px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+.soft-shadow {
+  box-shadow: 0 1px 2px rgba(31, 18, 32, 0.04), 0 12px 32px rgba(109, 26, 70, 0.07);
+}
+
+.hero-glow {
+  background:
+    radial-gradient(60% 50% at 85% 0%, rgba(240, 107, 143, 0.28), transparent 70%),
+    radial-gradient(50% 50% at 0% 30%, rgba(200, 161, 90, 0.18), transparent 70%),
+    var(--color-cream);
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-y { animation: float-y 5s ease-in-out infinite; }
+
+@keyframes sweep {
+  0% { top: -10%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 105%; opacity: 0; }
+}
+.scan-sweep { animation: sweep 2s ease-in-out infinite; }
+
+/* Tool pages use a quiet product UI: visible focus, stable images, and purposeful motion. */
+.tool-section { scroll-margin-top: 5rem; }
+.tool-page-shell :is(h1, h2, h3, summary) { font-family: var(--font-sans); }
+.tool-landing h2 { font-weight: 800; letter-spacing: -0.045em; }
+.tool-landing h3 { font-weight: 700; letter-spacing: -0.025em; }
+.tool-page-shell :is(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-plum);
+  outline-offset: 4px;
+}
+.tool-primary-button, .tool-secondary-button, .tool-gallery-arrow, .tool-related-card,
+.tool-text-link, .tool-image-download {
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease, opacity 160ms ease;
+}
+.tool-primary-button { min-height: 44px; }
+.tool-primary-button:hover { background-color: var(--color-plum); box-shadow: 0 3px 9px #6d1a461a; }
+.tool-primary-button:active, .tool-secondary-button:active { transform: translateY(1px); }
+.tool-secondary-button:hover, .tool-gallery-arrow:hover { background-color: var(--color-blush); border-color: var(--color-plum); }
+.tool-related-card:hover { border-color: #6d1a4655; box-shadow: 0 6px 18px #1f122009; transform: translateY(-2px); }
+.tool-text-link:hover { color: var(--color-berry); }
+@keyframes result-enter { from { opacity: .6; } to { opacity: 1; } }
+.tool-gallery-image { animation: result-enter 220ms ease-out; }
+@media (hover: hover) {
+  .tool-image-download { opacity: 0; transform: translateY(3px); }
+  .tool-example-link:hover .tool-image-download, .tool-example-link:focus-visible .tool-image-download { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .float-y, .scan-sweep, .tool-gallery-image { animation: none; }
+  .tool-page-shell *, .tool-page-shell *::before, .tool-page-shell *::after { transition-duration: 0s !important; scroll-behavior: auto !important; }
+  .tool-related-card:hover { transform: none; }
+}
+
+/* Sidebar scrolling: thin themed scrollbar plus soft edge shadows that appear only when there is more to scroll. */
+.nav-scroll, .nav-scroll-panel { scrollbar-width: thin; scrollbar-color: rgba(109, 26, 70, 0.28) transparent; }
+.nav-scroll::-webkit-scrollbar, .nav-scroll-panel::-webkit-scrollbar { width: 6px; }
+.nav-scroll::-webkit-scrollbar-thumb, .nav-scroll-panel::-webkit-scrollbar-thumb { background: rgba(109, 26, 70, 0.28); border-radius: 999px; }
+.nav-scroll {
+  background:
+    linear-gradient(#fff 30%, rgba(255, 255, 255, 0)) center top,
+    linear-gradient(rgba(255, 255, 255, 0), #fff 70%) center bottom,
+    radial-gradient(farthest-side at 50% 0, rgba(31, 18, 32, 0.14), rgba(31, 18, 32, 0)) center top,
+    radial-gradient(farthest-side at 50% 100%, rgba(31, 18, 32, 0.14), rgba(31, 18, 32, 0)) center bottom;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: 100% 40px, 100% 40px, 100% 12px, 100% 12px;
+  background-attachment: local, local, scroll, scroll;
+}
+
+/* Pricing: pay-as-you-go slider. --fill is set inline from the current value. */
+.price-slider { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 999px; outline: none; cursor: pointer;
+  background: linear-gradient(to right, var(--color-berry) var(--fill, 0%), rgba(109, 26, 70, 0.14) var(--fill, 0%)); }
+.price-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 3px solid var(--color-plum); box-shadow: 0 2px 8px rgba(31, 18, 32, 0.25); }
+.price-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--color-plum); box-shadow: 0 2px 8px rgba(31, 18, 32, 0.25); }
+.price-slider:focus-visible { outline: 3px solid var(--color-plum); outline-offset: 6px; }

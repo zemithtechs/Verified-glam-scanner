@@ -1,0 +1,137 @@
+[
+  {
+    "slug": "cartoon-yourself",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": "Comic ink",
+    "fixtures": ["/img/samples/sample-1.png"],
+    "expected": ["One flattened before/after PNG shows the uploaded portrait on the left and a comic-ink rendition on the right.", "The illustrated face, curls, expression and blue shirt remain recognizably the same person.", "No score, slogan, extra person or unrelated character appears."],
+    "blockers": []
+  },
+  {
+    "slug": "face-filters",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": "Warm film",
+    "fixtures": ["/img/samples/sample-2.png"],
+    "expected": ["The before panel matches the original portrait and the after panel has visible warm film color and grain.", "Facial features, bob haircut, beige top and framing remain consistent.", "No score or stickers appear."],
+    "blockers": []
+  },
+  {
+    "slug": "facial-expression-changer",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": "Surprised",
+    "fixtures": ["/img/samples/sample-2.png"],
+    "expected": ["The after face shows a believable surprised eye and mouth expression.", "The same adult, hair, clothing, lighting and background remain; the before panel is unchanged.", "No duplicated or malformed eyes or mouth appear."],
+    "blockers": []
+  },
+  {
+    "slug": "age-gender-swap",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": "Older adult",
+    "fixtures": ["/img/samples/sample-1.png"],
+    "expected": ["Before is the source adult; after is a visibly older fictional adult version.", "Recognizable facial structure and natural complexion survive.", "No child, age number, factual prediction or gender-identity claim appears."],
+    "blockers": []
+  },
+  {
+    "slug": "ai-face-swap",
+    "category": "fun-effects",
+    "inputs": 2,
+    "option": null,
+    "fixtures": ["/img/samples/sample-1.png", "/img/samples/sample-2.png"],
+    "expected": ["Before shows the second uploaded target portrait, not the first source portrait.", "After keeps the second portrait's pose, hair, beige clothing and scene but replaces its face with the first person's recognizable face.", "The output has exactly two panels and no source inset or third face."],
+    "blockers": ["Human review must confirm the two input roles and plausible placement; a returned PNG alone does not prove a correct swap."]
+  },
+  {
+    "slug": "square-face-filter",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-1.png"],
+    "expected": ["The after portrait has a clearly exaggerated square lower-face outline.", "Eyes, curls, expression, complexion and clothing remain recognizable.", "Before is the unchanged source; the effect is visibly comic rather than a subtle retouch."],
+    "blockers": []
+  },
+  {
+    "slug": "big-head-effect",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-body-1.png"],
+    "expected": ["The after person has a noticeably larger head relative to shoulders and torso.", "The same person, brown shirt and room remain visible, with one head and a believable neck join.", "Before is the unchanged source; no unrelated people appear."],
+    "blockers": ["The UI's portrait sample set does not offer this body fixture; testing requires uploading it manually."]
+  },
+  {
+    "slug": "halloween-mask",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": "Friendly skeleton",
+    "fixtures": ["/img/samples/sample-2.png"],
+    "expected": ["The after portrait adds original, non-gory skeleton-inspired face paint.", "The same adult face, eyes, hair, clothes and lighting remain recognizable.", "Before is unedited; no opaque full-face mask or copied character appears."],
+    "blockers": []
+  },
+  {
+    "slug": "pregnant-filter",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-body-1.png"],
+    "expected": ["The after panel shows a clearly fictional rounded-belly clothing effect on the same adult.", "The person remains fully clothed, with face, limbs, brown shirt and room otherwise consistent.", "Before is unchanged; no medical or actual-pregnancy claim appears."],
+    "blockers": []
+  },
+  {
+    "slug": "birthday-image-generator",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-1.png"],
+    "expected": ["One downloadable card contains the same recognizable adult portrait.", "The sole greeting reads Happy birthday and is legible.", "Confetti is restrained; no invented name, age or extra panel appears."],
+    "blockers": []
+  },
+  {
+    "slug": "ai-fortune-teller",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-1.png"],
+    "expected": ["One complete card includes the recognizable uploaded portrait, For fun and one short legible invented fortune.", "The fortune makes no factual claim about the pictured person's health, money, personality or future.", "No score, analysis chart or extra caption appears."],
+    "blockers": ["The image model may misspell small text; a human or OCR review is required for the fortune and For fun label."]
+  },
+  {
+    "slug": "elf-name-generator",
+    "category": "fun-effects",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-2.png"],
+    "expected": ["One fantasy card shows the same recognizable adult with pointed ears and forest styling.", "Exactly one original, legible fantasy name appears.", "No claim of real ancestry or a second panel appears."],
+    "blockers": ["The image model may misspell the invented name; read the rendered text before treating the result as complete."]
+  },
+  {
+    "slug": "old-photo-restoration",
+    "category": "photo-tools",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-vintage.png"],
+    "expected": ["The before panel preserves the scratched monochrome print; after shows visibly repaired scratches and improved contrast.", "The same woman, expression, clothes, crop and era remain without colorization.", "No new face, extra person or invented historical caption appears."],
+    "blockers": ["Lost photographic detail cannot be verified as historically accurate; the result requires visual comparison with the upload."]
+  },
+  {
+    "slug": "face-blur",
+    "category": "photo-tools",
+    "inputs": 1,
+    "option": null,
+    "fixtures": ["/img/samples/sample-1.png"],
+    "expected": ["The downloaded PNG contains one image only, with the entire visible face strongly obscured.", "There is no unblurred original, face inset, reflection or facial reconstruction in the export.", "Clothing and background remain recognizable so the user can inspect context."],
+    "blockers": ["A generative image edit cannot guarantee every face is found or reliably obscured. A deterministic face-detection-and-blur path plus manual review is required before claiming privacy protection.", "The available sample covers only one close face; add a multi-person and reflection fixture before claiming broad coverage."]
+  },
+  {
+    "slug": "merge-portraits",
+    "category": "photo-tools",
+    "inputs": 2,
+    "option": null,
+    "fixtures": ["/img/samples/sample-1.png", "/img/samples/sample-2.png"],
+    "expected": ["The download is one joint portrait containing exactly the two uploaded adults.", "Both faces, hairstyles and complexions remain separately recognizable with coherent scale and light.", "No source panels, report cards, score, duplication or implied real meeting appear."],
+    "blockers": ["A generative two-person composition can blend or replace identities; a human comparison against both source photos is required."]
+  }
+]

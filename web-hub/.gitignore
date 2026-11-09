@@ -1,0 +1,9 @@
+node_modules
+.next
+next-env.d.ts
+tsconfig.tsbuildinfo
+.env*
+!.env.example
+.local-test-results/
+.open-next
+.wrangler
