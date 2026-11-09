@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 .local-test-results/
 .open-next
 .wrangler
+public/_opt

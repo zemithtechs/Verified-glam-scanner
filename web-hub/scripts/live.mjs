@@ -15,6 +15,7 @@ const run = (cmd, args) => {
   const r = spawnSync(cmd, args, { stdio: "inherit", env, shell: true });
   if (r.status !== 0) process.exit(r.status ?? 1);
 };
-if (mode === "build") run("npx", ["opennextjs-cloudflare", "build"]);
-else if (mode === "deploy") { run("npx", ["opennextjs-cloudflare", "build"]); run("npx", ["opennextjs-cloudflare", "deploy"]); }
+const images = () => run("node", ["scripts/optimize-images.mjs"]);
+if (mode === "build") { images(); run("npx", ["opennextjs-cloudflare", "build"]); }
+else if (mode === "deploy") { images(); run("npx", ["opennextjs-cloudflare", "build"]); run("npx", ["opennextjs-cloudflare", "deploy"]); }
 else { console.log("Usage: node scripts/live.mjs build|deploy"); process.exit(2); }
