@@ -2,30 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingShell } from "@/components/SiteChrome";
 import { Container } from "@/components/ui";
-import { LEGACY_APP_URL, SUPPORT_EMAIL } from "@/lib/site-info";
+import { currentProfile } from "@/lib/account";
+import { SUPPORT_EMAIL } from "@/lib/site-info";
+import { DeleteAccountPanel } from "./DeleteAccountPanel";
 
 export const metadata: Metadata = {
   title: "Delete your account",
   description: "Delete your AI Beauty Styling or Verified Glam account and the personal data linked to it.",
   alternates: { canonical: "/delete-account" },
 };
+// Shows the deletion form only to a signed-in visitor.
+export const dynamic = "force-dynamic";
 
-export default function DeleteAccountPage() {
+export default async function DeleteAccountPage() {
+  const profile = await currentProfile().catch(() => null);
   return (
     <MarketingShell>
       <section className="hero-glow border-b border-line">
         <Container className="max-w-3xl py-12 sm:py-16">
           <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">Delete your account</h1>
-          <p className="mt-3 text-lg text-muted">You can permanently delete your account at any time, on the web or in the Android app.</p>
+          <p className="mt-3 text-lg text-muted">You can permanently delete your account at any time, here or in the Android app.</p>
         </Container>
       </section>
-      <Container className="max-w-3xl space-y-6 py-10 sm:py-14 text-[16px] leading-7">
-        <p>Deletion is permanent. It removes your account credentials, profile, stored photos, analysis history, challenges and saved results. Billing records that must be kept for legal or fraud-prevention reasons may be retained only for the period the law requires. Deleting your account is separate from cancelling a subscription.</p>
+      <Container className="max-w-3xl space-y-6 py-10 text-[16px] leading-7 sm:py-14">
+        <p>Deletion is permanent. It removes your account credentials, profile, stored photos, saved results, analysis history, challenges and credits. Billing records that must be kept for legal or fraud-prevention reasons may be retained only for the period the law requires. Deleting your account is separate from cancelling a subscription, so cancel any plan from your account page first if you have one.</p>
 
         <div className="rounded-3xl border border-line bg-white p-6 sm:p-7">
           <h2 className="font-display text-2xl font-semibold text-plum">Delete online</h2>
-          <p className="mt-2 text-muted">Sign in to your account and confirm. Your account, photos and history are removed straight away.</p>
-          <a href={`${LEGACY_APP_URL}/delete-account`} className="mt-5 inline-flex h-12 items-center rounded-xl bg-plum px-6 text-[15px] font-semibold text-white transition-colors hover:bg-ink">Go to account deletion</a>
+          <DeleteAccountPanel signedIn={Boolean(profile)} email={profile?.email ?? null} />
         </div>
 
         <div className="rounded-3xl border border-line bg-white p-6 sm:p-7">

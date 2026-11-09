@@ -1,33 +1,35 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { myCreations, requireProfile } from "@/lib/account";
 import { toolBySlug } from "@/lib/catalog";
+import { CreationActions } from "./CreationActions";
 
-const ITEMS = [
-  ["face-beauty-analysis", "Today"],
-  ["celebrity-look-alike", "Yesterday"],
-  ["facial-symmetry", "Nov 3"],
-  ["attractiveness-test", "Nov 1"],
-  ["beauty-routine-challenge", "Oct 28"],
-  ["skin-analysis", "Oct 25"],
-];
+export const dynamic = "force-dynamic";
 
-export default function Creations() {
+const when = (iso: string) => new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+export default async function Creations() {
+  await requireProfile("/app/creations");
+  const items = await myCreations();
   return (
     <div className="mx-auto max-w-6xl">
       <h1 className="font-display text-3xl font-semibold tracking-tight">My creations</h1>
-      <p className="mt-1 text-muted">Everything you’ve made, saved to your account. Delete any item at any time.</p>
-      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-        {ITEMS.map(([slug, when], i) => (
-          <div key={i} className="group overflow-hidden rounded-2xl border border-line bg-white">
-            <Link href={`/${slug}`} className="relative block aspect-video">
-              <Image src={`/img/results/${slug}.png`} alt={`${toolBySlug(slug)!.name}: complete example result`} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="object-contain" />
-            </Link>
-            <div className="p-3 text-center"><Link href={`/${slug}`} className="text-sm font-semibold">{toolBySlug(slug)!.name}</Link><p className="mt-1 text-xs text-muted">{when}</p></div>
-            <a href={`/img/results/${slug}.png`} download={`${slug}-result.png`} className="flex items-center justify-center gap-2 border-t border-line px-3 py-2.5 text-sm font-semibold text-berry hover:bg-blush"><Download size={15} />Download image</a>
-          </div>
-        ))}
-      </div>
+      <p className="mt-1 text-muted">Results you make while logged in are saved here. We keep your latest 100. Delete any item at any time.</p>
+      {items.length === 0 ? (
+        <div className="mt-8 rounded-2xl border border-dashed border-line bg-white p-10 text-center"><p className="font-semibold">Nothing saved yet</p><p className="mt-1 text-sm text-muted">Make a result with any tool and it will appear here.</p><Link href="/tools" className="mt-4 inline-block rounded-full bg-plum px-5 py-2.5 text-sm font-bold text-white">Browse tools</Link></div>
+      ) : (
+        <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+          {items.map((c) => (
+            <div key={c.id} className="overflow-hidden rounded-2xl border border-line bg-white">
+              <a href={`/api/proxy/creations/${c.id}/image`} target="_blank" rel="noreferrer" className="block">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/api/proxy/creations/${c.id}/image`} alt={`${c.tool_name} result`} loading="lazy" className="aspect-video w-full bg-[#faf9f8] object-contain" />
+              </a>
+              <div className="p-3 text-center"><Link href={`/${c.tool_slug}`} className="text-sm font-semibold hover:text-plum">{toolBySlug(c.tool_slug)?.name ?? c.tool_name}</Link><p className="mt-1 text-xs text-muted">{when(c.created_at)}</p></div>
+              <CreationActions id={c.id} slug={c.tool_slug} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

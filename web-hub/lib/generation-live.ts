@@ -78,7 +78,7 @@ export function liveStatus() {
   return { available: Boolean(env().OPENAI_API_KEY), token: "live", message: "Ready." };
 }
 
-export async function generateLive(request: Request) {
+export async function generateLive(request: Request, options: { skipVisitorLimit?: boolean } = {}) {
   const e = env();
   if (!e.OPENAI_API_KEY) throw new LiveError("The image service is not available right now.", 503);
   if (!e.DB) throw new LiveError("The image service is not available right now.", 503);
@@ -106,9 +106,13 @@ export async function generateLive(request: Request) {
 
   const day = today();
   const hash = await visitorHash(request, e);
-  const refused = await reserve(e.DB, hash, day, intOr(e.FREE_RESULTS_PER_DAY, 2), intOr(e.GLOBAL_RESULTS_PER_DAY, 100));
-  if (refused === "visitor") throw new LiveError("You have used your free results for today. Please come back tomorrow.", 429);
-  if (refused === "global") throw new LiveError("We have reached today's free capacity. Please try again tomorrow.", 429);
+  let reserved = false;
+  if (!options.skipVisitorLimit) {
+    const refused = await reserve(e.DB, hash, day, intOr(e.FREE_RESULTS_PER_DAY, 2), intOr(e.GLOBAL_RESULTS_PER_DAY, 100));
+    if (refused === "visitor") throw new LiveError("You have used your free results for today. Create a free account for more credits, or come back tomorrow.", 429);
+    if (refused === "global") throw new LiveError("We have reached today's free capacity. Log in or create an account to keep going, or try again tomorrow.", 429);
+    reserved = true;
+  }
 
   try {
     const model = e.OPENAI_IMAGE_MODEL?.trim() || DEFAULT_MODEL;
@@ -142,7 +146,7 @@ export async function generateLive(request: Request) {
     const bytes = Uint8Array.from(Buffer.from(b64, "base64"));
     return { bytes, slug };
   } catch (error) {
-    await refund(e.DB, hash, day); // a failed run does not use up the visitor's free result
+    if (reserved) await refund(e.DB, hash, day); // a failed run does not use up the visitor's free result
     if (error instanceof LiveError) throw error;
     if (error instanceof Error && ["AbortError", "TimeoutError"].includes(error.name)) throw new LiveError("Generation was cancelled or timed out. Please try again.", 504);
     throw new LiveError("The image could not be generated. Please retry with a clear photo.", 500);

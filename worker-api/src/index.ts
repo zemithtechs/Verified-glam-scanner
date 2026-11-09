@@ -14,6 +14,8 @@ import { showdown } from "./routes/showdown";
 import { polarCheckout } from "./routes/polar/checkout";
 import { polarPortal } from "./routes/polar/portal";
 import { polarWebhook } from "./routes/polar/webhook";
+import { creations } from "./routes/creations";
+import { generation } from "./routes/generation";
 import { assets } from "./routes/assets";
 import { ads } from "./routes/ads";
 import { authNative } from "./routes/auth-native";
@@ -79,6 +81,8 @@ app.use("/api/showdown/*", requireSession);
 app.use("/api/polar/checkout/*", requireSession);
 app.use("/api/polar/portal/*", requireSession);
 app.use("/api/ads/*", requireSession);
+app.use("/api/creations/*", requireSession);
+app.use("/api/generation/*", requireSession);
 app.use("/api/admin/*", requireSession, requireAdmin);
 
 app.route("/api/profiles", profiles);
@@ -91,6 +95,8 @@ app.route("/api/showdown", showdown);
 app.route("/api/polar/checkout", polarCheckout);
 app.route("/api/polar/portal", polarPortal);
 app.route("/api/ads", ads);
+app.route("/api/creations", creations);
+app.route("/api/generation", generation);
 app.route("/api/admin", admin);
 
 export default {

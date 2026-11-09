@@ -5,7 +5,6 @@ import { PricingPlans } from "@/components/PricingPlans";
 import { PlanCompare } from "@/components/PlanCompare";
 import { Container, SectionHead } from "@/components/ui";
 import { PRICING, money } from "@/lib/pricing";
-import { HANDOFF } from "@/lib/live-mode";
 
 export const metadata: Metadata = {
   title: "Pricing: Free Starter, Pro Plans and Pay As You Go",
@@ -35,7 +34,7 @@ export default function PricingPage() {
 
       <Container className="py-12 sm:py-14">
         <PricingPlans />
-        {HANDOFF ? <p className="mx-auto mt-6 max-w-2xl rounded-xl border border-line bg-white px-5 py-3 text-center text-sm text-muted">Pro and credit packs open soon. Start with the free Starter plan today. Prices in USD.</p> : <p className="mt-6 text-center text-xs text-muted">Prices in USD. Preview values for design review; final prices are set at launch.</p>}
+        <p className="mt-6 text-center text-xs text-muted">Prices in USD. Payments are processed securely by Polar.</p>
       </Container>
 
       <Container className="pb-6" >

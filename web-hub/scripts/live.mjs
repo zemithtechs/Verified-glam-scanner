@@ -8,6 +8,8 @@ const mode = process.argv[2];
 const env = {
   ...process.env,
   NEXT_PUBLIC_APP_MODE: "handoff",
+  // The origin the backend must trust for sign-in requests made by this site.
+  NEXT_PUBLIC_SELF_ORIGIN: "https://aibeautystyling.com",
   // The new domain stays hidden from Google until the SEO cutover. Set SITE_INDEXABLE=true only on cutover day.
   SITE_INDEXABLE: process.env.SITE_INDEXABLE ?? "false",
 };

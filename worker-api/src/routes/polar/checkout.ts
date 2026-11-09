@@ -39,7 +39,7 @@ polarCheckout.post("/", async (c) => {
     return c.json({ error: "POLAR_ACCESS_TOKEN not configured", version: FUNCTION_VERSION }, 503);
   }
 
-  const body = await c.req.json<{ planId?: string; amount?: number }>().catch(() => ({}) as { planId?: string; amount?: number });
+  const body = await c.req.json<{ planId?: string; amount?: number; successUrl?: string }>().catch(() => ({}) as { planId?: string; amount?: number; successUrl?: string });
   const planId = typeof body.planId === "string" ? body.planId.trim() : "";
   if (!VALID_PLANS.has(planId)) {
     return c.json({ error: "Invalid planId", version: FUNCTION_VERSION }, 400);
@@ -55,7 +55,10 @@ polarCheckout.post("/", async (c) => {
     packAmountCents = dollars * 100;
   }
 
-  const successUrl = polarSuccessUrl(env);
+  // The new site may ask Polar to send buyers back to it; only our own sites are accepted.
+  const requestedReturn = typeof body.successUrl === "string" ? body.successUrl : "";
+  const allowedReturn = /^https:\/\/(www\.)?(aibeautystyling\.com|scanner\.verifiedglam\.com)\//.test(requestedReturn) ? requestedReturn : null;
+  const successUrl = allowedReturn ?? polarSuccessUrl(env);
   const cancelUrl = polarCancelUrl(env);
   const productId = productIdForPlan(env, planId);
   const polar = createPolarClient(env);

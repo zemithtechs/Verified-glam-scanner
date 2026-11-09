@@ -461,6 +461,51 @@ export async function deductCredits(db: D1Database, userId: string, featureType:
   throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this analysis.");
 }
 
+/** Balance shown on the AI Beauty Styling site: plan credits plus bought credits. */
+export async function getGenerationBalance(db: D1Database, userId: string) {
+  let profile = await loadProfileCredits(db, userId);
+  profile = await refreshCreditsIfNeeded(db, userId, profile);
+  const plan = profile.credits_balance ?? 0;
+  const purchased = profile.purchased_credits ?? 0;
+  return { total: plan + purchased, planCredits: plan, purchasedCredits: purchased, isPro: Boolean(profile.is_pro), plan: profile.subscription_plan ?? "free" };
+}
+
+/**
+ * Charge one tool run on the AI Beauty Styling site. Unlike the app's analysis tools (free tier limited to one tool),
+ * every tool on the new site can be paid for with any credits: the free allowance, plan credits or bought credits.
+ * Plan/free credits are spent first, then bought credits. Guarded so simultaneous runs cannot overspend.
+ */
+export async function chargeWebGeneration(db: D1Database, userId: string, toolLabel: string): Promise<number> {
+  let profile = await loadProfileCredits(db, userId);
+  await refreshCreditsIfNeeded(db, userId, profile);
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const row = await db
+      .prepare("select credits_balance, purchased_credits from profiles where id = ?")
+      .bind(userId)
+      .first<{ credits_balance: number | null; purchased_credits: number | null }>();
+    const balance = row?.credits_balance ?? 0;
+    const purchased = row?.purchased_credits ?? 0;
+    const fromBalance = Math.min(balance, CREDITS_PER_GENERATION);
+    const fromPurchased = CREDITS_PER_GENERATION - fromBalance;
+    if (fromPurchased > purchased) {
+      throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this result.");
+    }
+    const updated = await db
+      .prepare(
+        `update profiles set credits_balance = credits_balance - ?, purchased_credits = purchased_credits - ?, updated_at = ?
+         where id = ? and credits_balance >= ? and purchased_credits >= ?
+         returning credits_balance, purchased_credits`,
+      )
+      .bind(fromBalance, fromPurchased, new Date().toISOString(), userId, fromBalance, fromPurchased)
+      .first<{ credits_balance: number; purchased_credits: number }>();
+    if (!updated) continue;
+    const remaining = updated.credits_balance + updated.purchased_credits;
+    await logCreditTransaction(db, userId, { amount: -CREDITS_PER_GENERATION, kind: "analysis", description: toolLabel, balanceAfter: remaining });
+    return remaining;
+  }
+  throw new AnalysisError(429, "INSUFFICIENT_CREDITS", "You need 5 credits for this result.");
+}
+
 // --- Free tier: FACE_BEAUTY_ANALYSIS only, gated per-scan by a watched
 // rewarded ad (see lib/reward-tokens.ts) rather than a lifetime counter.
 // Every other feature type still requires is_pro via checkCredits() above —

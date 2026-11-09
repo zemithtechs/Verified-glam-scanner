@@ -41,6 +41,9 @@ export function createAuth(env: Env) {
       // Origin header even for non-browser requests.
       "http://localhost:3100",
       "https://verified-glam-web.komolafephilip.workers.dev",
+      // AI Beauty Styling (the new home of the web app)
+      "https://aibeautystyling.com",
+      "https://www.aibeautystyling.com",
     ],
     emailAndPassword: {
       enabled: true,

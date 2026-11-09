@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import { HANDOFF, appSignUpUrl } from "@/lib/live-mode";
+import { CheckoutButton } from "./CheckoutButton";
 import { PRICING, generationsFor, money, num, paygCredits, perCredit, yearlyPerMonth, yearlySavingsPercent, yearOfMonthly } from "@/lib/pricing";
 
 const card = "relative flex flex-col rounded-3xl border bg-white p-7 sm:p-8";
@@ -20,7 +20,7 @@ function StarterCard() {
       <p className="mt-1 text-sm text-muted">Try the tools before you commit.</p>
       <p className="mt-6 flex items-baseline gap-2"><span className="font-display text-5xl font-semibold text-ink">$0</span><span className="text-sm text-muted">free</span></p>
       <Bullets items={[`${PRICING.starter.credits} free credits to start`, `About ${generationsFor(PRICING.starter.credits)} AI results (${PRICING.creditsPerGeneration} credits each)`, "Free-to-try tools", "Download your results", "Supported by ads"]} />
-      <Link href={HANDOFF ? appSignUpUrl : "/app"} className="mt-8 inline-flex h-12 items-center justify-center rounded-xl border border-plum/25 bg-white px-6 text-[15px] font-semibold text-plum transition-colors hover:bg-blush">Start free</Link>
+      <Link href="/register" className="mt-8 inline-flex h-12 items-center justify-center rounded-xl border border-plum/25 bg-white px-6 text-[15px] font-semibold text-plum transition-colors hover:bg-blush">Start free</Link>
     </section>
   );
 }
@@ -76,14 +76,10 @@ function ProCard() {
         "Cancel anytime",
       ]} />
 
-      {HANDOFF ? (
-        <span role="status" className="mt-8 inline-flex h-12 items-center justify-center rounded-xl bg-blush px-6 text-[15px] font-semibold text-plum">Opening soon</span>
-      ) : (
-        <Link href={`/app/account?plan=${billing}`} className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-plum px-6 text-[15px] font-semibold text-white transition-colors hover:bg-ink">
-          {yearly ? `Start ${PRICING.yearly.trialDays}-day free trial` : `Subscribe for ${money(PRICING.monthly.price)} / month`}<ArrowRight size={17} aria-hidden="true" />
-        </Link>
-      )}
-      <p className="mt-3 text-center text-xs text-muted">{HANDOFF ? "Paid plans open soon." : yearly ? `Then ${money(PRICING.yearly.price)} per year. No payment today.` : "Secure checkout. Renews monthly until cancelled."}</p>
+      <CheckoutButton planId={yearly ? "annual" : "pro_monthly"} className="mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-plum px-6 text-[15px] font-semibold text-white transition-colors hover:bg-ink disabled:opacity-60">
+        {yearly ? `Start ${PRICING.yearly.trialDays}-day free trial` : `Subscribe for ${money(PRICING.monthly.price)} / month`}<ArrowRight size={17} aria-hidden="true" />
+      </CheckoutButton>
+      <p className="mt-3 text-center text-xs text-muted">{yearly ? `Then ${money(PRICING.yearly.price)} per year. No payment today.` : "Secure checkout. Renews monthly until cancelled."}</p>
     </section>
   );
 }
@@ -119,19 +115,10 @@ function PaygCard() {
         "No subscription, no renewal",
       ]} />
 
-      {HANDOFF ? (
-        <>
-          <span role="status" className="mt-8 inline-flex h-12 items-center justify-center rounded-xl bg-blush px-6 text-[15px] font-semibold text-plum">Opening soon</span>
-          <p className="mt-3 text-center text-xs text-muted">Credit packs open soon.</p>
-        </>
-      ) : (
-        <>
-          <Link href={`/app/account?buy=credits&amount=${amount}`} className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-plum/25 bg-white px-6 text-[15px] font-semibold text-plum transition-colors hover:bg-blush">
-            Buy {num(credits)} credits for {money(amount)}<ArrowRight size={17} aria-hidden="true" />
-          </Link>
-          <p className="mt-3 text-center text-xs text-muted">Pay once at checkout. No account upgrade needed.</p>
-        </>
-      )}
+      <CheckoutButton planId="payg" amount={amount} className="mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-plum/25 bg-white px-6 text-[15px] font-semibold text-plum transition-colors hover:bg-blush disabled:opacity-60">
+        Buy {num(credits)} credits for {money(amount)}<ArrowRight size={17} aria-hidden="true" />
+      </CheckoutButton>
+      <p className="mt-3 text-center text-xs text-muted">Pay once at checkout. No subscription.</p>
     </section>
   );
 }

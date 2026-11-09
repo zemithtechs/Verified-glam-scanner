@@ -17,6 +17,8 @@
 	],
 	"vars": {
 		"OPENAI_IMAGE_MODEL": "gpt-image-2.5-sunburst",
+		// The shared account backend (sign-in, credits, saved results, payments).
+		"WORKER_API_URL": "https://verified-glam-api.komolafephilip.workers.dev",
 		// Free results per visitor per day, and the most free results the whole site will give per day.
 		"FREE_RESULTS_PER_DAY": "2",
 		"GLOBAL_RESULTS_PER_DAY": "100"

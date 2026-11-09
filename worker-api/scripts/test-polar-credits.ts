@@ -15,6 +15,8 @@ import {
   checkAnalysisAccess,
   deductCredits,
   grantPurchasedCredits,
+  chargeWebGeneration,
+  getGenerationBalance,
 } from "../src/lib/credits";
 
 const SECRET = "polar_whs_localtestsecret_0123456789abcdef";
@@ -156,6 +158,29 @@ console.log("\nCancelling");
   const p = (await profile(u))!;
   check("ending a subscription removes Pro and plan credits", p.is_pro === 0 && p.credits_balance === 0, JSON.stringify(p));
   check("but credits they bought are kept", p.purchased_credits === 200, `got ${p.purchased_credits}`);
+}
+
+console.log("\nCharging a tool run on the new site");
+{
+  const u = await newUser("webfree");
+  const b0 = await getGenerationBalance(DB, u);
+  check("a new free account has 10 credits", b0.total === 10, JSON.stringify(b0));
+  const r1 = await chargeWebGeneration(DB, u, "Hairstyle Changer");
+  const r2 = await chargeWebGeneration(DB, u, "Hairstyle Changer");
+  check("free credits pay for 2 results on any tool", r1 === 5 && r2 === 0, `${r1}, ${r2}`);
+  let blocked = false; try { await chargeWebGeneration(DB, u, "Hairstyle Changer"); } catch { blocked = true; }
+  check("a third result is refused when credits run out", blocked);
+
+  const mix = await newUser("webmix");
+  await DB.prepare("update profiles set credits_balance = 3, purchased_credits = 10 where id = ?").bind(mix).run();
+  const left = await chargeWebGeneration(DB, mix, "Cartoon Yourself");
+  const m = (await profile(mix))!;
+  check("plan credits are used first, then bought credits", m.credits_balance === 0 && m.purchased_credits === 8 && left === 8, JSON.stringify(m));
+
+  const racer2 = await newUser("webrace");
+  await DB.prepare("update profiles set credits_balance = 5 where id = ?").bind(racer2).run();
+  const res = await Promise.allSettled([chargeWebGeneration(DB, racer2, "x"), chargeWebGeneration(DB, racer2, "x")]);
+  check("two simultaneous results cannot spend the same 5 credits", res.filter((r) => r.status === "fulfilled").length === 1);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);
