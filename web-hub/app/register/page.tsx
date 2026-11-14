@@ -3,8 +3,9 @@ import Link from "next/link";
 import { AuthCard } from "@/components/AuthCard";
 import { RegisterForm } from "./RegisterForm";
 import { safeNext } from "@/lib/account";
+import { privateMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = { title: "Create your free account", robots: { index: false, follow: false } };
+export const metadata: Metadata = privateMetadata("Create your free account", "Sign up for a free AI Beauty Styling account and get 10 free credits to try the tools. No card needed. For adults aged 18 and over.");
 
 export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ redirect?: string }> }) {
   const { redirect } = await searchParams;

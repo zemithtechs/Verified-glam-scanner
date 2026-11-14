@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthCard } from "@/components/AuthCard";
 import { ForgotForm } from "./ForgotForm";
+import { privateMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = { title: "Reset your password", robots: { index: false, follow: false } };
+export const metadata: Metadata = privateMetadata("Reset your password", "Forgot your password? Enter your account email and we will send a link to choose a new AI Beauty Styling password.");
 
 export default function ForgotPasswordPage() {
   return (

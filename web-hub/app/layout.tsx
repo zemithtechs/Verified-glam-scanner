@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Outfit, Fraunces } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/catalog";
-import { SITE_INDEXABLE } from "@/lib/seo";
+import { publicRobots } from "@/lib/seo";
+import { OG_LOCALE } from "@/lib/seo-meta";
 
 const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -10,10 +11,12 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], wei
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: `${SITE.name} — Free AI Beauty Tools`, template: `%s | ${SITE.name}` },
-  description: "Free AI beauty tools: face analysis, skin analysis, hairstyle changer, makeup try-on, virtual clothes try-on and more. Upload a selfie and see results in seconds.",
+  description: "AI beauty tools for your photo: face analysis, skin analysis, hairstyle changer, makeup try-on and virtual clothes try-on. Try free with a selfie.",
+  openGraph: { siteName: SITE.name, locale: OG_LOCALE, type: "website" },
+  twitter: { card: "summary_large_image" },
   icons: { icon: "/img/favicon.png" },
-  // Local previews stay private until indexing is explicitly enabled for launch.
-  robots: { index: SITE_INDEXABLE, follow: SITE_INDEXABLE },
+  // Every public page derives robots from the single SITE_INDEXABLE switch (lib/seo.ts).
+  robots: publicRobots(),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

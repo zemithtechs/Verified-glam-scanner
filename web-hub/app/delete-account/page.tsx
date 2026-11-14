@@ -4,13 +4,14 @@ import { MarketingShell } from "@/components/SiteChrome";
 import { Container } from "@/components/ui";
 import { currentProfile } from "@/lib/account";
 import { SUPPORT_EMAIL } from "@/lib/site-info";
+import { buildMetadata } from "@/lib/seo-meta";
 import { DeleteAccountPanel } from "./DeleteAccountPanel";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Delete your account",
-  description: "Delete your AI Beauty Styling or Verified Glam account and the personal data linked to it.",
-  alternates: { canonical: "/delete-account" },
-};
+  description: "Delete your AI Beauty Styling or Verified Glam account and the personal data linked to it. Learn what is removed and how to delete online or in the app.",
+  path: "/delete-account",
+});
 // Shows the deletion form only to a signed-in visitor.
 export const dynamic = "force-dynamic";
 

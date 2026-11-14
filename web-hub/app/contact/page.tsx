@@ -4,12 +4,13 @@ import Link from "next/link";
 import { MarketingShell } from "@/components/SiteChrome";
 import { Container } from "@/components/ui";
 import { SUPPORT_EMAIL } from "@/lib/site-info";
+import { buildMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with AI Beauty Styling for support, feedback, privacy requests or partnership questions.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Contact AI Beauty Styling",
+  description: "Get in touch with AI Beauty Styling for support, feedback, privacy requests or partnership questions. Write to support@verifiedglam.com.",
+  path: "/contact",
+});
 
 const TOPICS = [
   { icon: Mail, title: "Support and feedback", text: "Questions about a tool, a result, your account or your subscription.", subject: "Support request" },

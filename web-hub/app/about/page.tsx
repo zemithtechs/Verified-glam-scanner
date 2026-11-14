@@ -5,12 +5,15 @@ import { MarketingShell } from "@/components/SiteChrome";
 import { Container, SectionHead } from "@/components/ui";
 import { COUNTS } from "@/lib/catalog";
 import { GOOGLE_PLAY_URL, SUPPORT_EMAIL } from "@/lib/site-info";
+import { JsonLd } from "@/components/JsonLd";
+import { organizationSchema } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "About AI Beauty Styling",
   description: "AI Beauty Styling turns a single photo into beauty, style and photo insights. Learn how our tools work, how we handle your photos and who is behind them.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 const PRINCIPLES = [
   ["Your photo stays central", "Reports keep your image and the visual context together, so a result is easier to understand than a number on its own."],
@@ -21,6 +24,7 @@ const PRINCIPLES = [
 export default function AboutPage() {
   return (
     <MarketingShell>
+      <JsonLd data={organizationSchema()} />
       <section className="hero-glow border-b border-line">
         <Container className="max-w-4xl py-14 sm:py-20">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-berry">About us</p>

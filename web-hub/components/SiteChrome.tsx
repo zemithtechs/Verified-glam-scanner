@@ -19,15 +19,15 @@ export function SiteFooter({ className = "mt-24" }: { className?: string }) {
     <footer className={`${className} bg-ink text-white/65`}>
       <div className="mx-auto grid max-w-[1450px] grid-cols-2 gap-x-7 gap-y-10 px-7 py-12 text-sm sm:px-12 lg:grid-cols-5">
         <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Popular tools</h2>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Popular tools</p>
           <ul className="space-y-2.5">{popular.map((tool) => <li key={tool.slug}><Link href={`/${tool.slug}`} className={footerLink}>{tool.name}</Link></li>)}</ul>
         </div>
         <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Explore all tools</h2>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Explore all tools</p>
           <ul className="space-y-2.5">{CATEGORIES.map((category) => <li key={category.id}><Link href={`/category/${category.id}`} className={footerLink}>{category.name}</Link></li>)}</ul>
         </div>
         <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Your workspace</h2>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Your workspace</p>
           <ul className="space-y-2.5">
             <li><Link href={appHref("/app")} className={footerLink}>Dashboard</Link></li>
             <li><Link href={appHref("/app/creations")} className={footerLink}>My creations</Link></li>
@@ -35,7 +35,7 @@ export function SiteFooter({ className = "mt-24" }: { className?: string }) {
           </ul>
         </div>
         <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Support</h2>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">Support</p>
           <ul className="space-y-2.5">
             <li><Link href="/blog" className={footerLink}>Blog</Link></li>
             <li><Link href="/contact" className={footerLink}>Contact</Link></li>
@@ -43,7 +43,7 @@ export function SiteFooter({ className = "mt-24" }: { className?: string }) {
           </ul>
         </div>
         <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">More information</h2>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white/80">More information</p>
           <ul className="space-y-2.5">
             <li><Link href="/privacy" className={footerLink}>Privacy policy</Link></li>
             <li><Link href="/terms" className={footerLink}>Terms of use</Link></li>

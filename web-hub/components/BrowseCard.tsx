@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Tool } from "@/lib/catalog";
+import { cardAlt } from "@/lib/image-alt";
 import styles from "./browse.module.css";
 
 export function BrowseCard({ tool, featured = false }: { tool: Tool; featured?: boolean }) {
@@ -10,7 +11,7 @@ export function BrowseCard({ tool, featured = false }: { tool: Tool; featured?: 
       <span className={styles.cardImage}>
         <Image
           src={`/img/results/${tool.slug}.png`}
-          alt={`Illustrative result for ${tool.name}`}
+          alt={cardAlt(tool)}
           fill
           sizes={featured ? "(max-width: 640px) 82vw, (max-width: 1000px) 46vw, 30vw" : "(max-width: 640px) 48vw, (max-width: 1000px) 30vw, 23vw"}
           className={styles.image}

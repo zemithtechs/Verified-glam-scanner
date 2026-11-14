@@ -3,11 +3,15 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BookOpen, Camera, Check, ChevronDown, Download, ScanFace } from "lucide-react";
 import { ToolWorkspace } from "@/components/ToolWorkspace";
 import { ToolStepIcon } from "@/components/ToolStepIcon";
+import { JsonLd } from "@/components/JsonLd";
 import { isBrowsableTool, type Category, type Tool } from "@/lib/catalog";
 import { getToolPageContent } from "@/lib/tool-page-content";
 import { GENERATION_SPECS } from "@/lib/generation-specs";
 import { getToolUseCases } from "@/lib/tool-use-cases";
 import { getRelatedBlogPosts } from "@/lib/blog-posts";
+import { cardAlt, featureAlt, resultAlt } from "@/lib/image-alt";
+import { breadcrumbSchema, faqSchema, howToSchema, webApplicationSchema } from "@/lib/schema";
+import { getToolImages } from "@/lib/tool-images";
 import styles from "./tool-content.module.css";
 
 const sectionClass = "tool-section bg-white px-5 py-12 sm:px-10 sm:py-16 xl:px-16";
@@ -30,15 +34,18 @@ export function ToolLandingPage({ tool, category, related }: { tool: Tool; categ
   const isFaceReport = tool.slug === "face-beauty-analysis";
   // Only render illustrations that exist. Some tools have not received a full
   // feature-image set yet; a broken image would misrepresent the result.
-  const featureCount = tool.slug === "old-photo-restoration" ? 0 : tool.slug === "cartoon-yourself" ? 1 : 3;
-  const featureImages = isFaceReport ? content.visuals : Array.from({ length: featureCount }, (_, index) => `/img/results/${tool.slug}-feature-${index + 1}.png`);
-  const galleryImages = [...new Set([content.visuals[0], ...featureImages])];
+  const { featureImages, galleryImages } = getToolImages(tool, content);
   const stories = content.stories.slice(0, featureImages.length);
+  const alts = stories.map((story) => featureAlt(tool, story));
+  const galleryAlts = galleryImages.map((src) => { const index = featureImages.indexOf(src); return index >= 0 && alts[index] ? alts[index] : resultAlt(tool); });
 
   return (
     <div className="tool-landing space-y-3">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: content.faqs.map(([q, answer]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: answer } })) }).replace(/</g, "\u003c") }} />
-      <ToolWorkspace key={tool.slug} tool={tool} title={content.heroTitle} lead={content.heroLead} images={galleryImages} />
+      <JsonLd data={webApplicationSchema(tool, content, galleryImages[0])} />
+      <JsonLd data={howToSchema(tool, content)} />
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: category.name, path: `/category/${category.id}` }, { name: tool.name, path: `/${tool.slug}` }])} />
+      <JsonLd data={faqSchema(content.faqs)} />
+      <ToolWorkspace key={tool.slug} tool={tool} title={content.heroTitle} lead={content.heroLead} images={galleryImages} alts={galleryAlts} />
 
       <section id="how-it-works" className={sectionClass}>
         <h2 className={headingClass}>{content.howToHeading ?? `How to use ${tool.name}`}</h2>
@@ -53,7 +60,7 @@ export function ToolLandingPage({ tool, category, related }: { tool: Tool; categ
         <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-7 text-muted">{content.featuresIntro ?? "Different photos, different possibilities. Take a closer look at the details in each example."}</p>
         <div className="mx-auto mt-12 max-w-[1220px] space-y-12 sm:space-y-16">
           {stories.map((story, index) => <article key={story.title} className="grid items-center gap-7 md:grid-cols-[1.1fr_1fr] md:gap-10 xl:gap-16">
-            <a href={featureImages[index]} download className={`tool-example-link relative block aspect-video w-full overflow-hidden rounded-lg border border-line bg-[#faf9f8] ${index % 2 ? "md:order-2" : ""}`} aria-label={`Download ${tool.name} example: ${story.title}`}><Image src={featureImages[index]} alt={`${story.title} — complete ${tool.name} example`} fill sizes="(min-width: 1440px) 620px, (min-width: 768px) 46vw, 100vw" className="object-contain" /><span className="tool-image-download absolute bottom-3 right-3 grid h-10 w-10 place-items-center rounded-full border border-line bg-white/95 text-plum shadow-sm" aria-hidden="true"><Download size={17} /></span></a>
+            <a href={featureImages[index]} download className={`tool-example-link relative block aspect-video w-full overflow-hidden rounded-lg border border-line bg-[#faf9f8] ${index % 2 ? "md:order-2" : ""}`} aria-label={`Download ${tool.name} example: ${story.title}`}><Image src={featureImages[index]} alt={alts[index]} fill sizes="(min-width: 1440px) 620px, (min-width: 768px) 46vw, 100vw" className="object-contain" /><span className="tool-image-download absolute bottom-3 right-3 grid h-10 w-10 place-items-center rounded-full border border-line bg-white/95 text-plum shadow-sm" aria-hidden="true"><Download size={17} /></span></a>
             <div className={index % 2 ? "md:order-1" : ""}>
               <h3 className="max-w-lg text-[23px] font-semibold tracking-[-0.02em] leading-[1.3] text-ink sm:text-[26px]">{story.title}</h3>
               <p className="mt-4 text-[15px] leading-7 text-muted">{story.body}</p>
@@ -74,14 +81,14 @@ export function ToolLandingPage({ tool, category, related }: { tool: Tool; categ
       <section id="photo-guidance" className={sectionClass}>
         <div className="mx-auto grid max-w-[1220px] overflow-hidden rounded-xl border border-line bg-blush/50 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="p-7 sm:p-10 lg:p-12"><p className="text-xs font-bold uppercase tracking-[0.16em] text-plum">Before you try</p><h2 className="mt-3 text-[26px] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[32px]">Prepare your photo for {tool.name}</h2><div className="mt-8 space-y-7"><div className="flex gap-4"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-plum"><Camera size={20} aria-hidden="true" /></span><div><h3 className="font-semibold text-ink">Choose the source</h3><p className="mt-2 text-sm leading-7 text-muted">{content.photoTip}</p></div></div><div className="flex gap-4"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-plum"><ScanFace size={20} aria-hidden="true" /></span><div><h3 className="font-semibold text-ink">Know what the preview means</h3><p className="mt-2 text-sm leading-7 text-muted">{content.expectation}</p></div></div></div></div>
-          <div className="relative min-h-[280px] bg-[#f8f5f5] sm:min-h-[380px]"><Image src={content.visuals[0]} alt={`Illustrative ${tool.name} output layout`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain" /></div>
+          <div className="relative min-h-[280px] bg-[#f8f5f5] sm:min-h-[380px]"><Image src={content.visuals[0]} alt={`The finished ${tool.name} image as delivered, showing ${(stories[0]?.title ?? tool.name).toLowerCase()}`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain" /></div>
         </div>
       </section>
 
       <section className={sectionClass}>
         <h2 className={headingClass}>More tools to try</h2>
         <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {related.filter(isBrowsableTool).slice(0, 6).map(item => <Link key={item.slug} href={`/${item.slug}`} className="tool-related-card overflow-hidden rounded-lg border border-line bg-white"><div className="relative aspect-video bg-[#faf9f8]"><Image src={`/img/results/${item.slug}.png`} alt={`${item.name} result example`} fill sizes="(min-width: 1440px) 460px, (min-width: 1024px) 31vw, (min-width: 640px) 45vw, 100vw" className="object-contain" /></div><div className="flex items-center justify-between gap-3 px-5 py-4"><h3 className="text-[15px] font-semibold text-ink">{item.name}</h3><ArrowUpRight size={17} className="shrink-0 text-plum" aria-hidden="true" /></div></Link>)}
+          {related.filter(isBrowsableTool).slice(0, 6).map(item => <Link key={item.slug} href={`/${item.slug}`} className="tool-related-card overflow-hidden rounded-lg border border-line bg-white"><div className="relative aspect-video bg-[#faf9f8]"><Image src={`/img/results/${item.slug}.png`} alt={cardAlt(item)} fill sizes="(min-width: 1440px) 460px, (min-width: 1024px) 31vw, (min-width: 640px) 45vw, 100vw" className="object-contain" /></div><div className="flex items-center justify-between gap-3 px-5 py-4"><h3 className="text-[15px] font-semibold text-ink">{item.name}</h3><ArrowUpRight size={17} className="shrink-0 text-plum" aria-hidden="true" /></div></Link>)}
         </div>
         <div className="mt-8 text-center"><Link href="/tools" className="tool-text-link inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-plum">Browse all tools<ArrowRight size={16} aria-hidden="true" /></Link></div>
       </section>

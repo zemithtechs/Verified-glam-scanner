@@ -4,6 +4,7 @@ import { Megaphone } from "lucide-react";
 import { type Category, type Tool } from "@/lib/catalog";
 import { CategoryGlyph, Glyph, IconTile } from "./icons";
 import { HANDOFF } from "@/lib/live-mode";
+import { cardAlt } from "@/lib/image-alt";
 
 const LEGACY_GLYPH: Record<Category["icon"], string> = { scan: "c-face", palette: "c-color", sparkles: "c-skin", scissors: "c-hair", brush: "c-makeup", shirt: "c-fashion", smile: "c-fun", image: "c-photo" };
 
@@ -47,7 +48,7 @@ export function ToolCard({ tool }: { tool: Tool; base?: string }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-line/70 bg-white shadow-sm transition hover:border-berry/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-berry"
     >
       <div className="relative aspect-video bg-white">
-        <NextImage src={`/img/results/${tool.slug}.png`} alt={`${tool.name}: complete example result`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-contain" />
+        <NextImage src={`/img/results/${tool.slug}.png`} alt={cardAlt(tool)} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-contain" />
       </div>
       <div className="flex flex-1 items-center justify-center px-3 py-4 text-center">
         <h3 className="text-[16px] font-semibold leading-snug text-ink sm:text-lg">{tool.name}</h3>

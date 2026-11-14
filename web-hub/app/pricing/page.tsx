@@ -5,11 +5,15 @@ import { PricingPlans } from "@/components/PricingPlans";
 import { PlanCompare } from "@/components/PlanCompare";
 import { Container, SectionHead } from "@/components/ui";
 import { PRICING, money } from "@/lib/pricing";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema, faqSchema, pricingSchema } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
-  title: "Pricing: Free Starter, Pro Plans and Pay As You Go",
-  description: `Start free, go Pro for ${money(PRICING.monthly.price)} a month or ${money(PRICING.yearly.price)} a year with a ${PRICING.yearly.trialDays}-day free trial, or buy credits once with pay as you go.`,
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Pricing: Free, Pro and Pay As You Go",
+  description: `Start free with ${PRICING.starter.credits} credits. Pro is ${money(PRICING.monthly.price)} a month or ${money(PRICING.yearly.price)} a year with a ${PRICING.yearly.trialDays}-day trial, or buy credits once. Compare plans.`,
+  path: "/pricing",
+});
 
 const FAQ: [string, string][] = [
   ["What is a credit?", `A credit pays for AI results. One AI result costs ${PRICING.creditsPerGeneration} credits. You can see exactly how many credits a purchase gives you before you pay.`],
@@ -24,6 +28,9 @@ const FAQ: [string, string][] = [
 export default function PricingPage() {
   return (
     <MarketingShell>
+      <JsonLd data={pricingSchema()} />
+      <JsonLd data={faqSchema(FAQ)} />
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <section className="hero-glow border-b border-line">
         <Container className="py-14 text-center sm:py-16">
           <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">Simple pricing</h1>

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { GLYPHS, Glyph, IconTile } from "@/components/icons";
 import { HANDOFF } from "@/lib/live-mode";
-export const metadata = { robots: { index: false } };
+export const metadata = { title: "Icon sheet", robots: { index: false, follow: false } };
 export default function Sheet() {
   if (HANDOFF) notFound(); // design-review page, not part of the public site
   return <div style={{ padding: 24, background: "#fff" }}><div style={{ display: "grid", gridTemplateColumns: "repeat(10, 1fr)", gap: 16 }}>
