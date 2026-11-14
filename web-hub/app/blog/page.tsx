@@ -4,15 +4,21 @@ import { ArrowUpRight, BookOpen, ChevronRight } from "lucide-react";
 import { MarketingShell } from "@/components/SiteChrome";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { categoryById } from "@/lib/catalog";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
-  title: "Photo & Beauty Guides",
-  description: "Original, practical guides to face reports, color palettes, portrait editing, virtual try-ons and photo restoration.",
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Photo and Beauty Guides",
+  description: "Original, practical guides to face reports, color palettes, portrait editing, virtual try-ons and photo restoration from the AI Beauty Styling team.",
+  path: "/blog",
+});
 
 export default function BlogPage() {
   return (
     <MarketingShell>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Guides", path: "/blog" }])} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Blog", name: "AI Beauty Styling guides", url: "https://aibeautystyling.com/blog", blogPost: BLOG_POSTS.map((post) => ({ "@type": "BlogPosting", headline: post.title, url: `https://aibeautystyling.com/blog/${post.slug}`, datePublished: post.published, dateModified: post.updated })) }} />
       <div className="bg-[radial-gradient(ellipse_at_50%_100%,#f8dce8,transparent_68%)] px-5 pb-16 pt-12 text-center sm:pt-20">
         <p className="text-xs font-extrabold uppercase tracking-[.17em] text-berry">The photo guide</p>
         <h1 className="mx-auto mt-4 max-w-4xl font-sans text-4xl font-extrabold tracking-[-.06em] text-ink sm:text-6xl">Ideas worth trying on your own photo</h1>
