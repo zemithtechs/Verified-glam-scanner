@@ -4,7 +4,7 @@
 //
 // Only files listed in scripts/image-manifest.json are sent (made by build-image-manifest.mjs), and files already
 // in the bucket with the same size are skipped, so reruns only send what is missing.
-// Bucket: ai-beauty-styling-images. Credentials (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID) come from web-hub/.env.
+// Bucket: ai-beauty-styling-images. Credentials (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID) come from web-hub/.env.cloudflare.
 // Object keys mirror the site paths: img/<file> for originals, _opt/<file> for the WebP versions, posts/<slug>/<file> for blog pictures (always uploaded).
 import { readdir, readFile, stat } from "node:fs/promises";
 import { readFileSync } from "node:fs";
@@ -20,7 +20,7 @@ const CONCURRENCY = 16;
 
 // Read web-hub/.env without printing anything from it.
 try {
-  for (const line of readFileSync(path.join(root, ".env"), "utf8").split(/\r?\n/)) {
+  for (const line of readFileSync(path.join(root, ".env.cloudflare"), "utf8").split(/\r?\n/)) {
     const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
     if (m && !(m[1] in process.env)) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
   }
