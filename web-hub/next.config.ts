@@ -6,8 +6,9 @@ const LEGACY_APP_URL = "https://scanner.verifiedglam.com";
 const nextConfig: NextConfig = {
   // Hide the floating Next.js dev badge (bottom-left) in the local preview.
   devIndicators: false,
-  // Deployed build only: use the pre-built static WebP files instead of resizing inside the Worker.
-  ...(HANDOFF ? { images: { loader: "custom" as const, loaderFile: "./lib/image-loader.ts", deviceSizes: [384, 768, 1280, 1920], imageSizes: [96, 256] } } : {}),
+  // All modes: serve the pre-built WebP files from R2 (see lib/image-loader.ts) instead of resizing in the server.
+  // A custom loader needs no remotePatterns.
+  images: { loader: "custom", loaderFile: "./lib/image-loader.ts", deviceSizes: [384, 768, 1280, 1920], imageSizes: [96, 256] },
   // Keep local Windows builds stable while prerendering the full 48-tool catalog.
   experimental: {
     cpus: 1,

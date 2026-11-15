@@ -5,7 +5,7 @@ import path from 'node:path';
 const root = process.cwd();
 const catalog = await readFile(path.join(root, 'lib/catalog.ts'), 'utf8');
 const slugs = [...catalog.matchAll(/slug: "([^"]+)"/g)].map(match => match[1]);
-const dir = path.join(root, 'public/img/results');
+const dir = path.join(root, 'media/img/results');
 const files = (await readdir(dir)).filter(name => name.endsWith('.png'));
 const errors = [];
 for (const slug of slugs) if (!files.includes(`${slug}.png`)) errors.push(`Missing ${slug}`);
@@ -23,7 +23,7 @@ const base = process.argv[2];
 if (base) {
   for (let i = 0; i < files.length; i += 6) {
     await Promise.all(files.slice(i, i + 6).map(async file => {
-      const response = await fetch(`${base}/img/results/${file}`, { method: 'HEAD' });
+      const response = await fetch(`${process.env.IMAGE_BASE ?? "https://images.aibeautystyling.com"}/img/results/${file}`, { method: 'HEAD' });
       if (!response.ok || !response.headers.get('content-type')?.includes('image/png')) errors.push(`Image HTTP failure ${response.status}: ${file}`);
     }));
   }

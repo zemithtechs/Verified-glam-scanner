@@ -8,3 +8,10 @@ tsconfig.tsbuildinfo
 .open-next
 .wrangler
 public/_opt
+
+# Source pictures and generated WebP files (uploaded to R2, never bundled in the Worker)
+media/
+
+# Site pictures live in R2 (media/); only the favicon stays in public/
+public/img/*
+!public/img/favicon.png

@@ -41,7 +41,7 @@ for (const item of selected) {
     assert.equal(page.status, 200, "Tool page failed.");
     const html = await page.text();
     assert.ok(html.includes("tool-workspace") && html.includes(item.slug), "Tool workspace missing.");
-    const template = await fetch(`${base}/img/results/${item.slug}.png`);
+    const template = await fetch(`${process.env.IMAGE_BASE ?? "https://images.aibeautystyling.com"}/img/results/${item.slug}.png`);
     assert.equal(template.status, 200, "Main result template missing.");
     const templateBytes = Buffer.from(await template.arrayBuffer());
     assert.equal(templateBytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", "Invalid result template PNG.");

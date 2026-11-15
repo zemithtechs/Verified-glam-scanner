@@ -32,7 +32,7 @@ if (live) {
   assert.ok(service.available, 'Live test requires the locally configured API key.');
   const body = new FormData();
   body.set('tool', 'ai-hair-color'); body.set('consent', 'yes'); body.set('option', 'Copper');
-  body.append('image', new Blob([await readFile('public/img/samples/sample-1.png')], { type: 'image/png' }), 'sample-1.png');
+  body.append('image', new Blob([await readFile('media/img/samples/sample-1.png')], { type: 'image/png' }), 'sample-1.png');
   const started = Date.now();
   const response = await fetch(`${base}/api/generate`, { method: 'POST', headers: { Origin: base, 'x-local-generation': token }, body, signal: AbortSignal.timeout(290000) });
   if (!response.ok) throw new Error(`Live generation ${response.status}: ${await response.text()}`);

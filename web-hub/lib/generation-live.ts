@@ -1,5 +1,6 @@
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { IMAGE_BASE, imageUrl } from "./image-base";
 import { buildGenerationPrompt, GENERATION_SPECS } from "./generation-specs";
 
 /**
@@ -100,8 +101,12 @@ export async function generateLive(request: Request, options: { skipVisitorLimit
 
   // Prepare everything that can fail for free (decoding, the layout reference) before spending an allowance.
   const images = await Promise.all((inputs as File[]).map((file) => normalized(file, e)));
-  const refResponse = await e.ASSETS.fetch(new Request(new URL(`/img/results/${slug}.png`, request.url)));
-  if (!refResponse.ok) throw new LiveError("This tool's visual template is missing. Please try another tool.", 503);
+  // The layout reference lives with the other pictures in R2 (IMAGE_BASE). With IMAGE_BASE empty it falls back to the site's own files.
+  const refPath = `/img/results/${slug}.png`;
+  let refResponse: Response;
+  try { refResponse = IMAGE_BASE ? await fetch(imageUrl(refPath)) : await e.ASSETS.fetch(new Request(new URL(refPath, request.url))); }
+  catch (error) { console.error("Template fetch failed", refPath, error); throw new LiveError("This tool's visual template could not be loaded. Please try again in a moment.", 503); }
+  if (!refResponse.ok) { console.error("Template fetch failed", refPath, refResponse.status); throw new LiveError("This tool's visual template is missing. Please try another tool.", 503); }
   const reference = new Uint8Array(await refResponse.arrayBuffer());
 
   const day = today();

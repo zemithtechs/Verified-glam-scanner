@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Download, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck, Wand2, X } from "lucide-react";
 import { TOOLS } from "@/lib/catalog";
 import { HANDOFF } from "@/lib/live-mode";
+import { imageUrl } from "@/lib/image-base";
 import { GENERATION_SPECS, samplePathsFor } from "@/lib/generation-specs";
 type Selection = { file: File; url: string; sample?: string };
 type Service = { available: boolean; token?: string; message: string };
@@ -14,7 +15,7 @@ function PhotoInput({ label, value, disabled, samples, onPick, onError }: { labe
   const [loading, setLoading] = useState("");
   async function pickSample(src: string) {
     setLoading(src);
-    try { const response = await fetch(src); if (!response.ok) throw new Error(); const blob = await response.blob(); onPick(new File([blob], src.split("/").pop()!, { type: "image/png" }), src); }
+    try { const response = await fetch(imageUrl(src)); if (!response.ok) throw new Error(); const blob = await response.blob(); onPick(new File([blob], src.split("/").pop()!, { type: "image/png" }), src); }
     catch { onError("This sample could not be loaded. Try another or upload a photo."); }
     finally { setLoading(""); }
   }
@@ -27,7 +28,7 @@ function PhotoInput({ label, value, disabled, samples, onPick, onError }: { labe
       {value ? <img src={value.url} alt={"Selected " + label.toLowerCase()} className="h-48 w-full object-contain" /> : <span className="m-auto p-5"><ImagePlus size={28} strokeWidth={1.6} className="mx-auto text-plum" /><span className="mt-3 block text-sm font-semibold text-ink">Upload image</span><span className="mt-1 block text-xs text-muted">or drop a photo here</span></span>}
     </button>
     <input ref={input} type="file" accept="image/jpeg,image/png,image/webp" hidden disabled={disabled} onChange={event => { const file = event.target.files?.[0]; if (file) onPick(file); event.target.value = ""; }} />
-    {samples.length > 0 && <div className="mt-4"><p className="mb-2 text-xs font-medium text-muted">Try a sample</p><div className="flex gap-2">{samples.map((src, index) => <button key={src} type="button" disabled={disabled || Boolean(loading)} onClick={() => pickSample(src)} aria-label={"Use sample " + (index + 1) + " for " + label.toLowerCase()} aria-pressed={value?.sample === src} className={"relative h-[68px] w-[54px] overflow-hidden rounded-md border-2 transition hover:border-plum disabled:opacity-60 " + (value?.sample === src ? "border-plum ring-2 ring-plum/15 ring-offset-2" : "border-transparent")}><img src={src} alt="" className="h-full w-full object-cover" />{loading === src && <span className="absolute inset-0 grid place-items-center bg-white/70"><LoaderCircle className="animate-spin text-plum" size={18} /></span>}</button>)}</div></div>}
+    {samples.length > 0 && <div className="mt-4"><p className="mb-2 text-xs font-medium text-muted">Try a sample</p><div className="flex gap-2">{samples.map((src, index) => <button key={src} type="button" disabled={disabled || Boolean(loading)} onClick={() => pickSample(src)} aria-label={"Use sample " + (index + 1) + " for " + label.toLowerCase()} aria-pressed={value?.sample === src} className={"relative h-[68px] w-[54px] overflow-hidden rounded-md border-2 transition hover:border-plum disabled:opacity-60 " + (value?.sample === src ? "border-plum ring-2 ring-plum/15 ring-offset-2" : "border-transparent")}><img src={imageUrl(src)} alt="" className="h-full w-full object-cover" />{loading === src && <span className="absolute inset-0 grid place-items-center bg-white/70"><LoaderCircle className="animate-spin text-plum" size={18} /></span>}</button>)}</div></div>}
   </div>;
 }
 export function UploadDemo({ toolName, toolSlug, exampleSrc, onWorkspaceChange }: { toolName: string; toolSlug?: string; credits: number; compact?: boolean; exampleSrc?: string; onWorkspaceChange: (state: WorkspaceState) => void }) {
@@ -89,7 +90,7 @@ export function UploadDemo({ toolName, toolSlug, exampleSrc, onWorkspaceChange }
     {service && !service.available && <p role="status" className="rounded-md border border-line bg-cream p-3 text-xs leading-5 text-muted">{service.message}</p>}
     {!service && <p role="status" className="text-xs text-muted">{HANDOFF ? "Getting ready…" : "Checking local generation service…"}</p>}
     {photos.some(Boolean) && <button type="button" disabled={busy} onClick={reset} className="tool-text-link mx-auto flex min-h-10 items-center gap-2 text-xs font-medium text-muted"><RotateCcw size={14} />Clear and start again</button>}
-    {exampleSrc && <a href={exampleSrc} download className="tool-text-link flex min-h-10 items-center justify-center gap-2 text-xs font-medium text-plum"><Download size={14} />Download a result example</a>}
+    {exampleSrc && <a href={imageUrl(exampleSrc)} download className="tool-text-link flex min-h-10 items-center justify-center gap-2 text-xs font-medium text-plum"><Download size={14} />Download a result example</a>}
     <p className="flex items-start gap-2 text-[11px] leading-5 text-muted"><ShieldCheck size={14} className="mt-0.5 shrink-0" /><span>{HANDOFF ? "Your photo is sent securely to our AI provider to create your result. Results are saved to My creations only when you are signed in, so download yours before leaving otherwise. See the Privacy Policy for how data is handled. A new account starts with 10 free credits, which covers 2 results at 5 credits each. Visitors without an account get a small free allowance each day." : "Local preview. Uses the configured OpenAI account and may incur API charges. This app does not save your uploads or results to disk. Download before leaving."}</span></p>
   </div>;
 }

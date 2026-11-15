@@ -1,10 +1,10 @@
-// Pre-builds small WebP versions of every picture in public/img, once, at build time.
-// The deployed site serves these as plain static files (no on-demand resizing inside the Worker,
-// which ran out of resources under load). Originals stay in public/img for "Download" links.
+// Pre-builds small WebP versions of every picture in media/img, once, at build time.
+// The WebP files are uploaded to R2 (npm run images:upload) and served from https://images.aibeautystyling.com,
+// so nothing is resized inside the Worker. Originals stay in media/img (git-ignored) for "Download" links.
 //
 //   node scripts/optimize-images.mjs
 //
-// Output: public/_opt/<same path>-<width>.webp for each width in WIDTHS (never upscaled).
+// Output: media/_opt/<same path>-<width>.webp for each width in WIDTHS (never upscaled).
 // Keep WIDTHS in sync with lib/image-loader.ts.
 import { readdir, mkdir, stat } from "node:fs/promises";
 import path from "node:path";
@@ -12,8 +12,8 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SRC = path.join(root, "public", "img");
-const OUT = path.join(root, "public", "_opt");
+const SRC = path.join(root, "media", "img");
+const OUT = path.join(root, "media", "_opt");
 const WIDTHS = [384, 768, 1280, 1920];
 const QUALITY = 78;
 
@@ -47,4 +47,4 @@ async function worker() {
   }
 }
 await Promise.all([worker(), worker(), worker()]);
-console.log(`Images: ${files.length} originals -> ${made} written, ${skipped} up to date, ${(bytes / 1048576).toFixed(1)} MB total in public/_opt`);
+console.log(`Images: ${files.length} originals -> ${made} written, ${skipped} up to date, ${(bytes / 1048576).toFixed(1)} MB total in media/_opt`);

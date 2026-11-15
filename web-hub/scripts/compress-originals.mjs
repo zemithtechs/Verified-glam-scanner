@@ -1,4 +1,4 @@
-// Re-encodes every PNG in public/img in place with a smaller (palette) PNG encoding.
+// Re-encodes every PNG in media/img in place with a smaller (palette) PNG encoding.
 // Same file names and sizes, so no page reference changes. A file is only replaced when the new one is smaller.
 //
 //   node scripts/compress-originals.mjs
@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SRC = path.join(root, "public", "img");
+const SRC = path.join(root, "media", "img");
 
 async function* walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BookOpen, Camera, ChevronDown, Download, ScanFace } from "lucide-react";
 import { ToolWorkspace } from "@/components/ToolWorkspace";
 import { ToolStepIcon } from "@/components/ToolStepIcon";
+import { imageUrl } from "@/lib/image-base";
 import { JsonLd } from "@/components/JsonLd";
 import { isBrowsableTool, type Category, type Tool } from "@/lib/catalog";
 import { getToolPageContent } from "@/lib/tool-page-content";
@@ -81,7 +82,7 @@ export function ToolLandingPage({ tool, category, related }: { tool: Tool; categ
         <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-7 text-muted">{content.featuresIntro ?? "Each example below shows what you get and how you can use it."}</p>
         <div className="mx-auto mt-12 max-w-[1220px] space-y-12 sm:space-y-16">
           {stories.map((story, index) => <article key={story.title} className="grid items-center gap-7 md:grid-cols-[1.1fr_1fr] md:gap-10 xl:gap-16">
-            <a href={featureImages[index]} download className={`tool-example-link relative block aspect-video w-full overflow-hidden rounded-lg border border-line bg-[#faf9f8] ${index % 2 ? "md:order-2" : ""}`} aria-label={`Download ${tool.name} example: ${story.title}`}><Image src={featureImages[index]} alt={alts[index]} fill sizes="(min-width: 1440px) 620px, (min-width: 768px) 46vw, 100vw" className="object-contain" /><span className="tool-image-download absolute bottom-3 right-3 grid h-10 w-10 place-items-center rounded-full border border-line bg-white/95 text-plum shadow-sm" aria-hidden="true"><Download size={17} /></span></a>
+            <a href={imageUrl(featureImages[index])} download className={`tool-example-link relative block aspect-video w-full overflow-hidden rounded-lg border border-line bg-[#faf9f8] ${index % 2 ? "md:order-2" : ""}`} aria-label={`Download ${tool.name} example: ${story.title}`}><Image src={featureImages[index]} alt={alts[index]} fill sizes="(min-width: 1440px) 620px, (min-width: 768px) 46vw, 100vw" className="object-contain" /><span className="tool-image-download absolute bottom-3 right-3 grid h-10 w-10 place-items-center rounded-full border border-line bg-white/95 text-plum shadow-sm" aria-hidden="true"><Download size={17} /></span></a>
             <div className={index % 2 ? "md:order-1" : ""}>
               <h3 className="max-w-lg text-[23px] font-semibold tracking-[-0.02em] leading-[1.3] text-ink sm:text-[26px]">{titleCase(story.title)}</h3>
               <p className="mt-4 text-[15px] leading-7 text-muted">{story.body}</p>

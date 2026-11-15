@@ -3,6 +3,7 @@
 //   node scripts/live.mjs deploy   -> build, then deploy with wrangler
 // Cloudflare credentials come from web-hub/.env (git-ignored). Index flags come from the environment.
 import { spawnSync } from "node:child_process";
+import { existsSync } from "node:fs";
 
 const mode = process.argv[2];
 const env = {
@@ -17,7 +18,8 @@ const run = (cmd, args) => {
   const r = spawnSync(cmd, args, { stdio: "inherit", env, shell: true });
   if (r.status !== 0) process.exit(r.status ?? 1);
 };
-const images = () => run("node", ["scripts/optimize-images.mjs"]);
+// Pictures are served from R2, not the Worker. Only rebuild the WebP files when the source folder exists on this machine.
+const images = () => { if (existsSync("media")) run("node", ["scripts/optimize-images.mjs"]); };
 if (mode === "build") { images(); run("npx", ["opennextjs-cloudflare", "build"]); }
 else if (mode === "deploy") { images(); run("npx", ["opennextjs-cloudflare", "build"]); run("npx", ["opennextjs-cloudflare", "deploy"]); }
 else { console.log("Usage: node scripts/live.mjs build|deploy"); process.exit(2); }

@@ -16,7 +16,7 @@ for (const f of readdirSync(path.join(root, "lib/copy")).filter((f) => f.endsWit
 const BANNED = [/\bunlock/i, /\belevate/i, /game-?changer/i, /revolution/i, /cutting-?edge/i, /seamless/i, /in today'?s/i, /\bdelve/i, /openai/i, /local preview/i, /scientifically proven/i, /most accurate/i, /100% accurate/i, /\bugly\b/i, /\bflaws?\b/i, /\bfix your\b/i, /diagnos(e|is)\b(?!.*(cannot|can't|not|no))/i];
 const words = (s) => s.trim().split(/\s+/).filter(Boolean).length;
 const has = (text, kw) => { const t = text.toLowerCase(); if (t.includes(kw)) return true; const w = kw.split(" ").filter((x) => x.length > 2); return w.filter((x) => t.includes(x.slice(0, 5))).length >= Math.ceil(w.length * 0.75); };
-const featureCount = (slug) => slug === "face-beauty-analysis" ? 4 : [1, 2, 3, 4].filter((i) => existsSync(path.join(root, `public/img/results/${slug}-feature-${i}.png`)) || existsSync(path.join(root, `public/img/results/${slug}-detail-${i}.png`))).length || 3;
+const featureCount = (slug) => slug === "face-beauty-analysis" ? 4 : [1, 2, 3, 4].filter((i) => existsSync(path.join(root, `media/img/results/${slug}-feature-${i}.png`)) || existsSync(path.join(root, `media/img/results/${slug}-detail-${i}.png`))).length || 3;
 
 let errors = 0, warns = 0;
 const err = (s, m) => { errors++; console.log(`ERROR ${s}: ${m}`); };
