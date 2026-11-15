@@ -46,7 +46,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "what-facial-symmetry-really-shows",
-    title: "What a facial symmetry preview can—and cannot—show",
+    title: "What a facial symmetry preview can and cannot show",
     description: "Understand left-right portrait guides, camera effects and why an illustrative symmetry view is not a precise measurement.",
     category: "face-analysis",
     toolSlugs: ["facial-symmetry", "face-golden-ratio", "face-comparison", "facial-landmarks"],
@@ -170,7 +170,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "virtual-outfit-preview-limits",
     title: "What a virtual outfit preview can tell you",
-    description: "See where a visual try-on helps with color and silhouette—and where fabric, sizing and movement still need a real fitting.",
+    description: "See where a visual try-on helps with color and silhouette, and where fabric, sizing and movement still need a real fitting.",
     category: "fashion-style",
     toolSlugs: ["virtual-try-on-clothes", "ai-tattoo-generator", "ai-waist-slimming", "seasonal-color-palette"],
     published: "2026-11-08",
@@ -178,7 +178,7 @@ export const BLOG_POSTS: BlogPost[] = [
     sections: [
       { heading: "What an outfit preview is for", paragraphs: ["Online shopping removes the fitting room, and that is the main reason people return clothes. A virtual outfit preview tries to bring part of it back: you give it a photo of yourself and an image of a garment, and it shows an image of how that garment might look on you. It is a way to explore a color, a cut or a style before you spend money.", "It is worth being clear about what that means. The result is a generated picture. It can say useful things about color and overall silhouette. It cannot say anything reliable about size, stretch, comfort or how a fabric moves."] },
       { heading: "Use a photo that shows the garment area", paragraphs: ["A clothing preview needs enough of the body in frame to place the garment. Stand naturally, keep arms from covering the outfit area when possible, and avoid a crop that cuts off the part you want to evaluate.", "If you are adding a garment reference, choose a clean image with the shape and details visible. A busy background or folded item makes it harder to imagine the complete look. A product photo on a plain background, or a garment laid flat, usually works best."] },
-      { heading: "Compare the visual direction", paragraphs: ["With [Virtual Try-On: Clothes](/virtual-try-on-clothes) you upload a photo and a garment and review a generated preview of the combination. Look at the color next to your face and the overall silhouette. A preview can help you decide whether to explore a style further or compare two ideas before shopping.", "It cannot prove how fabric drapes when you walk, where a seam will land, or whether a size will feel comfortable. Those details still require measurements, product information and, ideally, a real fitting."] },
+      { heading: "Compare the visual direction", paragraphs: ["With [Virtual Clothes Try-On](/virtual-try-on-clothes) you upload a photo and a garment and review a generated preview of the combination. Look at the color next to your face and the overall silhouette. A preview can help you decide whether to explore a style further or compare two ideas before shopping.", "It cannot prove how fabric drapes when you walk, where a seam will land, or whether a size will feel comfortable. Those details still require measurements, product information and, ideally, a real fitting."] },
       { heading: "Check color against your palette", paragraphs: ["Color is the part of an outfit a preview handles best. If you have already explored the shades that suit you with the [Seasonal Color Palette](/seasonal-color-palette), use the preview to see how a garment's color sits near your face. Our guide to [seasonal color palettes](/blog/seasonal-color-palette-photo-guide) explains how to test colors in real light so that you can confirm what you see on screen.", "Screens vary, so a rust orange on your laptop may look brighter or duller on your phone. Judge color in more than one place and read the product description."] },
       { heading: "Other style previews", paragraphs: ["Style is more than clothes. The [AI Tattoo Generator](/ai-tattoo-generator) previews one of three original tattoo motifs on your skin, which is a safe way to think about placement and size before making a permanent decision. Treat it as a mood-board tool: a real tattoo artist will adapt the design to your body and skin.", "The [Silhouette Preview](/ai-waist-slimming) shows how a garment's fit shapes your silhouette. It is meant for exploring how clothes sit, not for judging your body. If a preview changes proportions in a way that does not match you, trust your original photo and the garment's real measurements."] },
       { heading: "Getting a better source photo", paragraphs: ["The quality of a try-on depends on the photo you start with. A straight-on image with your full torso visible and your arms relaxed at your sides gives the tool the clearest view of where a top or dress would sit. Tight, plain clothing underneath helps, because loose layers can confuse the placement of the new garment.", "Avoid mirror selfies with a phone covering your body, strong backlight that turns you into a silhouette, and angles taken from below or above, which distort proportions. A friend taking the photo from a short distance often gives a much better result than a selfie."] },
@@ -245,8 +245,80 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const getBlogPost = (slug: string) => BLOG_POSTS.find((post) => post.slug === slug);
 
-export function getRelatedBlogPosts(tool: Tool, limit = 3): BlogPost[] {
-  return BLOG_POSTS.filter((post) => post.category === tool.category || post.toolSlugs.includes(tool.slug))
-    .sort((a, b) => Number(b.toolSlugs.includes(tool.slug)) - Number(a.toolSlugs.includes(tool.slug)))
-    .slice(0, limit);
+/** Hand-picked guides for each tool, most relevant first. A tool lists only guides that fit it, and never more than two. */
+const TOOL_GUIDES: Record<string, string[]> = {
+  "face-beauty-analysis": ["find-your-face-shape-from-a-photo", "what-facial-symmetry-really-shows"],
+  "facial-symmetry": ["what-facial-symmetry-really-shows", "find-your-face-shape-from-a-photo"],
+  "face-golden-ratio": ["what-facial-symmetry-really-shows", "find-your-face-shape-from-a-photo"],
+  "attractiveness-test": ["find-your-face-shape-from-a-photo", "natural-looking-portrait-retouch"],
+  "face-comparison": ["what-facial-symmetry-really-shows", "natural-looking-portrait-retouch"],
+  "beauty-score-showdown": ["natural-looking-portrait-retouch"],
+  "face-shape-analyzer": ["find-your-face-shape-from-a-photo", "plan-a-hair-change-with-a-preview"],
+  "skin-analysis": ["natural-looking-portrait-retouch"],
+  "facial-landmarks": ["what-facial-symmetry-really-shows", "find-your-face-shape-from-a-photo"],
+  "seasonal-color-palette": ["seasonal-color-palette-photo-guide", "virtual-makeup-try-on-lighting"],
+  "beauty-tips": ["seasonal-color-palette-photo-guide"],
+  "beauty-routine-challenge": ["seasonal-color-palette-photo-guide"],
+  "ai-skin-enhancement": ["natural-looking-portrait-retouch"],
+  "smart-beauty": ["natural-looking-portrait-retouch"],
+  "face-beauty-retouch": ["natural-looking-portrait-retouch"],
+  "ai-face-enhancer": ["natural-looking-portrait-retouch", "restore-an-old-family-photo"],
+  "ai-face-slimming": ["natural-looking-portrait-retouch"],
+  "hairstyle-changer": ["plan-a-hair-change-with-a-preview", "find-your-face-shape-from-a-photo"],
+  "ai-hair-color": ["plan-a-hair-change-with-a-preview", "seasonal-color-palette-photo-guide"],
+  "beard-styling": ["plan-a-hair-change-with-a-preview", "find-your-face-shape-from-a-photo"],
+  "beard-remover": ["plan-a-hair-change-with-a-preview"],
+  "hair-loss-simulation": ["plan-a-hair-change-with-a-preview"],
+  "bald-filter": ["plan-a-hair-change-with-a-preview"],
+  "lip-color-changer": ["virtual-makeup-try-on-lighting", "seasonal-color-palette-photo-guide"],
+  "eyeshadow-try-on": ["virtual-makeup-try-on-lighting", "seasonal-color-palette-photo-guide"],
+  "colored-contacts": ["virtual-makeup-try-on-lighting"],
+  "ai-eyelashes": ["virtual-makeup-try-on-lighting"],
+  "ai-eyebrows": ["virtual-makeup-try-on-lighting"],
+  "ai-lip-enhancement": ["virtual-makeup-try-on-lighting"],
+  "virtual-try-on-clothes": ["virtual-outfit-preview-limits", "seasonal-color-palette-photo-guide"],
+  "ai-tattoo-generator": ["creative-portrait-effects-responsibly"],
+  "ai-waist-slimming": ["virtual-outfit-preview-limits"],
+  "cartoon-yourself": ["creative-portrait-effects-responsibly"],
+  "face-filters": ["creative-portrait-effects-responsibly"],
+  "facial-expression-changer": ["creative-portrait-effects-responsibly"],
+  "age-gender-swap": ["creative-portrait-effects-responsibly"],
+  "ai-face-swap": ["creative-portrait-effects-responsibly"],
+  "square-face-filter": ["creative-portrait-effects-responsibly"],
+  "big-head-effect": ["creative-portrait-effects-responsibly"],
+  "halloween-mask": ["creative-portrait-effects-responsibly"],
+  "pregnant-filter": ["creative-portrait-effects-responsibly"],
+  "birthday-image-generator": ["creative-portrait-effects-responsibly"],
+  "ai-fortune-teller": ["creative-portrait-effects-responsibly"],
+  "elf-name-generator": ["creative-portrait-effects-responsibly"],
+  "old-photo-restoration": ["restore-an-old-family-photo", "natural-looking-portrait-retouch"],
+  "face-blur": ["restore-an-old-family-photo", "creative-portrait-effects-responsibly"],
+  "merge-portraits": ["creative-portrait-effects-responsibly"],
+};
+
+/** One-sentence blurbs per guide. Each has several phrasings, and the tool name makes the sentence specific to the page. */
+const GUIDE_BLURBS: Record<string, string[]> = {
+  "find-your-face-shape-from-a-photo": ["Check your face shape by hand first, then see how {tool} reads the same photo.", "A plain guide to reading your outline, so your {tool} result makes sense.", "Learn what a face shape label means in practice before you act on {tool}.", "Start here if you want to know which outline {tool} is looking at.", "Follow these steps on your photo and compare them with what {tool} shows."],
+  "what-facial-symmetry-really-shows": ["See what a symmetry guide can and cannot show before you read your {tool} result.", "A calm look at why faces are never perfectly even, written for {tool} users.", "Learn how camera angle can fake asymmetry, then run {tool} with that in mind.", "Read this before you decide what {tool} says about the two sides of your face.", "Understand the centerline guide that {tool} draws on your portrait."],
+  "seasonal-color-palette-photo-guide": ["Learn how daylight and bare skin change the colors you see, then try {tool} again.", "A photo-first guide to seasons, written for people using {tool}.", "See how a palette is read from a photo before you shop with your {tool} result.", "Read how to take a photo that gives {tool} a fair view of your coloring.", "Find out why one season is only a starting point, whatever {tool} shows."],
+  "natural-looking-portrait-retouch": ["Learn how to keep a retouch natural, then judge your {tool} result with fresh eyes.", "See which details to leave alone when you use {tool} on a portrait.", "A guide to light edits that still look like you, written for {tool}.", "Check your edit against this list before you save the {tool} version.", "Read how to compare the original and the edit when you use {tool}."],
+  "plan-a-hair-change-with-a-preview": ["Plan your hair change from a photo before you act on {tool}.", "See how to turn a preview into a clear request for your stylist after {tool}.", "Learn what a photo preview cannot tell you about real hair, then use {tool}.", "A short guide to choosing a change you will still like after {tool}.", "Read how to talk to your stylist with your {tool} image in hand."],
+  "virtual-makeup-try-on-lighting": ["See how light changes color on screen, then check your {tool} result in daylight.", "Learn why a shade looks different in a shop, and what that means for {tool}.", "A lighting guide for virtual makeup, written for people using {tool}.", "Read this before you buy anything based on your {tool} preview.", "Learn how to photograph your face so {tool} starts from true color."],
+  "virtual-outfit-preview-limits": ["See what an outfit preview can show, and what {tool} cannot know about fit.", "Learn which details to check in the shop after you use {tool}.", "A guide to the limits of a clothing preview, written for {tool} users.", "Read this before you spend money on an idea you saw in {tool}.", "Compare a preview with the real thing, step by step, after {tool}."],
+  "creative-portrait-effects-responsibly": ["Learn how to share an edited picture kindly, especially one made with {tool}.", "Read how to ask permission and label your {tool} result before you post it.", "A short guide to playful edits that still respect the people in them, for {tool}.", "See how to keep a {tool} picture fun and clearly marked as edited.", "Check this list before you send your {tool} image to anyone."],
+  "restore-an-old-family-photo": ["Learn how to prepare a print before you scan it, then use {tool}.", "See how to save the original beside the new version when you use {tool}.", "A guide to scanning and storing old photos, written for people using {tool}.", "Read what a repair can and cannot bring back before you rely on {tool}.", "Follow these steps to give {tool} the best scan you can."],
+};
+
+export function guideBlurb(tool: Tool, post: BlogPost): string {
+  const options = GUIDE_BLURBS[post.slug];
+  if (!options) return post.description;
+  let hash = 0;
+  for (const char of tool.slug + post.slug) hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  return options[hash % options.length].replace("{tool}", tool.name);
+}
+
+export function getRelatedBlogPosts(tool: Tool, limit = 2): BlogPost[] {
+  const picked = TOOL_GUIDES[tool.slug];
+  if (picked) return picked.map((slug) => getBlogPost(slug)).filter((post): post is BlogPost => Boolean(post)).slice(0, limit);
+  return BLOG_POSTS.filter((post) => post.toolSlugs.includes(tool.slug)).slice(0, limit);
 }

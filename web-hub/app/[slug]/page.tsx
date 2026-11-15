@@ -38,7 +38,21 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   const siblings = toolsInCategory(tool.category);
   const at = siblings.findIndex((item) => item.slug === tool.slug);
   const rotated = [...siblings.slice(at + 1), ...siblings.slice(0, at)];
-  const related = [...rotated, ...TOOLS.filter(item => item.popular && item.category !== tool.category)]
+  // After the siblings, suggest tools from groups people naturally move to next, rotated per tool so pages differ.
+  const NEXT_GROUPS: Record<string, string[]> = {
+    "face-analysis": ["glow-up", "skin-retouch", "hair-beard"],
+    "glow-up": ["makeup-tryon", "fashion-style", "face-analysis"],
+    "skin-retouch": ["makeup-tryon", "face-analysis", "hair-beard"],
+    "hair-beard": ["face-analysis", "makeup-tryon", "fashion-style"],
+    "makeup-tryon": ["skin-retouch", "glow-up", "hair-beard"],
+    "fashion-style": ["glow-up", "makeup-tryon", "hair-beard"],
+    "fun-effects": ["photo-tools", "skin-retouch", "face-analysis"],
+    "photo-tools": ["skin-retouch", "fun-effects", "face-analysis"],
+  };
+  const neighbours = (NEXT_GROUPS[tool.category] ?? []).flatMap((id) => toolsInCategory(id as typeof tool.category).sort((a, b) => Number(Boolean(b.popular)) - Number(Boolean(a.popular))));
+  const shift = neighbours.length ? (at * 2) % neighbours.length : 0;
+  const further = [...neighbours.slice(shift), ...neighbours.slice(0, shift)];
+  const related = [...rotated, ...further]
     .filter((item) => item.slug !== tool.slug && item.status !== "later" && isBrowsableTool(item))
     .slice(0, 6);
 

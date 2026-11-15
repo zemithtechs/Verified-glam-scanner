@@ -1,139 +1,81 @@
 import type { CategoryId, Tool } from "@/lib/catalog";
+import { TOOL_COPY } from "@/lib/copy";
+import type { UseCase } from "@/lib/copy/types";
 
-export type UseCase = { title: string; body: string };
+export type { UseCase };
 
 // Concrete applications, not promises about an AI-generated outcome. These sit
 // beside each tool's existing feature copy and keep the landing pages distinct.
 const TOOL_CASES: Record<string, [UseCase, UseCase]> = {
-  "face-beauty-analysis": [
-    { title: "Compare portraits before choosing a profile photo", body: "Look at framing, light and expression across your own photos. The subjective report gives you a second perspective; choose the picture that still feels like you." },
-    { title: "Take styling ideas to your next appointment", body: "Keep the portrait and its brief hair or frame suggestions together as a conversation starter, rather than treating a score as a rule." },
-  ],
-  "facial-symmetry": [
-    { title: "Understand the effect of camera tilt", body: "A slight turn can make one side appear different from the other. Use the centerline guide to notice the pose before drawing conclusions about your face." },
-    { title: "Choose a more balanced headshot", body: "Try a second straight-on photo and compare the illustrative guides. They are useful for framing, not precise measurements of facial geometry." },
-  ],
-  "face-golden-ratio": [
-    { title: "Explore face thirds visually", body: "See the upper, middle and lower sections on your portrait, then compare a straight-on photo with an angled one to understand how perspective changes the guides." },
-    { title: "Put phi in context", body: "Use 1.618 as a design reference to learn the idea behind the golden ratio. It is not a target your features need to meet." },
-  ],
-  "attractiveness-test": [
-    { title: "Find a photo that captures your expression", body: "Compare your own portraits in different lighting and poses. The photo-harmony impression is subjective and can change with the photograph." },
-    { title: "Plan a more comfortable next shoot", body: "Use the framing and styling notes to test a camera height or hair placement you like, without making the score the goal." },
-  ],
-  "face-comparison": [
-    { title: "Compare two looks side by side", body: "Place two consenting adults' portraits together to notice visible differences in hair, face outline and photo framing—not to verify identity or family relationship." },
-    { title: "Test two photos of yourself", body: "Use a pair taken in similar light to see how styling and angle affect the presentation of the same person." },
-  ],
-  "beauty-score-showdown": [
-    { title: "Make a friendly two-photo comparison", body: "Put two permitted portraits in one card with equal space for each person. The subjective notes invite conversation, not a winner." },
-    { title: "Compare your own styling choices", body: "Try two photos of yourself with different hair or lighting. Read each photo-harmony impression as feedback about the image, not your worth." },
-  ],
-  "face-shape-analyzer": [
-    { title: "Bring an outline to a haircut discussion", body: "The approximate face-shape label and contour notes can help describe what you want to a stylist. Your hair texture and routine still decide what works." },
-    { title: "Compare frame shapes", body: "Use the glasses ideas as a shortlist before trying real frames. A photo-based guide cannot replace fit and comfort." },
-  ],
-  "skin-analysis": [
-    { title: "Notice what the photo actually shows", body: "The connected close-ups call out visible texture, pores, fine lines and tone variation without turning them into a diagnosis or severity rating." },
-    { title: "Prepare a consistent photo reference", body: "If you want to compare pictures over time, use similar light and camera distance. Changes in the photo do not prove changes in skin health." },
-  ],
-  "seasonal-color-palette": [
-    { title: "Build a small outfit color shortlist", body: "Take one suggested swatch family into your wardrobe and compare it beside clothes you already own before buying anything." },
-    { title: "Choose makeup colors to explore", body: "Use the palette pairings to narrow a lip or cheek color direction. Screens and lighting can change how colors appear in person." },
-  ],
-  "beauty-tips": [
-    { title: "Make one change for your next portrait", body: "Pick a single suggestion from the hair, frames or photo-light cards and see how it works in a new photo." },
-    { title: "Keep the useful ideas together", body: "Download the portrait and concise styling cards as a reference when getting dressed, choosing eyewear or planning a headshot." },
-  ],
-  "beauty-routine-challenge": [
-    { title: "Turn a big reset into seven small actions", body: "The daily plan spans basic care, outfit pairing, hair styling, light, rest and reflection. It does not promise a physical transformation in a week." },
-    { title: "Adapt the plan to real life", body: "Treat each day as a suggestion. Skip what does not fit your skin, schedule, budget or preferences." },
-  ],
-  "ai-skin-enhancement": [
-    { title: "Prepare a portrait for sharing", body: "Try a subtle edit on temporary blemishes or uneven exposure while keeping freckles, moles and natural complexion visible." },
-    { title: "Compare restraint with polish", body: "Review the original beside the edited version at full size. Choose the level that still looks like the person in the source photo." },
-  ],
-  "smart-beauty": [
-    { title: "Balance a photo taken in tricky light", body: "A gentle exposure and shine adjustment can make a portrait easier to use without changing facial structure." },
-    { title: "Keep texture in a profile picture", body: "Check the cheeks and forehead at full size before saving. Real pores and age should remain visible, even after a polished edit." },
-  ],
-  "face-beauty-retouch": [
-    { title: "Pick a finish for the occasion", body: "Move from subtle to polished for a headshot or event portrait, then compare each result against the original." },
-    { title: "Review skin details before posting", body: "Zoom in on freckles, moles and fine texture. A natural edit should not replace the features that make the portrait recognizable." },
-  ],
-  "ai-face-enhancer": [
-    { title: "Improve a mildly soft headshot", body: "Try a clearer version of a portrait with a little blur or noise, then inspect the eyes and hairline for invented detail." },
-    { title: "Save a clearer social photo", body: "Use the comparison to judge whether improved clarity helps the whole image. Severely missing detail cannot be factually recovered." },
-  ],
-  "hairstyle-changer": [
-    { title: "Bring a cut idea to the salon", body: "Compare the curly bob, layers, pixie or fringe against your own face and save the look that starts the best conversation." },
-    { title: "Check the silhouette before committing", body: "Look at how the new hair frames your forehead and jaw. Texture, growth pattern and styling effort will affect a real cut." },
-  ],
-  "ai-hair-color": [
-    { title: "Narrow a color direction", body: "Compare chestnut, copper, black, blonde or pastel on your own haircut before discussing dye with a colorist." },
-    { title: "Check color in the full portrait", body: "Notice how a shade sits beside your skin, brows and clothing. A screen preview cannot predict exact dye results." },
-  ],
   "lip-color-changer": [
-    { title: "Compare everyday and occasion shades", body: "Preview rose nude, berry, red or peach gloss on the same portrait so the rest of the face stays constant." },
-    { title: "Start a more focused product search", body: "Save a color family you like, then test real formulas and finishes in person; the preview is not an exact swatch." },
+    { title: "Compare an everyday shade with a night-out shade.", body: "Preview rose nude, berry, red or peach gloss on the same portrait, so your skin, hair and light stay the same. Seeing two shades on one face shows you which one you would actually wear. Save both images and look at them again the next morning, when the colors feel less exciting." },
+    { title: "Narrow your shortlist before you buy a lipstick.", body: "Save the color family you like, then test real formulas in a shop or ask for a sample. Screens change color, so treat the preview as a direction and not an exact swatch. Write down the color family name from your result, and take it with you so a shop assistant can suggest real shades." },
   ],
   "eyeshadow-try-on": [
-    { title: "Choose a mood for an event", body: "Try soft bronze, rose shimmer or smoky plum on one portrait and assess the complete face rather than an isolated palette." },
-    { title: "Keep your eye shape in view", body: "Use the preview to judge placement and intensity while the original eye shape remains part of the comparison." },
+    { title: "Pick a mood for your next event.", body: "Try soft bronze, rose shimmer or smoky plum on one portrait and judge the whole face, not an isolated palette. Choose the look that still feels like you in that light. Look at the result on your phone and again on a bigger screen, because eye makeup can read differently at each size." },
+    { title: "Check placement and intensity on your own eye shape.", body: "Look at where the color sits on your lid and how strong it reads at normal size. Your original eye shape stays visible, so you can compare before you buy a palette. If the shimmer looks too strong, run the tool again with a softer shade and compare the two images." },
   ],
   "colored-contacts": [
-    { title: "Explore iris color in context", body: "Compare hazel, green, blue and gray against your own portrait. Pupil size and reflections should still look natural in the preview." },
-    { title: "Separate style from eye safety", body: "Use the image for a visual idea only. Lens fit, hygiene and eye health require advice from an eye-care professional." },
+    { title: "See how a new eye color looks on your face.", body: "Compare hazel, green, blue and gray on your own portrait. Pupil size and reflections stay natural, so the color reads as part of your face and not a sticker. Check the result next to your own photo, and pick the shade that you would still like in a week." },
+    { title: "Use it as a style idea, not as eye-care advice.", body: "The image shows color only. Lens fit, hygiene and eye health need an eye-care professional, so ask one before you buy real contacts. Real lenses can feel different, change how you see and need proper cleaning, so use the image only to decide which color you like. Book an eye exam before you buy any lens." },
   ],
   "virtual-try-on-clothes": [
-    { title: "Test a garment's overall mood", body: "Pair a clear person photo with a separate garment photo to explore its color and apparent drape on the same body." },
-    { title: "Make a shopping shortlist", body: "Use the before-and-after image to rule in or out a style direction, then check real size, fabric and return details before buying." },
+    { title: "Check an outfit's mood before you buy it.", body: "Pair a clear photo of yourself with a separate photo of the garment to see its color and how it drapes on you. It tells you fast whether the style deserves a closer look. Try more than one garment photo on the same picture of you, and keep the one that makes you want to wear it out." },
+    { title: "Build a shopping shortlist from the result.", body: "Use the before-and-after image to rule a style in or out. Then check the real size, fabric and return policy before you pay, because a preview cannot know them. Screenshot the best looks into one folder, then compare prices and reviews for each item before you spend money." },
   ],
   "cartoon-yourself": [
-    { title: "Create a playful profile image", body: "Try soft 3D, comic ink or anime while keeping the original hair, expression and clothing recognizable." },
-    { title: "Make a themed invitation", body: "Use the illustrated portrait as one visual ingredient for a personal invitation or party graphic, with the subject's permission." },
+    { title: "Make a playful profile picture that still looks like you.", body: "Try soft 3D, comic ink or anime and check that your hair, expression and clothes are still recognizable. The best result is a funny version of you, not a stranger. Try the same photo with two different styles and ask a friend which one looks more like you." },
+    { title: "Turn the cartoon into a party invitation.", body: "Use the illustrated portrait on an invitation or a party graphic. Ask the person in the photo first, and say the picture is an edited cartoon. Keep the invitation short, add the date and the place, and tell guests that the picture is a cartoon made from a real photo. That way nobody is confused." },
   ],
   "old-photo-restoration": [
-    { title: "Prepare a family print for sharing", body: "Start with the clearest scan you have and review repaired scratches or fading without replacing the people in the photo." },
-    { title: "Keep the original record", body: "Save the source scan separately. The restored version is an interpretation of damaged detail, not proof of exactly what was there." },
+    { title: "Clean up a family print before you share it.", body: "Start with the clearest scan you have and review the repaired scratches and faded areas. Check that the people still look like themselves before you send it around. Share the restored version with relatives and ask whether it looks like the person they remember. Their memory is the best check you have." },
+    { title: "Keep the original scan next to the restored one.", body: "Save the source file separately. Restored detail is a plausible guess, not proof of what was there, so keep both versions. Name the two files clearly, such as grandma-original and grandma-restored, and store them together. Years from now you will know exactly what was changed and which version is the real print." },
+  ],
+  "face-blur": [
+    { title: "Hide faces before you post a group photo.", body: "Blur the faces of people who did not agree to be shared, then check the whole image. Name tags, clothing and reflections can still identify someone, so look at every corner before you post. If you are not sure whether a person is still recognizable, blur more, or crop them out of the frame completely." },
+    { title: "Keep the original and share only the blurred copy.", body: "Download the blurred version as a new file and leave your source untouched. Share the blurred file only, and store the original somewhere private. Do not upload the original to a chat or a shared album by mistake. A clear file name such as blurred-final helps you pick the right image when you are in a hurry." },
+  ],
+  "merge-portraits": [
+    { title: "Put two people in one picture with permission.", body: "Add two adult portraits, with both people's agreement, and see them combined into one image. It works best when both photos have similar light and the faces point the same way. Ask both people first, tell them where the picture will be shared, and delete it if either of them changes their mind." },
+    { title: "Check both faces before you share the merge.", body: "Open the result at full size and look at the edges, the hair and the skin tone where the two photos meet. Say the image is edited when you post it. If one face looks off, go back and try a different pair of photos with closer light and angles." },
   ],
 };
 
 const CATEGORY_CASES: Record<CategoryId, [UseCase, UseCase]> = {
   "face-analysis": [
-    { title: "Read the guide in the context of the photo", body: "Use a straight-on portrait to explore visible features. These guides are illustrative, not biometric measurements." },
-    { title: "Try a second angle", body: "Compare how the same face appears under different light and camera positions before drawing conclusions." },
+    { title: "Read the guides against your own photo.", body: "Start with a straight-on portrait in even light, then look at what the report points out beside your face. The guides are illustrative, so treat them as notes about one photo and not as measurements of you. Take the notes one at a time and ask whether you can see each point in your picture." },
+    { title: "Try a second angle before you decide.", body: "Upload another photo taken in different light or at a different camera height, and compare the two reports. If they disagree, the camera caused it, not your face. That tells you which photo to trust. Use two or three photos taken on different days and keep the notes that appear in all of them." },
   ],
   "glow-up": [
-    { title: "Start with one wearable idea", body: "Try a suggested color or styling direction alongside clothes you already use." },
-    { title: "Make it your own", body: "Keep the parts that match your taste and ignore anything that does not fit your routine." },
+    { title: "Start with one idea you can wear this week.", body: "Pick a single color or styling direction from your result and pair it with clothes you already own. One lipstick or one scarf is enough to find out whether the idea suits you before you spend anything. Write the idea on your phone, and check it in daylight before you decide." },
+    { title: "Keep what matches your taste and drop the rest.", body: "Your result is a starting point, not a dress code. Save the suggestions that feel like you and ignore anything that does not fit your routine, your budget or the way you like to look. A short list of two or three ideas is easier to use than a long one, so cut it down before you shop." },
   ],
   "skin-retouch": [
-    { title: "Check the entire portrait", body: "Compare the edited frame with the original before deciding whether the change helps." },
-    { title: "Keep recognizable detail", body: "Inspect texture, expression and lighting at full size rather than relying on a small preview." },
+    { title: "Check the whole portrait before you save it.", body: "Put the edited photo beside the original and look at the full frame, not only the area you changed. If the edit still looks like you, it works. If something feels off, try again with a lighter touch. Look at your eyes, hair and background too, because an edit can change more than you expect." },
+    { title: "Zoom in to make sure your features survive.", body: "Open the result at full size and look at texture, freckles and the lighting on your face. A good edit tidies a distraction and leaves the details that make the photo recognizably yours. If freckles, moles or fine lines disappeared in a way you do not like, save a lighter version instead." },
   ],
   "hair-beard": [
-    { title: "Take a visual reference to a professional", body: "A preview can help explain a direction to a stylist or barber, who can adapt it to your real hair." },
-    { title: "Compare several silhouettes", body: "Look at the shape around the whole face, not only a close crop of the hair." },
+    { title: "Take a picture of the idea to your stylist.", body: "Show the preview instead of describing a cut in words. A stylist or barber can then tell you what works with your hair texture and density, and what would need more upkeep than you want. Bring two or three images, so your stylist can see what you like about each one, and ask what the cut needs each morning." },
+    { title: "Compare several shapes before you book.", body: "Look at how each style frames your forehead and jaw from a few steps back, not only in a close crop. The outline around your face is what people notice first, so judge that. Save the images side by side and ask a friend which one looks most like you, then book that appointment." },
   ],
   "makeup-tryon": [
-    { title: "See the shade on a whole face", body: "Judge the color beside your hair, skin and clothing instead of treating it as an isolated swatch." },
-    { title: "Test products in person", body: "Lighting, screen settings and real formulas can make the final color differ from a digital preview." },
+    { title: "See the shade on your whole face.", body: "A color looks different beside your hair, skin and clothes than it does on a swatch. Judge the preview as one complete look, then note the color family you liked before you go shopping. Look at it from arm's length as well, because that is how most people will see you." },
+    { title: "Test the real product before you buy it.", body: "Screens, daylight and real formulas all change how a shade looks. Use the preview to narrow the choice to two or three colors, then try those in a shop or ask for a sample. Ask the shop for a tester or a sample, and check the color in daylight before you pay." },
   ],
   "fashion-style": [
-    { title: "Explore the idea before committing", body: "Use the visual as a planning reference, then verify fit, materials and placement in the real world." },
-    { title: "Keep a realistic reference", body: "Review the full result beside the source image so the change is clear." },
+    { title: "Try the idea on a photo before you spend money.", body: "Use the result to check color, proportion and overall mood on your own picture. It is a planning aid that helps you rule a style in or out before you pay for it. Save the preview and look at it again after a day, then decide whether you still want it." },
+    { title: "Check the real thing before you commit.", body: "A preview cannot know your size, your skin or how a material moves. Keep the result next to your original photo, then confirm measurements, placement and the return policy or an artist's advice before you decide. Ask the shop or the artist for sizing, material and return details, and show them your result so they know what you want." },
   ],
   "fun-effects": [
-    { title: "Make a playful personal image", body: "Keep the effect clearly fictional and the subject recognizable in the finished result." },
-    { title: "Share with consent", body: "Only transform an adult's photo when you have permission to use and share it." },
+    { title: "Make a playful image that still looks like you.", body: "Pick an effect and check that your expression and hair are still recognizable in the result. The best ones feel like a funny version of you, which is what makes friends smile when they see it. Pick the effect that makes you smile and keep the others as spares for later." },
+    { title: "Share it only when everyone in the photo agrees.", body: "Use photos of adults who have said yes to being edited. Tell people the image is made with an effect before you post it, so nobody mistakes it for a real photo. A quick message asking whether it is fine to post takes a minute and keeps your friendships safe." },
   ],
   "photo-tools": [
-    { title: "Solve one specific photo problem", body: "Start with the clearest original available and inspect the whole result before saving." },
-    { title: "Keep the source image safe", body: "Download the edited version separately and retain your original file for comparison." },
+    { title: "Fix one specific problem with your photo.", body: "Start from the clearest original you have, run the tool once and look at the whole result. A focused fix beats a long editing session, and you keep full control of what you save. Pick one problem, such as blur or a faded print, and judge the result only on that point." },
+    { title: "Keep your original file safe.", body: "Download the new version as a separate file and leave the source untouched. That way you can always go back and compare, or try again with a different photo. Give the new file a different name, such as holiday-edited, and keep both in the same folder. Nothing is lost if you change your mind, and you can start again whenever you like." },
   ],
 };
 
 export function getToolUseCases(tool: Tool): [UseCase, UseCase] {
-  return TOOL_CASES[tool.slug] ?? CATEGORY_CASES[tool.category];
+  return TOOL_COPY[tool.slug]?.useCases ?? TOOL_CASES[tool.slug] ?? CATEGORY_CASES[tool.category];
 }

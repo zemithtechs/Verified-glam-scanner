@@ -16,13 +16,13 @@ export function BrowseCard({ tool, featured = false }: { tool: Tool; featured?: 
           sizes={featured ? "(max-width: 640px) 82vw, (max-width: 1000px) 46vw, 30vw" : "(max-width: 640px) 48vw, (max-width: 1000px) 30vw, 23vw"}
           className={styles.image}
         />
-        {tool.status === "later" && <span className={styles.soonBadge}>Coming soon</span>}
+        {tool.status === "later" && <span className={styles.soonBadge}>Not open yet</span>}
       </span>
       <span className={styles.cardBody}>
         <span className={styles.cardTitle}>{tool.name}</span>
         {tool.status !== "later" && <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.8} className={styles.cardArrow} />}
       </span>
-      {featured && <span className={styles.cardSummary}>{tool.summary}</span>}
+      <span className={styles.cardSummary}>{tool.summary}</span>
     </>
   );
   const className = `${styles.card} ${featured ? styles.featuredCard : ""} ${tool.status === "later" ? styles.unavailableCard : ""}`;

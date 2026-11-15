@@ -5,6 +5,7 @@ import { Download, LoaderCircle, WandSparkles } from "lucide-react";
 import { UploadDemo, type WorkspaceState } from "./UploadDemo";
 import { ResultGallery } from "./ResultGallery";
 import type { Tool } from "@/lib/catalog";
+import { titleCase } from "@/lib/title-case";
 
 export function ToolWorkspace({ tool, title, lead, images, alts }: { tool: Tool; title: string; lead: string; images: string[]; alts?: string[] }) {
   const [state, setState] = useState<WorkspaceState>({ originals: [], busy: false, result: null, error: "", attempted: false });
@@ -21,11 +22,11 @@ export function ToolWorkspace({ tool, title, lead, images, alts }: { tool: Tool;
       <UploadDemo toolSlug={tool.slug} toolName={tool.name} credits={tool.credits} exampleSrc={images[0]} onWorkspaceChange={setState} />
     </div>
     <div ref={preview} className="min-w-0 scroll-mt-20 rounded-lg border border-line bg-white px-4 py-7 sm:px-6 sm:py-8">
-      <h1 className="mx-auto max-w-3xl text-center text-[32px] font-extrabold leading-[1.1] tracking-[-0.055em] text-ink sm:text-[44px]">{title}</h1>
+      <h1 className="mx-auto max-w-3xl text-center text-[32px] font-extrabold leading-[1.1] tracking-[-0.055em] text-ink sm:text-[44px]">{titleCase(title)}</h1>
       <p className="mx-auto mt-4 max-w-[680px] text-center text-sm leading-6 text-muted">{lead}</p>
       {!state.attempted ? <ResultGallery images={images} alts={alts} toolName={tool.name} /> : <section aria-label="Your generated result" aria-busy={state.busy} className="mt-7">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3">
-          <h2 className="text-sm font-semibold text-ink">Your workspace</h2>
+          <h2 className="text-sm font-semibold text-ink">{titleCase("Your workspace")}</h2>
           <p role="status" className="text-xs font-medium text-plum">{state.busy ? "Processing your photo…" : state.result ? "Your result is ready" : "No result generated"}</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">

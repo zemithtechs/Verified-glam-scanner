@@ -6,6 +6,7 @@ import { ArrowRight, Search, X } from "lucide-react";
 import { CATEGORIES, TOOLS, isBrowsableTool, type CategoryId } from "@/lib/catalog";
 import { BrowseCard } from "./BrowseCard";
 import styles from "./browse.module.css";
+import { titleCase } from "@/lib/title-case";
 
 const FEATURED_SLUGS = [
   "face-beauty-analysis",
@@ -52,7 +53,7 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
           <div className={styles.sectionHeading}>
             <div>
               <p className={styles.eyebrow}>START HERE</p>
-              <h2 id="start-here-title">A good place to begin</h2>
+              <h2 id="start-here-title">{titleCase("Begin with one of these popular tools.")}</h2>
               <p>Explore a report, preview a change, or bring an old photo back into focus.</p>
             </div>
           </div>
@@ -64,7 +65,7 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
         <div className={styles.browserHeading}>
           <div>
             <p className={styles.eyebrow}>BROWSE THE COLLECTION</p>
-            <h2>Find the right tool for your photo</h2>
+            <h2>{titleCase("Find the right tool for your photo by goal.")}</h2>
           </div>
           <p>{filtered.length} {filtered.length === 1 ? "tool" : "tools"}{onlyFree ? " · Free to try" : ""}</p>
         </div>
@@ -89,14 +90,14 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
           <section key={item.id} className={styles.categorySection} id={`category-${item.id}`} aria-labelledby={`title-${item.id}`}>
             <div className={styles.categoryHeading}>
               <div>
-                <h3 id={`title-${item.id}`}>{item.name}</h3>
+                <h3 id={`title-${item.id}`}>{titleCase(item.name)}</h3>
                 <p>{item.tagline}</p>
               </div>
               <Link href={`/category/${item.id}`}>View category <ArrowRight aria-hidden="true" size={16} /></Link>
             </div>
             <div className={styles.cardGrid}>{tools.map((tool) => <BrowseCard key={tool.slug} tool={tool} />)}</div>
           </section>
-        )) : <div className={styles.emptyState}><h3>No matches yet</h3><p>Try another search or clear the filters to see the full collection.</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); setOnlyFree(false); }}>Clear filters</button></div>}
+        )) : <div className={styles.emptyState}><h3>{titleCase("No matches yet")}</h3><p>Try another search or clear the filters to see the full collection.</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); setOnlyFree(false); }}>Clear filters</button></div>}
       </div>
     </div>
   );
