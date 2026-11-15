@@ -1,0 +1,112 @@
+strings 2293 repeated 5-word phrases (4+ uses): 308
+43 your first result is free
+36 what happens to my photo
+31 a new account starts with
+31 new account starts with 10
+30 account starts with 10 credits
+30 starts with 10 credits and
+27 and wait a few minutes
+26 monthly plan has 200 credits
+25 200 credits which is 40
+24 you can read answers to
+24 can read answers to your
+23 free a new account starts
+23 front facing photo with your
+23 your first two results are
+23 first two results are free
+21 with 10 credits and each
+19 plan has 200 credits which
+18 a sharp front facing photo
+17 has 200 credits which is
+17 a clear front facing photo
+17 first two previews are free
+16 a monthly plan has 200
+16 upload a clear front facing
+16 adults aged 18 and over
+15 200 credits enough for 40
+15 your first two previews are
+14 with 10 credits and one
+14 if they are an adult
+14 10 credits and each result
+12 confirm the photo is yours
+12 is free a new account
+12 your photo is used to
+12 compare it with your original
+12 are free a new account
+12 credits and each result uses
+12 and each result uses 5
+12 each result uses 5 a
+12 result uses 5 a third
+12 here are the answers to
+12 are the answers to your
+11 first result is free a
+11 result is free a new
+11 front facing photo in soft
+10 costs 5 so you can
+10 happens to my photo after
+10 to my photo after i
+10 my photo after i upload
+10 photo after i upload it
+10 and nothing is posted publicly
+10 you have permission to use
+10 the monthly plan has 200
+10 the before and after image
+10 wait a few minutes for
+9 credits and one result costs
+9 and one result costs 5
+9 one result costs 5 so
+9 credits which is 40 more
+9 facing photo in soft daylight
+9 are free so you can
+9 confirm you have permission to
+9 a new account has 10
+9 new account has 10 credits
+9 account has 10 credits and
+9 facing photo with your whole
+9 for adults aged 18 and
+9 age and gender swap filter
+8 is yours or that you
+8 yours or that you have
+8 or that you have permission
+8 10 credits and one result
+--- identical full strings
+25 What happens to my photo?
+10 What happens to my photo after I upload it?
+5 Can I use a friend's photo?
+5 Can I use someone else's photo?
+3 What photo should I upload?
+3 How is my photo handled?
+3 What happens to my photos?
+3 Can I use the result as a profile picture?
+3 Can I use it on someone else's photo?
+2 What photo gives the best result?
+2 Do you keep my photo?
+2 Before and after side by side
+2 Upload a clear front-facing photo with your hairline visible.
+2 Can I use a photo of someone else?
+--- common sentence openers
+73 your first two
+69 it is a
+48 how do i
+41 a new account
+38 upload a clear
+30 a monthly plan
+27 can i use
+26 your photo is
+25 you can read
+22 what is a
+16 yes, your first
+16 a sharp, front-facing
+13 your first result
+13 what happens to
+13 is it worth
+12 confirm the photo
+12 it does not
+12 find answers to
+12 here are the
+10 you get a
+10 upload a photo
+10 upload a clear,
+9 download the finished
+9 ten free credits
+9 only with their
