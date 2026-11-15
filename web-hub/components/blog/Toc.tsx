@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { TocItem } from "@/lib/blog-utils";
+import { titleCase } from "@/lib/title-case";
 
 /** Jump links for the article headings. Highlights the heading being read. */
 export function TocList({ items }: { items: TocItem[] }) {
@@ -26,7 +27,7 @@ export function TocList({ items }: { items: TocItem[] }) {
     <ol className="space-y-0.5 text-sm leading-5">
       {items.map((item) => (
         <li key={item.id} className={item.level === 3 ? "ml-4" : undefined}>
-          <a href={`#${item.id}`} aria-current={active === item.id ? "location" : undefined} className={`block rounded-md border-l-2 px-3 py-0.5 transition-colors hover:text-plum ${active === item.id ? "border-berry bg-blush font-semibold text-plum" : "border-transparent text-muted"}`}>{item.text}</a>
+          <a href={`#${item.id}`} aria-current={active === item.id ? "location" : undefined} className={`block rounded-md border-l-2 px-3 py-0.5 transition-colors hover:text-plum ${active === item.id ? "border-berry bg-blush font-semibold text-plum" : "border-transparent text-muted"}`}>{titleCase(item.text)}</a>
         </li>
       ))}
     </ol>

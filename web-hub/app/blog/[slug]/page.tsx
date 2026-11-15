@@ -10,6 +10,7 @@ import { TocList } from "@/components/blog/Toc";
 import { renderInline } from "@/components/blog/Inline";
 import styles from "@/components/blog/blog.module.css";
 import { BLOG_POSTS, getBlogPost } from "@/lib/blog-posts";
+import { titleCase } from "@/lib/title-case";
 import { formatBlogDate, relatedPostsFor, resolvePost } from "@/lib/blog-utils";
 import { categoryById, toolBySlug, type Tool } from "@/lib/catalog";
 import { imageUrl } from "@/lib/image-base";
@@ -63,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mx-auto max-w-[1120px]">
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted"><Link href="/" className="hover:text-plum">Home</Link><ChevronRight size={13} aria-hidden="true" /><Link href="/blog" className="hover:text-plum">Guides</Link><ChevronRight size={13} aria-hidden="true" /><span aria-current="page" className="line-clamp-1 text-ink">{post.title}</span></nav>
             <p className="mt-10 text-xs font-extrabold uppercase tracking-[.16em] text-berry sm:mt-14">{category.name} guide</p>
-            <h1 className="mt-3 max-w-4xl text-[2rem] font-extrabold leading-[1.1] tracking-[-.04em] text-ink sm:text-5xl lg:text-6xl">{post.title}</h1>
+            <h1 className="mt-3 max-w-4xl text-[2rem] font-extrabold leading-[1.1] tracking-[-.04em] text-ink sm:text-5xl lg:text-6xl">{titleCase(post.title)}</h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#4a3d47] sm:text-lg sm:leading-8">{post.description}</p>
             <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-medium text-muted">
               <span>By {resolved.author}</span>
@@ -110,7 +111,7 @@ export default async function BlogPostPage({ params }: Props) {
               {resolved.intro && <p className="text-[1.08em]">{renderInline(resolved.intro)}</p>}
               {resolved.sections.map((section, index) => (
                 <section key={section.id} aria-labelledby={section.id} className={styles.section}>
-                  <h2 id={section.id}>{section.heading}</h2>
+                  <h2 id={section.id}>{titleCase(section.heading)}</h2>
                   {section.blocks.map((block, i) => <div key={i} className="mt-[1.25em] first:mt-[.6em]"><BlockView block={block} fallbackToolHref={leadHref} /></div>)}
                   {!hasExplicitCta && index === midIndex && (
                     <div className="mt-[1.75em]"><InlineCta variant="app" headline={appHeadline} text="The same tools on your phone, free to start. Install it from Google Play." label="Get it on Google Play" /></div>
@@ -122,8 +123,8 @@ export default async function BlogPostPage({ params }: Props) {
                 <>
                   <div className="mt-[2em]"><InlineCta variant="tool" headline={lead ? `Still unsure? Test ${lead.name} on a photo` : "Still unsure? Test it on a photo"} text="A quick preview often answers more than another article does." label="Open the web app" toolHref={leadHref} /></div>
                   <section id="faq" aria-labelledby="faq-title" className={`${styles.section} ${styles.faq}`}>
-                    <h2 id="faq-title">Common questions</h2>
-                    {post.faqs.map(([question, answer]) => <div key={question}><h3>{question}</h3><p className="mt-[.5em]">{renderInline(answer)}</p></div>)}
+                    <h2 id="faq-title">Common Questions</h2>
+                    {post.faqs.map(([question, answer]) => <div key={question}><h3>{titleCase(question)}</h3><p className="mt-[.5em]">{renderInline(answer)}</p></div>)}
                   </section>
                 </>
               )}
@@ -140,7 +141,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className="mt-12 rounded-2xl bg-ink p-6 text-white sm:p-8">
               <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-[#f4a9c3]">Your turn</p>
-              <h2 className="mt-2 font-display text-2xl font-bold sm:text-3xl">{lead ? `Put this into practice with ${lead.name}` : "Put this into practice"}</h2>
+              <h2 className="mt-2 font-display text-2xl font-bold sm:text-3xl">{titleCase(lead ? `Put this into practice with ${lead.name}` : "Put this into practice")}</h2>
               <p className="mt-3 max-w-xl text-[15px] leading-7 text-white/80">Pick the way that suits you. Both start free, and your photo stays yours.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Link href={leadHref} className={`${styles.btn} ${styles.btnPrimary} !border-white !bg-white !text-plum hover:!bg-blush`}>Open the web app<ArrowRight size={16} aria-hidden="true" /></Link>
@@ -169,7 +170,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mx-auto max-w-[1120px]">
             {tools.length > 0 && (
               <>
-                <h2 id="related-title" className="text-2xl font-bold tracking-tight text-ink">Related tools</h2>
+                <h2 id="related-title" className="text-2xl font-bold tracking-tight text-ink">Related Tools</h2>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {tools.map((tool) => <Link key={tool.slug} href={`/${tool.slug}`} className="group rounded-xl border border-line bg-white p-5 hover:border-[#d6abc0]"><span className="flex items-center justify-between gap-3 font-semibold text-ink group-hover:text-plum">{tool.name}<ArrowRight size={16} className="shrink-0" aria-hidden="true" /></span><span className="mt-1.5 block text-sm leading-6 text-muted">{tool.summary}</span></Link>)}
                 </div>
@@ -178,7 +179,7 @@ export default async function BlogPostPage({ params }: Props) {
             )}
             {related.length > 0 && (
               <>
-                <h2 className="mt-12 text-2xl font-bold tracking-tight text-ink">Keep reading</h2>
+                <h2 className="mt-12 text-2xl font-bold tracking-tight text-ink">Keep Reading</h2>
                 <div className="mt-5 grid gap-3 sm:grid-cols-3">
                   {related.map((item) => <Link key={item.slug} href={`/blog/${item.slug}`} className="group rounded-xl border border-line bg-white p-5 hover:border-[#d6abc0]"><span className="text-[11px] font-extrabold uppercase tracking-[.13em] text-berry">{categoryById(item.category).name}</span><span className="mt-1.5 flex items-start justify-between gap-3 font-semibold leading-6 text-ink group-hover:text-plum">{item.title}<ArrowRight size={16} className="mt-1 shrink-0" aria-hidden="true" /></span></Link>)}
                 </div>

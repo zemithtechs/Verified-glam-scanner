@@ -16,8 +16,12 @@ function keepAsIs(core: string) {
 }
 
 /** Hyphenated compounds: the first and last part are capitalized, small words in between stay lowercase (One-of-a-Kind). */
+/** Acronyms that are written in capitals even when the source text is lowercase. */
+const ACRONYMS = new Set(["dpi", "ppi", "tiff", "jpeg", "jpg", "png", "pdf", "faq", "ai", "uv", "seo", "diy", "url", "usb", "hd", "fadgi", "nedcc"]);
+
 function capitalizeWord(core: string) {
   if (keepAsIs(core)) return core;
+  if (ACRONYMS.has(core.toLowerCase())) return core.toUpperCase();
   const parts = core.split("-");
   return parts.map((part, index) => {
     if (keepAsIs(part)) return part;

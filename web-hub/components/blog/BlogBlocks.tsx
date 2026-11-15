@@ -1,4 +1,5 @@
 import { imageUrl } from "@/lib/image-base";
+import { titleCase } from "@/lib/title-case";
 import { toolBySlug } from "@/lib/catalog";
 import type { BlogBlock } from "@/lib/blog-posts";
 import { renderInline } from "./Inline";
@@ -12,7 +13,7 @@ export function BlockView({ block, fallbackToolHref }: { block: BlogBlock & { id
     case "p":
       return <p>{renderInline(block.text)}</p>;
     case "h3":
-      return <h3 id={block.id}>{block.text}</h3>;
+      return <h3 id={block.id}>{titleCase(block.text)}</h3>;
     case "list": {
       const Tag = block.ordered ? "ol" : "ul";
       return <Tag>{block.items.map((item) => <li key={item}>{renderInline(item)}</li>)}</Tag>;
