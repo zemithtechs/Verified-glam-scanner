@@ -3,7 +3,7 @@ import type { CopyMap } from "./types";
 export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
   "lip-color-changer": {
     "metaTitle": "Lip Color Changer: Try Lipstick Shades On Your Photo",
-    "metaDescription": "Use a free lip color changer on your own photo. Preview rose nude, berry, classic red or peach gloss before you buy a single lipstick.",
+    "metaDescription": "Use a lip color changer on your own photo. Preview rose nude, berry, red or peach gloss before you buy. Free to try today.",
     "primaryKeyword": "lip color changer",
     "secondaryKeywords": [
       "lipstick try on",
@@ -13,86 +13,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "try lipstick on my photo",
       "lipstick simulator"
     ],
-    "h1": "Lip Color Changer: See Your Next Lipstick Shade Before You Buy It",
-    "heroLead": "Stop guessing which lipstick will suit you. Upload a clear photo and our lip color changer shows rose nude, berry, classic red or peach gloss on your own lips, with texture and lip shape kept natural. Walk into the store already sure of your shade.",
-    "howToHeading": "How To Use The Lip Color Changer On Your Photo",
+    "h1": "Use a lip color changer to try lipstick shades on your own photo.",
+    "heroLead": "Find the lipstick that suits you before it sits unopened in your bag. Upload one photo and this lip color changer paints rose nude, berry, classic red or peach gloss onto your lips only. It's free to try, so test a few shades.",
+    "howToHeading": "Try a lipstick shade on your photo in three steps.",
+    "howToIntro": "You only need one clear photo and a few spare minutes.",
     "steps": [
       {
-        "title": "Upload a clear, front-facing photo",
-        "body": "Choose a bright, even photo where your lips are visible and not covered by a hand or a mask. Natural daylight gives the most believable shade preview."
+        "title": "Upload a photo where your lips are clearly in view.",
+        "body": "Face the camera in daylight and keep a hand, a mask or a phone away from your mouth. A bright photo gives the most believable shade."
       },
       {
-        "title": "Pick a lipstick shade",
-        "body": "Select rose nude, berry, classic red or peach gloss. Each one is applied only to your lips, so your skin and the rest of your makeup stay as they are."
+        "title": "Pick the lipstick shade you want to try on.",
+        "body": "The color goes on your lips only. Your skin, eyes and any makeup you already wear stay as they were."
       },
       {
-        "title": "Preview and download the finished image",
-        "body": "Compare the result with your original, then download the complete image to keep, save to your shopping notes or share with a friend."
+        "title": "Compare it with your original photo and save the result.",
+        "body": "Look at the two side by side, then download the finished picture for your shopping notes or a friend's opinion."
       }
     ],
-    "featuresHeading": "Lip Color Changer With Lipstick Shades, Realistic Texture, And Shade Comparison",
-    "featuresIntro": "Each result changes the lip color only, so you can judge the shade itself and not a whole new look.",
+    "featuresHeading": "This lip color changer shows each shade on your own mouth.",
+    "featuresIntro": "Only your lip color changes, so you judge the shade and nothing else.",
     "stories": [
       {
-        "title": "Rose nude lipstick on your own lip shape",
-        "body": "Rose nude is the shade many people reach for when they want something soft and everyday. Here it sits on the existing lips with fine lip texture still visible, so you can picture how it blends with your complexion on an ordinary morning."
+        "title": "Rose nude is the lipstick you can wear every morning.",
+        "body": "The color sits on your real lip shape with your natural lines still visible, so it looks like lipstick on your own mouth. Check how it blends with your skin in ordinary morning light. If you like what you see, you know the tube is worth buying.",
+        "points": [
+          "Natural lip texture",
+          "Your own lip shape",
+          "Morning light check"
+        ],
+        "cta": "See my rose nude"
       },
       {
-        "title": "Berry lip color beside your original makeup",
-        "body": "Berry can feel bold in the tube and surprisingly flattering on the face. This preview lets you compare the shade with your original photo and your current makeup, so you can decide if you love it before you spend anything."
+        "title": "Berry looks intense in the tube and softer on your lips.",
+        "body": "Berry can look intense in the tube and soften once it's on your lips. Your result sits beside the original photo, so you can compare it with the makeup you wear now. You decide before you pay for a full-size lipstick, and you keep that money if berry turns out not to be you.",
+        "points": [
+          "Beside your original",
+          "Current makeup kept",
+          "Decide before buying"
+        ],
+        "cta": "Try berry on me"
       },
       {
-        "title": "Classic red lipstick without the guesswork",
-        "body": "Red is the shade people most often hesitate over. See classic red on your own lips with the shape and expression of your mouth unchanged, then decide if it is the confident look you have been curious about."
+        "title": "Classic red shows you whether the shade feels confident on you.",
+        "body": "Red is the shade people hesitate over most. Try it on your own photo with your expression unchanged, then decide whether it feels confident or like a costume. The answer takes a few minutes and costs nothing, which beats finding out at the counter with a stranger's sample stick on your lip.",
+        "points": [
+          "Expression unchanged",
+          "Mouth shape kept",
+          "Answer in minutes"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Your preview tells you which shade to buy before you pay.",
+    "ideasIntro": "Run it the week before the party, or the day before you shop.",
+    "guidanceHeading": "Take a bright photo so your lips show their true color.",
+    "useCases": [
+      {
+        "title": "Choose your lipstick before you ever stand at the counter.",
+        "body": "Try three shades on one photo and walk into the shop with a short list instead of a whole shelf to test. You skip the sample sticks, which means no wiping lipstick off your hand between tries. You buy the tube you already liked on your own face."
+      },
+      {
+        "title": "Pick your lip color for a wedding or party in advance.",
+        "body": "Preview a red or a berry on your photo days before the event. Send the image to a friend or your makeup artist so everyone agrees on the shade early. On the day itself, you just copy the picture and get on with enjoying it."
       }
     ],
     "downloadBanner": {
-      "title": "Save your favorite lipstick shade",
-      "body": "Download one finished image of the shade you liked. Keep it as a shopping reference or send it to a friend for a second opinion."
+      "title": "Try a few shades before you spend on lipstick.",
+      "body": "Pick two shades and run them as separate results before you shop. For a longer shortlist, $10 a month buys 200 credits, which is 40 results at about 25 cents each."
     },
-    "faqHeading": "Lip Color Changer FAQ",
+    "faqHeading": "Here is what to know before you try a lip color changer.",
     "faqs": [
       [
         "What is a lip color changer?",
-        "A lip color changer is a tool that shows how a lipstick shade could look on your lips in a photo. Ours applies your chosen shade to the lips only, keeps lip texture and shape natural, and leaves skin and other makeup alone, so you can compare shades before buying."
+        "It shows how a lipstick shade could look on your own lips in a photo. The color goes on your lips only, so your skin and makeup stay as they are and you can compare shades before you buy anything."
       ],
       [
-        "How do I try a lipstick color on my photo?",
-        "Upload a clear photo, choose a shade such as rose nude, berry, classic red or peach gloss, and generate your preview. It takes one short wait. You can then compare the result with the original and download the finished image."
+        "How do I try lipstick on my photo?",
+        "Upload a photo with your lips clearly visible, choose rose nude, berry, classic red or peach gloss, and the preview arrives in a few minutes. Save the result, then go back for a second shade if you want one."
       ],
       [
-        "Is the lip color changer free?",
-        "It is free to try. Generating results uses credits, and your account shows what you have available. You can preview a shade or two to see whether the tool fits what you need before deciding to do more."
+        "Do I have to pay to try a lipstick shade?",
+        "No. A new account has 10 credits and each lipstick result uses 5, so your first two shades are free. A third shade costs another 5 credits."
       ],
       [
-        "How accurate is the lipstick shade?",
-        "The preview is a realistic visual approximation, not a color match to a specific product. Lighting, screen settings and the tint of your own lips all affect how a real lipstick looks. Use it to narrow down a family of shades, then swatch in person."
+        "How close is the preview to real lipstick?",
+        "Treat it as a close guess, not a product match. Lighting, your screen and your natural lip tone all change how real lipstick looks, so use the preview to pick a shade family and swatch in the store."
       ],
       [
-        "What kind of photo works best?",
-        "A front-facing, well-lit photo with your lips fully visible works best. Avoid heavy filters, strong shadows across the mouth, or lips covered by a hand. Natural window light gives the most trustworthy preview of how a shade sits on your skin tone."
+        "Which photo shows my lips most honestly?",
+        "Stand by a window and face it, with your lips relaxed and your mouth clear of hands or masks. Heavy filters and shadows across the mouth turn the shade muddy."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. We use it for the preview you asked for. You can remove your photos from your account whenever you like, so you stay in control of what is stored."
+        "Does the tool keep my photo after the preview?",
+        "The photo only serves to paint the shade you picked. Once you have saved your picture you can delete the upload from your account, since a lipstick preview doesn't need it stored."
       ],
       [
-        "Can I use someone else's photo?",
-        "Only use a photo of another adult if they have agreed to it. This tool is for adults aged 18 and over. If you are trying a shade on a friend or sister, ask first, and show them the result so they can enjoy it too."
+        "Can I compare two shades side by side?",
+        "Yes. Run one shade per result, then place the two images next to each other on your phone. Each result starts from your original photo, so the only difference between them is the lip color."
       ],
       [
-        "Is it worth trying a lipstick shade before I buy it?",
-        "Yes, a quick preview can save you from a shade that does not suit your coloring. It will not replace swatching on your own lips, but it helps you rule out surprises and walk into the store with two or three confident choices."
-      ],
-      [
-        "Can I use the result as a profile picture?",
-        "You can download the finished image and use it however you like for personal use. Because it is an edited preview, it is kind to others to mention that the lip color is digital if it is on a public profile."
+        "Is a lipstick try on worth it before I buy?",
+        "It helps if you have ever bought a shade that looked wrong at home. A preview won't replace swatching on your lips, but it rules out surprises and gets you to the store with two or three confident choices."
       ]
     ]
   },
   "eyeshadow-try-on": {
     "metaTitle": "Eyeshadow Try On: Preview Shades On Your Own Photo",
-    "metaDescription": "Try eyeshadow on your own photo. Preview soft bronze, rose shimmer or smoky plum on your lids, with your natural eye shape kept as it is.",
+    "metaDescription": "Run an eyeshadow try-on with your own photo. Preview soft bronze, rose shimmer or smoky plum on your lids. No cost to try.",
     "primaryKeyword": "eyeshadow try on",
     "secondaryKeywords": [
       "virtual eyeshadow",
@@ -102,86 +130,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "makeup try on online",
       "eyeshadow filter"
     ],
-    "h1": "Eyeshadow Try On: Find The Shade That Makes Your Eyes Stand Out",
-    "heroLead": "Palettes are tempting and hard to judge in the pan. Upload a clear photo and this eyeshadow try on places soft bronze, rose shimmer or smoky plum on your lids, keeping your natural eye shape. See what suits you, then shop with confidence.",
-    "howToHeading": "How To Do An Eyeshadow Try On With Your Photo",
+    "h1": "Use an eyeshadow try-on to find the shade for your eyes.",
+    "heroLead": "A palette looks perfect in the pan and wrong on your lids. Send in one clear photo and this eyeshadow try-on lays soft bronze, rose shimmer or smoky plum over your eyelids while your eye shape stays untouched. Trying it costs nothing, so compare before you shop.",
+    "howToHeading": "Three steps take you from one photo to a finished eyeshadow look.",
+    "howToIntro": "Upload one photo, choose one look, then compare it with your original.",
     "steps": [
       {
-        "title": "Upload a bright photo with your eyes open",
-        "body": "Use a front-facing photo in soft, even light where both eyes are clearly visible. Avoid sunglasses, heavy shadows and strong filters."
+        "title": "Take a bright photo with your eyes wide open.",
+        "body": "Use soft, even light and look straight at the camera. Sunglasses, heavy shadows and strong filters hide the lid."
       },
       {
-        "title": "Choose an eyeshadow look",
-        "body": "Pick soft bronze, rose shimmer or smoky plum. The color is applied around your eyelids only, so your face and eye shape stay recognizable."
+        "title": "Pick the eyeshadow look you want to try on.",
+        "body": "The color goes on and around your eyelids only. Your face and eye shape stay recognizable."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "Look at the preview next to your original, try another shade if you like, then download the complete image to save or share."
+        "title": "Compare the look with your photo and download your favorite.",
+        "body": "Check the preview against your original. Try a second shade if the first is not quite right, then save the one you want."
       }
     ],
-    "featuresHeading": "Eyeshadow Try On With Soft Bronze, Rose Shimmer, And Smoky Plum Looks",
-    "featuresIntro": "Each preview applies one eyeshadow direction tastefully around the lids so you can judge the color on your own face.",
+    "featuresHeading": "This eyeshadow try-on shows each shade on your own lids.",
+    "featuresIntro": "One shade per result keeps the comparison fair: you see each color alone, never mixed with another.",
     "stories": [
       {
-        "title": "Soft bronze eyeshadow for an easy everyday glow",
-        "body": "Bronze is a gentle way to warm up your eyes without looking made up. This preview shows a soft bronze lid color while your natural eye shape stays untouched, helping you picture a quick, polished morning look."
+        "title": "Bronze is the quiet eyeshadow for a workday.",
+        "body": "Bronze is the quiet option for a workday. The preview adds a gentle wash across your lid and leaves your lash line and eye shape alone. You see whether a little warmth is enough for you, or whether you would want a stronger color on your next try.",
+        "points": [
+          "Gentle lid wash",
+          "Eye shape untouched",
+          "Workday friendly"
+        ],
+        "cta": "Preview soft bronze"
       },
       {
-        "title": "Rose shimmer eyeshadow for a brighter lid",
-        "body": "Rose shimmer catches the light and can look lovely for dinners and celebrations. See the shimmer direction on your lids with the rest of your face unchanged, so you can tell whether it feels like you."
+        "title": "Rose shimmer catches the light across your lids.",
+        "body": "Shimmer behaves differently on every lid, which is why it's hard to judge in the pan. Here it catches the light in your own photo. You can tell whether it feels right for dinner or a celebration, or whether it looks like too much. Save the image and hold it up against a shade you already own.",
+        "points": [
+          "Catches your light",
+          "Rest of face unchanged",
+          "Evening ready"
+        ],
+        "cta": "See rose shimmer on me"
       },
       {
-        "title": "Smoky plum eyeshadow for an evening look",
-        "body": "Smoky plum is a favorite for nights out and often feels risky to try blind. Preview the deeper tone around your eyes first, and decide whether you want to recreate it with your own palette. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "Smoky plum lets you test a night look before buying.",
+        "body": "Deep colors feel risky to buy blind. Preview the smoky plum around your eyes first, then decide whether you want to recreate it with your own palette. A few minutes of waiting costs far less than a full palette that never leaves the drawer, and you keep the picture for later.",
+        "points": [
+          "Deeper evening tone",
+          "Your own eye color",
+          "One result at risk"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Preview the shades first and buy only the palette you want.",
+    "ideasIntro": "A preview is cheapest before the palette goes in your basket.",
+    "guidanceHeading": "Set up your photo so your eyelids show clearly.",
+    "useCases": [
+      {
+        "title": "Choose one palette you love instead of buying three.",
+        "body": "Compare two or three tones on the same photo and see which one suits your eye color. You buy one palette for a reason you can point to, and you skip the two that would never leave the drawer. The decision takes a few minutes, not a month of regret."
+      },
+      {
+        "title": "Settle your party eye look a week before the event.",
+        "body": "Try a smoky or shimmer look on your photo and send it to the friend who is doing your makeup. You agree on the colors before the day, and you both have a picture to copy. Nothing is left to guess on the morning of the party."
       }
     ],
     "downloadBanner": {
-      "title": "Keep the eyeshadow look you loved",
-      "body": "Download one finished image of your favorite shade. Save it as a reference for your next makeup counter visit or send it to a friend."
+      "title": "Pick your palette after you have seen the colors on you.",
+      "body": "Run bronze and plum as separate results and keep the one you reach for twice. Comparing several palettes? Pay $10 a month for 200 credits, enough for 40 previews."
     },
-    "faqHeading": "Eyeshadow Try On FAQ",
+    "faqHeading": "Read straight answers about the eyeshadow try-on before you start.",
     "faqs": [
       [
-        "What is a virtual eyeshadow try on?",
-        "A virtual eyeshadow try on is a preview that shows how an eyeshadow color could look on your own face in a photo. Ours applies your chosen shade around the eyelids and keeps your eye shape and the rest of your face as they are."
+        "What is an eyeshadow try-on?",
+        "An eyeshadow try-on previews a color on your own eyelids in a photo. Your eye shape and the rest of your face stay as they were, so the only thing that changes is the shade."
       ],
       [
         "How do I try eyeshadow on my photo?",
-        "Upload a clear, front-facing photo with your eyes open, pick soft bronze, rose shimmer or smoky plum, and generate your preview. Then compare it with the original and download the finished image if you want to keep it."
+        "Face the camera with both eyes open, upload the photo and pick soft bronze, rose shimmer or smoky plum. The look appears in a few minutes, and you can run a second shade on the same photo."
       ],
       [
-        "Is this eyeshadow try on free?",
-        "It is free to try. Each result uses credits, and your account shows how many you have. Start with one shade to see how the tool works, then try others if you want to compare. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Do I need to pay to preview a shade?",
+        "Not for your first looks. You begin with 10 credits and every eyeshadow result takes 5, which pays for two looks. Beyond that, each additional preview costs 5 credits."
       ],
       [
         "How realistic is the result?",
-        "The result is a visual preview, not an exact match for a specific palette. Real eyeshadow depends on formula, blending and your lid color. Use the preview to choose a color direction, then test the product in person."
+        "Formula, blending skill and your natural lid color all change how real eyeshadow looks, so no preview can match one palette exactly. Use it to choose a color direction, then test the product in person."
       ],
       [
-        "What photo should I use?",
-        "Choose a well-lit photo facing the camera with both eyes open and lids visible. Glasses, heavy shadows, strong filters or very small faces make the preview less reliable. Daylight near a window usually works well. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "What lighting works for a virtual eyeshadow preview?",
+        "Even light from a window works best, with your lids fully visible and no glasses in the way. Strong shadows and filters hide the lid, which is the area the preview needs to read."
       ],
       [
-        "Is my photo kept private?",
-        "Your photo is processed to create your result, and you can delete it. We use it only to produce the preview you requested. You control your uploads and can remove them from your account whenever you wish."
+        "Do you store my eye photo?",
+        "Your photo builds the lid preview and nothing else. You can remove it from your account whenever you like, so it does not have to sit there after you have saved a look."
       ],
       [
-        "Can I try eyeshadow on a friend's photo?",
-        "Only if the other adult has agreed. This tool is for adults aged 18 and over. Ask permission first, and share the result with them. It makes a fun way to plan a makeup look together."
+        "Does the preview mix several shades at once?",
+        "One shade per result keeps the comparison fair, so run bronze and plum as separate results and compare them yourself. You always see each color alone on your own lids."
       ],
       [
-        "Is it worth previewing eyeshadow before I buy a palette?",
-        "Yes, a preview helps you notice which tones flatter you before you spend money on a full palette. It will not replace swatching, but it narrows the choices and makes the counter visit easier. Think of it as a low-stakes way to feel more certain before you spend money or time."
-      ],
-      [
-        "Can I post the result on social media?",
-        "You can download the image and use it personally. Since the shade is digitally applied, it is considerate to say so if you post it publicly, especially if you are recommending a product. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Should I preview shades before buying a palette?",
+        "Yes, it shows which tones flatter you before you spend on a full palette. It can't replace swatching, but it narrows your choices and makes the counter visit quicker."
       ]
     ]
   },
   "colored-contacts": {
     "metaTitle": "Colored Contacts Try On: See Eye Colors On Your Photo",
-    "metaDescription": "Try colored contacts on your own photo. Preview hazel, green, blue or gray eyes with natural pupils and reflections. A free cosmetic preview.",
+    "metaDescription": "Run a colored contacts try-on with your own photo. Preview hazel, green, blue or gray irises with natural pupils. A cosmetic preview, free to try.",
     "primaryKeyword": "colored contacts try on",
     "secondaryKeywords": [
       "eye color changer",
@@ -191,86 +247,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "what eye color suits me",
       "eye color filter"
     ],
-    "h1": "Colored Contacts Try On: Picture Yourself With A New Eye Color",
-    "heroLead": "Ever wondered how you would look with hazel, green, blue or gray eyes? Upload a clear photo and this colored contacts try on changes the iris color only, keeping your pupils and natural light reflections. It is a cosmetic preview, so you can be curious without commitment.",
-    "howToHeading": "How To Use The Colored Contacts Try On",
+    "h1": "Use a colored contacts try-on to see your new eyes.",
+    "heroLead": "See how green or blue eyes would look on you before you talk to an optician. Add one close photo and this colored contacts try-on recolors your irises only, keeping your pupils and the light in your eyes. It's a cosmetic preview, and trying it is free.",
+    "howToHeading": "See yourself with a new eye color in three quick steps.",
+    "howToIntro": "You need one close, well-lit photo and a color in mind.",
     "steps": [
       {
-        "title": "Upload a close, well-lit photo",
-        "body": "Pick a front-facing photo with your eyes open and the irises clearly visible. Even daylight works better than flash or heavy shadow."
+        "title": "Upload a close photo with both eyes wide open.",
+        "body": "Face the camera in even daylight so both irises show. Flash and deep shadow wash out the color."
       },
       {
-        "title": "Choose an eye color",
-        "body": "Select hazel, green, blue or gray. Only the iris color changes, so your eye shape, skin and expression stay yours."
+        "title": "Choose the eye color you want to try on.",
+        "body": "Eye shape, skin and expression stay as they are."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "View the preview beside your original, then download the complete image to keep or share with friends."
+        "title": "Compare it with your natural color and save your favorite.",
+        "body": "Look at both versions together. Download the one you want to keep or send to friends."
       }
     ],
-    "featuresHeading": "Colored Contacts Try On With Hazel, Green, Blue, And Gray Eye Color Previews",
-    "featuresIntro": "Each preview changes iris color only, with pupils, reflections and fine eye detail kept natural.",
+    "featuresHeading": "This colored contacts try-on changes only your iris color.",
+    "featuresIntro": "Pupils, reflections and fine eye detail come from your own photo, so the result still looks like a picture of you.",
     "stories": [
       {
-        "title": "Hazel iris preview with natural reflections",
-        "body": "Hazel can look warm and soft against many skin tones. This preview shows hazel irises with your original pupils and the light reflections in your eyes preserved, so the result still looks like a photo of you."
+        "title": "Hazel adds warmth to your eyes and still looks like you.",
+        "body": "Hazel can look soft against many skin tones. Your pupils and the small reflections in your eyes come from the original photo, so the result still looks believable. Put it next to your natural color and judge the difference yourself, with no pressure to like it.",
+        "points": [
+          "Original pupils kept",
+          "Reflections preserved",
+          "Next to your own color"
+        ],
+        "cta": "See me in hazel"
       },
       {
-        "title": "Green iris preview with your eye shape intact",
-        "body": "Green is one of the most requested colors, and also one of the hardest to imagine. See it on your own face with the shape of your eyes and the skin around them left exactly as they were."
+        "title": "Green becomes easy to judge once you see it on your face.",
+        "body": "Green is a hard color to picture without seeing it. You see it with your eye shape and the skin around your eyes exactly as they were. One look at your own face tells you more than an hour of wondering, and it takes only a few minutes.",
+        "points": [
+          "Eye shape intact",
+          "Skin untouched",
+          "Your own face"
+        ],
+        "cta": "Try green on me"
       },
       {
-        "title": "Blue iris preview to satisfy your curiosity",
-        "body": "Blue eyes can change the whole mood of a portrait. Try the shade on your photo, compare it with your natural color, and decide whether you love it or simply enjoy knowing how it would look."
+        "title": "Blue changes the mood of your portrait in one result.",
+        "body": "Blue can make a face look cooler and brighter. Compare it with your natural color and decide whether you love it or just like knowing how it would look. Either answer costs you a single preview and a few minutes of waiting, and you keep the picture to show a friend.",
+        "points": [
+          "Cooler portrait mood",
+          "Compare with natural",
+          "One preview to decide"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Use it to settle your curiosity before you see a professional.",
+    "ideasIntro": "This preview is for curiosity and inspiration. Real lenses always need an eye care professional.",
+    "guidanceHeading": "Take a close photo so your irises show clearly.",
+    "useCases": [
+      {
+        "title": "Finally see the eye color you keep picturing on your face.",
+        "body": "Try the shade you keep thinking about on your own photo and get your answer in one result. If you still love it, you have a clear picture to bring to an appointment. If you don't, you have saved yourself the wondering and the cost of lenses."
+      },
+      {
+        "title": "Plan an eye color for a costume or a photoshoot.",
+        "body": "Preview a green or gray eye for a costume, a character or a photoshoot. You see whether the color works with your hair and skin before you spend money on props or lenses. Real lenses still need an eye care professional, so treat this as a cosmetic idea."
       }
     ],
     "downloadBanner": {
-      "title": "Save your favorite eye color preview",
-      "body": "Download one finished image of the color you liked. Keep it for fun, or bring it to an eye care professional as a conversation starter."
+      "title": "Find your eye color before you talk to a professional.",
+      "body": "Compare hazel and green, or any pair, as separate results. A $10 monthly plan includes 200 credits, so you can run the whole range for about 25 cents a preview."
     },
-    "faqHeading": "Colored Contacts Try On FAQ",
+    "faqHeading": "Get clear answers about the colored contacts try-on first.",
     "faqs": [
       [
-        "What is a colored contacts try on?",
-        "A colored contacts try on is a visual preview that shows how a different iris color could look in your photo. Ours changes only the iris color and keeps pupils, reflections and eye shape natural. It is cosmetic and not contact lens advice."
+        "What is a colored contacts try-on?",
+        "This tool recolors the irises in your photo so you can see a different eye color. Pupils, reflections and eye shape stay natural, and the result is cosmetic, not lens advice."
       ],
       [
         "How do I see myself with a different eye color?",
-        "Upload a clear, front-facing photo with your eyes open, choose hazel, green, blue or gray, and generate your preview. Then compare it with your original and download the finished image if you like it. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "Upload a sharp photo with your eyes open, choose hazel, green, blue or gray, and wait for the preview. If the first photo looks off, try a second one in softer light."
       ],
       [
-        "Is this colored contacts try on free?",
-        "It is free to try. Generating results uses credits, shown in your account. Try one color first to see how natural it looks on your photo before exploring others. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "What does it cost to test an eye color?",
+        "Your account opens with 10 credits and one eye color uses 5, so two colors are free to test. Each one after that is another 5 credits."
       ],
       [
         "Can this tell me which contacts to buy?",
-        "No. This is a cosmetic preview, not lens advice. Colored lenses must be prescribed and fitted by an eye care professional, even if they do not correct vision. Use the preview for inspiration and ask a professional about real lenses."
+        "No. It is a cosmetic preview, and colored lenses need fitting by an eye care professional even when they don't correct vision. Use the image for inspiration, then ask a professional about real lenses."
       ],
       [
-        "What photo gives the best result?",
-        "A sharp, front-facing photo in even daylight with both eyes open and irises visible works best. Glasses glare, closed eyes, heavy shadows or very distant shots make the preview less convincing. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Which photo gives the most believable iris color?",
+        "Take it close up, in daylight, with both irises fully open and no glasses glare. Flash and deep shadow wash out the color, and distant shots leave too little iris to work with."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. We use it only to produce the preview you asked for, and you can remove your uploads from your account at any time."
+        "How is my photo handled?",
+        "It's used to build the iris preview, then it is yours to delete. Remove it from your account whenever you like, because the finished image is all you need to keep."
       ],
       [
-        "Can I use a photo of someone else?",
-        "Only if that adult has agreed. This tool is for adults aged 18 and over. Ask first, and show them the preview. It is a fun way to explore looks together. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Will it work if I wear glasses in the photo?",
+        "Glare on the lenses can hide the iris, so a photo without glasses gives a cleaner color. Take them off, face the light and keep both eyes open."
       ],
       [
-        "Is it worth previewing an eye color before trying real lenses?",
-        "A preview can satisfy your curiosity and help you decide what shade family you like. It cannot show how a real lens looks on your eye, so speak with an eye care professional before buying any lenses."
-      ],
-      [
-        "Can I use the result as a profile picture?",
-        "You can download the image for personal use. Since the eye color is digitally changed, it is considerate to mention that if you post it publicly. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Is it worth previewing eye color before real lenses?",
+        "It can satisfy your curiosity and show which shade family you like. It can't show how a real lens sits on your eye, so talk to a professional before you buy any."
       ]
     ]
   },
   "ai-eyelashes": {
-    "metaTitle": "Virtual Eyelash Try On: Preview Lash Looks On Your Photo",
-    "metaDescription": "Try a virtual eyelash look on your own photo. Preview natural, wispy or full AI eyelashes before booking extensions or buying false lashes.",
+    "metaTitle": "Virtual Eyelash Try On: Preview Lashes On Your Photo",
+    "metaDescription": "Use a virtual eyelash try-on to see natural, wispy or full lashes on a photo of you ahead of booking extensions. Try it free.",
     "primaryKeyword": "virtual eyelash try on",
     "secondaryKeywords": [
       "ai eyelashes",
@@ -280,86 +364,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "try lashes on my photo",
       "eyelash filter"
     ],
-    "h1": "Virtual Eyelash Try On: See Natural, Wispy Or Full Lashes Before You Book",
-    "heroLead": "Lash styles look similar in a catalog and very different on you. Upload a clear photo and this virtual eyelash try on adds a natural, wispy or full lash look while keeping your eye color and shape. Choose your style before you buy or book.",
-    "howToHeading": "How To Do A Virtual Eyelash Try On",
+    "h1": "Use a virtual eyelash try-on to pick your lash style.",
+    "heroLead": "Lash sets look alike in a catalog and different on your eyes. Share one sharp photo and this virtual eyelash try-on adds a natural, wispy or full look while keeping your eye color and shape. You can try it free, so choose before you pay a lash artist.",
+    "howToHeading": "Preview your lashes on your own photo in three steps.",
+    "howToIntro": "A bright photo and a style choice are all you need.",
     "steps": [
       {
-        "title": "Upload a clear photo with your eyes open",
-        "body": "Use a bright, front-facing photo where both eyes and your natural lashes are visible. Avoid sunglasses and strong shadows."
+        "title": "Upload a bright photo with both eyes wide open.",
+        "body": "Face the camera with your natural lashes visible. Skip sunglasses, heavy shadow and thick eye makeup."
       },
       {
-        "title": "Pick a lash style",
-        "body": "Choose natural, wispy or full. The effect is added around your lashes while your eye color and shape remain the same."
+        "title": "Choose the lash style you want to preview.",
+        "body": "Lashes are added along your own lash line. Your eye color and eye shape stay the same."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "See the lash look beside your original, then download the complete image to bring to your lash appointment or share with friends."
+        "title": "Compare the preview and take it to your appointment.",
+        "body": "Review the preview beside your original, then download it as a reference for your lash artist."
       }
     ],
-    "featuresHeading": "Virtual Eyelash Try On With Natural, Wispy, And Full AI Eyelashes",
-    "featuresIntro": "Each preview adds a realistic lash look and avoids the clumped, artificial finish that gives previews away.",
+    "featuresHeading": "This virtual eyelash try-on judges each style on your own eyes.",
+    "featuresIntro": "Lashes are added along your own lash line, so the comparison is about the style alone.",
     "stories": [
       {
-        "title": "Natural lash look that still feels like you",
-        "body": "A natural lash look adds length and definition without drawing attention. This preview keeps your eyes and their shape recognizable, so you can see if a light, polished touch is all you need for everyday wear."
+        "title": "A natural set adds length without making a big statement.",
+        "body": "A natural set adds length and definition without drawing much attention. Your eyes keep their shape and color, so you can see whether a light touch is enough for everyday wear. If it's, you can ask your lash artist for a softer set and skip the cost of a dramatic one.",
+        "points": [
+          "Length and definition",
+          "Eye color unchanged",
+          "Everyday wear"
+        ],
+        "cta": "Preview natural lashes"
       },
       {
-        "title": "Wispy lash look compared with your original",
-        "body": "Wispy lashes have a soft, feathery silhouette that many people love in photos. Compare the effect against your original lashes and notice how it frames your eyes, before committing to a set. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "Wispy lashes open the outer corner of your eyes.",
+        "body": "Wispy lashes have a soft, uneven outline that looks good in photos. Put the result beside your original and look at how it opens the outer corner of your eye. You decide whether you love that effect before you commit to a full set. Your eye color and shape stay the same throughout.",
+        "points": [
+          "Soft feathered edge",
+          "Opens outer corner",
+          "Beside your original"
+        ],
+        "cta": "See wispy on me"
       },
       {
-        "title": "Full lash look for a statement finish",
-        "body": "A full lash look can feel dramatic, and that is exactly why a preview helps. See how fuller lashes sit with your eye color and face, then decide if it suits the occasion you have in mind."
+        "title": "Full lashes show you whether a dramatic look suits you.",
+        "body": "A full set is the boldest of the three. You see it with your own eye color and face, then ask yourself whether you would wear it to work or only to a party. One result answers that question in a few minutes, before you pay a lash artist.",
+        "points": [
+          "Statement finish",
+          "Your own eye color",
+          "Occasion check"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Show your lash artist exactly what you want.",
+    "ideasIntro": "Trying lashes on a photo works best before a booking or a purchase, when changing your mind costs time and money.",
+    "guidanceHeading": "Show your natural lashes clearly so the preview can build on them.",
+    "useCases": [
+      {
+        "title": "Book the lash set you actually want, with a picture.",
+        "body": "Preview natural, wispy and full lashes on the same photo, then show your favorite to your lash artist. You name the look with a picture instead of adjectives. It also gives you a fair way to compare two sets before you pay for either. The preview takes only a few minutes."
+      },
+      {
+        "title": "Test false lashes on your photo before a wedding or party.",
+        "body": "Test a fuller look on your photo ahead of buying strips or book a trial. If it feels too heavy, you have saved yourself an uncomfortable evening and the cost of the set. If it looks great, show the picture to whoever applies them. Your photo shows you the answer first."
       }
     ],
     "downloadBanner": {
-      "title": "Take your lash look to the appointment",
-      "body": "Download one finished image of the style you like. Show it to your lash artist as a clear reference for the look you want."
+      "title": "Book the lash set you tested, not the one you guessed.",
+      "body": "Run natural and wispy side by side, then take your favorite to the appointment. For a longer comparison, 200 credits come with the $10 monthly plan, which is 40 previews."
     },
-    "faqHeading": "Virtual Eyelash Try On FAQ",
+    "faqHeading": "Check these answers before you use the virtual eyelash try-on.",
     "faqs": [
       [
-        "What is a virtual eyelash try on?",
-        "A virtual eyelash try on is a preview that shows how a lash style could look on your own face in a photo. Ours adds a natural, wispy or full lash look while preserving your eye color and shape."
+        "What is a virtual eyelash try-on?",
+        "This tool shows how a lash style could look on your own face. It adds a natural, wispy or full look along your lash line and keeps your eye color and shape."
       ],
       [
         "How do I try false eyelashes on my photo?",
-        "Upload a clear, front-facing photo with your eyes open, choose natural, wispy or full, and generate your preview. Compare it with the original, then download the finished image if you want to keep it. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Upload a photo with both eyes open, choose natural, wispy or full, and give it a few minutes. Then set the result next to your original and save the style you like."
       ],
       [
-        "Is the AI eyelashes tool free?",
-        "It is free to try. Each result uses credits, and your account shows what is available. Preview one style first, then try another if you want to compare. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Is the AI eyelashes tool free to use?",
+        "Two lash styles are free: you start with 10 credits and each preview spends 5. More previews cost 5 credits apiece."
       ],
       [
         "How accurate is the lash preview?",
-        "It is a visual approximation, not a promise of what a specific product or technician will deliver. Real lashes depend on your natural lash length, curl and the products used. Use the preview to choose a direction and discuss it with your lash artist."
+        "Real lashes depend on your natural length, curl and the products used, so treat the preview as a direction. It cannot promise what a technician will deliver, so talk it through with your lash artist."
       ],
       [
-        "What photo works best?",
-        "A sharp, well-lit, front-facing photo with both eyes open works best. Heavy eye makeup, glasses, shadows or low resolution can make lashes harder to render naturally. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Which photo works for a lash extensions preview?",
+        "Shoot straight at the camera in daylight and leave off heavy eye makeup, glasses and strong shadow. Your natural lashes must be visible, because the preview builds on them."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. It is used only to produce the preview you asked for, and you can remove your uploads from your account whenever you like."
+        "Is my eye photo kept private?",
+        "It exists to build your lash preview. Once you have downloaded your favorite style you can clear the photo, since that saved image is what you take to the appointment."
       ],
       [
-        "Can I use a friend's photo?",
-        "Only if the other adult has agreed. This tool is for adults aged 18 and over. Ask permission and share the result so you can both enjoy it. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Does it work if I already wear mascara?",
+        "Light mascara is fine. Heavy eye makeup makes the lash line harder to read, so a bare or lightly made up eye gives the cleanest result."
       ],
       [
-        "Is it worth previewing lashes before getting extensions?",
-        "Yes, a preview helps you choose between subtle and dramatic before you spend time and money. It does not replace a consultation, but it gives you a clear picture to talk through with your lash artist."
-      ],
-      [
-        "Can I use the result as my profile picture?",
-        "You can download it for personal use. Because the lashes are digitally added, it is considerate to say so if you share it publicly. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Does previewing lashes help before extensions?",
+        "It helps you choose between subtle and dramatic before you spend time and money. It does not replace a consultation, but it gives your lash artist a clear picture to discuss."
       ]
     ]
   },
   "ai-eyebrows": {
-    "metaTitle": "Eyebrow Try On: Preview Brow Shapes On Your Own Photo",
-    "metaDescription": "Try eyebrows on your own photo. Preview a soft arch, full natural or straight brow before you shape, tint or book a brow appointment.",
+    "metaTitle": "Eyebrow Try On: Preview Brow Shapes On Your Photo",
+    "metaDescription": "Use an eyebrow try-on to see a soft arch, full natural or straight brow on a photo of you ahead of shaping or tinting. Free to try.",
     "primaryKeyword": "eyebrow try on",
     "secondaryKeywords": [
       "ai eyebrows",
@@ -369,86 +481,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "try eyebrows on my photo",
       "eyebrow filter"
     ],
-    "h1": "Eyebrow Try On: Find The Brow Shape That Frames Your Face",
-    "heroLead": "Brows frame the whole face, and a shape you cannot undo can feel scary. Upload a clear photo and this eyebrow try on previews a soft arch, full natural or straight brow, keeping your eyes, skin and individual brow hairs natural.",
-    "howToHeading": "How To Use The Eyebrow Try On",
+    "h1": "Use an eyebrow try-on to see which shape suits you.",
+    "heroLead": "Brows grow back slowly, so a shape you regret stays with you for weeks. Upload a clear photo and this eyebrow try-on previews a soft arch, a full natural brow or a straight line, with individual hairs kept visible. Give it a go for free.",
+    "howToHeading": "Three steps show you how your brows look in a new shape.",
+    "howToIntro": "Push your hair back, face the camera and choose a style.",
     "steps": [
       {
-        "title": "Upload a clear, front-facing photo",
-        "body": "Use a bright photo with your brows fully visible and your hair pushed back. Avoid fringe covering your brows and strong shadows."
+        "title": "Use a bright photo that shows your brows clearly.",
+        "body": "Push hair and fringe off your forehead and face the camera. Shadows and glasses frames hide the brow line."
       },
       {
-        "title": "Choose a brow style",
-        "body": "Select soft arch, full natural or straight brow. Only the eyebrows change, so your eyes and complexion stay as they are."
+        "title": "Choose the brow shape you want to try.",
+        "body": "Only the eyebrows change. Your eyes, skin and expression stay yours."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "Look at the preview beside your original, then download the complete image to take to your brow appointment."
+        "title": "Compare each shape and download the one you prefer.",
+        "body": "Check each preview beside your original and save the one you like to show your brow artist."
       }
     ],
-    "featuresHeading": "Eyebrow Try On With Soft Arch, Full Natural, And Straight Brow Shapes",
-    "featuresIntro": "Each preview changes the eyebrows only and keeps individual brow hairs visible so the result looks believable.",
+    "featuresHeading": "This eyebrow try-on shows you the shape before the tweezers come out.",
+    "featuresIntro": "Individual brow hairs stay visible in every preview, so the shape looks like real brows and not a drawn line.",
     "stories": [
       {
-        "title": "Soft brow arch with individual hairs visible",
-        "body": "A gentle arch can lift and open the face. This preview shows the shape with individual brow hairs still visible, so you can judge the line itself and picture how it frames your eyes before any tweezers come out."
+        "title": "A soft arch lifts the eyes without changing your face.",
+        "body": "A gentle arch can open the face and lift the eyes. The preview keeps single hairs visible, so you judge the line itself and not a flat drawing. You see whether it suits you before any wax or tweezers touch a brow. Your eyes and skin stay exactly as they were.",
+        "points": [
+          "Single hairs visible",
+          "Opens the face",
+          "Before any grooming"
+        ],
+        "cta": "Preview a soft arch"
       },
       {
-        "title": "Full natural brows without changing your eyes",
-        "body": "Fuller brows are a popular direction, and it helps to see them before growing out or filling in. The preview keeps your eyes and skin untouched so you can focus on how the density suits you."
+        "title": "Full natural brows show what growing them out could look like.",
+        "body": "Fuller brows are popular, and growing them takes patience. Preview the density first, with your eyes and skin untouched, and decide whether the wait is worth it for you. You get a clear answer in minutes and avoid weeks of uncertain waiting. Nothing is plucked or tinted along the way.",
+        "points": [
+          "Fuller density",
+          "Eyes untouched",
+          "Wait or skip"
+        ],
+        "cta": "See fuller brows on me"
       },
       {
-        "title": "Straight brow styling for a modern, soft look",
-        "body": "A straight brow gives a calm, youthful, modern frame. Try it on your own photo to see how the flatter line works with your face, and whether it feels like a style you would enjoy wearing."
+        "title": "Straight brows look calm on some faces and stern on others.",
+        "body": "A straight brow gives a calm, modern frame, and it can feel stern on some faces. Try it on your photo and see whether the flatter line feels like you or like someone else. A preview takes minutes, and growing a brow back takes weeks.",
+        "points": [
+          "Calm modern frame",
+          "Flatter line",
+          "Face check"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Make your big brow decisions on a photo first.",
+    "ideasIntro": "An eyebrow try-on is the cheapest moment to change your mind, before a tint, a wax or a salon visit.",
+    "guidanceHeading": "Clear your brow area so your preview looks trustworthy.",
+    "useCases": [
+      {
+        "title": "Walk into the salon with a picture of your brows.",
+        "body": "Show your brow artist the shape you chose and skip the vague talk about a little less here. You both look at the same picture, so nothing gets lost in the description. That small step helps you avoid a shape you did not ask for."
+      },
+      {
+        "title": "Decide on a photo whether to grow your brows out.",
+        "body": "Preview full natural brows on your photo before you stop plucking. If you love them, you now have a good reason to wait. If you don't, you keep your routine and lose nothing. Either way, you decide with a picture and not a guess. You'll know which one it is after one result."
       }
     ],
     "downloadBanner": {
-      "title": "Bring your brow shape to your appointment",
-      "body": "Download one finished image of the shape you prefer. It is a simple way to show your brow artist exactly what you have in mind."
+      "title": "Test a brow shape twice before you reach for the tweezers.",
+      "body": "Try a soft arch and a full natural brow, then pick one. Want to compare more shapes or send previews to a friend? Pay $10 a month and 200 credits are yours."
     },
-    "faqHeading": "Eyebrow Try On FAQ",
+    "faqHeading": "See how the eyebrow try-on works, question by question.",
     "faqs": [
       [
-        "What is an eyebrow try on?",
-        "An eyebrow try on is a preview that shows how a different brow shape could look on your own face in a photo. Ours previews grooming styles while preserving your eye shape, complexion and natural brow hairs."
+        "What is an eyebrow try-on?",
+        "An eyebrow try-on shows a different brow shape on your own face in a photo. It previews grooming styles while keeping your eye shape, skin and natural brow hairs."
       ],
       [
         "How do I find which eyebrow shape suits me?",
-        "Upload a clear, front-facing photo, then preview a soft arch, a full natural brow and a straight brow. Compare each one with your original and notice which one balances your features in a way you enjoy."
+        "Upload a bright photo with your brows showing, then preview a soft arch, a full natural brow and a straight brow. Notice which one balances your features in a way you like."
       ],
       [
         "Is the AI eyebrows tool free?",
-        "It is free to try. Each result uses credits, shown in your account. Start with one style and compare others if you want a closer look. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Yes for your first two brow shapes. A new account holds 10 credits and a preview uses 5, so a third shape needs 5 more."
       ],
       [
         "How accurate is the brow preview?",
-        "It is a visual approximation, not an instruction for how to shape your brows. Real results depend on your hair growth, bone structure and the technician. Use it as a starting point for a conversation with your brow artist."
+        "Think of it as a sketch of the shape. Real results depend on your hair growth, bone structure and your brow artist, so use it as a starting point for a conversation with them."
       ],
       [
-        "What photo gives the best result?",
-        "A bright, front-facing photo with your brows clearly visible works best. Fringe over the brows, heavy filters, shadows or glasses frames covering them make the preview less reliable. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "What should my photo look like for a brow preview?",
+        "Pull your hair and fringe back so nothing covers the brows, and face a window for soft daylight. Glasses frames and heavy filters hide the brow line the tool needs to read."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. We use it only to produce the preview you requested, and you can remove uploads from your account anytime. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Will you keep my photo?",
+        "The photo builds your brow preview and you can delete it from your account at any time. Download your favorite shape first, then remove the upload."
       ],
       [
-        "Can I use someone else's photo?",
-        "Only if the other adult has agreed. This tool is for adults aged 18 and over. Ask first and share the result with them. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Can I preview brows if mine are thin or patchy?",
+        "A full natural brow preview shows what a fuller shape could look like. Real growth varies, so treat it as a goal to discuss with your brow artist."
       ],
       [
-        "Is it worth trying a brow shape before I shape or tint?",
-        "Yes, brows are slow to regrow, so a preview can help you avoid a shape you will not enjoy. It does not replace a consultation, but it helps you walk in knowing what you like. Think of it as a low-stakes way to feel more certain before you spend money or time."
-      ],
-      [
-        "Can I use the result as a profile picture?",
-        "You can download it for personal use. The brows are digitally edited, so it is considerate to mention that if you share it publicly. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Is it worth testing a brow shape before shaping or tinting?",
+        "Yes, because brows regrow slowly and a preview helps you avoid a shape you will not enjoy. It doesn't replace a consultation, but you walk in knowing what you like."
       ]
     ]
   },
   "ai-lip-enhancement": {
     "metaTitle": "Lip Enhancement Preview: Liner And Gloss On Your Photo",
-    "metaDescription": "Try a lip enhancement preview with makeup-style lip liner and gloss on your own photo. A subtle, natural effect, not a procedure simulation.",
+    "metaDescription": "Try a lip enhancement preview with makeup-style liner and gloss on your photo. It is makeup only. Try it at no cost.",
     "primaryKeyword": "lip enhancement preview",
     "secondaryKeywords": [
       "lip liner try on",
@@ -458,86 +598,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "lip makeup simulator",
       "try lip gloss on my photo"
     ],
-    "h1": "Lip Enhancement Preview: See A Fuller-Looking Lip With Liner And Gloss",
-    "heroLead": "Curious how lip liner and gloss could shape your look? Upload a clear photo and this lip enhancement preview shows a subtle, makeup-style effect with your mouth expression and natural lip texture kept. It is a makeup preview, not a medical or cosmetic procedure.",
-    "howToHeading": "How To Use The Lip Enhancement Preview",
+    "h1": "Use a lip enhancement preview to see makeup on your lips.",
+    "heroLead": "See what lip liner and gloss could do for your mouth before you buy either. Give it a clear photo and this lip enhancement preview adds a subtle makeup effect while keeping your expression and lip texture. It is makeup only, and trying it costs you nothing.",
+    "howToHeading": "Previewing lip makeup takes three steps and one relaxed photo.",
+    "howToIntro": "One relaxed, well-lit photo is the only setup you need.",
     "steps": [
       {
-        "title": "Upload a clear, front-facing photo",
-        "body": "Choose a bright photo where your lips are visible and relaxed. Even light helps the liner and gloss look natural."
+        "title": "Choose a bright photo of your relaxed mouth.",
+        "body": "Close your lips gently or smile a little. Even light helps the liner and gloss sit naturally."
       },
       {
-        "title": "Generate your makeup preview",
-        "body": "The tool adds a restrained lip liner and gloss effect. Your identity, expression and the rest of your face stay unchanged."
+        "title": "Generate your makeup preview and give it a moment.",
+        "body": "A restrained liner and gloss effect is added. Your identity, expression and the rest of your face stay unchanged."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "Check the result against your original, then download the complete image to save or share."
+        "title": "Compare it with your original and save the image.",
+        "body": "Look at both side by side, then download the one you want to use as a shopping reference."
       }
     ],
-    "featuresHeading": "Lip Enhancement Preview With Lip Liner, Gloss, And Natural Texture",
-    "featuresIntro": "Every preview is a makeup effect only, kept subtle so you can judge the finish rather than a dramatic change.",
+    "featuresHeading": "This lip enhancement preview changes only the makeup on your lips.",
+    "featuresIntro": "The effect is makeup only and kept subtle, so you judge the finish instead of a dramatic change.",
     "stories": [
       {
-        "title": "A subtle lip-liner effect that looks like makeup",
-        "body": "A well-placed liner can make lips look a little fuller using color alone. This preview shows a restrained, makeup-style outline on your own lips, so you can see the effect without anything permanent. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "A fine liner can make your lips look slightly fuller.",
+        "body": "Color alone can change how full a lip looks. The preview draws a restrained, makeup-style outline on your own lips, so you see the effect without buying a pencil first. It's makeup only, nothing about it is permanent, and it shows no filler or surgical result.",
+        "points": [
+          "Makeup-style outline",
+          "Your own lips",
+          "Nothing permanent"
+        ],
+        "cta": "Preview lip liner"
       },
       {
-        "title": "Gloss finish that keeps natural lip texture",
-        "body": "Gloss adds light and softness. Here it sits over your existing lip texture, helping you see how a glossy finish changes the way your mouth catches the light in a photo. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "Gloss adds a bright highlight over your own lip texture.",
+        "body": "Gloss adds softness and a bright highlight. It sits over your own lip texture, so you can tell whether a wet finish or a quieter one suits your mouth in photos. You see the answer before you spend money on a tube. Your lip shape and expression stay yours.",
+        "points": [
+          "Natural lip texture",
+          "Bright highlight",
+          "Photo-ready finish"
+        ],
+        "cta": "See gloss on me"
       },
       {
-        "title": "Compare the makeup finish with your original",
-        "body": "Seeing the before and after side by side helps you decide how much you like the effect. The comparison keeps your mouth expression and identity intact, so the focus stays on the makeup itself. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "The side-by-side photo shows you how much makeup is enough.",
+        "body": "Seeing before and after together shows how far you want to go. Your expression and identity stay put, so the comparison is only about the makeup. If you prefer the original, you have your answer, and you have saved the cost of products you would not wear.",
+        "points": [
+          "Before and after",
+          "Expression kept",
+          "Your call"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Decide on your liner and gloss before you go shopping.",
+    "ideasIntro": "A lip enhancement preview helps when you are choosing makeup. For a procedure, talk to a licensed professional.",
+    "guidanceHeading": "Give the tool a clean look at your lips.",
+    "useCases": [
+      {
+        "title": "Pick a liner and gloss pair in one sitting.",
+        "body": "Preview the effect on your photo, then choose products that give a similar finish. You buy two items with a reference picture instead of a hunch. You can also show the image to a makeup artist so the match is easy to find. That makes shopping faster and far less of a gamble."
+      },
+      {
+        "title": "Check how a glossy finish looks on camera.",
+        "body": "Before a shoot or a profile photo, see how gloss reads on camera. You will know whether to wear it or keep your lips matte. One preview settles it, and your first two previews are free, so there is nothing to lose by looking. Your face and expression stay the same."
       }
     ],
     "downloadBanner": {
-      "title": "Keep the lip makeup look you liked",
-      "body": "Download one finished image of the finish you prefer. It is a handy reference for choosing a liner and gloss in store."
+      "title": "Run two lip makeup finishes and keep the one you like.",
+      "body": "Run two attempts, then decide which finish is worth buying. If you keep going, $10 a month covers 40 more previews."
     },
-    "faqHeading": "Lip Enhancement Preview FAQ",
+    "faqHeading": "Learn what the lip enhancement preview does and does not show.",
     "faqs": [
       [
         "What is a lip enhancement preview?",
-        "A lip enhancement preview here is a makeup-style visual that shows how lip liner and gloss could make lips look a little fuller in a photo. It is not a surgical, filler or medical simulation. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "A lip enhancement preview is a makeup-style picture of how liner and gloss could make lips look a little fuller. It's not a filler, surgical or medical simulation."
       ],
       [
         "How do I preview lip liner and gloss on my photo?",
-        "Upload a clear, front-facing photo, generate your preview, and compare the result with your original. The effect is subtle and keeps your mouth expression and natural lip texture. Then download the finished image. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Upload a bright photo of your relaxed mouth, and the preview appears shortly. The effect is subtle and keeps your natural lip texture and expression, then you download the image."
       ],
       [
         "Is this lip enhancement tool free?",
-        "It is free to try. Generating a result uses credits, which your account shows. Try one preview to see whether it helps you choose a liner and gloss. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Yes, up to a point. Ten starting credits cover two previews at 5 credits each, and further previews cost 5 apiece."
       ],
       [
         "Does it show what lip filler would look like?",
-        "No. It does not show surgical or filler results and it avoids extreme enlargement. It previews a makeup effect only. For any cosmetic procedure, speak with a qualified, licensed professional. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "No. It avoids extreme enlargement and previews makeup only. For any cosmetic procedure, speak with a qualified, licensed professional."
       ],
       [
-        "What photo works best?",
-        "A bright, front-facing photo with a relaxed mouth works best. Strong shadows, heavy filters, a wide smile covering the lip line, or low resolution make the preview less natural. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "How should I pose for a lip makeup preview?",
+        "Rest your mouth in a gentle closed position or a small smile so the lip line stays visible. A wide smile, hard shadows or a low resolution file make the result less natural."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. It is used only to produce the preview you requested, and you can remove your uploads from your account anytime. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Who sees my photo?",
+        "Your photo goes into the liner and gloss preview and nowhere else. You can remove it from your account once you have saved the finish you like."
       ],
       [
-        "Can I use a friend's photo?",
-        "Only if the other adult has agreed. This tool is for adults aged 18 and over. Ask first and share the result so you can enjoy it together. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Can I use a photo where I am smiling?",
+        "A small smile is fine. A wide smile can cover the lip line the preview needs, so a relaxed mouth gives the most natural liner and gloss."
       ],
       [
-        "Is it worth previewing lip makeup before I buy products?",
-        "Yes, a preview can help you see whether a liner and gloss combination appeals to you before you buy. It does not replace trying products on, but it narrows your choices. Think of it as a low-stakes way to feel more certain before you spend money or time."
-      ],
-      [
-        "Can I use the result as a profile picture?",
-        "You can download it for personal use. The effect is digitally added, so it is considerate to say so if you post it publicly. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Is lip makeup worth previewing before I buy products?",
+        "If you are unsure a liner and gloss pair will suit you, yes. It doesn't replace trying products on, but it narrows your choices before you spend."
       ]
     ]
   },
   "virtual-try-on-clothes": {
     "metaTitle": "Virtual Try On Clothes: See An Outfit On Your Photo",
-    "metaDescription": "Use a free virtual try on for clothes. Upload your photo and a garment picture to preview the color, sleeves and neckline on you before you buy.",
+    "metaDescription": "Use virtual try on clothes with your photo and a garment picture. See color, sleeves and neckline on you before you buy. Free to try.",
     "primaryKeyword": "virtual try on clothes",
     "secondaryKeywords": [
       "try on clothes online",
@@ -547,86 +715,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "try on a dress on my photo",
       "clothes try on app"
     ],
-    "h1": "Virtual Try On Clothes: See The Outfit On You Before You Buy",
-    "heroLead": "Online shopping leaves you guessing how a piece will look on you. Upload your photo and a picture of the garment, and this virtual try on clothes tool shows a before and after outfit preview with your face and body shape preserved. Shop with a clearer picture.",
-    "howToHeading": "How To Use Virtual Try On Clothes With Your Photo",
+    "h1": "Virtual clothes try-on shows any outfit on your own photo.",
+    "heroLead": "Shopping online means guessing how a piece will look on you. Upload your photo and a picture of the garment, and this virtual clothes try-on tool shows a before and after with your face and body shape kept. You can try it for free.",
+    "howToHeading": "Try on an outfit with your own photo in three steps.",
+    "howToIntro": "You need two pictures, one of you and one of the piece.",
     "steps": [
       {
-        "title": "Upload your photo",
-        "body": "Use a clear, full or half-length photo in good light, standing straight, with the area the garment will cover visible."
+        "title": "Upload a clear photo of yourself standing straight.",
+        "body": "Stand straight in good light with the area the garment will cover in view. Half or full length both work."
       },
       {
-        "title": "Add the garment photo",
-        "body": "Upload a clean picture of the garment, ideally flat or on a plain background, so its color, print and material are easy to see."
+        "title": "Add a clean picture of the garment you like.",
+        "body": "A flat photo on a plain background shows color, print and material best. Skip busy backgrounds and heavy folds."
       },
       {
-        "title": "Preview and download the complete image",
-        "body": "Compare the before and after panels, then download the complete image to keep or share before you decide."
+        "title": "Compare the before and after, then save the image.",
+        "body": "Check both panels and send the picture to a friend for a second opinion before you buy."
       }
     ],
-    "featuresHeading": "Virtual Try On Clothes With Garment Color, Sleeves, Neckline, And Drape Preview",
-    "featuresIntro": "Each result is a before and after outfit preview, so you can see the garment on you while your identity stays the same.",
+    "featuresHeading": "This virtual clothes try-on puts the garment on you, not a model.",
+    "featuresIntro": "The garment arrives on your photo with its visible color, print and cut, and your identity stays the same.",
     "stories": [
       {
-        "title": "Garment color and pattern on your own photo",
-        "body": "A color that looks great on the hanger can feel different near your face. This preview brings the visible color and pattern of your chosen garment onto you, so you can see how it works with your coloring."
+        "title": "A shade that glows on the hanger can wash you out.",
+        "body": "A shade that glows on the hanger can wash you out. The preview carries the garment's visible color and pattern onto your photo, so you check it against your own skin and hair. Do it for the one piece you'd hate to return. Your face and body shape stay exactly as they are.",
+        "points": [
+          "Color near your face",
+          "Pattern carried over",
+          "Your own coloring"
+        ],
+        "cta": "See the color on me"
       },
       {
-        "title": "Sleeves and neckline compared on the same person",
-        "body": "Necklines and sleeve lengths change the whole outfit. See them on the same person with your face and body shape preserved, which makes it easier to tell which cut you feel most like yourself in. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "Put two cuts on one photo and see which feels like you.",
+        "body": "Necklines and sleeve lengths change a whole outfit. Put two cuts on the same photo and notice which one you reach for. You see the cut on your own shoulders, which a product photo of someone else can't show you. That makes the choice quick and easy to explain.",
+        "points": [
+          "Neckline compared",
+          "Sleeve length",
+          "Same person"
+        ],
+        "cta": "Compare two cuts"
       },
       {
-        "title": "Outfit drape preview before you add to cart",
-        "body": "Seeing how fabric hangs helps you picture the finished outfit. This is a visual approximation of drape and fit, not sizing advice, but it can give you the confidence to say yes or skip it. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "The drape preview helps you say yes or skip before ordering.",
+        "body": "Seeing how fabric falls helps you picture the finished outfit before you pay. The preview is a visual guess at drape, so it can't confirm your size, stretch or real fit. Use it to say yes or skip, then check the retailer's size guide and return policy before you order.",
+        "points": [
+          "Visual drape guess",
+          "Before and after panels",
+          "Still check sizing"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Check expensive pieces on your photo before you order them.",
+    "ideasIntro": "Run it before any order you couldn't easily return.",
+    "guidanceHeading": "Show the area the garment will cover, arms down and clear.",
+    "useCases": [
+      {
+        "title": "Check a dress on your photo before the big event.",
+        "body": "Put the dress on your photo before ordering. If the color or neckline looks off, you cancel before it ships and skip the return label and the wait for a refund. Check the neckline first, since it changes the look most, and keep the size guide handy for the fit."
+      },
+      {
+        "title": "Narrow a full cart of options down to one favorite.",
+        "body": "Put two or three pieces on the same photo and compare them side by side. You keep the one you looked best in and close the other tabs. Order the winner, skip the rest, and remember that the size guide still decides the fit, not the preview."
       }
     ],
     "downloadBanner": {
-      "title": "Save the outfit preview",
-      "body": "Download one finished before and after image. Send it to a friend for a second opinion or keep it with your shopping list."
+      "title": "Check your whole cart on your photo before you order.",
+      "body": "Add the pieces one at a time and keep only what looks right. For a long shopping list, $10 a month brings 200 credits, which covers 40 try-ons at about 25 cents each."
     },
-    "faqHeading": "Virtual Try On Clothes FAQ",
+    "faqHeading": "Check how virtual clothes try-on works before you upload anything.",
     "faqs": [
       [
-        "What is a virtual try on for clothes?",
-        "A virtual try on for clothes is a preview that shows a garment on your own photo. Ours takes your picture and a garment picture, then creates a before and after outfit preview that keeps your identity and preserves print, material and color as far as visible."
+        "What is a virtual clothes try-on and how does it work?",
+        "It shows a garment on your own photo. You give it your picture and a picture of the piece, and it builds a before and after outfit image that keeps your identity and the garment's visible color and print."
       ],
       [
         "How do I try on clothes online with my photo?",
-        "Upload a clear photo of yourself and a clean picture of the garment, then generate the preview. You will see Before and After panels. Download the complete image if you want to keep it or share it."
+        "Give it a clear photo of yourself and a clean picture of the garment, and give it a few minutes. You get Before and After panels to download or send to a friend."
       ],
       [
-        "Is the virtual try on free?",
-        "It is free to try. Each result uses credits, shown in your account. Try one garment first to see how it works before exploring more. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Is virtual try on free?",
+        "Your first two try-ons are free. You start with 10 credits and each try-on uses 5, so a third garment costs 5 more."
       ],
       [
         "Does it tell me my size?",
-        "No. The result is a visual approximation of fit and drape, not sizing advice. Always check the retailer's size guide and return policy. Use the preview to judge color, pattern and style rather than exact measurements."
+        "No. The result is a visual guess at fit and drape, not sizing advice. Check the retailer's size guide and return policy, and use the preview to judge color, pattern and style."
       ],
       [
-        "What photos work best?",
-        "Use a sharp, well-lit photo of yourself standing straight, with the relevant area visible. For the garment, use a clear flat-lay or plain-background image. Busy backgrounds and heavy folds make the preview less accurate. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Which pictures give the best outfit preview?",
+        "Stand straight in good light for your own photo, and use a flat-lay or plain-background shot of the garment. Busy backgrounds and heavy folds make colors and cut harder to carry over."
       ],
       [
-        "What happens to my photo?",
-        "Your photos are processed to create your result, and they can be deleted. They are used only to produce the preview you requested, and you can remove your uploads from your account whenever you like. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Are my pictures stored after I upload them?",
+        "Your photo and the garment picture are used to build the preview. Delete both from your account when you're done shopping, because the saved before and after image is the part worth keeping."
       ],
       [
-        "Can I use someone else's photo?",
-        "Only if the other adult has agreed. This tool is for adults aged 18 and over. Ask permission first, for example before trying a gift idea on a friend, and share the result with them. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Can I use a screenshot from an online shop?",
+        "Yes. Crop away the prices and the model if you can, since a flat, plain picture of the garment shows color and print best."
       ],
       [
-        "Is it worth trying clothes virtually before buying?",
-        "Yes, it can help you rule out a color or cut that will not suit you and cut down on returns. It will not guarantee the real fit, so still check measurements and the retailer's return policy."
-      ],
-      [
-        "Can I use the result on social media?",
-        "You can download it for personal use. Since it is a digital preview of a garment you may not own, it is considerate to say so if you post it publicly. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Does trying clothes virtually cut down returns?",
+        "It can help you rule out a color or cut that won't suit you. It will not guarantee the real fit, so still check measurements and the return policy."
       ]
     ]
   },
   "ai-tattoo-generator": {
-    "metaTitle": "Tattoo Try On: Preview An AI Tattoo On Your Arm",
-    "metaDescription": "Use a tattoo try on to see an original AI tattoo design on your forearm photo. Preview fine-line, geometric or wave designs before you commit.",
+    "metaTitle": "Tattoo Try On: Preview A Tattoo Design On Your Arm",
+    "metaDescription": "Run a tattoo try-on with a photo of your forearm. Preview fine-line, geometric or wave designs on your skin before you commit. Free to start.",
     "primaryKeyword": "tattoo try on",
     "secondaryKeywords": [
       "ai tattoo generator",
@@ -636,86 +832,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "tattoo before you commit",
       "small tattoo ideas preview"
     ],
-    "h1": "Tattoo Try On: See A Design On Your Arm Before You Commit",
-    "heroLead": "A tattoo is permanent, so choosing slowly makes sense. Upload a photo of your forearm and this tattoo try on shows an original design placed with realistic curvature, so you can see how it sits on you before you visit an artist.",
-    "howToHeading": "How To Use The Tattoo Try On",
+    "h1": "Use a tattoo try-on to see a design on your arm.",
+    "heroLead": "A tattoo stays, so looking first makes sense. Upload a photo of your forearm and this tattoo try-on places an original design that follows the curve of your arm. Starting is free, and you can take your favorite to your artist.",
+    "howToHeading": "Preview a tattoo on your arm in three steps.",
+    "howToIntro": "A photo of your bare forearm and a design choice are enough.",
     "steps": [
       {
-        "title": "Upload a clear forearm photo",
-        "body": "Use a bright photo with your bare forearm visible and the skin in focus. Avoid sleeves, heavy shadows and extreme angles."
+        "title": "Upload a clear photo of your bare forearm.",
+        "body": "Use bright light with the skin in focus. Sleeves, jewelry and extreme angles hide the placement."
       },
       {
-        "title": "Choose a tattoo design",
-        "body": "Pick fine-line botanical, small geometric or minimal wave. Designs are original and never use brand logos."
+        "title": "Pick the tattoo design you want to preview.",
+        "body": "Every design is an original drawing, placed on visible skin so it follows your arm's shape."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "Look at the preview next to your original, then download the complete image to show your tattoo artist."
+        "title": "Compare the preview and save it for your artist.",
+        "body": "Look at the preview beside the original, then download it as a talking point for a consultation."
       }
     ],
-    "featuresHeading": "Tattoo Try On With AI Tattoo Designs: Fine-Line, Geometric, And Minimal Wave",
-    "featuresIntro": "Each preview places one original design on visible forearm skin, following the curve of the arm.",
+    "featuresHeading": "This tattoo try-on shows you the real size and placement on your arm.",
+    "featuresIntro": "One original design per result sits on visible forearm skin, so you judge size, position and style in one look.",
     "stories": [
       {
-        "title": "Fine-line botanical tattoo on your forearm",
-        "body": "Fine botanical lines are delicate and personal. This preview shows an original botanical design on visible forearm skin, so you can picture the size and placement before you take the idea to an artist. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "Thin botanical lines look different at real arm scale.",
+        "body": "Thin botanical lines look different at real arm scale. Your preview shows an original design on visible forearm skin, so you can judge its size and where it lands before an artist sketches anything. Fine lines can fade at small sizes, so check the scale on your own arm.",
+        "points": [
+          "Real arm scale",
+          "Original design",
+          "Placement check"
+        ],
+        "cta": "Preview the botanical"
       },
       {
-        "title": "Small geometric tattoo shaped around your arm",
-        "body": "Geometric designs depend heavily on placement. Here the design follows the shape of your arm, which helps you judge whether its size and position feel right for you. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "A small geometric design depends on exactly where it sits.",
+        "body": "Geometric designs depend on position. The shape follows your arm in the preview, so you can tell whether it feels centered or slightly off. Moving a design on a photo takes a few minutes, while moving a tattoo on skin is much harder. That small check protects a very permanent decision.",
+        "points": [
+          "Follows arm shape",
+          "Centered or off",
+          "Cheap to rethink"
+        ],
+        "cta": "See geometric on me"
       },
       {
-        "title": "Minimal wave tattoo for a quiet, simple look",
-        "body": "A minimal wave is understated and easy to imagine, yet hard to commit to without seeing it. Preview it on your own arm, and decide whether a simple line is the kind of design you want to live with."
+        "title": "A minimal wave is easy to picture and hard to commit to.",
+        "body": "A single wave line is easy to picture and hard to commit to unseen. Preview it on your own arm and ask whether you would be happy with it for years. The preview is a visual idea and not a stencil, so your artist still adapts it.",
+        "points": [
+          "Minimal single line",
+          "Your own arm",
+          "Visual idea only"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Bring a real picture with you to the tattoo consultation.",
+    "ideasIntro": "A tattoo try-on gives you a picture to react to before anyone picks up a needle.",
+    "guidanceHeading": "Photograph your forearm straight on in bright light.",
+    "useCases": [
+      {
+        "title": "Check the size and placement before you book your artist.",
+        "body": "Preview the design at its arm position and see whether it looks too small or too bold. Then tell your artist what you would change. You walk into the consultation with a clear picture, and the conversation is quicker for both of you. You can also bring two versions to compare."
+      },
+      {
+        "title": "Compare three styles on your arm before choosing one.",
+        "body": "Run fine-line, geometric and wave designs on the same arm. Seeing them side by side shows which style you keep looking back at. Pick the one you still like after a day, since a permanent choice deserves that much time. The comparison takes only a few minutes."
       }
     ],
     "downloadBanner": {
-      "title": "Bring your tattoo idea to your artist",
-      "body": "Download one finished image of the design and placement you liked. It makes a clear starting point for a consultation."
+      "title": "Look at your design on your arm before you decide.",
+      "body": "Try two designs and sleep on it. If you want to explore more styles with your artist, 200 credits cost $10 a month and cover 40 previews."
     },
-    "faqHeading": "Tattoo Try On FAQ",
+    "faqHeading": "Get quick answers before you test a tattoo try-on.",
     "faqs": [
       [
-        "What is a tattoo try on?",
-        "A tattoo try on is a preview that shows how a tattoo design could look on your skin in a photo. Ours places an original design on visible adult forearm skin with realistic curvature, keeping you and your arm as they are."
+        "What is a tattoo try-on?",
+        "A tattoo try-on shows a design on your skin in a photo. It places an original design on your forearm, follows the curve of your arm and leaves the rest of the picture alone."
       ],
       [
         "How do I see a tattoo on my arm before getting it?",
-        "Upload a clear photo of your bare forearm, choose a design such as fine-line botanical, small geometric or minimal wave, and generate your preview. Then compare it with the original and download the finished image. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "Send a photo of your bare forearm in clear light, pick fine-line botanical, small geometric or minimal wave, and wait for the preview. Download it when you like what you see."
       ],
       [
         "Is the AI tattoo generator free?",
-        "It is free to try. Each result uses credits, shown in your account. Try one design first, then explore others to compare. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Two previews are free. Starting credits total 10 and every design preview uses 5, so a third design costs another 5."
       ],
       [
         "Is the preview a final tattoo design?",
-        "No. It is a visual idea, not a stencil or a finished design. A professional tattoo artist should adapt the design to your skin, size and placement. Use the preview as a conversation starter, not a blueprint."
+        "No. It is a visual idea, not a stencil or finished artwork. A professional tattoo artist should adapt any design to your skin, size and placement, so treat the preview as a conversation starter."
       ],
       [
-        "What photo works best?",
-        "A sharp, well-lit photo of your bare forearm facing the camera works best. Sleeves, jewelry covering the area, heavy shadows or blurry shots make the placement less convincing. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "How should I photograph my arm?",
+        "Hold your bare forearm toward a window and keep the camera level with it. Sleeves, bracelets over the area, heavy shadows and blurry shots make the placement less convincing."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. It is used only to produce the preview you requested, and you can remove uploads from your account whenever you like. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Do you keep my arm photo?",
+        "It's used for the design preview alone. Delete it when you are done, and keep only the image you plan to show your artist."
       ],
       [
-        "Can I use someone else's arm photo?",
-        "Only if that adult has agreed. This tool is for adults aged 18 and over. Ask first, and show them the preview before sharing it. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Can I try a design somewhere other than my forearm?",
+        "The previews are made for the forearm, so upload a photo of your bare forearm. Other body areas are not what this tool is built for."
       ],
       [
-        "Is it worth trying a tattoo design before I get inked?",
-        "Yes, a permanent choice deserves a good look first. A preview helps you judge size, placement and style, though it does not replace talking with a licensed tattoo artist about your skin and the design. Think of it as a low-stakes way to feel more certain before you spend money or time."
-      ],
-      [
-        "Can I use the design from the result for a real tattoo?",
-        "The designs are original and meant as inspiration. Show the image to your artist as a reference, and expect them to refine it. Check with them about suitability, placement and aftercare. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "Is it worth trying a design before I get inked?",
+        "A permanent choice deserves a good look first. A preview helps you judge size, placement and style, though it does not replace talking with a licensed artist about your skin."
       ]
     ]
   },
   "ai-waist-slimming": {
     "metaTitle": "Garment Fit Preview: See A Neater, Tailored Drape",
-    "metaDescription": "Try a garment fit preview on your photo. See a neater drape and tailored seams on the clothes you already own, with your body size unchanged.",
+    "metaDescription": "Try a garment fit preview on your photo. See a neater drape and tailored seams on clothes you own, with your body unchanged. Free to start.",
     "primaryKeyword": "garment fit preview",
     "secondaryKeywords": [
       "silhouette preview",
@@ -725,86 +949,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "neater drape preview",
       "ai waist slimming"
     ],
-    "h1": "Garment Fit Preview: See Your Clothes With A Neater, Tailored Drape",
-    "heroLead": "Sometimes the clothes need adjusting, not you. Upload a photo and this garment fit preview shows a slightly neater drape and tailored seams on the piece you are wearing. Your body size and shape stay exactly as they are, so you can picture a tailor's work.",
-    "howToHeading": "How To Use The Garment Fit Preview",
+    "h1": "Get a garment fit preview to see your clothes tailored.",
+    "heroLead": "Some clothes you own never hang quite right. Upload a photo of yourself wearing one and this garment fit preview shows a neater drape and cleaner seams on the garment. Your body size and shape stay exactly as they are, and starting costs nothing.",
+    "howToHeading": "You can preview a tailored fit on your own clothes in three steps.",
+    "howToIntro": "You wear the piece, and the preview shows what tailoring could change.",
     "steps": [
       {
-        "title": "Upload a clear photo in the garment",
-        "body": "Choose a bright, full or half-length photo of you wearing the shirt, jacket or dress. Stand naturally with the garment fully visible."
+        "title": "Upload a photo of yourself wearing the garment.",
+        "body": "Stand naturally in bright light with the shirt, jacket or dress fully visible."
       },
       {
-        "title": "Generate the tailoring preview",
-        "body": "The tool adjusts the drape and seams of the garment only. It does not change your body size or shape."
+        "title": "Generate the tailoring preview, which takes a few minutes.",
+        "body": "Only the clothing's drape and seams are adjusted."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "See the before and after, then download the complete image to bring to a tailor or keep for reference."
+        "title": "Compare the two and take the image to your tailor.",
+        "body": "Check before and after together, then download the picture to show the fit you hope for."
       }
     ],
-    "featuresHeading": "Garment Fit Preview With Tailored Drape, Neater Seams, And Silhouette Comparison",
-    "featuresIntro": "Each result works on the clothing, not on you. It shows what careful tailoring could do for the same garment.",
+    "featuresHeading": "This garment fit preview changes only your clothing, never your body.",
+    "featuresIntro": "The preview tidies the clothing and shows what careful tailoring could do for the same piece.",
     "stories": [
       {
-        "title": "A neater shirt drape on the same body",
-        "body": "A shirt that bunches can make an outfit feel off. This preview shows a neater drape in the existing shirt, without reducing the person's body size, so you can picture how a simple tailoring change would look."
+        "title": "Your loose shirt gets a neater drape in the preview.",
+        "body": "Loose fabric at the waist or shoulders can make a good shirt feel wrong. The preview smooths the drape on the shirt you already own, so you can picture a tailoring fix before you pay for one. Your own body doesn't change at all. The change shows on the garment only.",
+        "points": [
+          "Smoother drape",
+          "Cleaner fit",
+          "Simple fix"
+        ],
+        "cta": "Preview a neater shirt"
       },
       {
-        "title": "A tailored jacket preview built around the garment",
-        "body": "Tailoring lives in the seams and outline of a garment. Here those lines are refined while your body stays untouched, which helps you decide if a visit to a tailor is worth it. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "Cleaner seams show a tailor where your jacket needs work.",
+        "body": "Tailoring happens in the seams and outline of a garment. The preview refines those lines on your photo, so you can see which seams a tailor would need to touch. That tells you whether the jacket is worth the cost of fixing. Your body is never changed in the picture.",
+        "points": [
+          "Cleaner seams",
+          "Refined outline",
+          "Worth the cost?"
+        ],
+        "cta": "See a tailored jacket"
       },
       {
-        "title": "Garment fit comparison before and after",
-        "body": "Place the original and the tailored version side by side. The comparison focuses on how the clothing hangs, so you judge the garment itself and not yourself, and feel calmer about your next alteration. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "The before and after panels show how much tailoring could change.",
+        "body": "Put the original and the tailored version side by side and look at how the clothing hangs. It is a visual guess, not a pattern or a measurement, so ask a tailor what is realistic. You walk in with a clear picture of the fit you hope for.",
+        "points": [
+          "Side by side",
+          "Same photo",
+          "Visual guess"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Spend your money on tailoring only when the change will show.",
+    "ideasIntro": "Run it before you pay for an alteration, not after.",
+    "guidanceHeading": "Wear the garment and stand naturally for your photo.",
+    "useCases": [
+      {
+        "title": "Decide whether your favorite jacket is worth altering.",
+        "body": "Preview the neater fit on your own photo before you pay a tailor. If the change looks small, you keep the money. If it looks great, you book the fitting and take the picture with you so the tailor can see it. Either way, you decide with real information."
+      },
+      {
+        "title": "Show your tailor the fit you want without jargon.",
+        "body": "Show your tailor the preview instead of describing the fit in words. A picture of the drape you hope for is clearer than any explanation, and both of you work from the same image. It makes the first conversation shorter and the result closer to the fit you pictured."
       }
     ],
     "downloadBanner": {
-      "title": "Take the tailoring idea to your tailor",
-      "body": "Download one finished before and after image. It is a clear way to show a tailor the fit you are hoping for."
+      "title": "Check a jacket's tailored look before you pay a tailor.",
+      "body": "Check your favorite jacket and one backup piece first. A $10 monthly plan offers 200 credits, enough to look at 40 pieces before you book any fitting."
     },
-    "faqHeading": "Garment Fit Preview FAQ",
+    "faqHeading": "Find out how the garment fit preview works and where it stops.",
     "faqs": [
       [
         "What is a garment fit preview?",
-        "A garment fit preview is a visual that shows how an existing piece of clothing could hang with better tailoring. Ours adjusts drape and seams on the garment and leaves your actual body size and shape unchanged."
+        "A garment fit preview shows how a piece of clothing you own could hang with better tailoring. It adjusts drape and seams on the garment in your photo and leaves you untouched."
       ],
       [
         "Does this slim my waist?",
-        "No. The tool does not reduce your waist or change your body, and it makes no weight-loss claims. It only previews a neater, tailored look for the garment you are wearing. Your shape is not something that needs to change."
+        "No. The tool doesn't reduce your waist or change your body, and it makes no weight-loss claims. It only previews a neater, tailored look for the garment you are wearing."
       ],
       [
         "How do I preview how a tailored garment would look?",
-        "Upload a clear photo of you wearing the garment, generate the preview, and compare the before and after panels. Then download the finished image to bring to a tailor as a reference. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "Upload a photo of yourself wearing the garment, wait a few minutes, then study the before and after panels. Download the image to bring to a tailor."
       ],
       [
         "Is the garment fit preview free?",
-        "It is free to try. Each result uses credits, shown in your account. Try one photo first to see how it handles your garment. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Yes for the first two. You start with 10 credits and each garment preview takes 5. After that it's 5 credits per preview."
       ],
       [
         "How accurate is the preview?",
-        "It is a visual approximation, not a measurement or a tailoring pattern. A real tailor will take measurements and may suggest different adjustments. Use the preview as a conversation starter about how a garment could fit."
+        "A real tailor takes measurements, and this preview does not. It is a visual guess, so a tailor may suggest different changes."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. It is used only to produce the preview you requested, and you can remove your uploads from your account at any time. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Is the picture of me deleted afterwards?",
+        "It builds the tailoring preview and nothing else. You can clear it from your account after saving the before and after image for your tailor."
       ],
       [
-        "Can I use a photo of someone else?",
-        "Only if that adult has agreed. This tool is for adults aged 18 and over. Ask first, and be kind about the result. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
+        "Does it work on dresses as well as jackets?",
+        "It adjusts drape and seams on the garment in your photo, so a shirt, jacket or dress can all be tried as long as the whole piece is visible."
       ],
       [
-        "Is it worth previewing tailoring before an alteration?",
-        "Yes, it can help you decide whether a garment is worth altering and what to ask for. It will not replace a fitting, but it can help you feel more sure before you pay for changes."
-      ],
-      [
-        "What photo gives the best result?",
-        "A bright, sharp photo where the garment is fully visible and you stand naturally works best. Bulky coats, strong shadows, extreme angles or low resolution make the drape harder to preview. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "What photo gives the best garment fit preview?",
+        "Wear the piece and stand naturally in bright, even light so the whole garment shows. Bulky coats, strong shadows and extreme angles make the drape harder to read."
       ]
     ]
   },
   "old-photo-restoration": {
-    "metaTitle": "Old Photo Restoration: Free AI Repair Of Faded Photos",
-    "metaDescription": "Try old photo restoration online. Preview repaired scratches, restored contrast and gentle sharpening while the people and era stay true.",
+    "metaTitle": "Old Photo Restoration: Repair Faded And Scratched Photos",
+    "metaDescription": "Try old photo restoration online. Preview repaired scratches, restored contrast and gentle sharpening while people and era stay true. Free to start.",
     "primaryKeyword": "old photo restoration",
     "secondaryKeywords": [
       "restore old photos online",
@@ -814,86 +1066,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "photo restoration app",
       "restore family photos"
     ],
-    "h1": "Old Photo Restoration: Bring Faded Family Memories Back To Life",
-    "heroLead": "The photo of a grandparent, a wedding or a childhood home deserves to be seen clearly. Upload a scan or a picture of it and this old photo restoration repairs scratches, restores faded contrast and softens blur, keeping the people and the era of the original.",
-    "howToHeading": "How To Use Old Photo Restoration On Your Scan",
+    "h1": "Use old photo restoration to bring a faded family picture back.",
+    "heroLead": "Your grandparents' wedding photo has faded, and nobody can retake it. Upload a scan and this old photo restoration tool repairs scratches, brings back faded contrast and softens blur, keeping the people and the era in place. It costs nothing to try.",
+    "howToHeading": "Restoring an old photo takes three steps.",
+    "howToIntro": "Scan it flat, upload it, then compare the two versions.",
     "steps": [
       {
-        "title": "Upload a scan or a clear photo",
-        "body": "Scan the print flat, or photograph it in even light without glare. Higher resolution captures more detail to restore."
+        "title": "Scan the print or photograph it flat in even light.",
+        "body": "Use even light and avoid glare and finger shadows. A higher resolution gives the tool more detail to work with."
       },
       {
-        "title": "Generate the restoration",
-        "body": "The tool repairs visible scratches, fade and mild blur. A black and white photo stays black and white."
+        "title": "Generate the restoration and let it run.",
+        "body": "Visible scratches, fade and mild blur are repaired. A black and white photo stays black and white."
       },
       {
-        "title": "Compare and download the complete image",
-        "body": "Check the restored version beside the original, then download the complete image to keep, print or share with family."
+        "title": "Compare it with your scan and save the new file.",
+        "body": "Check the restored version beside your scan, then download it to print or share with family."
       }
     ],
-    "featuresHeading": "Old Photo Restoration That Repairs Scratches, Restores Faded Contrast, And Respects The Original Era",
-    "featuresIntro": "Each restoration works on the real photograph and keeps the subjects, composition and period intact.",
+    "featuresHeading": "This old photo restoration makes your picture clearer and keeps its age.",
+    "featuresIntro": "The restoration works on your real photograph and keeps the subjects, the composition and the period.",
     "stories": [
       {
-        "title": "Repair visible scratches and creases on a treasured photo",
-        "body": "Scratches and creases pull attention away from the faces you love. This preview repairs visible damage and keeps the subjects intact, so you can compare it with your original and see the memory more clearly. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "Restoration repairs scratches, fading and blur and keeps every face.",
+        "body": "Old photo restoration repairs scratches, lifts faded contrast and softens blur without changing who is in the picture. A black and white print stays black and white. The result sits beside your original scan, so you can check every face before you print it or share it with the family.",
+        "points": [
+          "Scratches repaired",
+          "Creases smoothed",
+          "Faces kept"
+        ],
+        "cta": "Repair my photo"
       },
       {
-        "title": "Restore faded contrast in aging photographic tones",
-        "body": "Time drains contrast from old prints. The restoration brings back a clearer balance of light and dark, so details that were lost in fading become easier to see, while the photo still looks like its own age."
+        "title": "Restoration works from your scan, so a sharper scan helps.",
+        "body": "The tool can only repair what your scan shows, so a flat, evenly lit scan gives it more to work with. Use the highest resolution your scanner offers and keep glare and finger shadows off the print. A phone photo works too if the light is soft and the camera is square to the paper.",
+        "points": [
+          "Clearer light and dark",
+          "Details recovered",
+          "Period look kept"
+        ],
+        "cta": "Restore the contrast"
       },
       {
-        "title": "Preserve the original era and the people in it",
-        "body": "A good restoration does not replace anyone or modernize the scene. Composition, clothing and mood remain as they were, and monochrome stays monochrome. Restored details are plausible, not verified history. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "You get one clean file and keep your original scan.",
+        "body": "You download the repaired file and keep your scan untouched as the record. Where the original is badly damaged, the tool makes a plausible guess, not verified history, so the scan stays your reference. Send the clean file to relatives or print it, and file the original away safely.",
+        "points": [
+          "Nobody replaced",
+          "Monochrome stays",
+          "Keep your scan"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Repair your family photo and share it with everyone.",
+    "ideasIntro": "Run it on the pictures you can't retake and want to share.",
+    "guidanceHeading": "Scan your photo carefully so the tool has detail to repair.",
+    "useCases": [
+      {
+        "title": "Print a clean copy of your photo for a family gathering.",
+        "body": "Restore the one photo everyone asks about and print the new version for the wall at a copy shop or on your home printer. The clean copy hangs where the faded one used to sit, and you can reprint it whenever a relative asks. The original scan stays safe in your files."
+      },
+      {
+        "title": "Give a restored portrait to the person in the photo.",
+        "body": "Restore a childhood or wedding photo and hand it to the person pictured, framed or in an email. A clear version of an old day makes a gift you can't buy in a store. Keep the original scan too, as the true record of the photo."
       }
     ],
     "downloadBanner": {
-      "title": "Save your restored photo",
-      "body": "Download one finished, restored image. Share it with relatives, print it for the wall or keep it with your family archive."
+      "title": "Two faded photos come back without spending anything.",
+      "body": "If a shoebox of prints is waiting, the $10 monthly plan includes 200 credits, which is 40 restorations, about 25 cents each. Download every file, then print it or send it to family."
     },
-    "faqHeading": "Old Photo Restoration FAQ",
+    "faqHeading": "Learn how old photo restoration treats your family pictures.",
     "faqs": [
       [
         "What is old photo restoration?",
-        "Old photo restoration is the process of repairing damage and fading in an aged photograph so the original image is easier to see. Ours repairs scratches, restores contrast and softens mild blur while keeping the people and era."
+        "Old photo restoration repairs damage and fading in an aged photograph so the image is easier to see. It fixes scratches, restores contrast and softens mild blur while keeping the people and the era."
       ],
       [
         "How do I restore an old photo online?",
-        "Scan or photograph your print in even light, upload it, and generate the restoration. Compare the result with the original, then download the complete image. Higher-resolution scans give better detail. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Scan or photograph your print flat, upload it and let the restoration run. Higher resolution scans give better detail, so use the sharpest copy you have."
       ],
       [
         "Is old photo restoration free?",
-        "It is free to try. Each result uses credits, shown in your account. Start with your most important photo to see the result, then continue with others. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Yes. A new account has 10 credits and one restoration uses 5, so your first two photos are free."
       ],
       [
         "Will the restored photo be historically accurate?",
-        "Not necessarily. Restored details are plausible, not verified history. Where the original is lost or damaged, the tool fills in what looks likely. Keep your original scan so you always have the true record. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Not necessarily. Restored details are a plausible guess, not verified history. Where the original is lost or damaged, the tool fills in what looks likely, so keep your original scan as the true record."
       ],
       [
         "Does it add color?",
-        "No. A black and white or sepia photo stays that way, because the goal is to respect the original. The tool focuses on repairing damage, restoring contrast and softening mild blur. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "No. A black and white or sepia photo stays that way, because the goal is to respect the original. It repairs and clarifies what is already there instead of inventing a new look."
       ],
       [
-        "What photo should I upload?",
-        "Upload the sharpest scan or photograph you have, flat and without glare or finger shadows. Heavily torn, extremely small or very low-resolution photos give less reliable results. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "What should I upload to fix a faded photo?",
+        "The sharpest scan you can make, flat and free of glare or finger shadows. Hold the camera square to the print if you photograph it, and keep your own shadow off the paper."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. It is used only to produce the restoration you requested, and you can remove your uploads from your account anytime. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Is my family scan kept on your side?",
+        "It's used to make the restoration and nothing else. Clear it once you hold the repaired file, and keep your own original somewhere safe."
       ],
       [
-        "Can I restore a photo of someone else's family?",
-        "Yes, if you have the right to use it. Old photos often include people who cannot give consent, so use them with care and respect for the individuals shown. This tool is for adult users aged 18 and over."
-      ],
-      [
-        "Is it worth restoring before I print an old photo?",
-        "Yes, a restoration can give you a clearer version to print and frame. Keep your original, and use the restored image for sharing, gifts and displays. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Can I restore a photo with a torn corner?",
+        "A light tear or crease is fine. Heavily torn, tiny or very low resolution photos give less reliable results, so scan the print flat and check the damage is clearly visible."
       ]
     ]
   },
   "face-blur": {
     "metaTitle": "Face Blur: Blur Faces In A Photo Before You Share",
-    "metaDescription": "Use a face blur tool to obscure every visible face in your photo with a strong soft blur. Share more comfortably. Free to try.",
+    "metaDescription": "Use face blur to obscure every visible face in your photo with a soft, strong blur, then share more comfortably. Free for your first photos.",
     "primaryKeyword": "face blur",
     "secondaryKeywords": [
       "blur faces in photo",
@@ -903,86 +1183,114 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "blur face in picture",
       "blur background people"
     ],
-    "h1": "Face Blur: Obscure Faces In Your Photo Before You Post",
-    "heroLead": "Sharing a photo should not mean sharing everyone's face. Upload your picture and this face blur tool covers every visible face with a strong, soft-edged blur and exports only the blurred image. It makes posting easier, though it cannot promise anonymity.",
-    "howToHeading": "How To Blur Faces In A Photo",
+    "h1": "Use face blur to hide faces in your photo before you post.",
+    "heroLead": "Sharing a photo should not mean sharing everyone's face. Upload your picture and this face blur tool looks for every visible face and covers it with a strong, soft-edged blur, then gives you only the blurred image. It is free to try, though it can't promise anonymity.",
+    "howToHeading": "Blur faces in a photo in three steps.",
+    "howToIntro": "Upload a photo, check every corner of the result, then download it.",
     "steps": [
       {
-        "title": "Upload a clear photo",
-        "body": "Choose a photo where the faces are visible, in good light and decent resolution. Larger, sharper faces are easier to detect."
+        "title": "Upload a sharp photo with every face in view.",
+        "body": "Larger faces in good light are easier to find. Very small or turned faces are harder."
       },
       {
-        "title": "Generate the blurred image",
-        "body": "The tool blurs every visible face with a strong soft-edged blur. Only the blurred image is shown, with no unblurred original panel."
+        "title": "Generate the blurred image and give it a moment.",
+        "body": "Every visible face gets a strong, soft-edged blur. You see only the blurred result, with no original beside it."
       },
       {
-        "title": "Check carefully and download the complete image",
-        "body": "Look over every person, reflection and background face, then download the complete image once you are happy with it."
+        "title": "Check each person in the result, then download it.",
+        "body": "Look at reflections, background faces and anyone partly hidden. Save the image once you are happy."
       }
     ],
-    "featuresHeading": "Face Blur For Close-Ups, Group Photos, And Wider Scenes",
-    "featuresIntro": "Each result is a single blurred image, with no side-by-side original that would defeat the purpose.",
+    "featuresHeading": "This face blur gives you one blurred image with no original shown.",
+    "featuresIntro": "There is no unblurred original on screen, so the picture you save is the picture you meant to share.",
     "stories": [
       {
-        "title": "Obscure a close-up face with a soft, strong blur",
-        "body": "When a face is large in the frame, a clear blur matters. This result exports a face-obscured image without an unblurred comparison panel, so the picture you save is the one you meant to share. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "You get a strong, soft blur over any close-up face.",
+        "body": "When a face fills the frame, a half-hearted blur defeats the point. This result exports a strongly obscured image with no original beside it, so you cannot post the wrong version by mistake. You check the result once, then download the one file. You stay in control of what gets shared.",
+        "points": [
+          "Strong soft blur",
+          "No original shown",
+          "No wrong file"
+        ],
+        "cta": "Blur my photo"
       },
       {
-        "title": "Cover faces in a wider photo with several people",
-        "body": "Group shots and street scenes can hide faces in the background. Check every visible face in the wider scene, including reflections and people behind your main subject, before you post. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "You get every face in a crowded photo blurred.",
+        "body": "Wider scenes hide faces in the background, in mirrors and behind your main subject. The tool looks for every visible face, and you scan the result for any it missed. One missed face in the corner is the one people notice. Zoom in on the result before you share it.",
+        "points": [
+          "Every visible face",
+          "Backgrounds checked",
+          "Reflections too"
+        ],
+        "cta": "Cover every face"
       },
       {
-        "title": "A privacy-conscious export you still review yourself",
-        "body": "Blurring faces can help you share a moment more comfortably. It is not a guarantee of anonymity, because clothing, location and context can still identify someone. Review the image yourself first. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "A blur hides faces, but your caption can still name people.",
+        "body": "Blur reduces how visible a face is. It's not anonymity, because clothing, tattoos, location and captions can still identify someone. Treat the result as a first step and check it yourself before you post, since you decide what is safe to share. Look at the caption and the background as well as the faces.",
+        "points": [
+          "Review before posting",
+          "Not full anonymity",
+          "Check the context"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "You can share your moment and keep other people private.",
+    "ideasIntro": "Blurring helps when a photo matters to you but not everyone in it agreed to be posted.",
+    "guidanceHeading": "Pick a photo where every face is easy to find.",
+    "useCases": [
+      {
+        "title": "Post a group photo without showing strangers' faces.",
+        "body": "Blur the faces in a street scene or event shot, then share your own moment. A street scene with eight strangers takes the same single upload as a close-up. Passersby in the background get blurred too, though you should check the corners for any it missed."
+      },
+      {
+        "title": "Respect a friend who prefers not to be posted.",
+        "body": "Blur their face before the photo goes online. They stay in the memory, you keep the picture, and nobody is exposed against their wishes. Ask first when you can, and blur when you cannot, then check the result before you post it to the group chat."
       }
     ],
     "downloadBanner": {
-      "title": "Save your blurred photo",
-      "body": "Download one finished image with faces obscured. Review it once more before you share it anywhere."
+      "title": "Blur the photos you plan to post this week.",
+      "body": "Your first two blurred photos are free, so try one group shot and one street scene. For an event album, $10 a month brings 200 credits, enough for 40 photos."
     },
-    "faqHeading": "Face Blur FAQ",
+    "faqHeading": "Check what face blur can and cannot hide in your photos.",
     "faqs": [
       [
-        "What is a face blur tool?",
-        "A face blur tool is a tool that covers the faces in a photo with a blur so they are harder to recognize. Ours applies a strong, soft-edged blur to every visible face and exports only the blurred image."
+        "What is face blur?",
+        "Face blur covers the faces in a photo so they are harder to recognize. This tool applies a strong, soft-edged blur to every visible face and exports only the blurred image."
       ],
       [
         "How do I blur faces in a photo?",
-        "Upload a clear photo, generate the blurred version, and look it over carefully for any face that was missed. Then download the complete image. Check reflections and small background faces too. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Upload the photo, wait for the blurred version, then look over each corner for a missed face. Check reflections and small faces in the background before you download."
       ],
       [
         "Is the face blur tool free?",
-        "It is free to try. Each result uses credits, shown in your account. Try one photo to see how it handles your picture. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Yes for your first two photos. You start with 10 credits and each blurred image uses 5, so a third photo is 5 more credits."
       ],
       [
         "Does face blur make someone anonymous?",
-        "No. Blurring a face does not guarantee anonymity. Clothing, tattoos, location, captions and other context can still identify a person. Use blur as one step, and think about what else in the photo might give someone away."
+        "No. Clothing, tattoos, location, captions and other context can still identify a person. Use blur as one step, and think about what else could give someone away."
       ],
       [
         "Can it miss a face?",
-        "Yes, it can. Very small, turned away, partly hidden or reflected faces may be missed or only partly covered. Always check the result yourself before sharing, and re-run it or edit further if needed. Treat the result as a helpful guide rather than a final answer."
+        "Yes. Very small, turned away, partly hidden or reflected faces may be missed or only partly covered. Check the result yourself before sharing, and run it again if needed."
       ],
       [
-        "What photo works best?",
-        "A sharp, well-lit photo with faces reasonably large in the frame works best. Very distant crowds, extreme angles or low-resolution images make detection less reliable. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Which photo makes blurring most reliable?",
+        "Choose a sharp, well lit shot where faces are reasonably large. Distant crowds, extreme angles and low resolution make detection less dependable."
       ],
       [
-        "What happens to my photo?",
-        "Your photo is processed to create your result, and it can be deleted. It is used only to produce the blurred image you requested, and you can remove your uploads from your account at any time."
+        "Is the original photo deleted?",
+        "The photo is used to make the blurred image, then it can go. Remove the original once the download is done. The blurred result is the safest copy to keep."
       ],
       [
-        "Can I blur faces in photos of other people?",
-        "Yes, and it is often the considerate choice when you share group photos or pictures of children and friends. This tool is for adult users aged 18 and over. Respect people's wishes about where photos appear."
-      ],
-      [
-        "Is it worth blurring faces before I post?",
-        "Often yes, if you want to share a moment without showing everyone in it. Blur reduces how visible faces are, but it is not full protection, so also consider location tags and captions. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "May I blur faces in photos of other people?",
+        "Yes, and it's often the kind choice with group photos or pictures of friends and children. The tool is for users aged 18 and over, and people's wishes about where photos appear come first."
       ]
     ]
   },
   "merge-portraits": {
     "metaTitle": "Merge Portraits: Combine Two Photos Into One Portrait",
-    "metaDescription": "Merge portraits online. Combine two adult photos into one natural joint portrait with matched light and framing, keeping each person recognizable.",
+    "metaDescription": "Merge portraits online. Combine two adult photos into one natural joint portrait with matched light, keeping each person recognizable. Free to try.",
     "primaryKeyword": "merge portraits",
     "secondaryKeywords": [
       "combine two photos into one",
@@ -992,80 +1300,108 @@ export const COPY_MAKEUP_FASHION_PHOTO: CopyMap = {
       "merge two photos of people",
       "side by side portrait"
     ],
-    "h1": "Merge Portraits: Put Two People Together In One Natural Photo",
-    "heroLead": "Some people are never in the same place at the same time. Upload two adult portraits and merge them into one side-by-side joint portrait with consistent light, keeping each person recognizable. It is a keepsake you can make from anywhere.",
-    "howToHeading": "How To Merge Portraits Into One Photo",
+    "h1": "Merge portraits to put two people together in one photo.",
+    "heroLead": "Some people are never in the same place at the same time. Upload two adult photos and this tool will merge portraits into one joint picture with matched light, with each person still recognizable. Your first tries cost nothing.",
+    "howToHeading": "Merging two portraits into one picture takes three steps.",
+    "howToIntro": "Upload two adult portraits, check the result, then download it.",
     "steps": [
       {
-        "title": "Upload two clear portraits",
-        "body": "Choose two sharp, front-facing photos of adults who have agreed. Similar lighting and distance from the camera help the pair match."
+        "title": "Upload two sharp, front-facing portraits of adults who agree.",
+        "body": "Both people must be adults who agreed. Similar light and distance from the camera help the pair match."
       },
       {
-        "title": "Generate the joint portrait",
-        "body": "The tool places both people in one shared composition with matched light and framing. It does not create a new identity."
+        "title": "Generate your joint portrait, which takes a few minutes.",
+        "body": "Both people appear in one shared composition with matched light and framing. No new face is created."
       },
       {
-        "title": "Review and download the complete image",
-        "body": "Check that both people look like themselves, then download the complete image to print, gift or share."
+        "title": "Check that both people look like themselves, then download.",
+        "body": "Compare the result with the originals. Save the file to print, gift or share."
       }
     ],
-    "featuresHeading": "Merge Portraits With Matched Light, Shared Framing, And A Natural Joint Composition",
-    "featuresIntro": "Each result keeps both people recognizable and makes the pair feel like one photograph.",
+    "featuresHeading": "Merge portraits turns two separate photos into one shared picture.",
+    "featuresIntro": "Both people remain recognizable and the pair reads as a single photograph.",
     "stories": [
       {
-        "title": "Two people together in one shared portrait",
-        "body": "Friends, partners and family members often live far apart. This result brings two supplied adult portraits into one composition while keeping both people recognizable, so you can hold onto a picture of them side by side."
+        "title": "Put two relatives who live far apart in one photo.",
+        "body": "Friends, partners and family often live in different cities. The result brings two adult portraits into one composition and keeps each face as it is, so you hold a picture of them side by side. It is a creative composition and doesn't claim the two ever met.",
+        "points": [
+          "Two adults, one frame",
+          "Faces stay theirs",
+          "No new identity"
+        ],
+        "cta": "Put us together"
       },
       {
-        "title": "Matched light and framing across both subjects",
-        "body": "Photos taken in different places rarely match. The tool aims for more coherent lighting and framing across the two subjects, which helps the pair look like they belong in the same picture. It gives you something real to look at, which makes choosing feel calmer."
+        "title": "You match the light so two photos look like one moment.",
+        "body": "Photos taken in different places rarely agree on light. The tool aligns lighting and framing across both people, so the pair look as if they belong together. Similar starting photos give the best match, so pick two taken from about the same distance with light falling from the same side.",
+        "points": [
+          "Matched lighting",
+          "Shared framing",
+          "Similar photos help"
+        ],
+        "cta": "Match the light"
       },
       {
-        "title": "A natural joint composition for gifts and keepsakes",
-        "body": "The finished portrait is a creative composition, not a claim that the two people met or are related. It works well as a gift, a card or a keepsake, and each person stays themselves. Seeing it on your own photo makes the decision feel easier and more personal."
+        "title": "You can give a joint portrait as a gift to keep.",
+        "body": "The finished picture is a creative composition, not a record that the two people met or are related. It works for a card, a frame or an anniversary, and each person stays themselves. Tell the family it's a composite so nobody is confused. Print it small for a card or large for a frame.",
+        "points": [
+          "Card or frame",
+          "Creative composition",
+          "Gift ready"
+        ],
+        "cta": "Get my free result"
+      }
+    ],
+    "ideasHeading": "Make a keepsake for two people who live far apart.",
+    "ideasIntro": "Merge portraits works best as a gift or a memory, made with the agreement of everyone in it.",
+    "guidanceHeading": "Choose two photos with similar light and similar angles.",
+    "useCases": [
+      {
+        "title": "Give a joint portrait to a couple for an anniversary.",
+        "body": "Combine two photos of a couple who live in different cities and frame the result. The gift takes a few minutes to make, and the couple get one picture of themselves together to keep on a shelf. Both people should agree to the portrait first."
+      },
+      {
+        "title": "Put two relatives together in one family picture.",
+        "body": "Place two relatives from separate photos in one portrait to hang beside the others. Tell the family it's a composite, so nobody mistakes it for a photo taken together. Everyone gets a picture of the relatives side by side, even if they never met. A grandparent and a grandchild who have never met in person make a good pair."
       }
     ],
     "downloadBanner": {
-      "title": "Save your joint portrait",
-      "body": "Download one finished image of the two of you. Print it, frame it or send it as a gift."
+      "title": "Your first two joint portraits are free to make.",
+      "body": "Try one gift idea and one family picture. If you are making a set for a reunion, 200 credits for $10 a month is enough for 40 portraits."
     },
-    "faqHeading": "Merge Portraits FAQ",
+    "faqHeading": "Learn how merge portraits builds one picture from two photos.",
     "faqs": [
       [
         "What does it mean to merge portraits?",
-        "To merge portraits means combining two separate photos of people into one shared image. Ours creates a natural side-by-side joint portrait with consistent lighting, keeping each person's identity and not morphing a new face. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "To merge portraits is to combine two separate photos of people into one shared image. This tool keeps each person's identity, matches the lighting and doesn't morph a new face."
       ],
       [
         "How do I put two people in one photo?",
-        "Upload two clear adult portraits, generate the joint portrait, and review it. Check that both people look like themselves, then download the complete image. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Upload two clear adult portraits and let the tool work. Check that both people look like themselves, then download the image to print, gift or share, with everyone's agreement."
       ],
       [
-        "Is merge portraits free?",
-        "It is free to try. Each result uses credits, shown in your account. Try one pair first to see how the composition looks. There is no pressure to use it all at once, so you can come back whenever you want another look."
+        "Is it free to merge two portraits?",
+        "Your first two portraits are free. Ten starting credits cover two results at 5 credits each. A third pair costs 5 more."
       ],
       [
         "Does it blend two faces into a new person?",
-        "No. The tool does not morph a new identity, predict a child's looks or infer kinship. Each person remains themselves in a shared composition. It also does not claim that the two people actually met. It takes only a short wait, and you can try again with a different photo if the first one is not quite right."
+        "No. The tool does not morph a new identity, predict a child's looks or infer kinship. Each person remains themselves in one composition, and it does not claim they ever met."
       ],
       [
-        "What photos work best?",
-        "Sharp, front-facing portraits with similar lighting and distance from the camera work best. Heavy filters, sunglasses, very different angles or low resolution make the composition less natural. Taking a moment to choose a good photo makes the preview look more natural and saves you from retrying."
+        "Which two photos match best?",
+        "Pick portraits taken at a similar distance and angle, with similar light on both faces. Heavy filters, sunglasses and very different angles make the composition less natural."
       ],
       [
-        "What happens to my photos?",
-        "Your photos are processed to create your result, and they can be deleted. They are used only to produce the portrait you requested, and you can remove your uploads from your account whenever you like. You decide what to keep and what to delete, and you can do so whenever you like."
+        "Are both photos deleted after I download?",
+        "Both are used to build your portrait and nothing else. Delete them from your account when you have the finished image, since it's the only file you need."
       ],
       [
         "Do I need permission to use someone else's photo?",
-        "Yes. Use only photos of adults who have agreed to be included. This tool is for adults aged 18 and over. Ask first, and share the finished portrait with them. A little courtesy goes a long way, and the result is usually more fun when everyone is involved."
-      ],
-      [
-        "Is it worth making a joint portrait?",
-        "It is a warm option for gifts, anniversaries and remembering people who live far away. Treat it as a creative keepsake, not as a record that a moment really happened. Think of it as a low-stakes way to feel more certain before you spend money or time."
+        "Yes. Use only photos of adults who agreed to be included. The tool is for people aged 18 and over, so ask first and share the portrait with them before it goes online."
       ],
       [
         "Can I use the result as a profile picture?",
-        "You can download it for personal use, as long as both people are happy with it. Since it is a composite, it is considerate to say so if you post it publicly. It is your image to enjoy, so use it in the way that feels honest and comfortable to you."
+        "For personal use, yes, if both people are happy with it. It is a composite, so it is considerate to say so if you post it publicly."
       ]
     ]
   }
