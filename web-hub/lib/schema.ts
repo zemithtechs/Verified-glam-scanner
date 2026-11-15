@@ -2,9 +2,10 @@ import { SITE, type Category, type Tool } from "@/lib/catalog";
 import { GOOGLE_PLAY_URL, SUPPORT_EMAIL } from "@/lib/site-info";
 import { PRICING, money } from "@/lib/pricing";
 import { CONTENT_UPDATED } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/seo-meta";
+import { absoluteImageUrl, absoluteUrl } from "@/lib/seo-meta";
 import type { ToolPageContent } from "@/lib/tool-page-content";
 import type { BlogPost } from "@/lib/blog-posts";
+import { resolvePost, stripLinks } from "@/lib/blog-utils";
 
 const CTX = "https://schema.org";
 export const ORG_ID = `${SITE.url}/#organization`;
@@ -71,7 +72,7 @@ export function webApplicationSchema(tool: Tool, content: Pick<ToolPageContent, 
     name: tool.name,
     description: content.metaDescription ?? tool.summary,
     url,
-    image: absoluteUrl(image),
+    image: absoluteImageUrl(image),
     applicationCategory: APP_CATEGORY[tool.category],
     operatingSystem: "Web",
     inLanguage: "en",
@@ -100,19 +101,27 @@ export function faqSchema(faqs: Array<[string, string]>) {
 
 export function blogPostingSchema(post: BlogPost, image: string) {
   const url = absoluteUrl(`/blog/${post.slug}`);
+  const resolved = resolvePost(post);
+  const picture = post.heroImage ? post.heroImage.src : image;
   return {
     "@context": CTX,
     "@type": "BlogPosting",
+    "@id": `${url}#article`,
     headline: post.title,
     description: post.description,
-    image: [absoluteUrl(image)],
-    author: { "@type": "Organization", name: `${SITE.name} editorial team`, url: absoluteUrl("/about") },
+    image: [absoluteImageUrl(picture)],
+    author: { "@type": "Organization", name: resolved.author, url: absoluteUrl("/about") },
     publisher: { "@type": "Organization", "@id": ORG_ID, name: SITE.name, logo: { "@type": "ImageObject", url: `${SITE.url}/img/favicon.png` } },
     datePublished: post.published,
     dateModified: post.updated,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
     inLanguage: "en",
+    isAccessibleForFree: true,
+    wordCount: resolved.wordCount,
+    articleSection: post.category,
+    abstract: resolved.keyTakeaways.map(stripLinks).join(" "),
+    ...(post.sources?.length ? { citation: post.sources.map((source) => ({ "@type": "CreativeWork", name: source.title, url: source.url, publisher: { "@type": "Organization", name: source.publisher } })) } : {}),
   };
 }
 

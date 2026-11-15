@@ -1,5 +1,28 @@
 import type { CategoryId, Tool } from "@/lib/catalog";
 
+/** One piece of article content. Inline links written as [anchor](/path or https://...) work in every text field. */
+export type BlogBlock =
+  | { type: "p"; text: string }
+  | { type: "h3"; text: string; id?: string }
+  | { type: "list"; items: string[]; ordered?: boolean }
+  | { type: "table"; headers: string[]; rows: string[][]; caption?: string; source?: { label: string; url?: string } }
+  | { type: "image"; src: string; alt: string; width?: number; height?: number; caption?: string; creditText?: string; creditUrl?: string; license?: string }
+  | { type: "callout"; tone: "tip" | "warning" | "note"; title?: string; text: string }
+  | { type: "steps"; items: Array<{ title: string; text: string }> }
+  | { type: "cta"; variant: "app" | "tool"; headline: string; text?: string; label?: string; toolSlug?: string }
+  | { type: "summary"; title?: string; text: string };
+
+export type BlogSection = {
+  heading: string;
+  /** Anchor id; derived from the heading when left out. */
+  id?: string;
+  /** Plain paragraphs, rendered before `blocks`. Old posts use only this. */
+  paragraphs?: string[];
+  blocks?: BlogBlock[];
+};
+
+export type BlogSource = { title: string; url: string; publisher: string; accessed: string };
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -9,9 +32,23 @@ export type BlogPost = {
   /** ISO dates shown on the page and in BlogPosting schema. */
   published: string;
   updated: string;
-  /** Paragraphs may contain inline links written as [anchor text](/path-or-https-url). */
-  sections: Array<{ heading: string; paragraphs: string[] }>;
+  /** 4 to 7 short points. When left out they are derived from the first sentence of each section. */
+  keyTakeaways?: string[];
+  /** Opening paragraph shown after the Key Takeaways. */
+  intro?: string;
+  sections: BlogSection[];
   faqs: Array<[string, string]>;
+  sources?: BlogSource[];
+  /** Tool slugs to feature; defaults to toolSlugs. */
+  relatedTools?: string[];
+  /** Guide slugs to feature; defaults to other guides in the same category. */
+  relatedPosts?: string[];
+  /** Defaults to BLOG_AUTHOR. */
+  author?: string;
+  /** Lead picture, stored in R2 at /blog/<slug>/<file>. */
+  heroImage?: { src: string; alt: string; width: number; height: number; credit?: string };
+  /** Overrides for the headline of the tool and app calls to action. */
+  cta?: { toolHeadline?: string; appHeadline?: string };
 };
 
 /** Author line used on every guide. Never a named person. */
@@ -28,15 +65,40 @@ export const BLOG_POSTS: BlogPost[] = [
     toolSlugs: ["face-shape-analyzer", "face-beauty-analysis", "hairstyle-changer", "facial-landmarks"],
     published: "2026-11-01",
     updated: "2026-11-14",
+    keyTakeaways: [
+      "A front-facing photo at eye level is a fair starting point for comparing your forehead, cheekbones and jaw.",
+      "Look at which part of the face is widest, then at how long the face is compared with its width.",
+      "Selfies taken at arm's length enlarge the nose and forehead and can make the jaw look narrower.",
+      "Most people recognize parts of two or three shapes, so treat a label as a styling reference, not a rule.",
+      "Take two or three photos in the same light; if the answers agree, you have a working description.",
+    ],
+    intro: "Before you book a haircut or shop for glasses, it helps to know how to describe your face outline in plain words. This guide shows how to read the proportions from one good photo and what to do with the answer.",
     sections: [
       { heading: "Why a photo is a fair starting point", paragraphs: ["Face shape is a way of describing the outline of a face: how wide the forehead, cheekbones and jaw are in relation to each other, and how long the face looks overall. Common labels include oval, round, square, heart and diamond. They are shorthand used by stylists and makeup artists so that two people can talk about a silhouette without a ruler.", "A photograph is a reasonable place to start because it freezes the outline and lets you study it calmly. It also has limits. A camera flattens a three-dimensional head into two dimensions, and the result depends heavily on lens, distance and angle. Treat anything you read from a single picture as a first impression that you can test with a second photo."] },
-      { heading: "Start with a useful photo", paragraphs: ["Choose a front-facing portrait taken near eye level. Pull hair away from the sides of your face if you can, and avoid a wide-angle selfie taken very close to the camera. Lens distortion, a strong tilt and deep shadows can change the outline you are trying to see.", "You do not need a perfectly symmetrical image. You only need a clear view of the forehead, cheekbones and jaw. If the first image is heavily filtered, try a second, unedited photo before drawing a conclusion. Soft daylight from a window in front of you works better than an overhead bulb, which carves shadows under the brows and chin."] },
+      { heading: "Start with a useful photo", paragraphs: ["Choose a front-facing portrait taken near eye level. Pull hair away from the sides of your face if you can, and avoid a wide-angle selfie taken very close to the camera. Lens distortion, a strong tilt and deep shadows can change the outline you are trying to see.", "You do not need a perfectly symmetrical image. You only need a clear view of the forehead, cheekbones and jaw. If the first image is heavily filtered, try a second, unedited photo before drawing a conclusion. Soft daylight from a window in front of you works better than an overhead bulb, which carves shadows under the brows and chin."], blocks: [
+        { type: "callout", tone: "tip", text: "Stand about an arm and a half from the camera, then crop the photo afterwards. Distance is the easiest fix for a distorted outline." },
+      ] },
       { heading: "Compare the broad proportions", paragraphs: ["Look at which part appears widest. A wider forehead with a narrower chin can suggest a heart-like outline; similar width through the forehead, cheeks and jaw can read more square; gentle curves and a longer overall outline often read oval; widest cheekbones with a narrower forehead and jaw point toward diamond. Many faces sit between these descriptions, and that is normal.", "If you would like help looking, the [Face Shape Analyzer](/face-shape-analyzer) places an overview of your outline beside your photo so you can see which description fits best. For a more detailed look at where the main features sit, the [Facial Landmarks Map](/facial-landmarks) gives an illustrative guide to visible features. Both are visual aids for exploring a photo, not anatomical measurements.", "The label is a shorthand for discussing a silhouette, not a verdict about your features. Small changes in expression, hairstyle and camera angle can move the apparent outline from one category toward another. If you want to understand why one angle can change how balanced a face looks, read our guide to [what a facial symmetry preview can and cannot show](/blog/what-facial-symmetry-really-shows)."] },
       { heading: "Use the result as a styling reference", paragraphs: ["If you are planning a haircut, bring both your portrait and a few styles you like. A stylist can account for hair density, texture and how much time you want to spend styling it. The shape guide can help you explain what you want to emphasize, but it should not tell you which cuts you are allowed to wear.", "A visual preview makes this easier. With the [Hairstyle Changer](/hairstyle-changer) you can see a few different cuts on your own portrait and compare the full picture, not just the face outline. Our guide on how to [plan a hair change with a photo preview](/blog/plan-a-hair-change-with-a-preview) explains what to look at first.", "Glasses, necklines and earrings are also easier to think about once you know which areas of your outline you would like to balance or echo. As with hair, treat any suggestion as an idea to try rather than a rule."] },
       { heading: "Common mistakes to avoid", paragraphs: ["The most frequent mistake is judging from a selfie taken at arm's length. Close, wide-angle shots enlarge whatever is nearest the lens, usually the nose and forehead, and make the jaw look narrower. Step back, zoom in a little, and hold the phone at eye level.", "Another mistake is treating a label as a limit. Nobody needs permission to wear a fringe, a short crop or a bold frame because of a category. Labels describe common patterns; real faces are a mixture, and they change with expression, age and lighting.", "Finally, avoid comparing yourself with edited photos. Filters and beauty modes smooth and reshape the outline, so a portrait that has been through an app can give you a misleading answer. Use an untouched image whenever you can."] },
-      { heading: "How the five common shapes are usually described", paragraphs: ["Oval faces are usually described as longer than they are wide, with a forehead slightly wider than the chin and softly curved edges. Round faces have similar length and width, with fuller cheeks and a rounded chin and jawline. Square faces have a broad forehead and a strong, angular jaw, with width that stays fairly even from top to bottom.", "Heart-shaped faces are widest at the forehead and taper to a narrower chin, often with high cheekbones. Diamond faces are narrowest at the forehead and jaw and widest across the cheekbones. These are descriptions of tendencies, and most people recognize parts of two or three of them in themselves."] },
+      { heading: "How the five common shapes are usually described", paragraphs: ["Oval faces are usually described as longer than they are wide, with a forehead slightly wider than the chin and softly curved edges. Round faces have similar length and width, with fuller cheeks and a rounded chin and jawline. Square faces have a broad forehead and a strong, angular jaw, with width that stays fairly even from top to bottom.", "Heart-shaped faces are widest at the forehead and taper to a narrower chin, often with high cheekbones. Diamond faces are narrowest at the forehead and jaw and widest across the cheekbones. These are descriptions of tendencies, and most people recognize parts of two or three of them in themselves."], blocks: [
+        { type: "table", caption: "The five common face shapes at a glance", headers: ["Shape", "Widest point", "Jaw and chin", "Overall length"], rows: [
+          ["Oval", "Slightly wider forehead than chin", "Softly curved", "Longer than wide"],
+          ["Round", "Cheeks, about as wide as long", "Rounded chin and jaw", "Similar to width"],
+          ["Square", "Even from forehead to jaw", "Strong, angular jaw", "Fairly even"],
+          ["Heart", "Forehead", "Tapers to a narrower chin", "Medium"],
+          ["Diamond", "Cheekbones", "Narrow forehead and jaw", "Medium to long"],
+        ], source: { label: "Common styling descriptions, summarised by the AI Beauty Styling editorial team" } },
+      ] },
       { heading: "How hair and frames change the picture", paragraphs: ["Hair has a large effect on how a face outline is perceived. A middle parting with hair tucked behind the ears shows the full forehead and jaw, while a heavy fringe hides the forehead and shortens the face. Volume at the crown adds length, and volume at the sides adds width. This is why many stylists ask to see your hair pulled back before suggesting a cut.", "Glasses work in a similar way. A frame that is wider than the cheekbones can make a face look narrower, while a very small frame can make the lower face look larger. Trying a few styles on, either in a shop or in a photo, shows you more than any label can."] },
-      { heading: "What to do next", paragraphs: ["Take two or three photos in the same light with a neutral expression, run them through a shape tool if you like, and see whether the answers agree. If they do, you have a reasonable working description. If they do not, that is useful information too: it means your outline sits between categories.", "For a broader report that includes a face shape note alongside other visible features and a subjective photo-harmony impression, try [Face Beauty Analysis](/face-beauty-analysis). Remember that every score and label on this site is an entertainment-style impression of one photo, intended for adults, and not a professional or medical assessment."] },
+      { heading: "What to do next", paragraphs: ["Take two or three photos in the same light with a neutral expression, run them through a shape tool if you like, and see whether the answers agree. If they do, you have a reasonable working description. If they do not, that is useful information too: it means your outline sits between categories.", "For a broader report that includes a face shape note alongside other visible features and a subjective photo-harmony impression, try [Face Beauty Analysis](/face-beauty-analysis). Remember that every score and label on this site is an entertainment-style impression of one photo, intended for adults, and not a professional or medical assessment."], blocks: [
+        { type: "steps", items: [
+          { title: "Take two or three photos", text: "Use the same light and a neutral expression, with the camera at eye level." },
+          { title: "Compare the outline", text: "Check which part is widest and how long the face looks next to its width." },
+          { title: "Try a shape tool", text: "Run the photos through the [Face Shape Analyzer](/face-shape-analyzer) and see whether the answers agree." },
+        ] },
+        { type: "summary", text: "A good photo, a calm look at the widest point and a second opinion from a tool give you a working description of your face shape, which is all a stylist needs." },
+      ] },
     ],
     faqs: [
       ["Can a photo tell me my real face shape?", "A photo can give a useful approximation of the outline, but it cannot give an exact answer. Camera angle, lens distance, lighting and hairstyle all change how the forehead, cheeks and jaw appear. Compare two or three untouched photos taken under similar conditions before settling on a label."],
@@ -219,29 +281,207 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "restore-an-old-family-photo",
-    title: "How to prepare an old family photo for restoration",
-    description: "Scan or photograph a print carefully, preserve the original and review restored details before sharing a family memory.",
+    title: "How to restore an old family photo without making it worse",
+    description: "Torn, faded or water damaged? Scan it safely, pick the right repair route and learn when to stop and call a conservator. Free and AI options compared.",
     category: "photo-tools",
     toolSlugs: ["old-photo-restoration", "ai-face-enhancer", "face-blur", "merge-portraits"],
     published: "2026-11-10",
-    updated: "2026-11-14",
+    updated: "2026-11-15",
+    heroImage: {
+      src: "/posts/restore-an-old-family-photo/old-photo-restoration-before-and-after.webp",
+      alt: "Cracked sepia couple portrait next to its restored black and white version",
+      width: 1400,
+      height: 788,
+      credit: "Result made with AI Beauty Styling Old Photo Restoration",
+    },
+    keyTakeaways: [
+      "A wet, stuck-together or moldy photo is an emergency. Don't scan it and don't pull it apart. NEDCC says mold can start within 48 hours in warm, humid air, and stuck prints need a conservator.",
+      "Hold prints by the edges with clean, dry hands. No tape, glue, paper clips, rubber bands or sticky album pages, and blow loose dust off with a bulb blower, not canned air or a brush.",
+      "Scan flat and save a TIFF. The top level in the FADGI archive guidelines is 600 ppi, which is an archive standard and more than most home projects need.",
+      "Keep the first scan untouched and repair a copy. Free editors fix dust and small scratches. AI restoration is faster on fading and cracks.",
+      "AI restoration invents plausible detail where the photo has none, so compare every face with the original before you share the result.",
+      "Keep the original print after scanning, and back the scan up with the 3-2-1 rule: three copies, two kinds of storage, one stored off-site.",
+      "Our Old Photo Restoration costs 5 credits per result, and the 10 free credits on a new account cover two results. It's one option among several, compared below. Colorizing is a separate, optional step, and it guesses.",
+    ],
+    intro: "Restoring an old family photo starts before any software: somebody hands you a shoebox, or one portrait has a crease through a face you love. Software matters less than order. Protect the print first, scan second, repair a copy last. This guide covers each step, says when to stop and call a conservator, and compares free, AI and professional options fairly, including ours.",
     sections: [
-      { heading: "Handle the original gently first", paragraphs: ["The best restoration starts before any software is involved. Old prints are fragile: emulsion cracks, paper curls and fingerprints leave permanent marks. Wash and dry your hands, work on a clean flat surface and hold the photo by its edges. Do not peel a photo from an album page or remove it from a frame by force, because you may tear it.", "Both the US Library of Congress and the US National Archives publish plain-language advice on keeping family photographs in good condition. See the Library of Congress guide to [caring for your family photographs](https://www.loc.gov/preservation/care/photo.html) and the National Archives guide to [preserving family archives](https://www.archives.gov/preservation/family-archives) for storage and handling tips from preservation specialists."] },
-      { heading: "Capture as much detail as you can", paragraphs: ["If you have a print, scan it flat at a useful resolution. If you are using a phone, place the photo on a level surface and shoot straight down in soft, even light. Avoid flash glare and strong reflections from a glossy finish.", "Do not cut away the edges too early. A border can reveal where fading, folds or missing corners begin, and that context helps you judge a restoration preview. Take a second shot with the lighting angled slightly differently if the first has glare."] },
-      { heading: "Keep an untouched copy", paragraphs: ["Save the original scan separately before editing. A restoration may reduce scratches, contrast loss and blur, but it can also infer details that the source no longer contains. The old image remains the most faithful record of what survives.", "Compare the faces, clothing and background in both versions. If a feature looks invented or a person no longer resembles the original, prefer a gentler result."] },
-      { heading: "What restoration can and cannot do", paragraphs: ["[Old Photo Restoration](/old-photo-restoration) is designed to repair scratches, fading and blur in old family photos. It works by generating a cleaner version of the image, which means that where the original is missing information, the tool makes a plausible guess. Those guesses are not verified historical facts.", "If a face in the photo is small or very soft, the [AI Face Enhancer](/ai-face-enhancer) can sharpen portraits, but the same limits apply: clarity can improve, but details that are not in the source cannot be recovered with certainty. When a result looks like a different person, trust the original."] },
-      { heading: "Privacy and sharing", paragraphs: ["Family photographs often show people who have not agreed to be online, including relatives who have passed away and children. Before sharing a restored image publicly, think about who appears in it and whether they, or their families, would be comfortable with it. For a photo with bystanders or strangers in the background, the [Face Blur](/face-blur) tool can hide faces you do not want to share. Review the whole image afterwards, since clothing and surroundings can still identify people.", "If you want to bring two relatives together in one picture, [Merge Portraits](/merge-portraits) can blend two portraits into one image. Label a combined picture clearly so that nobody mistakes it for a real photograph taken together."] },
-      { heading: "Scanning tips that make restoration easier", paragraphs: ["A flatbed scanner gives the most even result. Clean the glass with a soft cloth, place the print face down and scan in color even if the photo is black and white, since color scans often capture subtle tones that help with later repair. Save the scan in a lossless format such as TIFF or PNG for your archive, and make a smaller copy for sharing.", "If you are using a phone, turn off the flash and take the photo in bright, even light such as by a window on an overcast day. Hold the phone parallel to the print so that the edges do not slant, and take several shots to choose from."] },
-      { heading: "Dealing with specific kinds of damage", paragraphs: ["Different damage needs different expectations. Scratches and dust spots are usually easy to reduce. Fading and color shifts can often be improved, although the original tones are a matter of judgment. Torn or missing areas are the hardest, because the tool has to invent what was there, and the result may not match the truth.", "Water stains, mold and cracking emulsion are physical problems that can get worse with handling. For a valuable or very fragile photo, consider asking a professional conservator before doing anything yourself, and scan the photo first so that the information is safe."] },
-      { heading: "Add the story around the image", paragraphs: ["When sharing a restored photo with family, note who appears in it, an approximate date if known, and where the original came from. This information is often more valuable than a perfectly polished image. Write it on the back of the print in pencil, or in the file name and description of the scan.", "A good restoration helps a memory become easier to see while respecting the uncertainty in damaged parts of the photograph. Store the original, the scan and the restored copy together so that the next person to look at them can see what was changed."] },
+      {
+        heading: "Work out what kind of damage you have first",
+        id: "damage-guide",
+        blocks: [
+          { type: "p", text: "Dust and fading you can fix at home. Wet or stuck prints can't wait. Wet or pest-infested items need quick action, and stuck-together items, mold, many loose pieces and rolled items that tear when opened are all reasons to call a conservator ([National Archives](https://www.archives.gov/preservation/family-archives/repairing.html))." },
+          { type: "table", caption: "A damage-by-damage decision guide for old prints", headers: ["What you see", "First step with the print", "Best repair route", "Call a conservator?"], rows: [
+            ["Dust and light scratches", "Blow dust off with a bulb blower", "Scan, then a free editor or AI restore", "No"],
+            ["Fading or yellowing", "Leave it alone and store it away from light", "Scan, then AI restore or a tone fix in an editor", "No"],
+            ["Creases and cracks", "Don't flatten it by force", "Scan flat, then AI restore or an editor", "Only if it's rolled and tears as you open it"],
+            ["Torn in pieces", "No tape or glue; keep the pieces together", "Scan each piece, join them in an editor, then repair", "Yes if there are many pieces"],
+            ["Missing corner or face", "Scan what's left", "Photo editor or a professional restorer; AI will guess", "Optional"],
+            ["Stains and spots", "Don't scrub or use cleaners", "Scan, then an editor or AI restore", "Yes if it could be mold"],
+            ["Wet or stuck together", "Don't scan or pull apart", "Conservator first", "Yes, now"],
+            ["Mold", "Don't try to clean it", "Conservator first", "Yes"],
+          ], source: { label: "Compiled by us from National Archives and NEDCC guidance; the repair routes are our advice", url: "https://www.archives.gov/preservation/family-archives/repairing.html" } },
+          { type: "h3", text: "If the photo is wet, stuck or moldy, stop here", id: "wet-photos" },
+          { type: "p", text: "NEDCC's emergency leaflet says mold can grow within 48 hours at 60% relative humidity and 70F, so a wet photo can't wait for the weekend. Its advice for photos that are stuck together or stuck to glass is to bag them while still damp and freeze them, then consult a conservator. Don't peel them apart. If the prints are separate and you can air dry, the leaflet says to rinse only if the print is visibly dirty and the emulsion is intact, in a tray of clean water, then spread the photos out face up with air moving over them ([NEDCC Leaflet 3.7](https://nedcc.org/free-resources/preservation-leaflets/3.-emergency-management/3.7-emergency-salvage-of-wet-photographs))." },
+          { type: "image", src: "/posts/restore-an-old-family-photo/water-damaged-print-gelatin-dissolved.webp", alt: "A black and white photo of a cathedral whose gelatin layer has dissolved and dripped, stuck to a backing board", width: 1400, height: 949, caption: "Water-damaged print: the gelatin has dissolved and dripped. A print in this state needs a conservator, not a scanner.", creditText: "Heritage Preservation Department, Minnesota Historical Society (photo by Bob Herskovitz), CC BY-SA 4.0, via Wikimedia Commons", creditUrl: "https://commons.wikimedia.org/wiki/File:Water-damaged_photo_materials-01.jpg", license: "CC BY-SA 4.0" },
+          { type: "callout", tone: "warning", title: "Take a phone photo of the damage first", text: "NEDCC advises it before and during salvage. And if you still have the negative or a digital file, saving the wet print may not be the best use of your time. Prints stuck hard to album pages should be removed by a conservator; the American Institute for Conservation has a Find a Professional directory, linked from the National Archives page above." },
+          { type: "image", src: "/posts/restore-an-old-family-photo/moldy-photo-album-page-water-spotting.webp", alt: "An album page of six small black and white photos held by corner mounts, covered in dark spots from water damage or mold", width: 1400, height: 942, caption: "Spotting like this on an album page can be mold or water damage. A conservator can tell which and what's safe to do.", creditText: "Heritage Preservation Department, Minnesota Historical Society (photo by Bob Herskovitz), CC BY-SA 4.0, via Wikimedia Commons", creditUrl: "https://commons.wikimedia.org/wiki/File:Water-damaged_photo_materials-18.jpg", license: "CC BY-SA 4.0" },
+          { type: "cta", variant: "tool", headline: "Restore this photo in a few minutes", text: "Once your print is dry and scanned, upload the scan to Old Photo Restoration. New accounts start with 10 free credits, enough for two results.", label: "Open Old Photo Restoration", toolSlug: "old-photo-restoration" },
+        ],
+      },
+      {
+        heading: "Handle the print gently and skip the home fixes",
+        id: "handle-with-care",
+        blocks: [
+          { type: "p", text: "The Library of Congress says to handle photographs by the edges with clean hands or clean nitrile gloves, and to avoid touching the image area ([Library of Congress](https://www.loc.gov/preservation/care/photo.html)). Skin oils can bleach a print or leave a silver mirror (NEDCC). The don't list matters more than the do list, in our view: tape, glue and wet cleaning are the usual home mistakes." },
+          { type: "h3", text: "What to do" },
+          { type: "list", items: [
+            "Work on a clean, flat surface with clean, dry hands.",
+            "Remove loose dust with an air bulb blower. The Library of Congress says even soft brushes can scratch, and recommends against canned air.",
+            "If you must write on a print, use a soft graphite pencil on the back near the edge. Labeling the folder or sleeve is better.",
+            "Keep negatives separate from prints.",
+          ] },
+          { type: "h3", text: "What not to do" },
+          { type: "list", items: [
+            "Don't use tape, glue, sticky notes, paper clips or rubber bands. Pressure-sensitive tape, rubber cement, rusting clips and dry rubber bands all damage photographs (NEDCC).",
+            "Don't leave prints on self-stick or magnetic album pages. Self-stick pages are acidic and can bond to photos (NEDCC).",
+            "Don't try to fix a torn photo with tape on either side. Scan the pieces and repair the image digitally instead.",
+            "Don't force a curled print flat. Tightly curled materials must not be forced to lay flat (FADGI).",
+            "Don't store prints in an attic, basement or near a vent, radiator or exterior wall.",
+            "Don't use vacuum thermal drying on wet photographs. Gelatin prints can mottle and stick (NEDCC).",
+          ] },
+        ],
+      },
+      {
+        heading: "Scan old photos flat, at high resolution, as a TIFF",
+        id: "scan-old-photos",
+        blocks: [
+          { type: "p", text: "FADGI, the US federal guidelines for digitizing cultural heritage, sets 600 ppi as its top level for prints and photographs, saved as TIFF or JPEG 2000 ([FADGI Technical Guidelines, third edition, 2023](https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf)). That's an archive standard, not a home requirement. At home, 600 dpi is a good default: more detail for the repair tool and room to enlarge. (ppi means pixels per inch, and scanner software often uses dpi for the same thing.) Expect big files: a 4 x 6 inch print at 600 ppi in 16-bit color is roughly 50 MB uncompressed." },
+          { type: "table", caption: "FADGI levels for scanning prints and photographs", headers: ["Level", "Resolution", "Bit depth"], rows: [
+            ["1 star", "200 ppi", "8 bit"],
+            ["2 star", "250 ppi", "8 bit"],
+            ["3 star", "400 ppi", "8 or 16 bit"],
+            ["4 star", "600 ppi", "16 bit"],
+          ], source: { label: "FADGI Technical Guidelines for Digitizing Cultural Heritage Materials, section 3.8", url: "https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf" } },
+          { type: "image", src: "/posts/restore-an-old-family-photo/flatbed-scanner-lid-open.webp", alt: "A flatbed photo scanner with its lid open, showing the empty glass bed", width: 1400, height: 1187, caption: "A flatbed scanner gives the flattest, most even capture. Dust on the glass ends up in your file, so wipe it first.", creditText: "Santeri Viinamäki, CC BY-SA 4.0, via Wikimedia Commons", creditUrl: "https://commons.wikimedia.org/wiki/File:Epson_V850_scanner_open_20230920.jpg", license: "CC BY-SA 4.0" },
+          { type: "h3", text: "A flatbed scanning checklist", id: "scanning-checklist" },
+          { type: "steps", items: [
+            { title: "Clean the glass, not the photo", text: "Wipe the scanner glass and blow loose dust off the print with a bulb. FADGI notes that dust and dirt on the glass end up in the file." },
+            { title: "Place the print face down, square to the edges", text: "Don't press a curled or fragile print flat. FADGI's rule for any risk to the original is to stop immediately and seek assistance." },
+            { title: "Choose 600 dpi, color mode, and 16 bit if offered", text: "FADGI says black and white prints are to be scanned in color at its upper levels (3 star and up), because subtle tone and color differences are part of a print's character. For a wallet-size print, MemoryCherish suggests 1200 dpi." },
+            { title: "Turn off the scanner's dust removal and auto enhancement", text: "FADGI says a digitized master should show the original as it was at capture, and lists removing dust, stains and scratches among the edits to avoid. Switch off the scanner's automatic dust and scratch removal, and do your repairs on a copy." },
+            { title: "Scan the whole border and save as TIFF", text: "The border shows where fading, folds or missing corners begin. Save a TIFF as your master and make a smaller JPEG for sharing." },
+            { title: "Name the file and keep it untouched", text: "The National Archives suggests only letters A to Z, hyphens or underscores and no spaces, plus who, what, where and when in the metadata. Work on a copy from now on." },
+          ] },
+          { type: "h3", text: "No scanner? Photograph it or use a scanning app", id: "no-scanner" },
+          { type: "p", text: "A phone works if you control the light. Lay the print on a flat surface by a window, turn the flash off, hold the camera straight above the print and fill the frame. Take several shots and keep the sharpest. Google PhotoScan, listed on Google Play, takes multiple shots to remove glare, crops automatically and saves to Google Photos. It only scans: it won't repair anything ([Google Play listing](https://play.google.com/store/apps/details?id=com.google.android.apps.photos.scanner))." },
+          { type: "h3", text: "Torn photos: scan every piece", id: "torn-photos" },
+          { type: "p", text: "To fix a torn photo, scan each piece separately and flat, then join them in an editor on a copy. Never tape the back. A seam in the image is easy to retouch. Tape on the back is almost impossible to undo. If you have many fragments, the National Archives suggests asking a conservator." },
+          { type: "image", src: "/posts/restore-an-old-family-photo/album-page-with-torn-hole-two-photos.webp", alt: "An old brown album page with two small black and white photos of a tree-lined promenade and a large torn hole where a third photo once sat", width: 1400, height: 1143, caption: "Missing areas, like this torn hole in an album page, are the hardest to repair, because nothing is left to restore.", creditText: "Unknown author, public domain, via Wikimedia Commons", creditUrl: "https://commons.wikimedia.org/wiki/File:Hungarian_family_photo_album,_page_20.jpg", license: "Public domain" },
+        ],
+      },
+      {
+        heading: "Free and paid ways to restore an old family photo, compared",
+        id: "restoration-options",
+        blocks: [
+          { type: "p", text: "There isn't one best way to restore an old family photo. A scanning app, a photo editor, an AI restore tool and a professional each solve a different part of the job. Where we couldn't confirm a price, we say so." },
+          { type: "table", caption: "Restoration options compared, as checked on 2026-11-15", headers: ["Option", "Good for", "Cost", "Where it falls short"], rows: [
+            ["Phone scan app (Google PhotoScan)", "Glare-free scans without a scanner", "Free to install on Google Play", "Scans only, repairs nothing"],
+            ["Free photo editor (GIMP, Google Photos editor)", "Dust, small scratches, tone, joining torn pieces", "Free", "Manual work; GIMP has a steeper learning curve, in our view. Google Photos lists general edit tools, not restoration"],
+            ["Full photo editor (Adobe Photoshop)", "Detailed manual repair", "We could not confirm pricing; check Adobe's pricing page", "Takes skill and time"],
+            ["Other AI enhancer (MyHeritage Photo Enhancer)", "Face-focused enhancing", "We could not confirm pricing", "Same limit as every AI tool: it invents detail"],
+            ["Old Photo Restoration (ours)", "Scratches, fading and blur in family photos, in the browser", "5 credits per result; 10 free credits for a new account (two results); $10 a month for 200 credits", "Guesses where the photo has no information; not for wet or stuck prints"],
+            ["Professional restorer", "Missing areas, hard cases, large prints", "One vendor says from $38 per photo and quotes studios at $50 to $500; get a written quote", "Cost and waiting time"],
+            ["Conservator", "Wet, stuck, moldy or fragile originals", "Quote-based, price not published", "Treats the physical print; doesn't retouch the image"],
+          ], source: { label: "Vendor pages and Google Play, read 2026-11-15; professional price from MemoryCherish", url: "https://memorycherish.com/how-to-restore-old-photos/" } },
+          { type: "p", text: "A free editor like [GIMP](https://www.gimp.org/) is enough for dust and small scratches if you're patient. AI restoration is quicker for fading, cracks and blur across a whole portrait. A professional is worth paying for when a face is missing or the photo is the only record of someone. Treat the vendor price range as a rough guide: it comes from one company's marketing page." },
+        ],
+      },
+      {
+        heading: "Restore an old family photo with Old Photo Restoration",
+        id: "old-photo-restoration-steps",
+        blocks: [
+          { type: "p", text: "Our [Old Photo Restoration](/old-photo-restoration) tool repairs scratches, fading and blur in old family photos. The pair at the top of this page is one of its results: the cracks and creases are gone, and the faces and glasses are sharper. Notice that the restored version came back in black and white, not the sepia of the print, so check the tone matches what you want." },
+          { type: "steps", items: [
+            { title: "Upload a copy of your scan", text: "Use the JPEG made from your untouched TIFF, with the whole photo in frame." },
+            { title: "Run the restoration", text: "Each result costs 5 credits. A new account starts with 10 free credits, which covers two results." },
+            { title: "Compare it with your scan", text: "Zoom in on faces, hair and clothing, and keep the version that stays closer to the original." },
+            { title: "Sharpen a soft face if needed", text: "If a face is still blurry, the [AI Face Enhancer](/ai-face-enhancer) works on portraits, with the same caution about invented detail." },
+          ] },
+          { type: "cta", variant: "app", headline: "Scan and restore from your phone", text: "Prefer your phone? Get the AI Beauty Styling app on Google Play, or use the web app in any browser.", label: "Get it on Google Play" },
+          { type: "p", text: "The monthly plan is $10 for 200 credits, which is 40 results (see [pricing](/pricing)). If you want two relatives in one picture, [Merge Portraits](/merge-portraits) can blend two separate portraits, and you should get their permission and label the result as a composite." },
+        ],
+      },
+      {
+        heading: "Repair in the right order, then colorize or print if you want to",
+        id: "repair-order",
+        blocks: [
+          { type: "p", text: "Scanning before repairing is like photographing a room before you clean it: you keep a record of how things were. After that, order saves time. This sequence is our own advice, not a standard." },
+          { type: "steps", items: [
+            { title: "Scan and save the master", text: "A TIFF, untouched, stored where you won't edit it." },
+            { title: "Make a working copy", text: "Crop to the photo edges and fix overall tone, brightness and contrast first." },
+            { title: "Repair the big damage", text: "Cracks, creases and tears, with an editor or an AI restorer." },
+            { title: "Clean up dust and small spots last", text: "They're quick to fix once the big problems are gone." },
+            { title: "Retouch lightly and export", text: "Save a JPEG for sharing, and keep both the master and the working copy." },
+          ] },
+          { type: "h3", text: "Should you colorize a black and white photo?", id: "colorize" },
+          { type: "p", text: "Only if you want a keepsake version, and only on a copy. A colorizer has to guess the color of clothes, skin and walls, and it can't know them. FADGI lists colorization among the edits to avoid on a master, so keep your black and white scan as the record. Say it's colorized when you share it." },
+          { type: "h3", text: "How big can you print a restored photo?", id: "print-size" },
+          { type: "p", text: "A common rule of thumb is about 300 pixels per inch for a good photo print. A 4 x 6 inch print scanned at 600 ppi is 2400 x 3600 pixels, so it can be printed at 8 x 12 inches and still reach 300 ppi. Past that, an upscaler adds pixels, not real detail, so check faces at full size before you order a large print." },
+        ],
+      },
+      {
+        heading: "Check the restored photo for invented detail before you share it",
+        id: "check-the-result",
+        blocks: [
+          { type: "p", text: "AI restoration works by generating a cleaner picture, so where the damage has removed information, the tool makes a plausible guess. Every AI restorer does this, ours included. It can smooth a crack well, and it can also give someone a slightly different nose. Our guide to [keeping a retouch natural](/blog/natural-looking-portrait-retouch) covers the same instinct for modern portraits." },
+          { type: "list", items: [
+            "Put the scan and the result side by side at full size and look at the eyes, the mouth and the hairline.",
+            "Check small text, jewelry and patterns. These are the details most likely to be invented.",
+            "Ask a relative who knew the person. A face that's technically clean but doesn't look like them is a failed restoration.",
+            "Prefer the gentler result when two versions disagree.",
+            "Keep both files. A master should show the original as captured, not what it may once have looked like if restored (FADGI).",
+          ] },
+          { type: "callout", tone: "note", title: "A short privacy note before you share", text: "Old family photos often show people who never agreed to be online, including children and relatives who have died. Before posting, think about who is in the picture. [Face Blur](/face-blur) can hide faces of bystanders you don't want to share, and our guide to [creative portrait effects](/blog/creative-portrait-effects-responsibly) covers consent. Services differ in how they treat uploads, so read each privacy page before uploading a photo you'd mind seeing elsewhere." },
+        ],
+      },
+      {
+        heading: "Store the original and back up the scan with the 3-2-1 rule",
+        id: "store-and-back-up",
+        blocks: [
+          { type: "p", text: "Keep the original print after you digitize it. The National Archives says digital files have their own preservation risks and can easily be lost, and it recommends the 3-2-1 rule: three copies, stored on two different media, with one copy located off-site ([National Archives](https://www.archives.gov/preservation/family-archives/digitizing.html)). In practice that's your original TIFF on your computer, a copy on an external drive, and a third in cloud storage or at a relative's house." },
+          { type: "p", text: "For the print itself, the Library of Congress recommends 70F or below and 30 to 50% relative humidity, with humidity changing by less than 5% in 24 hours. Use enclosures that pass ISO 18902, including the Photographic Activity Test, and avoid attics, basements and exterior walls. NEDCC says chemical deterioration roughly doubles with each 10F rise in temperature, so cool and steady beats warm and changeable." },
+          { type: "summary", text: "Triage first, scan flat, repair a copy, check every face, and keep the original." },
+          { type: "cta", variant: "tool", headline: "Try your first restoration free", text: "Upload your scan to Old Photo Restoration and compare the result with the original. Your first two results are covered by the 10 free credits.", label: "Restore a photo", toolSlug: "old-photo-restoration" },
+        ],
+      },
     ],
     faqs: [
-      ["What resolution should I scan an old photo at?", "A higher resolution keeps more detail for a restoration to work with. If you are using a phone, shoot straight down in even light and fill the frame, and avoid compressing the file more than necessary."],
-      ["Will restoration change how people in the photo look?", "It can. Where the original is damaged, the tool fills in plausible detail, which may differ from reality. Always compare faces with the original and prefer a gentler result when someone looks different."],
-      ["Should I throw the original away after restoring it?", "No. Keep the original print and the untouched scan. They are the only faithful record of the photo, and a future restoration may do a better job."],
+      ["Can old, damaged photos be restored?", "Yes, most can. Dust, fading, scratches and creases repair well from a good scan. Missing areas are harder because nothing is left to restore, so a tool has to guess. Wet, stuck or moldy prints need a conservator first, before any scanning, because the original is the one thing you can't replace."],
+      ["What dpi should I scan old photos at?", "600 dpi is a safe choice. FADGI's top level for prints is 600 ppi, with 400 ppi at the level below. That's an archive standard, so a lower setting works for a casual copy, but 600 gives a repair tool more detail and lets you enlarge. Save the master as a TIFF."],
+      ["Should I clean an old photo before scanning?", "No, only remove loose dust. Use an air bulb blower, not canned air or a brush, because the Library of Congress says even soft brushes can scratch photographs. Never wipe or wet-clean a dry print at home. Wipe the scanner glass instead, since dust on the glass ends up in your scan."],
+      ["Can I fix a torn photo with tape?", "No. NEDCC lists pressure-sensitive tape and rubber cement among the materials that damage photographs, and tape is almost impossible to undo. Scan each piece separately and flat, join them in an editor on a copy, and keep the physical pieces together in a clean folder. Many fragments call for a conservator."],
+      ["How do I save water damaged photos?", "Act fast. NEDCC says mold can grow within 48 hours at 60% relative humidity and 70F. Photos stuck together should be bagged while damp and frozen, then shown to a conservator. Don't pull them apart. Separate prints can be air dried face up with air moving over them."],
+      ["Can AI restore a photo with a missing face?", "It can generate a face, but not the real one. AI fills gaps with plausible detail, not recovered detail, so the result may look like someone else. For a missing face, a human restorer working from other photos of that person is a safer choice. Compare the result with relatives' memories."],
+      ["How much does professional photo restoration cost?", "Vendors quote roughly tens to a few hundred dollars per photo. One vendor says from $38 per photo and puts studios at $50 to $500, but that's marketing, not an independent survey. We couldn't find a neutral price survey, so ask for a written quote and a sample before you commit."],
+      ["Do I keep the original photo after scanning?", "Yes. The National Archives says digital files have their own preservation risks and can easily be lost, and a better restoration may be possible later. Store the print somewhere cool and stable, away from attics and basements, and back up the scan with the 3-2-1 rule."],
+      ["Is Old Photo Restoration free?", "You can try it free. A new account starts with 10 credits and each result costs 5 credits, so that's two free results. After that, the monthly plan is $10 for 200 credits, which is 40 results. Other tools in the comparison table have their own pricing."],
     ],
-  },
-];
+    relatedTools: ["old-photo-restoration", "ai-face-enhancer", "face-blur", "merge-portraits"],
+    relatedPosts: ["natural-looking-portrait-retouch", "creative-portrait-effects-responsibly"],
+    sources: [
+      { title: "Care, Handling and Storage of Photographs", url: "https://www.loc.gov/preservation/care/photo.html", publisher: "Library of Congress", accessed: "2026-11-15" },
+      { title: "Leaflet 5.3: Care of Photographs", url: "https://nedcc.org/free-resources/preservation-leaflets/5.-photographs/5.3-care-of-photographs", publisher: "Northeast Document Conservation Center (NEDCC)", accessed: "2026-11-15" },
+      { title: "Leaflet 3.7: Emergency Salvage of Wet Photographs", url: "https://nedcc.org/free-resources/preservation-leaflets/3.-emergency-management/3.7-emergency-salvage-of-wet-photographs", publisher: "Northeast Document Conservation Center (NEDCC)", accessed: "2026-11-15" },
+      { title: "Repairing and Conserving Family Archives", url: "https://www.archives.gov/preservation/family-archives/repairing.html", publisher: "National Archives", accessed: "2026-11-15" },
+      { title: "Digitizing Family Archives", url: "https://www.archives.gov/preservation/family-archives/digitizing.html", publisher: "National Archives", accessed: "2026-11-15" },
+      { title: "Technical Guidelines for Digitizing Cultural Heritage Materials, Third Edition", url: "https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf", publisher: "Federal Agencies Digital Guidelines Initiative (FADGI)", accessed: "2026-11-15" },
+      { title: "Google PhotoScan", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.photos.scanner", publisher: "Google Play", accessed: "2026-11-15" },
+      { title: "Edit photos in Google Photos", url: "https://support.google.com/photos/answer/6128850", publisher: "Google Photos Help", accessed: "2026-11-15" },
+      { title: "GIMP", url: "https://www.gimp.org/", publisher: "GIMP project", accessed: "2026-11-15" },
+      { title: "MyHeritage Photo Enhancer", url: "https://www.myheritage.com/photo-enhancer", publisher: "MyHeritage", accessed: "2026-11-15" },
+      { title: "How to restore old photos", url: "https://memorycherish.com/how-to-restore-old-photos/", publisher: "MemoryCherish (vendor, source of the professional price claim)", accessed: "2026-11-15" },
+    ],
+  },];
 
 export const getBlogPost = (slug: string) => BLOG_POSTS.find((post) => post.slug === slug);
 

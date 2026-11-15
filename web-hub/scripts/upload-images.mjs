@@ -5,7 +5,7 @@
 // Only files listed in scripts/image-manifest.json are sent (made by build-image-manifest.mjs), and files already
 // in the bucket with the same size are skipped, so reruns only send what is missing.
 // Bucket: ai-beauty-styling-images. Credentials (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID) come from web-hub/.env.
-// Object keys mirror the site paths: img/<file> for originals, _opt/<file> for the WebP versions.
+// Object keys mirror the site paths: img/<file> for originals, _opt/<file> for the WebP versions, posts/<slug>/<file> for blog pictures (always uploaded).
 import { readdir, readFile, stat } from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -47,13 +47,24 @@ for (const folder of ["img", "_opt"]) {
   const base = path.join(root, "media", folder);
   try { for await (const f of walk(base)) files.push({ file: f, key: `${folder}/${path.relative(base, f).replace(/\\/g, "/")}` }); } catch {}
 }
+// Blog pictures: media/blog/<slug>/<file> goes to posts/<slug>/<file>. Only the flat files next to the post are sent,
+// never the research/, images/ (original downloads) or _template-checks folders.
+try {
+  const blogBase = path.join(root, "media", "blog");
+  for (const post of await readdir(blogBase, { withFileTypes: true })) {
+    if (!post.isDirectory() || post.name.startsWith("_")) continue;
+    for (const entry of await readdir(path.join(blogBase, post.name), { withFileTypes: true })) {
+      if (entry.isFile() && TYPES[path.extname(entry.name).toLowerCase()]) files.push({ file: path.join(blogBase, post.name, entry.name), key: `posts/${post.name}/${entry.name}` });
+    }
+  }
+} catch {}
 // The favicon is the one picture that also stays in public/ (the browser asks the site root for it).
 files.push({ file: path.join(root, "public", "img", "favicon.png"), key: "img/favicon.png" });
 
 try {
   const wanted = new Set(JSON.parse(readFileSync(path.join(root, "scripts", "image-manifest.json"), "utf8")));
   const before = files.length;
-  for (let i = files.length - 1; i >= 0; i--) if (!wanted.has(files[i].key)) files.splice(i, 1);
+  for (let i = files.length - 1; i >= 0; i--) if (!files[i].key.startsWith("posts/") && !wanted.has(files[i].key)) files.splice(i, 1);
   console.log(`Manifest: ${files.length} of ${before} files are in use by pages.`);
 } catch { console.log("No manifest found: uploading every file."); }
 

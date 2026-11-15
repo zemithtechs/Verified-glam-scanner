@@ -11,11 +11,13 @@ export const RESULT_IMAGE_SIZE = { width: 1672, height: 941 };
 
 export type ShareImage = { url: string; width: number; height: number; alt: string };
 
-/** Absolute URL for a site path. Picture paths (/img/, /_opt/) resolve to the image host (see lib/image-base.ts). */
-export const absoluteUrl = (path: string) => { const p = imageUrl(path); return /^https?:\/\//.test(p) ? p : p === "/" ? `${SITE.url}/` : `${SITE.url}${p}`; };
+/** Absolute URL for a page path. Always on the site host; never routed through the image host. */
+export const absoluteUrl = (path: string) => (path.startsWith("http") ? path : path === "/" ? `${SITE.url}/` : `${SITE.url}${path}`);
+/** Absolute URL for a picture path. /img/, /_opt/ and /posts/ resolve to the image host (see lib/image-base.ts). */
+export const absoluteImageUrl = (path: string) => { const p = imageUrl(path); return p.startsWith("http") ? p : absoluteUrl(p); };
 
 /** Share image built from a result example in public/img/results. */
-export const resultShareImage = (slug: string, alt: string): ShareImage => ({ url: absoluteUrl(`/img/results/${slug}.png`), ...RESULT_IMAGE_SIZE, alt });
+export const resultShareImage = (slug: string, alt: string): ShareImage => ({ url: absoluteImageUrl(`/img/results/${slug}.png`), ...RESULT_IMAGE_SIZE, alt });
 
 /** "Title | AI Beauty Styling" when it fits in 60 characters, otherwise the title alone. */
 export function fitTitle(title: string) {

@@ -1,0 +1,95 @@
+/* Article reading styles. Body: Source Serif 4 at 17px (phone) / 18px (desktop), line-height 1.75, measure about 66 characters. */
+.prose {
+  font-family: var(--font-article), Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #1f1220;
+  max-width: 66ch;
+  overflow-wrap: break-word;
+}
+@media (min-width: 768px) {
+  .prose { font-size: 18px; }
+}
+.prose > * + * { margin-top: 1.25em; }
+.prose p { margin-bottom: 0; }
+.prose h2,
+.prose h3 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  color: #1f1220;
+  scroll-margin-top: 6.5rem;
+  text-wrap: balance;
+}
+.prose h2 { font-size: 1.65em; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em; margin-top: 1.5em; }
+.prose h3 { font-size: 1.3em; line-height: 1.3; font-weight: 600; margin-top: 1.5em; }
+.prose h2 + *, .prose h3 + * { margin-top: 0.6em; }
+.prose ul, .prose ol { padding-left: 1.4em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li + li { margin-top: 0.5em; }
+.prose li::marker { color: #b8325f; font-weight: 700; }
+.prose a { color: #6d1a46; font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(184, 50, 95, 0.55); }
+.prose a:hover { color: #b8325f; text-decoration-color: currentColor; }
+.prose a:focus-visible { outline: 2px solid #b8325f; outline-offset: 2px; border-radius: 2px; }
+.prose a[rel~="noopener"]::after { content: " \2197"; font-size: 0.8em; text-decoration: none; display: inline-block; }
+.prose strong { font-weight: 700; }
+.prose blockquote { border-left: 4px solid #b8325f; padding: 0.25em 0 0.25em 1.1em; font-style: italic; color: #3a2a38; }
+
+.section { scroll-margin-top: 6.5rem; }
+
+/* Callouts */
+.callout { border-radius: 14px; border: 1px solid; padding: 1em 1.15em; font-size: 0.95em; line-height: 1.65; }
+.callout strong.title { display: block; font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.72em; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.35em; }
+.tip { background: #f1f8f2; border-color: #b9dcc0; } .tip .title { color: #1f6b3a; }
+.warning { background: #fff6e8; border-color: #f0cf94; } .warning .title { color: #8a5200; }
+.note { background: #fdeef2; border-color: #efc2d2; } .note .title { color: #6d1a46; }
+
+/* Tables */
+.tableWrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid rgba(109, 26, 70, 0.18); border-radius: 14px; background: #fff; }
+.tableWrap:focus-visible { outline: 2px solid #b8325f; outline-offset: 2px; }
+.table { width: 100%; min-width: 34rem; border-collapse: separate; border-spacing: 0; font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.86em; line-height: 1.5; }
+.table caption { caption-side: top; text-align: left; padding: 0.8em 1em; font-weight: 700; color: #1f1220; background: #fff; }
+.table th, .table td { padding: 0.7em 1em; text-align: left; vertical-align: top; border-top: 1px solid rgba(109, 26, 70, 0.12); }
+.table thead th { background: #6d1a46; color: #fff; font-weight: 600; border-top: 0; position: sticky; top: 0; z-index: 1; white-space: nowrap; }
+.table tbody th { background: #fdeef2; color: #1f1220; font-weight: 700; position: sticky; left: 0; z-index: 1; min-width: 7.5rem; }
+.table thead th:first-child { position: sticky; left: 0; z-index: 2; }
+.table tbody tr:nth-child(even) td { background: #fffafb; }
+.tableSource { margin-top: 0.5em; font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.78em; color: #6b5b66; line-height: 1.5; }
+
+/* Figures */
+.figure img { width: 100%; height: auto; border-radius: 14px; background: #fdeef2; display: block; }
+.figure figcaption { margin-top: 0.6em; font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.8em; line-height: 1.5; color: #6b5b66; }
+
+/* Steps */
+.steps { list-style: none; padding: 0; counter-reset: step; }
+.steps > li { counter-increment: step; position: relative; padding-left: 3em; margin-top: 1.1em; }
+.steps > li::before { content: counter(step); position: absolute; left: 0; top: 0.1em; width: 2.1em; height: 2.1em; border-radius: 999px; background: #6d1a46; color: #fff; display: grid; place-items: center; font-family: var(--font-outfit), system-ui, sans-serif; font-weight: 700; font-size: 0.8em; }
+.steps strong { display: block; font-family: var(--font-outfit), system-ui, sans-serif; }
+
+/* In short */
+.summary { border-radius: 14px; background: #1f1220; color: #fff; padding: 1.1em 1.3em; }
+.summary .label { font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.72em; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #f4a9c3; }
+.summary p { margin-top: 0.35em; }
+.summary a { color: #fff; text-decoration-color: #f4a9c3; }
+
+/* FAQ */
+.faq h3 { margin-top: 1.4em; }
+
+/* Sources */
+.sources { font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.82em; line-height: 1.6; color: #3a2a38; }
+.sources li { margin-top: 0.7em; }
+
+/* Buttons (also used inside .prose, so they reset the link styles) */
+.btn, .prose a.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 44px; padding: 0.55rem 1.1rem; border-radius: 999px; font-family: var(--font-outfit), system-ui, sans-serif; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; white-space: nowrap; transition: background-color 0.15s, border-color 0.15s; }
+.prose a.btn::after { content: none; }
+.btnPrimary, .prose a.btnPrimary { background: #6d1a46; color: #fff; border: 1px solid #6d1a46; }
+.btnPrimary:hover, .prose a.btnPrimary:hover { background: #b8325f; border-color: #b8325f; color: #fff; }
+.btnDark, .prose a.btnDark { background: #1f1220; color: #fff; border: 1px solid #1f1220; }
+.btnDark:hover, .prose a.btnDark:hover { background: #3a2a38; color: #fff; }
+
+/* Horizontal scroll cue for tables on phones */
+.tableShell { position: relative; }
+.tableFade, .swipeHint { display: none; }
+@media (max-width: 639px) {
+  .tableFade { display: block; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 36px; border-radius: 0 14px 14px 0; background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(109, 26, 70, 0.22)); pointer-events: none; }
+  .swipeHint { display: block; margin-top: 0.4em; font-family: var(--font-outfit), system-ui, sans-serif; font-size: 0.75em; font-weight: 600; color: #6d1a46; text-align: right; }
+}

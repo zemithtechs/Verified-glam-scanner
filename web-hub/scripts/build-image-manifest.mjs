@@ -4,6 +4,7 @@
 //   node scripts/build-image-manifest.mjs <used.json>
 //
 // Writes scripts/image-manifest.json: the R2 object keys (img/... originals and _opt/... WebP files) to upload.
+// Blog pictures (blog/<slug>/<file>) are not listed here: upload-images.mjs always sends them.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
