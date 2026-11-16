@@ -1,6 +1,9 @@
 import { buildLlmsTxt } from "@/lib/llms";
 import { SITE_INDEXABLE } from "@/lib/seo";
 
+// Built once at deploy time (like robots.txt and the sitemap) so it sees SITE_INDEXABLE; at request time that setting is not available.
+export const dynamic = "force-static";
+
 /** Hidden (404) until SITE_INDEXABLE is true, like the sitemap. */
 export function GET() {
   if (!SITE_INDEXABLE) return new Response("Not found", { status: 404 });
