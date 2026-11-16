@@ -19,7 +19,7 @@ export const ALLOW_AI_TRAINING = true;
 export const PRIVATE_PATHS = ["/app", "/admin", "/login", "/register", "/forgot-password", "/api/", "/icon-sheet"];
 
 /** Date the public content was last reviewed. Used for sitemap lastModified and schema dateModified. */
-export const CONTENT_UPDATED = "2026-11-14";
+export const CONTENT_UPDATED = "2026-11-16";
 
 /** Robots meta for a public page. Always noindex while SITE_INDEXABLE is false. */
 export const publicRobots = () => ({ index: SITE_INDEXABLE, follow: SITE_INDEXABLE });

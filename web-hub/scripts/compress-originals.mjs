@@ -2,7 +2,7 @@
 // Same file names and sizes, so no page reference changes. A file is only replaced when the new one is smaller.
 //
 //   node scripts/compress-originals.mjs
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -18,8 +18,12 @@ async function* walk(dir) {
   }
 }
 
+// Pass --since=2026-11-16T16:00 to compress only files changed after that time. Without it every PNG is re-encoded,
+// which squeezes already-compressed pictures a second time, so use --since for new additions.
+const sinceArg = process.argv.find((a) => a.startsWith("--since="));
+const since = sinceArg ? new Date(sinceArg.slice("--since=".length)).getTime() : 0;
 const files = [];
-for await (const f of walk(SRC)) files.push(f);
+for await (const f of walk(SRC)) if (!since || (await stat(f)).mtimeMs >= since) files.push(f);
 
 let before = 0;
 let after = 0;

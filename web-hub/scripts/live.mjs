@@ -4,7 +4,7 @@
 // Cloudflare credentials come from web-hub/.env.cloudflare (git-ignored). They are NOT kept in .env, because the build bundles
 // every .env file into the deployed Worker. Only the deploy step receives them. Index flags come from the environment.
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync } from "node:fs";
 
 const mode = process.argv[2];
 const env = {
@@ -12,8 +12,8 @@ const env = {
   NEXT_PUBLIC_APP_MODE: "handoff",
   // The origin the backend must trust for sign-in requests made by this site.
   NEXT_PUBLIC_SELF_ORIGIN: "https://aibeautystyling.com",
-  // The new domain stays hidden from Google until the SEO cutover. Set SITE_INDEXABLE=true only on cutover day.
-  SITE_INDEXABLE: process.env.SITE_INDEXABLE ?? "false",
+  // The site is open to search engines (owner decision, 2026-11-16). Set SITE_INDEXABLE=false to hide it again.
+  SITE_INDEXABLE: process.env.SITE_INDEXABLE ?? "true",
 };
 const credentials = {};
 if (existsSync(".env.cloudflare")) {
@@ -30,6 +30,13 @@ const run = (cmd, args, extra = {}) => {
 };
 // Pictures are served from R2, not the Worker. Only rebuild the WebP files when the source folder exists on this machine.
 const images = () => { if (existsSync("media")) run("node", ["scripts/optimize-images.mjs"]); };
-if (mode === "build") { clean(); images(); run("npx", ["opennextjs-cloudflare", "build"]); }
-else if (mode === "deploy") { clean(); images(); run("npx", ["opennextjs-cloudflare", "build"]); run("npx", ["opennextjs-cloudflare", "deploy"], credentials); }
+// Safety net: pictures belong in R2, so strip any that the build copied from public/ into the Worker bundle (keep the favicon).
+const stripPictures = () => {
+  rmSync(".open-next/assets/_opt", { recursive: true, force: true });
+  const dir = ".open-next/assets/img";
+  if (!existsSync(dir)) return;
+  for (const entry of readdirSync(dir)) if (entry !== "favicon.png") rmSync(`${dir}/${entry}`, { recursive: true, force: true });
+};
+if (mode === "build") { clean(); images(); run("npx", ["opennextjs-cloudflare", "build"]); stripPictures(); }
+else if (mode === "deploy") { clean(); images(); run("npx", ["opennextjs-cloudflare", "build"]); stripPictures(); run("npx", ["opennextjs-cloudflare", "deploy"], credentials); }
 else { console.log("Usage: node scripts/live.mjs build|deploy"); process.exit(2); }
