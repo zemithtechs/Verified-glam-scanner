@@ -10,7 +10,7 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], wei
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: `${SITE.name} — Free AI Beauty Tools`, template: `%s | ${SITE.name}` },
+  title: { default: `${SITE.name}: Free AI Beauty Tools`, template: `%s | ${SITE.name}` },
   description: "AI beauty tools for your photo: face analysis, skin analysis, hairstyle changer, makeup try-on and virtual clothes try-on. Try free with a selfie.",
   openGraph: { siteName: SITE.name, locale: OG_LOCALE, type: "website" },
   twitter: { card: "summary_large_image" },

@@ -20,7 +20,6 @@ const FEATURED_SLUGS = [
 export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", showSoon = true }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<CategoryId | "all">(initialCategory);
-  const [onlyFree, setOnlyFree] = useState(false);
   const featured = FEATURED_SLUGS.map((slug) => TOOLS.find((tool) => tool.slug === slug)).filter((tool) => tool !== undefined);
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -28,12 +27,11 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
       if (!isBrowsableTool(tool)) return false;
       if (!showSoon && tool.status === "later") return false;
       if (category !== "all" && tool.category !== category) return false;
-      if (onlyFree && (tool.credits > 0 || tool.status === "later")) return false;
       if (needle && !`${tool.name} ${tool.summary}`.toLowerCase().includes(needle)) return false;
       return true;
     });
-  }, [query, category, onlyFree, showSoon]);
-  const isDefault = !query.trim() && category === "all" && !onlyFree;
+  }, [query, category, showSoon]);
+  const isDefault = !query.trim() && category === "all";
   const sections = CATEGORIES.filter((item) => category === "all" || category === item.id)
     .map((item) => ({
       category: item,
@@ -67,7 +65,7 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
             <p className={styles.eyebrow}>BROWSE THE COLLECTION</p>
             <h2>{titleCase("Find the right tool for your photo by goal.")}</h2>
           </div>
-          <p>{filtered.length} {filtered.length === 1 ? "tool" : "tools"}{onlyFree ? " · Free to try" : ""}</p>
+          <p>{filtered.length} {filtered.length === 1 ? "tool" : "tools"}</p>
         </div>
         <div className={styles.controls}>
           <label className={styles.searchBox}>
@@ -75,10 +73,6 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
             <span className="sr-only">Search beauty tools</span>
             <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search hair, skin, makeup..." />
             {query && <button type="button" onClick={() => setQuery("")} aria-label="Clear search"><X size={17} /></button>}
-          </label>
-          <label className={styles.freeFilter}>
-            <input type="checkbox" checked={onlyFree} onChange={(event) => setOnlyFree(event.target.checked)} />
-            <span>Free to try</span>
           </label>
         </div>
         <nav className={styles.categoryChips} aria-label="Filter tools by category">
@@ -97,7 +91,7 @@ export function ToolDirectory({ initialCategory = "all" as CategoryId | "all", s
             </div>
             <div className={styles.cardGrid}>{tools.map((tool) => <BrowseCard key={tool.slug} tool={tool} />)}</div>
           </section>
-        )) : <div className={styles.emptyState}><h3>{titleCase("No matches yet")}</h3><p>Try another search or clear the filters to see the full collection.</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); setOnlyFree(false); }}>Clear filters</button></div>}
+        )) : <div className={styles.emptyState}><h3>{titleCase("No matches yet")}</h3><p>Try another search or clear the filters to see the full collection.</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); }}>Clear filters</button></div>}
       </div>
     </div>
   );

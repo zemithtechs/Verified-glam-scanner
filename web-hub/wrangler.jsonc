@@ -20,6 +20,8 @@
 		// The shared account backend (sign-in, credits, saved results, payments).
 		"WORKER_API_URL": "https://verified-glam-api.komolafephilip.workers.dev",
 		// Free results per visitor per day, and the most free results the whole site will give per day.
+		// Lets pages that are rendered on request (such as /delete-account) read the same indexing setting as the pages built at deploy time.
+		"SITE_INDEXABLE": "true",
 		"FREE_RESULTS_PER_DAY": "2",
 		"GLOBAL_RESULTS_PER_DAY": "100"
 	},
