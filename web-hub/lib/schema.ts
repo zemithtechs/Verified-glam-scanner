@@ -120,6 +120,8 @@ export function blogPostingSchema(post: BlogPost, image: string) {
     isAccessibleForFree: true,
     wordCount: resolved.wordCount,
     articleSection: post.category,
+    ...(post.keywords?.length ? { keywords: post.keywords.join(", ") } : {}),
+    ...(post.primaryKeyword ? { about: { "@type": "Thing", name: post.primaryKeyword } } : {}),
     abstract: resolved.keyTakeaways.map(stripLinks).join(" "),
     ...(post.sources?.length ? { citation: post.sources.map((source) => ({ "@type": "CreativeWork", name: source.title, url: source.url, publisher: { "@type": "Organization", name: source.publisher } })) } : {}),
   };

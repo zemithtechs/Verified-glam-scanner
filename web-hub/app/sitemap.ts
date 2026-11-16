@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CATEGORIES.map((category) => entry(`/category/${category.id}`, 0.8, "weekly")),
     ...TOOLS.filter(isAvailable).map((tool) => entry(`/${tool.slug}`, 0.8, "monthly", CONTENT_UPDATED, getToolImages(tool, getToolPageContent(tool)).galleryImages)),
     entry("/blog", 0.6, "weekly"),
-    ...BLOG_POSTS.map((post) => entry(`/blog/${post.slug}`, 0.6, "monthly", post.updated, [`/img/results/${post.toolSlugs[0]}.png`])),
+    ...BLOG_POSTS.map((post) => entry(`/blog/${post.slug}`, 0.6, "monthly", post.updated, [post.heroImage ? post.heroImage.src : `/img/results/${post.toolSlugs[0]}.png`])),
     entry("/pricing", 0.5, "monthly"),
     entry("/about", 0.4, "yearly"),
     entry("/contact", 0.3, "yearly"),
