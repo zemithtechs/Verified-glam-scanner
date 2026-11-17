@@ -105,6 +105,32 @@ body {
 .price-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--color-plum); box-shadow: 0 2px 8px rgba(31, 18, 32, 0.25); }
 .price-slider:focus-visible { outline: 3px solid var(--color-plum); outline-offset: 6px; }
 
+/* Phone usability (screens under 640px). */
+@media (max-width: 639px) {
+  /* Tight headline spacing made for big screens glues the words together on a phone. */
+  h1, h2 { letter-spacing: -0.02em !important; word-spacing: 0.04em; }
+  h3 { letter-spacing: -0.01em !important; }
+  /* Caption text under 12px is hard to read, so it is raised to 12px. */
+  .text-\[10px\], .text-\[11px\], .text-\[10\.5px\] { font-size: 12px !important; }
+  /* Breadcrumbs, filter chips and quick-amount buttons get a bigger tap area. */
+  nav[aria-label="Breadcrumb"] a { display: inline-flex; align-items: center; min-height: 32px; padding-inline: 2px; }
+  nav[aria-label="Filter tools by category"] button { min-height: 40px; }
+  /* Small labels inside the page-specific styles are raised to 12px too. */
+  [class*="eyebrow"], [class*="smallLabel"], [class*="imageTag"] { font-size: 12px !important; }
+  /* Footer links, "view all" links and accordion links are tall enough to tap without hitting a neighbour. */
+  footer li > a { display: inline-block; padding-block: 11px; }
+  [class*="sectionLine"] a, [class*="viewAll"] { display: inline-flex; align-items: center; min-height: 44px; }
+  [class*="categoryHeading"] a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+  [class*="accordionRows"] a { display: inline-block; padding-block: 10px; }
+  [class*="sectionHeading"] a { display: inline-flex; align-items: center; min-height: 44px; }
+  /* Sign-in links (Forgot it?, Create a free account, Log in) and contact links are 44px tall. */
+  a[href="/forgot-password"], a[href="/register"], a[href="/login"], a[href^="mailto:"], a[href="/delete-account"], a[href="/contact"] { display: inline-flex; align-items: center; min-height: 44px; }
+  /* Long words and e-mail addresses wrap instead of pushing the page sideways. */
+  main a { overflow-wrap: anywhere; }
+  /* 16px form text stops iPhones from zooming the page when a field is tapped. */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px; }
+}
+
 /* The admin screens were built with the previous site's colour names; define them here so they look exactly as before. */
 .legacy-admin {
   --color-burgundy: #872b3f;

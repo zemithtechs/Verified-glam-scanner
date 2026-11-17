@@ -154,9 +154,9 @@ export function MegaHeader({ onOpenSidebar, maxWidth = "max-w-[1320px]" }: { onO
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white" onMouseLeave={() => setMenu(null)}>
-      <div className={`mx-auto flex h-14 items-center justify-between px-4 sm:px-6 ${maxWidth}`}>
-        <div className="flex items-center gap-3">
-          <button type="button" data-tool-menu-trigger={onOpenSidebar ? true : undefined} className="grid h-10 w-10 place-items-center rounded-lg hover:bg-blush focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum lg:hidden" aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={onOpenSidebar ? undefined : mobile} aria-controls={onOpenSidebar ? undefined : "mobile-site-menu"} onClick={() => (onOpenSidebar ? onOpenSidebar() : setMobile((v) => !v))}>{mobile && !onOpenSidebar ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}</button>
+      <div className={`mx-auto flex h-14 items-center justify-between px-3 sm:px-6 ${maxWidth}`}>
+        <div className="flex items-center gap-1 sm:gap-3">
+          <button type="button" data-tool-menu-trigger={onOpenSidebar ? true : undefined} className="grid h-11 w-11 shrink-0 place-items-center rounded-lg hover:bg-blush focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum lg:hidden" aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={onOpenSidebar ? undefined : mobile} aria-controls={onOpenSidebar ? undefined : "mobile-site-menu"} onClick={() => (onOpenSidebar ? onOpenSidebar() : setMobile((v) => !v))}>{mobile && !onOpenSidebar ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}</button>
           <Logo />
         </div>
         <nav aria-label="Main" className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 lg:flex">
@@ -166,22 +166,26 @@ export function MegaHeader({ onOpenSidebar, maxWidth = "max-w-[1320px]" }: { onO
           <Link href="/blog" aria-current={path.startsWith("/blog") ? "page" : undefined} className={plain} onMouseEnter={() => setMenu(null)}>Blog</Link>
           <Link href="/pricing" aria-current={path === "/pricing" ? "page" : undefined} className={plain} onMouseEnter={() => setMenu(null)}>Pricing</Link>
         </nav>
-        <div className="flex items-center gap-1.5">
-          <Link href={appHref("/app")} className="hidden h-9 items-center rounded-lg px-3.5 text-[14.5px] font-semibold text-ink hover:bg-blush/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum sm:flex">{me?.signedIn ? "Dashboard" : "Log in"}</Link>
-          <Link href="/tools" className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg bg-plum px-4 text-[14.5px] font-semibold text-white transition-colors hover:bg-berry focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum"><span className="sm:hidden">{me?.signedIn ? "Tools" : "Start"}</span><span className="hidden sm:inline">{me?.signedIn ? "Make a result" : "Start for free"}</span><ArrowRight size={15} aria-hidden="true" /></Link>
+        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1.5">
+          <Link href={appHref("/app")} className="flex h-11 items-center rounded-lg px-2.5 text-[14px] font-semibold text-ink hover:bg-blush/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum sm:h-9 sm:px-3.5 sm:text-[14.5px]">{me?.signedIn ? "Dashboard" : "Log in"}</Link>
+          <Link href="/tools" className="inline-flex h-10 items-center gap-1.5 whitespace-nowrap rounded-lg bg-plum px-3 text-[14px] font-semibold text-white transition-colors hover:bg-berry focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum sm:h-9 sm:px-4 sm:text-[14.5px]"><span className="sm:hidden">{me?.signedIn ? "Tools" : "Start"}</span><span className="hidden sm:inline">{me?.signedIn ? "Make a result" : "Start for free"}</span><ArrowRight size={15} aria-hidden="true" className="hidden sm:block" /></Link>
         </div>
       </div>
 
       {menu && (
-        <div id={`mega-${menu}`} role="region" aria-label={`${menu === "tools" ? "AI Tools" : menu === "popular" ? "Popular" : "Features"} menu`} className="absolute inset-x-0 top-full max-h-[calc(100vh-3.5rem)] overflow-y-auto border-b border-line bg-white shadow-[0_16px_32px_rgba(31,18,32,0.09)]">
+        <div id={`mega-${menu}`} role="region" aria-label={`${menu === "tools" ? "AI Tools" : menu === "popular" ? "Popular" : "Features"} menu`} className="absolute inset-x-0 top-full max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-b border-line bg-white shadow-[0_16px_32px_rgba(31,18,32,0.09)]">
           {menu === "tools" ? <ToolsPanel close={() => setMenu(null)} /> : menu === "popular" ? <PopularPanel close={() => setMenu(null)} /> : <FeaturesPanel close={() => setMenu(null)} />}
         </div>
       )}
 
       {mobile && !onOpenSidebar && (
-        <div id="mobile-site-menu" className="max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-line bg-white lg:hidden">
+        <div id="mobile-site-menu" className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white pb-6 lg:hidden">
+          <div className="grid grid-cols-2 gap-2 border-b border-line p-3">
+            <Link href={appHref("/app")} onClick={() => setMobile(false)} className="flex h-12 items-center justify-center rounded-xl border border-plum/30 text-[15px] font-semibold text-plum hover:bg-blush">{me?.signedIn ? "Dashboard" : "Log in"}</Link>
+            <Link href={me?.signedIn ? "/tools" : "/register"} onClick={() => setMobile(false)} className="flex h-12 items-center justify-center rounded-xl bg-plum text-[15px] font-semibold text-white hover:bg-berry">{me?.signedIn ? "Make a result" : "Sign up free"}</Link>
+          </div>
           <div className="flex flex-col"><SideNav variant="tool" mode="accordion" onNavigate={() => setMobile(false)} /></div>
-          <div className="grid gap-1 border-t border-line p-3 text-[15px] font-semibold"><Link href="/blog" className="rounded-lg px-3 py-3 hover:bg-blush">Blog</Link><Link href="/pricing" className="rounded-lg px-3 py-3 hover:bg-blush">Pricing</Link><Link href={appHref("/app")} className="rounded-lg px-3 py-3 hover:bg-blush">{me?.signedIn ? "Dashboard" : "Log in"}</Link></div>
+          <div className="grid gap-1 border-t border-line p-3 text-[15px] font-semibold"><Link href="/blog" onClick={() => setMobile(false)} className="rounded-lg px-3 py-3 hover:bg-blush">Blog</Link><Link href="/pricing" onClick={() => setMobile(false)} className="rounded-lg px-3 py-3 hover:bg-blush">Pricing</Link></div>
         </div>
       )}
     </header>

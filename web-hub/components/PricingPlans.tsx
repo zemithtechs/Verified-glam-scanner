@@ -106,7 +106,7 @@ function PaygCard() {
       </label>
       <div className="mt-3 flex flex-wrap gap-2">
         {PRICING.payg.quick.map((q) => (
-          <button key={q} type="button" onClick={() => setAmount(q)} aria-pressed={amount === q} className={`h-8 rounded-full border px-3.5 text-[13px] font-semibold transition-colors ${amount === q ? "border-plum bg-plum text-white" : "border-line text-ink hover:bg-blush"}`}>{money(q)}</button>
+          <button key={q} type="button" onClick={() => setAmount(q)} aria-pressed={amount === q} className={`h-10 min-w-14 rounded-full border px-3.5 text-[14px] font-semibold transition-colors ${amount === q ? "border-plum bg-plum text-white" : "border-line text-ink hover:bg-blush"}`}>{money(q)}</button>
         ))}
       </div>
 
