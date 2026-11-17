@@ -17,20 +17,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     const SITE = "https://aibeautystyling.com";
     const www = [{ type: "host" as const, value: "www.aibeautystyling.com" }];
-    // Cloudflare tells the Worker which scheme the visitor used.
-    const plainHttp = [{ type: "header" as const, key: "x-forwarded-proto", value: "http" }];
-    const visitorHttp = [{ type: "header" as const, key: "cf-visitor", value: '.*"scheme":"http".*' }];
     return [
       { source: "/guides", destination: "/blog", permanent: true },
-      // One canonical address: https://aibeautystyling.com. Every other variant (www, plain http, or both) goes there in ONE step.
+      // One canonical host: www goes to https://aibeautystyling.com in one step.
       // The home page needs its own rule: ":path*" does not expand when the path is empty, which produced a 404.
+      // Plain http is NOT detected here: the headers the Worker sees for the scheme are not reliable (a rule on them
+      // caused a redirect loop on 2026-11-17). Use Cloudflare's "Always Use HTTPS" setting for that, plus the HSTS header below.
       { source: "/", has: www, destination: `${SITE}/`, permanent: true },
       { source: "/:path+", has: www, destination: `${SITE}/:path+`, permanent: true },
-      { source: "/", has: plainHttp, destination: `${SITE}/`, permanent: true },
-      { source: "/:path+", has: plainHttp, destination: `${SITE}/:path+`, permanent: true },
-      // Same rule through the second header Cloudflare sets, in case the first one is not passed on.
-      { source: "/", has: visitorHttp, destination: `${SITE}/`, permanent: true },
-      { source: "/:path+", has: visitorHttp, destination: `${SITE}/:path+`, permanent: true },
     ];
   },
   async headers() {
